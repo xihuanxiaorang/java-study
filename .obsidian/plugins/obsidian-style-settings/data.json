@@ -1,0 +1,9 @@
+{
+  "minimal-style@@title-alignment": "title-align-center",
+  "minimal-advanced@@cursor": "pointer",
+  "minimal-style@@h1-color@@light": "#48803E",
+  "minimal-style@@h2-color@@light": "#E27474",
+  "minimal-style@@h3-color@@light": "#288383",
+  "minimal-style@@h4-color@@light": "#FC7930",
+  "minimal-style@@list-spacing": 0.075
+}

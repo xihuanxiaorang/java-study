@@ -1,0 +1,125 @@
+{
+  "main": {
+    "id": "20821e5cfeeadf01",
+    "type": "split",
+    "children": [
+      {
+        "id": "d3c6a8110e343b2d",
+        "type": "leaf",
+        "state": {
+          "type": "empty",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "76761ec29d05dd6a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8596c06128cf434d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5e4336a37f0c8f38",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "28bced6485af07ad",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 357
+  },
+  "right": {
+    "id": "039754b6c9feae6e",
+    "type": "split",
+    "children": [
+      {
+        "id": "437ddd7a9d6afe4f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "cf845aaada85a286",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "byCreatedTime",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "89e6a9336c5d2aac",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          },
+          {
+            "id": "6e626e165da5a884",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "cb3b8bd09d06f9cd",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "horizontal",
+    "width": 319.5
+  },
+  "active": "d3c6a8110e343b2d",
+  "lastOpenFiles": [
+    "面试题/Java基础面试题集锦(一).md",
+    "开发工具/idea/IDEA断点调试.md",
+    "学习资源/设计模式/设计模式.md",
+    "学习资源/MySQL/MySQL.md",
+    "源码剖析/JDK/JDK源码阅读.md",
+    "源码剖析/JDK/集合底层结构与源码分析.md",
+    "面试题/Springboot面试题集锦.md",
+    "面试题/MySQL面试题集锦.md",
+    "面试题/Spring面试题集锦.md",
+    "源码剖析/Springboot/Springboot 自动配置原理剖析.md"
+  ]
+}

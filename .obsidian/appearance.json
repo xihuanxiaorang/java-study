@@ -1,0 +1,19 @@
+{
+  "cssTheme": "Minimal",
+  "theme": "moonstone",
+  "interfaceFontFamily": "华康手札体W5P,PingFang SC,FiraCode Nerd Font Mono,JetBrains Mono",
+  "baseFontSize": 16,
+  "baseFontSizeAction": false,
+  "monospaceFontFamily": "华康手札体W5P,JetBrains Mono,FiraCode Nerd Font Mono",
+  "textFontFamily": "华康手札体W5P",
+  "enabledCssSnippets": [
+    "tag-pills",
+    "round-checkbox",
+    "list-outline",
+    "custom-admonitions.48953a",
+    "auto-fade-control",
+    "1",
+    "width"
+  ],
+  "translucency": false
+}

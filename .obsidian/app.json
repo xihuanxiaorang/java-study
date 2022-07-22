@@ -1,0 +1,19 @@
+{
+  "fileSortOrder": "byCreatedTimeReverse",
+  "communityThemeSortOrder": "download",
+  "pdfExportSettings": {
+    "pageSize": "A3",
+    "landscape": true,
+    "margin": "0",
+    "downscalePercent": 100
+  },
+  "spellcheck": false,
+  "alwaysUpdateLinks": true,
+  "attachmentFolderPath": "./attachements",
+  "showFrontmatter": true,
+  "legacyEditor": false,
+  "readableLineLength": false,
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "newFileLocation": "current"
+}

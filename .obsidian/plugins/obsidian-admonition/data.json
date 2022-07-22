@@ -1,0 +1,64 @@
+{
+  "userAdmonitions": {
+    "bug": {
+      "type": "bug",
+      "color": "248, 165, 165",
+      "icon": {
+        "name": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAkpJREFUSEvllcFrE0EUxr+3ieJB8VDNJhJExIP0H+hBxPSmVHajkCDN2XZC7bHiydaLQj1qyCb3iqQHs0HFk4l4Ue9WTyJSTDc1gngyjftkIrsk6WQ3OXhyj/PefL/53rw3S/jHH02i//XywkmZf+Jp+cu4+8YCOGlxkxkrBByTwgx8I8J9vWqth4FCAU0jn9GIKyohlymbqBU3gyChAMcUGwDmR4g80m0rNzbAMUVBY7w+XrMee5tapqgzkFKJENCI2dasF9s1xDUmmo/ZRcNbG3DgpEUFjAwxlmM166FMaqbFqaATJqrWZxlvGeIGEx6AsKlXrawSIBc9CBhrYRc4ECesDYvLuPIOgsoyCjpcrpEOenYD6v6fAtpXl5Mdd++MZz/CWFW3Ji/9zaHCcKnkHTCj4a3rNeuOf8mOIVYhuyDkcwm9ntcY9bBcJlqMV4tlv4uaaeEP0ygHQYCJusifhaFjhjgo6bYlFKXbb3bHFPcIuDUcCQK44LmEXXo+FqCVzl9i5n3JQQDdtpRDq1ysp1LR6aNnPwDwO0ueLADwbuvHx3OzjUY31MH2laWpA+7vDYCSAH8HcN7bpAIw4yUR6QBv72mRXPJJod0PGXxN5/KnEWUpfiQKN/vL5VZE0+4CuK52wIVDB7u3u51ovAutAvBPdCmnPyt+Ur5Fjpl/A+CwFJ+yS1te0o65MEOsXXQ1vOrNgYsLTO6LuF1+6+W0zcVpCSHwbv8/YsBBy8hnIuS+7xcPG6j+uIR0iGKJquVPdOgvcxKAKvcPvqz1GZVhui4AAAAASUVORK5CYII=",
+        "type": "image"
+      },
+      "command": false,
+      "title": "Bug",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": false
+    },
+    "solution": {
+      "type": "solution",
+      "color": "127, 199, 145",
+      "icon": {
+        "name": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA3lJREFUSEu1lXtIk2EUxp/3c8655uZE7ULFosvSckNLyqiMblBhlNhErKAo5yWLzCwiU5tdzLIirDbtQooUkVZm0R9BRQlRlqZhdDG63ya56aZt0zf2yfymzkuR35/Pe875nee8l49giD8yxPUxKAA1RGYAWAJgBpGUDirH0figg6kh8iKAeiIpzfob112AIDVdCgrvWh0pcVWA6lcGEN+yevva1A10noVB3Ssd0Q8E4wBx9DahCO6gCKorJN9dJQbH2357ebbYCtVZwqi8PDzXkQEnwAYEbaThDEEYBfSEorGmgJQ5ALT8R3Rwhd8jiafhhTZOI5SPescufW/yRdxZre56FlH356LfDmhFowqgl5IeCaz529a6Oxeas6cYKxZ6mlIjiOifALTsnbeFJ0l42sjsmzm9lGDMjW51FmQX48BWT+QXIfPCDtLnxvfrwD7zpzkqPqgbQNq7AFerlsEsWIUJMi88rEJLSgTx6stFn4CwZPOPyuzVfj0T9UYpInJP4fjOzon569uQdk2Qdjmd5LqCuASEJNhMZambhWN9v/XKmZVegmM7PVhdarBgYkMzTjaImpKSBdJBAQITqUjCa9NXamI7qzh9yu1XUJDZKYhMNgS+MQAdwFuTG7bWeqvLNUTXM6eXg+mJ1q+VmtgR7jxbt9i5GUU4nCZkNb6lA4oGI5hWbl9utn5pXhalEA8ImJVsanqYvUbiHBiRW4D0RB9WIpRC+dYIfrNTAyN/o4o5hW3Fmsh7h7k7xMb3JE5LsNmeHFS5OfTlueewO5FrbOqHZggbLVyaTzswZTtAW6C9s1EfH7mk28HoBQjb3NpyKDZPmHRmF/ERW5GTwt0v+VcTJN/auOLDKKA8CjAvWe3FxwmIOZETXqsl9x1BvQDy9dTLncFSfzHGzAnFmnGjERgwHjzZz1b4fzJzxe1cZQkguMtpHtFYsV/16tpeIu8T0HNkinjq7yfCYpXCmio1WwNCpRa+TNQOKG4B4q4nC+BHAYIYKNUAYRBSc5o8c7kHrs6yQ7O7Gy7FopTZj7M6xNXyabJqd/au8BcCgoSu1Ki9eHYlg4T8NcAZPi+T8tp/YcFkmXFL/XtxuNEMYY22M8LugiGYVK0lrwd8z/tz5LwWmkTnjhuBHZ/1mP/gGATrjiD/fCrZ9N8AzjD7H6+ukLC7PyQAZ9gf/n4jKCExNf8AAAAASUVORK5CYII=",
+        "type": "image"
+      },
+      "command": false,
+      "title": "解决方案",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": false
+    },
+    "tip": {
+      "type": "tip",
+      "color": "98, 147, 243",
+      "icon": {
+        "name": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAYBJREFUSEvlk7FLAnEUx987yfOy1T1aO7yCBhuCbLvCcwjP9qiloiEaokGHIIimtqJd1Mkf2ppDkYOgxhVN1b/g4nmH3QshQyL19Lwh+q2/3/t8eN/3fgguH3SZD/9UYCrKPiFOUauV8hUKr/1iHjoiIxI5AcTjNpQA7nyMLY1FoIdC00Kp9G4qyhUBbH1B33jGZsYi6EBMWT63DGOPPJ4PThCSPGNnjgQky4GGru9whpEgorgnEFABcd3L8zxms+agNe87A0NREgCQ/IboegMsaxL9/icvY+IgePt+OEEXEREvJ+r1XSwWW44iMhXlmgA2e0CqPGPzjgTt4mY0usoRHRDAyk+YZVlhIZ8v9pLY/gez6Wr4sHwT23h5aHIcFyKiRQK4R8RtPpd7diwQM9WKps71jeM3ia0OxFRlGTguqMWlCzub0/3GniBdK2hxaW1Y+MA17QDFbO1Ii0mnrgjETK2sqdLCKHBbHYiZx1tNDYZdE4wK7tTZGrITyd8XfALRTnsZctSDvgAAAABJRU5ErkJggg==",
+        "type": "image"
+      },
+      "command": false,
+      "title": "Tips",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": false
+    }
+  },
+  "syntaxHighlight": false,
+  "copyButton": false,
+  "version": "9.0.3",
+  "autoCollapse": false,
+  "defaultCollapseType": "open",
+  "injectColor": true,
+  "parseTitles": true,
+  "dropShadow": true,
+  "hideEmpty": false,
+  "open": {
+    "admonitions": true,
+    "icons": true,
+    "other": true,
+    "advanced": false
+  },
+  "icons": [],
+  "useFontAwesome": true,
+  "rpgDownloadedOnce": false,
+  "msDocConverted": false,
+  "useSnippet": false,
+  "snippetPath": "custom-admonitions.072efd"
+}

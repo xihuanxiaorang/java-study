@@ -1,0 +1,8 @@
+{
+  "commands": {
+    "global": true,
+    "FileExplorer": false,
+    "TagPane": false
+  },
+  "splitButtons": false
+}
