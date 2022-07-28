@@ -9,11 +9,12 @@
   },
   "spellcheck": false,
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "./attachements",
+  "attachmentFolderPath": "attachments",
   "showFrontmatter": true,
   "legacyEditor": false,
   "readableLineLength": false,
   "newLinkFormat": "relative",
   "useMarkdownLinks": true,
-  "newFileLocation": "current"
+  "newFileLocation": "current",
+  "trashOption": "local"
 }

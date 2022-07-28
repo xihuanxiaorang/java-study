@@ -38,6 +38,18 @@
       "injectColor": true,
       "noTitle": false,
       "copy": false
+    },
+    "ref": {
+      "type": "ref",
+      "color": "47, 162, 66",
+      "icon": {
+        "name": "book-open",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "参考文献",
+      "injectColor": true,
+      "noTitle": false
     }
   },
   "syntaxHighlight": false,
