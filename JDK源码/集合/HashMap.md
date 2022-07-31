@@ -1,8 +1,8 @@
 ---
 title: HashMap
-tags: 集合 源码
+tags: 集合 源码 面试
 created: 2022-07-25 16:22:07
-modified: 2022-07-28 17:22:56
+modified: 2022-07-30 01:42:27
 ---
 
 ## 整体结构
@@ -293,6 +293,12 @@ final void treeifyBin(Node<K,V>[] tab, int hash) {
     }  
 }
 ```
+
+## 待完善知识点
+
+- [ ] 红黑树添加节点
+- [ ] 左旋
+- [ ] 右旋
 
 ```ad-ref
 [HashMap二十三问 · 语雀](https://www.yuque.com/lovebetterworld/ioayz6/qx4frz#SpUEn)
