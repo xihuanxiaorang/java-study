@@ -50,6 +50,19 @@
       "title": "参考文献",
       "injectColor": true,
       "noTitle": false
+    },
+    "pit": {
+      "type": "pit",
+      "color": "225, 122, 122",
+      "icon": {
+        "name": "bell",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "遗留问题",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": false
     }
   },
   "syntaxHighlight": false,

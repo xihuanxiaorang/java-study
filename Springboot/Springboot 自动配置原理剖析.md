@@ -2,11 +2,11 @@
 title: Springboot 自动配置原理剖析
 tags: java springboot 源码
 created: 2022-05-06 21:24:27
-modified: 2022-07-31 14:45:39
+modified: 2022-08-03 03:33:29
 ---
 
 在开始剖析 Springboot 自动配置原理之前，首先得明白**Springboot 的自动配置是什么**？
-Springboot 自动配置 => 英文是 AutoConfiguration，它是指根据你所添加的 jar 包 (依赖) 自动配置你的 Spring 应用程序，它为 Springboot 框架的 " 开箱即用 " 提供了基础支撑。
+Springboot 自动配置 => 英文是 AutoConfiguration，它是指根据你所添加的 jar 包 (依赖) 自动配置你的 Spring 应用程序，它为 Springboot 框架的 " 开箱即用 " 提供了基础支 0 撑。
 ![[Springboot 源码阅读环境构建]]
 
 ```ad-important
