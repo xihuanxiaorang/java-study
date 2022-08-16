@@ -12,7 +12,6 @@
   "obsidian-style-settings",
   "obsidian-collapse-all-plugin",
   "obsidian-auto-link-title",
-  "table-editor-obsidian",
   "obsidian-linter",
   "shortcuts-extender",
   "hotkey-helper",
@@ -24,5 +23,5 @@
   "obsidian-pandoc",
   "remember-cursor-position",
   "obsidian-git",
-  "obsidian-dynamic-toc"
+  "table-editor-obsidian"
 ]
