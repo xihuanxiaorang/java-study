@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "读书计划/重学Java设计模式/README.md",
+            "file": "设计模式/抽象工厂模式.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "读书计划/重学Java设计模式/README.md",
+                "file": "设计模式/抽象工厂模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "读书计划/重学Java设计模式/README.md"
+                "file": "设计模式/抽象工厂模式.md"
               }
             }
           },
@@ -119,15 +119,15 @@
   },
   "active": "93397884111f21d7",
   "lastOpenFiles": [
-    "读书计划/重学Java设计模式/工厂方法模式.md",
-    "读书计划/重学Java设计模式/README.md",
+    "设计模式/工厂方法模式.md",
+    "设计模式/README.md",
+    "设计模式/抽象工厂模式.md",
+    "设计模式/六大设计原则.md",
+    "Attachments/Pasted image 20220816171433.png",
+    "设计模式/六大原则.md",
     "读书计划/重学Java设计模式/TOC.md",
-    "读书计划/重学Java设计模式/六大设计原则.md",
     "读书计划/重学Java设计模式/策略模式.md",
     "读书计划/重学Java设计模式/单例模式.md",
-    "读书计划/重学Java设计模式/模板方法模式.md",
-    "Springboot/Springboot 源码阅读环境构建.md",
-    "Springboot/Springboot 自动配置原理剖析.md",
-    "SpringSecurity/SpringSecurity 源码剖析 (二).md"
+    "读书计划/重学Java设计模式/模板方法模式.md"
   ]
 }
