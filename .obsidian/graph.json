@@ -1,20 +1,12 @@
 {
   "collapse-filter": false,
   "search": "",
-  "showTags": false,
+  "showTags": true,
   "showAttachments": false,
   "hideUnresolved": false,
-  "showOrphans": true,
+  "showOrphans": false,
   "collapse-color-groups": false,
-  "colorGroups": [
-    {
-      "query": "tag:#杂记",
-      "color": {
-        "a": 1,
-        "rgb": 14048348
-      }
-    }
-  ],
+  "colorGroups": [],
   "collapse-display": false,
   "showArrow": true,
   "textFadeMultiplier": 0,
@@ -25,6 +17,6 @@
   "repelStrength": 10,
   "linkStrength": 1,
   "linkDistance": 250,
-  "scale": 1.476986098068653,
+  "scale": 0.535979599622595,
   "close": false
 }
