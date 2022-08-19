@@ -4,14 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "93397884111f21d7",
+        "id": "3a34c3d59bd26d6a",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "设计模式/工厂方法模式.md",
+            "file": "设计模式/README.md",
             "mode": "source",
-            "source": false
+            "source": true
           }
         }
       }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/工厂方法模式.md",
+                "file": "设计模式/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "设计模式/工厂方法模式.md"
+                "file": "设计模式/README.md"
               }
             }
           },
@@ -111,16 +111,16 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
     "width": 232.5
   },
-  "active": "93397884111f21d7",
+  "active": "cb3b8bd09d06f9cd",
   "lastOpenFiles": [
-    "设计模式/建造者模式.md",
     "设计模式/抽象工厂模式.md",
+    "设计模式/建造者模式.md",
     "设计模式/工厂方法模式.md",
     "设计模式/六大设计原则.md",
     "设计模式/README.md",
