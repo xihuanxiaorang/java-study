@@ -139,7 +139,7 @@
       "Ensures that Chinese and English or numbers are separated by a single space. Follow this [guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines)": true
     },
     "Trailing spaces": {
-      "Removes extra spaces after every line.": true,
+      "Removes extra spaces after every line.": false,
       "Two Space Linebreak": false
     }
   },

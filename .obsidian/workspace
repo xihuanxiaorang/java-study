@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "设计模式/工厂方法模式.md",
+            "file": "设计模式/建造者模式.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/工厂方法模式.md",
+                "file": "设计模式/建造者模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "设计模式/工厂方法模式.md"
+                "file": "设计模式/建造者模式.md"
               }
             }
           },
@@ -119,9 +119,9 @@
   },
   "active": "93397884111f21d7",
   "lastOpenFiles": [
-    "设计模式/建造者模式.md",
     "设计模式/抽象工厂模式.md",
     "设计模式/工厂方法模式.md",
+    "设计模式/建造者模式.md",
     "设计模式/README.md",
     "Attachments/builder-mini 1.png",
     "设计模式/六大设计原则.md",
