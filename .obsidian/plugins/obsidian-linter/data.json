@@ -124,7 +124,7 @@
       "All paragraphs should have exactly one blank line both before and after.": false
     },
     "Remove Empty Lines Between List Markers and Checklists": {
-      "There should not be any empty lines between list markers and checklists.": true
+      "There should not be any empty lines between list markers and checklists.": false
     },
     "Remove link spacing": {
       "Removes spacing around link text.": false
@@ -139,7 +139,7 @@
       "Ensures that Chinese and English or numbers are separated by a single space. Follow this [guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines)": true
     },
     "Trailing spaces": {
-      "Removes extra spaces after every line.": true,
+      "Removes extra spaces after every line.": false,
       "Two Space Linebreak": false
     }
   },

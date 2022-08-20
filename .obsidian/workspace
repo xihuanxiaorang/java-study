@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "JDK/基础/内部类.md",
+            "file": "设计模式/单例模式.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JDK/基础/内部类.md",
+                "file": "设计模式/单例模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JDK/基础/内部类.md"
+                "file": "设计模式/单例模式.md"
               }
             }
           },
@@ -119,15 +119,15 @@
   },
   "active": "3a34c3d59bd26d6a",
   "lastOpenFiles": [
-    "JDK/基础/泛型.md",
-    "JDK/基础/内部类.md",
-    "设计模式/单例模式.md",
     "设计模式/建造者模式.md",
+    "设计模式/单例模式.md",
     "设计模式/抽象工厂模式.md",
+    "设计模式/工厂方法模式.md",
+    "JDK/基础/内部类.md",
+    "JDK/基础/泛型.md",
     "设计模式/未命名.md",
     "设计模式/六大设计原则.md",
     "设计模式/README.md",
-    "设计模式/工厂方法模式.md",
     "Attachments/builder-mini 1.png"
   ]
 }
