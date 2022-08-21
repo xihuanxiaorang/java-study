@@ -7,11 +7,10 @@
         "id": "3a34c3d59bd26d6a",
         "type": "leaf",
         "state": {
-          "type": "markdown",
+          "type": "diff-view",
           "state": {
-            "file": "设计模式/代理模式.md",
-            "mode": "source",
-            "source": false
+            "file": ".obsidian/workspace",
+            "staged": false
           }
         }
       }
@@ -70,7 +69,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/代理模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -86,9 +84,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "设计模式/代理模式.md"
-              }
+              "state": {}
             }
           },
           {
@@ -123,19 +119,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 866.5
+    "width": 240.5
   },
-  "active": "3a34c3d59bd26d6a",
+  "active": "554dfed0e50e65a1",
   "lastOpenFiles": [
+    "设计模式/代理模式.md",
+    "README.md",
+    "JDK/源码/集合/ConcurrentHashMap.md",
+    "JDK/源码/集合/ArrayList.md",
+    "JDK/源码/集合/HashMap.md",
+    "JDK/源码/集合/index.md",
+    "数据结构与算法/算法/排序算法/冒泡排序.md",
     "设计模式/单例模式.md",
     "设计模式/建造者模式.md",
-    "设计模式/抽象工厂模式.md",
-    "Springboot/Springboot 自动配置原理剖析.md",
-    "Springboot/Springboot 源码阅读环境构建.md",
-    "JDK/源码/集合/index.md",
-    "JDK/源码/集合/Vector.md",
-    "JDK/源码/集合/LinkedList.md",
-    "JDK/源码/集合/ArrayList.md",
-    "JDK/源码/集合/HashMap.md"
+    "设计模式/抽象工厂模式.md"
   ]
 }
