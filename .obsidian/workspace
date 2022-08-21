@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "设计模式/单例模式.md",
+            "file": "JDK/源码/集合/Vector.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/单例模式.md",
+                "file": "JDK/源码/集合/Vector.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "设计模式/单例模式.md"
+                "file": "JDK/源码/集合/Vector.md"
               }
             }
           },
@@ -117,17 +117,17 @@
     "direction": "horizontal",
     "width": 232.5
   },
-  "active": "3a34c3d59bd26d6a",
+  "active": "89e6a9336c5d2aac",
   "lastOpenFiles": [
-    "设计模式/建造者模式.md",
-    "设计模式/单例模式.md",
-    "设计模式/抽象工厂模式.md",
-    "设计模式/工厂方法模式.md",
-    "JDK/基础/内部类.md",
-    "JDK/基础/泛型.md",
-    "设计模式/未命名.md",
-    "设计模式/六大设计原则.md",
-    "设计模式/README.md",
-    "Attachments/builder-mini 1.png"
+    "JDK/源码/集合/LinkedList.md",
+    "JDK/源码/集合/ArrayList.md",
+    "JDK/进阶/Java SPI.md",
+    "Excalidraw/Java SPI 应用实例.excalidraw.md",
+    "Attachments/Pasted Image 20220421155602_328.svg",
+    "Attachments/Pasted Image 20220421155522_298.svg",
+    "Attachments/Pasted Image 20220421155854_534.svg",
+    "Excalidraw/Java SPI 应用实例项目关系图.excalidraw.md",
+    "Excalidraw/JDBC API 不同厂商实现.excalidraw.md",
+    "JDK/源码/集合/Vector.md"
   ]
 }
