@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "JDK/源码/集合/Vector.md",
+            "file": "设计模式/代理模式.md",
             "mode": "source",
             "source": false
           }
@@ -70,7 +70,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "JDK/源码/集合/Vector.md",
+                "file": "设计模式/代理模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -87,7 +87,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "JDK/源码/集合/Vector.md"
+                "file": "设计模式/代理模式.md"
               }
             }
           },
@@ -109,25 +109,33 @@
               "type": "advanced-tables-toolbar",
               "state": {}
             }
+          },
+          {
+            "id": "554dfed0e50e65a1",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 232.5
+    "width": 866.5
   },
-  "active": "89e6a9336c5d2aac",
+  "active": "3a34c3d59bd26d6a",
   "lastOpenFiles": [
+    "设计模式/单例模式.md",
+    "设计模式/建造者模式.md",
+    "设计模式/抽象工厂模式.md",
+    "Springboot/Springboot 自动配置原理剖析.md",
+    "Springboot/Springboot 源码阅读环境构建.md",
+    "JDK/源码/集合/index.md",
+    "JDK/源码/集合/Vector.md",
     "JDK/源码/集合/LinkedList.md",
     "JDK/源码/集合/ArrayList.md",
-    "JDK/进阶/Java SPI.md",
-    "Excalidraw/Java SPI 应用实例.excalidraw.md",
-    "Attachments/Pasted Image 20220421155602_328.svg",
-    "Attachments/Pasted Image 20220421155522_298.svg",
-    "Attachments/Pasted Image 20220421155854_534.svg",
-    "Excalidraw/Java SPI 应用实例项目关系图.excalidraw.md",
-    "Excalidraw/JDBC API 不同厂商实现.excalidraw.md",
-    "JDK/源码/集合/Vector.md"
+    "JDK/源码/集合/HashMap.md"
   ]
 }
