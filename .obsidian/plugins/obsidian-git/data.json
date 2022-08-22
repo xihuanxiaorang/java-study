@@ -20,5 +20,6 @@
   "refreshSourceControl": true,
   "basePath": "",
   "differentIntervalCommitAndPush": false,
-  "changedFilesInStatusBar": false
+  "changedFilesInStatusBar": false,
+  "username": ""
 }

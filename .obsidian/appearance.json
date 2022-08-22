@@ -1,11 +1,11 @@
 {
   "cssTheme": "Minimal",
   "theme": "moonstone",
-  "interfaceFontFamily": "霞鹜文楷,华康手札体W5P,PingFang SC,FiraCode Nerd Font Mono,JetBrains Mono",
+  "interfaceFontFamily": "霞鹜文楷",
   "baseFontSize": 16,
-  "baseFontSizeAction": false,
-  "monospaceFontFamily": "JetBrains Mono,FiraCode Nerd Font Mono,华康手札体W5P,霞鹜文楷",
-  "textFontFamily": "霞鹜文楷,华康手札体W5P",
+  "baseFontSizeAction": true,
+  "monospaceFontFamily": "JetBrains Mono,FiraCode Nerd Font Mono,霞鹜文楷",
+  "textFontFamily": "霞鹜文楷",
   "enabledCssSnippets": [
     "tag-pills",
     "round-checkbox",

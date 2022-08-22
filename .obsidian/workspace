@@ -4,13 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "3a34c3d59bd26d6a",
+        "id": "229d9bc19dce98e3",
         "type": "leaf",
         "state": {
-          "type": "diff-view",
+          "type": "markdown",
           "state": {
-            "file": ".obsidian/workspace",
-            "staged": false
+            "file": "设计模式/代理模式.md",
+            "mode": "source",
+            "source": false
           }
         }
       }
@@ -31,7 +32,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#基础",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -47,13 +48,21 @@
               "type": "file-explorer",
               "state": {}
             }
+          },
+          {
+            "id": "c12a5dbad130a48e",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
           }
         ],
         "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 441
+    "width": 295
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -69,6 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "设计模式/代理模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -84,7 +94,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "设计模式/代理模式.md"
+              }
             }
           },
           {
@@ -105,33 +117,25 @@
               "type": "advanced-tables-toolbar",
               "state": {}
             }
-          },
-          {
-            "id": "554dfed0e50e65a1",
-            "type": "leaf",
-            "state": {
-              "type": "git-view",
-              "state": {}
-            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 240.5
+    "width": 309.5
   },
-  "active": "554dfed0e50e65a1",
+  "active": "229d9bc19dce98e3",
   "lastOpenFiles": [
+    "设计模式/未命名.md",
     "设计模式/代理模式.md",
-    "README.md",
-    "JDK/源码/集合/ConcurrentHashMap.md",
-    "JDK/源码/集合/ArrayList.md",
-    "JDK/源码/集合/HashMap.md",
-    "JDK/源码/集合/index.md",
-    "数据结构与算法/算法/排序算法/冒泡排序.md",
     "设计模式/单例模式.md",
     "设计模式/建造者模式.md",
-    "设计模式/抽象工厂模式.md"
+    "设计模式/工厂方法模式.md",
+    "README.md",
+    "Excalidraw/JDBC 执行流程.excalidraw.md",
+    "Excalidraw/Auto Configuration.excalidraw.md",
+    "Excalidraw/Java SPI 与 SpringBoot 自动配置.excalidraw.md",
+    "Excalidraw/SpringBoot 自动配置核心流程.excalidraw.md"
   ]
 }
