@@ -49,9 +49,12 @@ kanban-plugin: basic
 - [x] [工厂方法模式](设计模式/工厂方法模式.md)
 - [x] [抽象工厂模式](设计模式/抽象工厂模式.md)
 - [x] [代理模式](设计模式/代理模式.md)
+- [x] [README](SpringMVC/README.md)
+- [x] [README](Spring/基础/README.md)
+- [x] [README](Mybatis/README.md)
 
 %% kanban:settings
 ```
-{"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false}
+{"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false,"date-picker-week-start":1}
 ```
 %%

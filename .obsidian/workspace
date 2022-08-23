@@ -7,11 +7,9 @@
         "id": "229d9bc19dce98e3",
         "type": "leaf",
         "state": {
-          "type": "markdown",
+          "type": "kanban",
           "state": {
-            "file": "SpringMVC/README.md",
-            "mode": "source",
-            "source": false
+            "file": "README.md"
           }
         }
       }
@@ -78,7 +76,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SpringMVC/README.md",
+                "file": "README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +93,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SpringMVC/README.md"
+                "file": "README.md"
               }
             }
           },
@@ -127,15 +125,15 @@
   },
   "active": "229d9bc19dce98e3",
   "lastOpenFiles": [
+    "Mybatis/README.md",
     "Spring/基础/README.md",
-    "SpringMVC/README.md",
     "README.md",
     "设计模式/README.md",
+    "SpringMVC/README.md",
     "设计模式/代理模式.md",
     "设计模式/工厂方法模式.md",
     "设计模式/单例模式.md",
     "设计模式/未命名.md",
-    "设计模式/建造者模式.md",
-    "Excalidraw/JDBC 执行流程.excalidraw.md"
+    "设计模式/建造者模式.md"
   ]
 }

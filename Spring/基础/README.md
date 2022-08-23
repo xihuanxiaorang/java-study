@@ -2,7 +2,7 @@
 title: Spring[IOC]
 tags: spring
 created: 2022-08-23 14:52:50
-modified: 2022-08-23 15:47:53
+modified: 2022-08-23 18:15:43
 ---
 
 # 第一个 Spring 程序
@@ -226,7 +226,7 @@ public void test1() {
 
 ### 1、编写 Person 类
 
-类还是以前的 `Person` 类，里面有两个属性 `name` 和 `age`，书写 `getter``setter` 方法
+类还是以前的 `Person` 类，里面有两个属性 `name` 和 `age`，书写 `getter` `setter` 方法
 
 ```java
 public class Person {
@@ -942,7 +942,7 @@ public void test5() {
 
 ## 2、什么样的对象只创建一次，什么样的对象需要每次创建新的？
 
-创建一次的对象，如 `SqlSessionFactroy``Service``Dao`。<br />创建多次的对象，如 `Connection``SqlSession`，因为每次控制事务时不一样，所以需要新的。<br />总结：可以共用，并且线程安全的，就可以只需要创建一次，反之则需要创建新的。  
+创建一次的对象，如 `SqlSessionFactroy` `Service` `Dao`。<br />创建多次的对象，如 `Connection` `SqlSession`，因为每次控制事务时不一样，所以需要新的。<br />总结：可以共用，并且线程安全的，就可以只需要创建一次，反之则需要创建新的。  
 
 ## 3、那么如何控制呢？
 
@@ -1078,9 +1078,10 @@ public void test6() {
 ```
 
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/1554080/1647590067551-df3ca861-6010-423b-a3e9-52be23b6b135.png#clientId=u4c720250-2228-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=537&id=u8c4b4bc5&originHeight=537&originWidth=1462&originalType=binary&ratio=1&rotation=0&showTitle=false&size=358647&status=done&style=none&taskId=u8fa2901e-4ca0-4b28-982c-e25c00a5bd0&title=&width=1462)  
-:::success  
+
+```ad-important
 🎨<br />细节分析：从上面可以看出 spring 先通过反射调用 person 构造方法创建对象，然后使用 set 注入的方式给 person 对象中的成员变量 `name` 和 `age` 进行赋值，然后才执行 `initializingBean` 接口的 `afterPropertiesSet` 初始化方法，最后才执行自己定义的 `init-method` 初始化方法。  
-:::  
+```
 
 ### 3、销毁阶段
 
@@ -1168,9 +1169,10 @@ public void test6() {
 ```
 
 ![image.png](https://cdn.nlark.com/yuque/0/2022/png/1554080/1647591177775-a0b30953-e5d0-409c-8c9f-21c41954f29d.png#clientId=u4c720250-2228-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=544&id=u6878507c&originHeight=544&originWidth=1460&originalType=binary&ratio=1&rotation=0&showTitle=false&size=387950&status=done&style=none&taskId=u74434e78-1a00-46a0-a92e-d54b56e4b2e&title=&width=1460)<br />**再次完善 Bean 的生命周期流程**：  
-:::success  
-🎨对象从创建 ->初始化 ->销毁的完整流程<br />细节分析：从上面可以看出 spring 先通过反射调用 person 构造方法创建对象，然后使用 set 注入的方式给 person 对象中的成员变量 `name` 和 `age` 进行赋值，然后才执行 `initializingBean` 接口的 `afterPropertiesSet` 初始化方法，最后才执行自己定义的 `init-method` 初始化方法。接下来在关闭工厂的时候，会先执行 `DisposableBean` 接口的 `destroy` 方法，然后才执行自定义的销毁方法。<br />💡注意<br />销毁方法只针对 `signleton` 对象。  
-:::  
+
+```ad-important
+🎨对象从创建 ->初始化 ->销毁的完整流程<br />细节分析：从上面可以看出 spring 先通过反射调用 person 构造方法创建对象，然后使用 set 注入的方式给 person 对象中的成员变量 `name` 和 `age` 进行赋值，然后才执行 `initializingBean` 接口的 `afterPropertiesSet` 初始化方法，最后才执行自己定义的 `init-method` 初始化方法。接下来在关闭工厂的时候，会先执行 `DisposableBean` 接口的 `destroy` 方法，然后才执行自定义的销毁方法。<br />💡注意<br />销毁方法只针对 `signleton` 对象。
+```  
 
 # 配置文件参数化
 
@@ -1189,7 +1191,7 @@ jdbc.username=root
 jdbc.password=
 ```
 
-将 `db.properties` 文件整合到 `spring` 配置文件中。<br />💡**需要在配置文件的**`**beans**`**标签中添加**`**xmlns:context**`**的命名空间，然后还需要在 schemaLocation 中添加 context 的 xsd**。
+将 `db.properties` 文件整合到 `spring` 配置文件中。<br />💡**需要在配置文件的 `beans` 标签中添加 `xmlns:context` 的命名空间，然后还需要在 schemaLocation 中添加 context 的 xsd**。
 
 ```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -1376,9 +1378,11 @@ public void test1() {
 ## 2、BeanPostProcessor 接口的运行时机
 
 **再次完善 Bean 的生命周期流程**：  
-:::success  
+
+```ad-important
 🎨对象从创建 ->初始化 ->销毁的完整流程<br />细节分析：从上面可以看出 spring 先通过反射调用 person 构造方法创建对象，然后使用 set 注入的方式给 person 对象中的成员变量 `name` 和 `age` 进行赋值，然后执行 `BeanPostProcessor#postProcessBeforeInitialization` 方法，然后才执行 `initializingBean` 接口的 `afterPropertiesSet` 初始化方法，最后才执行自己定义的 `init-method` 初始化方法和 `BeanPostProcessor#postProcessAfterInitialization` 方法。接下来在关闭工厂的时候，会先执行 `DisposableBean` 接口的 `destroy` 方法，然后才执行自定义的销毁方法。<br />💡注意<br />销毁方法只针对 `signleton` 对象。  
-:::  
+```
+
 可以看到 BeanPostProcessor 接口定义了两个方法，一个 `postProcessBeforeInitialization`，运行在 `initializingBean` 接口的 `afterPropertiesSet` 初始化方法之前；另一个 `postProcessAfterInitialization` 方法则运行在自己定义的 `init-method` 初始化方法之后。<br />Spring 中的 AOP 底层实现就是在 `postProcessAfterInitialization` 方法中使用 jdk 的动态代理对 Bean 进行增强。  
 
 ## 3、开发步骤
@@ -1413,7 +1417,9 @@ public void test1() {
 }
 ```
 
+![image.png](https://cdn.nlark.com/yuque/0/2022/png/1554080/1647934951581-9335363b-7298-40c8-a1a3-aa7b7027c27b.png#clientId=ucf18156f-7f8c-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=875&id=ueb0566f2&originHeight=875&originWidth=1459&originalType=binary&ratio=1&rotation=0&showTitle=false&size=182689&status=done&style=none&taskId=ue7cb6f52-e81b-44a3-9c20-f8dfd901f04&title=&width=1459)
+
 ### 4、代码分析
 
 1. 从上图可以看出 `BeanPostProcessor#postProcessAfterInitialization` 方法运行在自定义的 `init-method` 方法之后。
-1. `BeanPostProcessor` 会对 Spring 工厂中创建的所有 Bean 对象进行增强。
+2. `BeanPostProcessor` 会对 Spring 工厂中创建的所有 Bean 对象进行增强。

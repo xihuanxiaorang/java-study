@@ -9,7 +9,7 @@
   },
   "spellcheck": false,
   "alwaysUpdateLinks": true,
-  "attachmentFolderPath": "Attachments",
+  "attachmentFolderPath": "./attachements",
   "showFrontmatter": true,
   "legacyEditor": false,
   "readableLineLength": false,
