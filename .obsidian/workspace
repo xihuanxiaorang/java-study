@@ -127,6 +127,8 @@
   },
   "active": "229d9bc19dce98e3",
   "lastOpenFiles": [
+    "Attachments/image.png",
+    "MybatisPlus/README.md",
     "README.md",
     "Mybatis/README.md",
     "Spring/基础/README.md",
@@ -134,8 +136,6 @@
     "SpringMVC/README.md",
     "设计模式/代理模式.md",
     "设计模式/工厂方法模式.md",
-    "设计模式/单例模式.md",
-    "设计模式/未命名.md",
-    "设计模式/建造者模式.md"
+    "设计模式/单例模式.md"
   ]
 }

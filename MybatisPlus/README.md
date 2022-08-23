@@ -2,7 +2,7 @@
 title: MybatisPlus
 tags: Mybatis MybatisPlus
 created: 2022-08-23 21:02:51
-modified: 2022-08-23 21:20:46
+modified: 2022-08-23 21:30:32
 ---
 
 # 1、简介
@@ -222,7 +222,7 @@ public void testInsert() {
 }
 ```
 
-![image](attachments/image.png)<br />💡注意：主键 id 已经反填。
+![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639570930699-b9d7909b-b73f-46ea-ba48-1824d4ad951f.png#clientId=u50584c14-f6ea-4&from=paste&height=268&id=ubb182b39&originHeight=268&originWidth=812&originalType=binary&ratio=1&size=36778&status=done&style=none&taskId=u8ca80a22-2e4f-475a-a9a2-05dd6b9d269&width=812)<br />💡注意：主键 id 已经反填。
 
 ## 6.2、主键生成策略
 
