@@ -7,9 +7,11 @@
         "id": "229d9bc19dce98e3",
         "type": "leaf",
         "state": {
-          "type": "kanban",
+          "type": "markdown",
           "state": {
-            "file": "README.md"
+            "file": "MybatisPlus/README.md",
+            "mode": "preview",
+            "source": false
           }
         }
       }
@@ -76,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "MybatisPlus/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -93,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "MybatisPlus/README.md"
               }
             }
           },
@@ -125,9 +127,9 @@
   },
   "active": "229d9bc19dce98e3",
   "lastOpenFiles": [
+    "README.md",
     "Mybatis/README.md",
     "Spring/基础/README.md",
-    "README.md",
     "设计模式/README.md",
     "SpringMVC/README.md",
     "设计模式/代理模式.md",
