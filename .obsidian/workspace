@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "设计模式/代理模式.md",
+            "file": "Spring/基础/README.md",
             "mode": "source",
             "source": false
           }
@@ -78,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/代理模式.md",
+                "file": "Spring/基础/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "设计模式/代理模式.md"
+                "file": "Spring/基础/README.md"
               }
             }
           },
@@ -127,15 +127,15 @@
   },
   "active": "229d9bc19dce98e3",
   "lastOpenFiles": [
-    "设计模式/未命名.md",
-    "设计模式/代理模式.md",
-    "设计模式/单例模式.md",
-    "设计模式/建造者模式.md",
-    "设计模式/工厂方法模式.md",
+    "SpringMVC/README.md",
+    "Spring/基础/README.md",
     "README.md",
-    "Excalidraw/JDBC 执行流程.excalidraw.md",
-    "Excalidraw/Auto Configuration.excalidraw.md",
-    "Excalidraw/Java SPI 与 SpringBoot 自动配置.excalidraw.md",
-    "Excalidraw/SpringBoot 自动配置核心流程.excalidraw.md"
+    "设计模式/README.md",
+    "设计模式/代理模式.md",
+    "设计模式/工厂方法模式.md",
+    "设计模式/单例模式.md",
+    "设计模式/未命名.md",
+    "设计模式/建造者模式.md",
+    "Excalidraw/JDBC 执行流程.excalidraw.md"
   ]
 }

@@ -1,25 +1,30 @@
 ---
+
 title: README
 tags: null
 created: 2022-08-21 14:53:10
 modified: 2022-08-22 15:07:23
 kanban-plugin: basic
+
 ---
 
 ## TODO
 
+- [ ] Spring 源码
 - [ ] [SpringSecurity 源码剖析 (四)](SpringSecurity/SpringSecurity%20源码剖析%20(四).md)
 - [ ] [ConcurrentHashMap](JDK/源码/集合/ConcurrentHashMap.md)
-- [ ] Spring 源码
 - [ ] Springboot 源码
 - [ ] Java 类加载过程
 - [ ] ASM
 
+
 ## PROCESSING
 
-- [ ] [代理模式](设计模式/代理模式.md)
+
 
 ## ToBeImproved
+
+
 
 ## Done
 
@@ -43,11 +48,10 @@ kanban-plugin: basic
 - [x] [HashMap](JDK/源码/集合/HashMap.md)
 - [x] [工厂方法模式](设计模式/工厂方法模式.md)
 - [x] [抽象工厂模式](设计模式/抽象工厂模式.md)
+- [x] [代理模式](设计模式/代理模式.md)
 
 %% kanban:settings
-
 ```
 {"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false}
 ```
-
 %%
