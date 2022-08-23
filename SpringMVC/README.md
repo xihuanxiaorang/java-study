@@ -2,12 +2,12 @@
 title: SpringMvc
 tags: java springmvc
 created: 2022-04-17 10:51:38
-modified: 2022-08-23 15:45:09
+modified: 2022-08-23 16:06:39
 ---
 
-本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-mvc-study: 学习SpringMvc之用(已完结)](https://github.com/xihuanxiaorang/spring-mvc-study) 仓库中，可以自行查看。
-
 # 1、环境搭建
+
+本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-mvc-study: 学习SpringMvc之用(已完结)](https://github.com/xihuanxiaorang/spring-mvc-study) 仓库中，可以自行查看。
 
 ## 1、Servlet 配置文件 - Web. Xml
 
@@ -40,7 +40,7 @@ modified: 2022-08-23 15:45:09
 
 也是 Spring 的配置文件，放置路径可以根据需要随意放置，但是一般放在资源文件夹的根下。  
 如何创建 Spring 配置文件：右键点击 resources 资源文件夹，点击 New -> XML Configuration File -> Spring Config。，取名 `dispatcher.xml` 。  
-![[Pasted image 20220417155233.png]]
+![Pasted image 20220417155233](../Attachments/Pasted%20image%2020220417155233.png)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>  
@@ -181,7 +181,7 @@ modified: 2022-08-23 15:45:09
 ```
 
 配置 idea 在引入依赖时自动下载 jar 包以及构建。  
-![[Pasted image 20220417154658.png]]
+![Pasted image 20220417154658](../Attachments/Pasted%20image%2020220417154658.png)
 
 ## 4、配置 Tomcat
 
@@ -362,7 +362,7 @@ public class AppConfig {
 
 如果在 Web.xml 配置文件中没有显式的配置 SpringMvc 配置文件所在路径，系统会查找默认的配置文件，/WEB-INF/[servlet-name]-servlet.xml。根据上述配置，SpringMvc 配置文件的默认名字为 dispatcherServlet-servlet.xml，放置在 /WEB-INF 目录下。  
 📍如果没有显式的指定 SpringMvc 配置文件所在路径，默认的配置文件又不存在，那么在启动 Tomcat 的时候就会抛出异常！  
-![[Pasted image 20220417221318.png]]
+![Pasted image 20220417221318](../Attachments/Pasted%20image%2020220417221318.png)
 
 # 3、SpringMvc 控制器开发详解 (一)
 
@@ -516,7 +516,7 @@ public String param3(List<Integer> ids) {
 }
 ```
 
-![[Pasted image 20220418150705.png]]
+![Pasted image 20220418150705](../Attachments/Pasted%20image%2020220418150705.png)
 
 - 上面竟然报错，那么试一下 List 的实现类 ArrayList 呢？
 
@@ -609,7 +609,7 @@ public String param2(@RequestParam String username, @RequestParam Integer age) {
 ### 1、解决请求参数与方法形参名字不一致的问题
 
 当发送的请求是 <http://localhost:8500/basic/param/param2?n=admin&a=10> 时，如果还是以前的写法则会抛出 400 异常，说字符串类型的参数 username 不存在！  
-![[Pasted image 20220418165456.png]]  
+![Pasted image 20220418165456](../Attachments/Pasted%20image%2020220418165456.png)  
 此时就需要用到@RequestParam 注解的第一个作用，解决请求参数与形参名字不一致的问题，那么怎么做呢🤔？让@RequestParam 注解的 value 属性等于请求参数的 key 即可。
 
 ```java
@@ -768,7 +768,7 @@ public String param5(String username, Date birthday) {
 
 客户端发送请求 <http://localhost:8500/basic/param5.jsp> ，输入用户名和生日，点击提交  
 抛出异常 Failed to convert from type [java.lang.String] to type [java.util.Date] for value '2022-04-18'; nested exception is java.lang.IllegalArgumentException]，无法将字符串类型的数据转换成 Date 类型！  
-![[Pasted image 20220418224815.png]]  
+![Pasted image 20220418224815](../Attachments/Pasted%20image%2020220418224815.png)  
 那么我们该怎么解决这个问题呢🤔？
 
 1. **自定义日期类型转换器**
@@ -844,7 +844,7 @@ public String param6(@RequestParam Map<String, String> params) {
 
 发送请求 <http://localhost:8500/basic/param/param6?name=xiaorang> ，控制台打印 {name=xiaorang}  
 发送请求 <http://localhost:8500/basic/param/param6?name=xiaorang&age=10> ，控制台打印 {name=xiaorang, age=10}  
-![[Pasted image 20220418235857.png]]  
+![Pasted image 20220418235857](../Attachments/Pasted%20image%2020220418235857.png)  
 💡需要注意的是，必须使用 @RequestParam 注解修饰，否则接收不到任何值！
 
 #### 2、多值动态参数收集
@@ -862,7 +862,7 @@ public String param6(@RequestParam MultiValueMap<String, String> params) {
 ```
 
 再次发送请求 <http://localhost:8500/basic/param/param6?usernames=xiaorang&usernames=xiaoming&usernames=sanshi> ，控制台打印 {usernames=[xiaorang, xiaoming, sanshi]}，说明成功接收到值！🥳  
-![[Pasted image 20220419002805.png]]
+![Pasted image 20220419002805](../Attachments/Pasted%20image%2020220419002805.png)
 
 ### 2、接收 Cookie 数据
 
@@ -879,8 +879,8 @@ public String param7(@CookieValue("name") String value) {
 
 客户端发送请求 <http://localhost:8500/basic/param/param7> ，发送之前添加一个 Cookie，name=xiaorang，发送之后，控制台打印 xiaorang。  
 如果浏览器中不好添加 Cookie 的话，可以使用 POSTMAN 或者 Apifox 工具。  
-![[Pasted image 20220419004955.png]]  
-![[Pasted image 20220419004659.png]]
+![Pasted image 20220419004955](../Attachments/Pasted%20image%2020220419004955.png)  
+![Pasted image 20220419004659](../Attachments/Pasted%20image%2020220419004659.png)
 
 ### 3、接收请求头数据
 
@@ -898,7 +898,7 @@ public String param8(@RequestHeader("Host") String host) {
 ```
 
 客户端发起请求 <http://localhost:8500/basic/param/param8> ，控制台打印 localhost:8500 。  
-![[Pasted image 20220419010115.png]]
+![Pasted image 20220419010115](../Attachments/Pasted%20image%2020220419010115.png)
 
 # 4、SpringMvc 控制器开发详解 (二)
 
@@ -920,8 +920,8 @@ public String param8(@RequestHeader("Host") String host) {
 
 #### 2、新建一个 tomcat 启动器 ssm
 
-![[Pasted image 20220419111632.png]]  
-![[Pasted image 20220419111705.png]]
+![Pasted image 20220419111632](../Attachments/Pasted%20image%2020220419111632.png)  
+![Pasted image 20220419111705](../Attachments/Pasted%20image%2020220419111705.png)
 
 #### 3、在 dispatcher.xml 增加 Mybatis 与事务需要用到的核心 Bean
 
@@ -1206,9 +1206,9 @@ public class UserController {
 #### 2、父子容器存在的问题
 
 但是根据上面这种配置之后，其实还是有点问题，仔细查看控制台打印出来的 DEBUG 信息，发现并 **没有开启事务**！  
-![[Pasted image 20220419180704.png]]  
+![Pasted image 20220419180704](../Attachments/Pasted%20image%2020220419180704.png)  
 或者查看 Controller 中注入的 Service 是否代理对象也可以辨别到底是否开启事务，断点查看之后，注入进来的 Service 并不是代理对象，所以说明并没有开启事务功能！  
-![[Pasted image 20220419171525.png]]  
+![Pasted image 20220419171525](../Attachments/Pasted%20image%2020220419171525.png)  
 这是为什么呢🤔？
 
 ```ad-important
@@ -1232,7 +1232,7 @@ public class UserController {
 ```
 
 发起请求 <http://localhost:8500/ssm/reg.jsp> ，填写用户名和密码，点击提交，查看控制台打印信息，发现已经 **成功开启事务功能**！  
-![[Pasted image 20220419174149.png]]
+![Pasted image 20220419174149](../Attachments/Pasted%20image%2020220419174149.png)
 
 # 5、SpringMvc 控制器开发详解 (三)
 
@@ -1313,9 +1313,9 @@ public class ViewController {
 ```
 
 发起请求 <http://localhost:8888/jump/view/view1> ，页面跳转成功！控制台打印：  
-![[Pasted image 20220419214920.png]]  
+![Pasted image 20220419214920](../Attachments/Pasted%20image%2020220419214920.png)  
 如果使用 "forward: result"; 则会抛出 404 异常！  
-![[Pasted image 20220419214631.png]]
+![Pasted image 20220419214631](../Attachments/Pasted%20image%2020220419214631.png)
 
 ### 2、控制器 redirect 页面
 
@@ -1330,9 +1330,9 @@ public String view2() {
 ```
 
 发起请求 <http://localhost:8888/jump/view/redirect> ，页面发生跳转，并且地址栏信息发生改变 <http://localhost:8888/jump/result.jsp> ，控制台打印：  
-![[Pasted image 20220419215234.png]]  
+![Pasted image 20220419215234](../Attachments/Pasted%20image%2020220419215234.png)  
 如果使用 "redirect: result"；则会抛出 404 异常！  
-![[Pasted image 20220419215712.png]]
+![Pasted image 20220419215712](../Attachments/Pasted%20image%2020220419215712.png)
 
 ### 3、控制器 forward 控制器
 
@@ -1356,7 +1356,7 @@ public class ForwardController {
 
 💡需要注意的是，控制器 forward 控制器时，forward 关键字不能省略！  
 发起请求 <http://localhost:8888/jump/forward/forward1> ，页面成功跳转，控制台打印：  
-![[Pasted image 20220419220616.png]]
+![Pasted image 20220419220616](../Attachments/Pasted%20image%2020220419220616.png)
 
 ### 4、控制器 redirect 控制器
 
@@ -1379,7 +1379,7 @@ public class RedirectController {
 ```
 
 发起请求 <http://localhost:8888/jump/redirect/redirect1> ，页面成功跳转，地址栏信息发生改变 <http://localhost:8888/jump/result.jsp> ，控制台打印：  
-![[Pasted image 20220419221201.png]]
+![Pasted image 20220419221201](../Attachments/Pasted%20image%2020220419221201.png)
 
 ## 4、Web 开发中对于作用域的处理
 
@@ -1420,7 +1420,7 @@ public class View2Controller {
 ```
 
 发送请求 <http://localhost:8888/jump/view2/view1> ，页面成功跳转，控制台打印：  
-![[Pasted image 20220419233755.png]]
+![Pasted image 20220419233755](../Attachments/Pasted%20image%2020220419233755.png)
 
 - 基于 ModelMap 的方式：
 
@@ -1433,7 +1433,7 @@ public String view2(ModelMap modelMap) {
 ```
 
 发送请求 <http://localhost:8888/jump/view2/view2> ，页面成功跳转，控制台打印：  
-![[Pasted image 20220419234108.png]]
+![Pasted image 20220419234108](../Attachments/Pasted%20image%2020220419234108.png)
 
 **Model 与 ModelMap 的细节分析：**
 
@@ -1476,7 +1476,7 @@ public class View3Controller {
 ```
 
 发起请求 <http://localhost:8888/jump/view3/view1> ，页面跳转成功！控制台打印：  
-![[Pasted image 20220420154812.png]]  
+![Pasted image 20220420154812](../Attachments/Pasted%20image%2020220420154812.png)  
 其中的 name 会同时存放在 request 作用域和 session 作用域中，而 address 只会存放在 request 作用域中。  
 就算 @SessionAttributes 中的 age 没有在 Model 中添加属性，程序也不会报错！  
 💡**注意：**  
@@ -1514,9 +1514,9 @@ public class View3Controller {
 
 修改 view1 方法，让其 forward 到 view2，在 view2 方法中使用 `sessionStatus.setComplete();` 来清除 session 作用域中的所有数据，然后让其 forward 到 result2 页面，此时达到的效果应该是页面中的内容只显示出 request 作用域中的数据，然后 session 作用域中的数据显示不出来！  
 发起请求 <http://localhost:8888/jump/view3/view1> ，页面跳转成功！  
-![[Pasted image 20220420160018.png]]  
+![Pasted image 20220420160018](../Attachments/Pasted%20image%2020220420160018.png)  
 控制台打印：  
-![[Pasted image 20220420160152.png]]  
+![Pasted image 20220420160152](../Attachments/Pasted%20image%2020220420160152.png)  
 说明 session 作用域中的数据真的被清除了！
 
 #### 3、SpringMvc 中对 application 作用域的处理
@@ -1541,7 +1541,7 @@ public class View4Controller {
 ```
 
 发起请求 <http://localhost:8888/jump/view4/view1?name=xiaorang> ，页面成功跳转！控制台打印：  
-![[Pasted image 20220420163851.png]]  
+![Pasted image 20220420163851](../Attachments/Pasted%20image%2020220420163851.png)  
 @ModelAttribute 注解等同于如下效果：
 
 ```java
@@ -1580,9 +1580,9 @@ public String view3(@ModelAttribute("u") User user) {
 ```
 
 发送请求 <http://localhost:8888/jump/view4/view3?username=xiaorang&password=123456> ，页面成功跳转！  
-![[Pasted image 20220420165718.png]]  
+![Pasted image 20220420165718](../Attachments/Pasted%20image%2020220420165718.png)  
 控制台打印：  
-![[Pasted image 20220420165701.png]]  
+![Pasted image 20220420165701](../Attachments/Pasted%20image%2020220420165701.png)  
 3. @ModelAttribute 注解中 value 属性的值不能存在于@SessionAttributes 注解的 value 属性中，否则会抛出一个异常！
 
 ```java
@@ -1598,7 +1598,7 @@ public class View4Controller {
 ```
 
 发起请求 <http://localhost:8888/jump/view4/view1?name=xiaorang> ，页面显示异常！控制台打印出异常信息：  
-![[Pasted image 20220420170403.png]]  
+![Pasted image 20220420170403](../Attachments/Pasted%20image%2020220420170403.png)  
 如需要将请求参数的数据存放在 session 作用域当中，则只能使用传统的做法 (Model 或者 ModelMap)。
 
 ### 4、ModelAndView 技术 (了解)
@@ -1637,7 +1637,7 @@ public class View5Controller {
 ```
 
 发起请求 <http://localhost:8888/jump/view5/view1> ，页面成功跳转！控制器打印：  
-![[Pasted image 20220420172147.png]]
+![Pasted image 20220420172147](../Attachments/Pasted%20image%2020220420172147.png)
 
 目前控制器方法返回值：String、ModelAndView。SpringMvc 处理跳转页面与作用域时，把对应的内容最终都会封装到 ModelAndView 中，所以 **ModelAndView 返回值的这种处理更加底层**，而 **返回 String 的处理仅仅是简化了开发**。
 
@@ -1665,7 +1665,7 @@ public class View5Controller {
 ```
 
 此时通过请求 <http://localhost:8888/jump/result4> ，也可以访问到 result4 页面！此时 request 作用域中是不存在数据的。  
-![[Pasted image 20220420180659.png]]  
+![Pasted image 20220420180659](../Attachments/Pasted%20image%2020220420180659.png)  
 控制台打印：  
 ![[Pasted image 20220420180638.png]]
 
@@ -1717,7 +1717,7 @@ public class View6Controller {
 ```
 
 再次发起请求  <http://localhost:8888/jump/view6/view1> ，地址栏变成 <http://localhost:8888/jump/result5> ，页面成功跳转！控制台打印：  
-![[Pasted image 20220420194006.png]]
+![Pasted image 20220420194006](../Attachments/Pasted%20image%2020220420194006.png)
 
 ## 6、静态资源处理
 
@@ -1814,7 +1814,7 @@ public void handleRequest(HttpServletRequest request, HttpServletResponse respon
 ```
 
 发起请求 <http://localhost:8888/jump/img/90179059.jpg> ，断点调试。  
-![[Pasted image 20220420210246.png]]
+![Pasted image 20220420210246](../Attachments/Pasted%20image%2020220420210246.png)
 
 # 6、遇到的问题💣
 
@@ -1824,14 +1824,14 @@ public void handleRequest(HttpServletRequest request, HttpServletResponse respon
 org.apache.tomcat.util.descriptor.web.WebXml.setVersion 未知版本字符串 [4.0]。将使用默认版本。
 ```
 
-![[Pasted image 20220417105952.png]]
+![Pasted image 20220417105952](../Attachments/Pasted%20image%2020220417105952.png)
 
 ```ad-solution
 查看 Tomcat 官方文档 [Apache Tomcat® - Which Version Do I Want?](https://tomcat.apache.org/whichversion.html)，可知 Tomcat、Servlet 和 JDK 之间的版本是有要求的，不能随便选择版本。
 我们生成的 web. Xml 文档是 4.0 版本的，那么 tomcat 就应该选择 9.0. X。
 ```
 
-![[Pasted image 20220417111117.png]]
+![Pasted image 20220417111117](../Attachments/Pasted%20image%2020220417111117.png)
 
 ## 2、找到多个名为 spring_web 的片段。这是不合法的相对排序
 
@@ -1846,5 +1846,5 @@ org.apache.tomcat.util.descriptor.web.WebXml.setVersion 未知版本字符串 [4
 2. 配置tomcat启动参数，加上 -Dfile.encoding=UTF-8
 ```
 
-![[Pasted image 20220417221608.png]]  
-![[Pasted image 20220417221839.png]]
+![Pasted image 20220417221608](../Attachments/Pasted%20image%2020220417221608.png)  
+![Pasted image 20220417221839](../Attachments/Pasted%20image%2020220417221839.png)
