@@ -1,39 +1,42 @@
 ---
+title:
 
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
+created: 2022-08-20 23:30:16
+modified: 2022-08-24 14:56:23
 ---
+
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-Application应用程序 ^X0tFdL3T
 
-Load Driver
+Application 应用程序 ^X0tFdL3T
+
+Load Driver  
 加载驱动 ^Vp2Q4zVA
 
-Open Connection
+Open Connection  
 打开连接 ^cH5d69Ky
 
-Execute Statement
+Execute Statement  
 执行语句 ^sw6xSzq6
 
-Process ResultSet
+Process ResultSet  
 处理结果集 ^CoUkqYdH
 
-Close Connection
+Close Connection  
 关闭连接 ^qShOw1bI
 
 JDBC 访问数据库 ^YZnbbqwd
 
-在Java SPI 出现之前，我们是这样来使用JDBC的： ^VC0FKUsq
+在 Java SPI 出现之前，我们是这样来使用 JDBC 的： ^VC0FKUsq
 
  ^xUEChw1p
 
 
 # Embedded files
-8908cb2dba605f0857160a36d69ca7222d7ccf8f: [[Attachments/Pasted Image 20220421093556_412.png]]
+8908cb2dba605f0857160a36d69ca7222d7ccf8f: [[Excalidraw/attachements/Pasted Image 20220824151118_899.png]]
 
 %%
 # Drawing
@@ -45,8 +48,8 @@ JDBC 访问数据库 ^YZnbbqwd
 	"elements": [
 		{
 			"type": "rectangle",
-			"version": 340,
-			"versionNonce": 691324578,
+			"version": 342,
+			"versionNonce": 43597704,
 			"isDeleted": false,
 			"id": "GSnm-EXt3U7ISiUm4f70a",
 			"fillStyle": "hachure",
@@ -60,7 +63,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			"strokeColor": "#000000",
 			"backgroundColor": "transparent",
 			"width": 239,
-			"height": 74,
+			"height": 78,
 			"seed": 918626971,
 			"groupIds": [],
 			"strokeSharpness": "sharp",
@@ -74,14 +77,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929793,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 323,
-			"versionNonce": 1180298366,
+			"version": 325,
+			"versionNonce": 2118278392,
 			"isDeleted": false,
 			"id": "X0tFdL3T",
 			"fillStyle": "hachure",
@@ -91,32 +94,32 @@ JDBC 访问数据库 ^YZnbbqwd
 			"opacity": 100,
 			"angle": 0,
 			"x": -592,
-			"y": -289,
+			"y": -304,
 			"strokeColor": "#000000",
 			"backgroundColor": "transparent",
 			"width": 229,
-			"height": 34,
+			"height": 68,
 			"seed": 900961851,
 			"groupIds": [],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Application应用程序",
+			"text": "\nApplication 应用程序",
 			"rawText": "Application应用程序",
-			"baseline": 21,
+			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "GSnm-EXt3U7ISiUm4f70a",
-			"originalText": "Application应用程序"
+			"originalText": "\nApplication 应用程序"
 		},
 		{
 			"type": "rectangle",
-			"version": 370,
-			"versionNonce": 1441243746,
+			"version": 371,
+			"versionNonce": 1129844360,
 			"isDeleted": false,
 			"id": "kUH-cYICDzcVCy3czzh9X",
 			"fillStyle": "hachure",
@@ -146,14 +149,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "rectangle",
-			"version": 373,
-			"versionNonce": 396602558,
+			"version": 374,
+			"versionNonce": 1222376952,
 			"isDeleted": false,
 			"id": "wBoNkH0X5ENHs1CqpatTU",
 			"fillStyle": "hachure",
@@ -183,14 +186,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 387,
-			"versionNonce": 1732838946,
+			"version": 388,
+			"versionNonce": 1097137544,
 			"isDeleted": false,
 			"id": "Vp2Q4zVA",
 			"fillStyle": "hachure",
@@ -211,23 +214,23 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Load Driver\n加载驱动",
+			"text": "Load Driver  \n加载驱动",
 			"rawText": "Load Driver\n加载驱动",
 			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "wBoNkH0X5ENHs1CqpatTU",
-			"originalText": "Load Driver\n加载驱动"
+			"originalText": "Load Driver  \n加载驱动"
 		},
 		{
 			"type": "rectangle",
-			"version": 450,
-			"versionNonce": 1380672766,
+			"version": 451,
+			"versionNonce": 832143096,
 			"isDeleted": false,
 			"id": "nHD03VOFNUSdVIKlGMF8I",
 			"fillStyle": "hachure",
@@ -261,14 +264,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 495,
-			"versionNonce": 1447555554,
+			"version": 496,
+			"versionNonce": 1845234824,
 			"isDeleted": false,
 			"id": "cH5d69Ky",
 			"fillStyle": "hachure",
@@ -289,23 +292,23 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Open Connection\n打开连接",
+			"text": "Open Connection  \n打开连接",
 			"rawText": "Open Connection\n打开连接",
 			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "nHD03VOFNUSdVIKlGMF8I",
-			"originalText": "Open Connection\n打开连接"
+			"originalText": "Open Connection  \n打开连接"
 		},
 		{
 			"type": "rectangle",
-			"version": 518,
-			"versionNonce": 131208510,
+			"version": 519,
+			"versionNonce": 150921208,
 			"isDeleted": false,
 			"id": "IiwhbielsgVwHQo2ihhUC",
 			"fillStyle": "hachure",
@@ -339,14 +342,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 597,
-			"versionNonce": 636708258,
+			"version": 598,
+			"versionNonce": 853097352,
 			"isDeleted": false,
 			"id": "sw6xSzq6",
 			"fillStyle": "hachure",
@@ -367,23 +370,23 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Execute Statement\n执行语句",
+			"text": "Execute Statement  \n执行语句",
 			"rawText": "Execute Statement\n执行语句",
 			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "IiwhbielsgVwHQo2ihhUC",
-			"originalText": "Execute Statement\n执行语句"
+			"originalText": "Execute Statement  \n执行语句"
 		},
 		{
 			"type": "rectangle",
-			"version": 559,
-			"versionNonce": 1905835390,
+			"version": 560,
+			"versionNonce": 1863327992,
 			"isDeleted": false,
 			"id": "I5tSbs6IyYKhrpuTzGPYR",
 			"fillStyle": "hachure",
@@ -417,14 +420,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 677,
-			"versionNonce": 528114018,
+			"version": 678,
+			"versionNonce": 1647872648,
 			"isDeleted": false,
 			"id": "CoUkqYdH",
 			"fillStyle": "hachure",
@@ -445,23 +448,23 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Process ResultSet\n处理结果集",
+			"text": "Process ResultSet  \n处理结果集",
 			"rawText": "Process ResultSet\n处理结果集",
 			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "I5tSbs6IyYKhrpuTzGPYR",
-			"originalText": "Process ResultSet\n处理结果集"
+			"originalText": "Process ResultSet  \n处理结果集"
 		},
 		{
 			"type": "rectangle",
-			"version": 617,
-			"versionNonce": 1960861118,
+			"version": 618,
+			"versionNonce": 1666269688,
 			"isDeleted": false,
 			"id": "YAg1BJI_Sl8ZHTeRwaLBT",
 			"fillStyle": "hachure",
@@ -491,14 +494,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 769,
-			"versionNonce": 237757730,
+			"version": 770,
+			"versionNonce": 651557256,
 			"isDeleted": false,
 			"id": "qShOw1bI",
 			"fillStyle": "hachure",
@@ -519,23 +522,23 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
 			"fontFamily": 4,
-			"text": "Close Connection\n关闭连接",
+			"text": "Close Connection  \n关闭连接",
 			"rawText": "Close Connection\n关闭连接",
 			"baseline": 55,
 			"textAlign": "center",
 			"verticalAlign": "middle",
 			"containerId": "YAg1BJI_Sl8ZHTeRwaLBT",
-			"originalText": "Close Connection\n关闭连接"
+			"originalText": "Close Connection  \n关闭连接"
 		},
 		{
 			"type": "text",
-			"version": 321,
-			"versionNonce": 650769918,
+			"version": 322,
+			"versionNonce": 1422279416,
 			"isDeleted": false,
 			"id": "YZnbbqwd",
 			"fillStyle": "hachure",
@@ -556,7 +559,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650504929794,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"fontSize": 20,
@@ -571,8 +574,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "arrow",
-			"version": 901,
-			"versionNonce": 972905442,
+			"version": 934,
+			"versionNonce": 667287688,
 			"isDeleted": false,
 			"id": "E1nwVBrSxWFcRfigpCKA4",
 			"fillStyle": "hachure",
@@ -593,7 +596,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650504969039,
+			"updated": 1661325078978,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -622,8 +625,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "arrow",
-			"version": 899,
-			"versionNonce": 811420514,
+			"version": 932,
+			"versionNonce": 18185864,
 			"isDeleted": false,
 			"id": "35NYtWy7m-ubzJ07bzWtt",
 			"fillStyle": "hachure",
@@ -644,7 +647,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650504969040,
+			"updated": 1661325078979,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -673,8 +676,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "arrow",
-			"version": 884,
-			"versionNonce": 1814518498,
+			"version": 917,
+			"versionNonce": 253590664,
 			"isDeleted": false,
 			"id": "pNpnMHxCWXBrZ0i6EL2rO",
 			"fillStyle": "hachure",
@@ -695,7 +698,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650504969041,
+			"updated": 1661325078981,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -724,8 +727,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "arrow",
-			"version": 876,
-			"versionNonce": 1901300322,
+			"version": 909,
+			"versionNonce": 1572731528,
 			"isDeleted": false,
 			"id": "XTdrNCPFcJk9d7Zy3xdiY",
 			"fillStyle": "hachure",
@@ -746,7 +749,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650504969042,
+			"updated": 1661325078982,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -775,8 +778,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "arrow",
-			"version": 80,
-			"versionNonce": 1729072226,
+			"version": 97,
+			"versionNonce": 2135884424,
 			"isDeleted": false,
 			"id": "4CifE1wPma-zoDRVH-bQH",
 			"fillStyle": "hachure",
@@ -786,16 +789,16 @@ JDBC 访问数据库 ^YZnbbqwd
 			"opacity": 100,
 			"angle": 0,
 			"x": -350,
-			"y": -270,
+			"y": -268.5007053107331,
 			"strokeColor": "#000000",
 			"backgroundColor": "transparent",
-			"width": 118,
-			"height": 1.9999999999999432,
+			"width": 117.99999999999997,
+			"height": 1.5781018430471363,
 			"seed": 866679797,
 			"groupIds": [],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650504969037,
+			"updated": 1661325078976,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -817,15 +820,15 @@ JDBC 访问数据库 ^YZnbbqwd
 					0
 				],
 				[
-					118,
-					1.9999999999999432
+					117.99999999999997,
+					1.5781018430471363
 				]
 			]
 		},
 		{
 			"type": "arrow",
-			"version": 394,
-			"versionNonce": 1008823074,
+			"version": 457,
+			"versionNonce": 1191478776,
 			"isDeleted": false,
 			"id": "2litwV-7EywLK81gicL41",
 			"fillStyle": "hachure",
@@ -844,7 +847,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			"groupIds": [],
 			"strokeSharpness": "round",
 			"boundElements": [],
-			"updated": 1650505052542,
+			"updated": 1661324144099,
 			"link": null,
 			"locked": false,
 			"startBinding": {
@@ -873,8 +876,8 @@ JDBC 访问数据库 ^YZnbbqwd
 		},
 		{
 			"type": "rectangle",
-			"version": 318,
-			"versionNonce": 254322530,
+			"version": 354,
+			"versionNonce": 1044812680,
 			"isDeleted": false,
 			"id": "IpCBk_idjMczsDAN5-4ng",
 			"fillStyle": "hachure",
@@ -891,7 +894,7 @@ JDBC 访问数据库 ^YZnbbqwd
 			"height": 338.3333333333332,
 			"seed": 1523193621,
 			"groupIds": [
-				"rFvdD7pKsjVyI8jJ_BhaO"
+				"e7sTP0W1NejQnfxMXpNX_"
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [
@@ -900,14 +903,14 @@ JDBC 访问数据库 ^YZnbbqwd
 					"type": "arrow"
 				}
 			],
-			"updated": 1650505052541,
+			"updated": 1661325085270,
 			"link": null,
 			"locked": false
 		},
 		{
 			"type": "text",
-			"version": 1516,
-			"versionNonce": 559403006,
+			"version": 1552,
+			"versionNonce": 499403000,
 			"isDeleted": false,
 			"id": "VC0FKUsq",
 			"fillStyle": "hachure",
@@ -920,31 +923,31 @@ JDBC 访问数据库 ^YZnbbqwd
 			"y": -280.0114454226011,
 			"strokeColor": "#000000",
 			"backgroundColor": "transparent",
-			"width": 330.59666203059805,
-			"height": 25.059805285118212,
+			"width": 340,
+			"height": 25,
 			"seed": 253587899,
 			"groupIds": [
-				"rFvdD7pKsjVyI8jJ_BhaO"
+				"e7sTP0W1NejQnfxMXpNX_"
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650505052542,
+			"updated": 1661325085270,
 			"link": null,
 			"locked": false,
 			"fontSize": 14.794611518128924,
 			"fontFamily": 4,
-			"text": "在Java SPI 出现之前，我们是这样来使用JDBC的：",
+			"text": "在 Java SPI 出现之前，我们是这样来使用 JDBC 的：",
 			"rawText": "在Java SPI 出现之前，我们是这样来使用JDBC的：",
-			"baseline": 16.059805285118212,
+			"baseline": 16,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
-			"originalText": "在Java SPI 出现之前，我们是这样来使用JDBC的："
+			"originalText": "在 Java SPI 出现之前，我们是这样来使用 JDBC 的："
 		},
 		{
 			"type": "text",
-			"version": 97,
-			"versionNonce": 483112674,
+			"version": 133,
+			"versionNonce": 1178264200,
 			"isDeleted": false,
 			"id": "xUEChw1p",
 			"fillStyle": "hachure",
@@ -957,52 +960,52 @@ JDBC 访问数据库 ^YZnbbqwd
 			"y": -262.63942976356236,
 			"strokeColor": "#000000",
 			"backgroundColor": "transparent",
-			"width": 4.819193324061198,
-			"height": 32.77051460361609,
+			"width": 5,
+			"height": 33,
 			"seed": 262440930,
 			"groupIds": [
-				"rFvdD7pKsjVyI8jJ_BhaO"
+				"e7sTP0W1NejQnfxMXpNX_"
 			],
 			"strokeSharpness": "sharp",
 			"boundElements": [],
-			"updated": 1650505052542,
+			"updated": 1661325085270,
 			"link": null,
 			"locked": false,
 			"fontSize": 19.27677329624479,
 			"fontFamily": 4,
 			"text": "",
 			"rawText": "",
-			"baseline": 20.770514603616093,
+			"baseline": 21,
 			"textAlign": "left",
 			"verticalAlign": "top",
 			"containerId": null,
 			"originalText": ""
 		},
 		{
+			"id": "erL2sHqYCUFlc3VVcCR09",
 			"type": "image",
-			"version": 508,
-			"versionNonce": 806953022,
-			"isDeleted": false,
-			"id": "n2mwOjiIzdxuS4qkajO8y",
+			"x": 217.13177148215323,
+			"y": -244.82142857142856,
+			"width": 716.4285714285716,
+			"height": 277.4607762180017,
+			"angle": 0,
+			"strokeColor": "transparent",
+			"backgroundColor": "transparent",
 			"fillStyle": "hachure",
 			"strokeWidth": 1,
 			"strokeStyle": "solid",
 			"roughness": 1,
 			"opacity": 100,
-			"angle": 0,
-			"x": 218.19380729709184,
-			"y": -245.8257997218359,
-			"strokeColor": "transparent",
-			"backgroundColor": "transparent",
-			"width": 711.4583895543149,
-			"height": 275.5359080932895,
-			"seed": 1473913762,
 			"groupIds": [
-				"rFvdD7pKsjVyI8jJ_BhaO"
+				"e7sTP0W1NejQnfxMXpNX_"
 			],
 			"strokeSharpness": "round",
-			"boundElements": [],
-			"updated": 1650505052542,
+			"seed": 582114808,
+			"version": 81,
+			"versionNonce": 2034264568,
+			"isDeleted": false,
+			"boundElements": null,
+			"updated": 1661325085270,
 			"link": null,
 			"locked": false,
 			"status": "pending",
@@ -1011,6 +1014,73 @@ JDBC 访问数据库 ^YZnbbqwd
 				1,
 				1
 			]
+		},
+		{
+			"type": "image",
+			"version": 265,
+			"versionNonce": 13035400,
+			"isDeleted": true,
+			"id": "qI4Hmx31jh6ePnaE5pSBq",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"angle": 0,
+			"x": 225.70320005358178,
+			"y": -247.67857142857144,
+			"strokeColor": "transparent",
+			"backgroundColor": "transparent",
+			"width": 699.0085287846481,
+			"height": 270.71428571428567,
+			"seed": 114966408,
+			"groupIds": [],
+			"strokeSharpness": "round",
+			"boundElements": [],
+			"updated": 1661325031745,
+			"link": null,
+			"locked": false,
+			"status": "pending",
+			"fileId": "8908cb2dba605f0857160a36d69ca7222d7ccf8f",
+			"scale": [
+				1,
+				1
+			]
+		},
+		{
+			"id": "9EDy0UocGS0fcjQ0l2Pl6",
+			"type": "text",
+			"x": 479.6317714821532,
+			"y": -122.10714285714283,
+			"width": 5,
+			"height": 34,
+			"angle": 0,
+			"strokeColor": "#000000",
+			"backgroundColor": "transparent",
+			"fillStyle": "hachure",
+			"strokeWidth": 1,
+			"strokeStyle": "solid",
+			"roughness": 1,
+			"opacity": 100,
+			"groupIds": [],
+			"strokeSharpness": "sharp",
+			"seed": 276082056,
+			"version": 3,
+			"versionNonce": 529906824,
+			"isDeleted": true,
+			"boundElements": null,
+			"updated": 1661325013133,
+			"link": null,
+			"locked": false,
+			"text": "",
+			"rawText": "",
+			"fontSize": 20,
+			"fontFamily": 4,
+			"textAlign": "left",
+			"verticalAlign": "top",
+			"baseline": 21,
+			"containerId": null,
+			"originalText": ""
 		}
 	],
 	"appState": {

@@ -111,7 +111,7 @@
       "Inner New Lines": false
     },
     "Consecutive blank lines": {
-      "There should be at most one consecutive blank line.": false
+      "There should be at most one consecutive blank line.": true
     },
     "Convert Spaces to Tabs": {
       "Converts leading spaces to tabs.": true,
