@@ -2,7 +2,7 @@
 title: Spring[AOP]
 tags: spring aop
 created: 2022-08-25 20:53:11
-modified: 2022-08-27 00:32:14
+modified: 2022-08-27 16:24:32
 ---
 
 ## 楔子
@@ -10,6 +10,8 @@ modified: 2022-08-27 00:32:14
 AOP 是 OOP 的延续，是 Aspect Oriented Programming 的缩写，意思是 **面向切面编程**，可以通过预编译和运行时动态代理，实现 **在不修改源代码的情况下给程序<u>动态统一</u>添加功能**。  
 日常开发中一些非业务，如<u>日志</u>、<u>事务</u>、<u>安全</u>等写在业务代码中，这些代码往往是重复的，复制粘贴式代码会给程序的维护带来不便。AOP 就将这些非业务代码与业务代码分开，这种解决方式也称之 **代理机制**。  
 Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功能性需求中分离出来**，达到 **解耦** 的目的。
+
+> 本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-study: 用于 spring 学习](https://github.com/xihuanxiaorang/spring-study) 仓库中的 `aop` 模块，可以自行查看。
 
 ## 概念
 
@@ -66,8 +68,6 @@ Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功
 ### 1、XML 配置方式
 
 #### 开发环境搭建
-
-> 本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-study: 用于 spring 学习](https://github.com/xihuanxiaorang/spring-study) 仓库中的 `aop` 模块，可以自行查看。
 
 ###### 依赖的 jar 包
 

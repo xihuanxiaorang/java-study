@@ -2,13 +2,14 @@
 title: Spring基础
 tags: Spring
 created: 2022-08-26 16:50:49
-modified: 2022-08-26 16:54:54
+modified: 2022-08-27 16:23:05
 ---
 
-## 学习顺序
+## 撰写顺序
 
-| 顺序 | 内容 | 文章链接                    |
-| ---- | ---- | --------------------------- |
-| 1    | IOC  | [Spring-IOC](IOC/README.md) |
-| 2    | AOP  | [Spring-AOP](AOP/README.md) |
-| 3     |   事务   |          [Spring事务](事务/README.md)                   |
+| 顺序 | 内容 | 文章链接                     |
+| ---- | ---- | ---------------------------- |
+| 1    | Spring-IOC  | [Spring-IOC](IOC/README.md)  |
+| 2    | Spring-AOP  | [Spring-AOP](AOP/README.md)  |
+| 3    | Spring 事务 | [Spring事务](事务/README.md) |
+| 4    | Spring 注解开发     |       [Spring 注解开发](Spring注解驱动开发/README.md)                       |

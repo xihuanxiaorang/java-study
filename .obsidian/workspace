@@ -4,7 +4,7 @@
     "type": "split",
     "children": [
       {
-        "id": "7321f813831ff35f",
+        "id": "5345d3b6bdfc92fa",
         "type": "leaf",
         "state": {
           "type": "kanban",
@@ -60,7 +60,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 295
+    "width": 558,
+    "collapsed": true
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -123,17 +124,17 @@
     "direction": "horizontal",
     "width": 309.5
   },
-  "active": "7321f813831ff35f",
+  "active": "5345d3b6bdfc92fa",
   "lastOpenFiles": [
-    "Spring/源码/README.md",
-    "JDK/进阶/Java SPI.md",
-    "README.md",
-    "Spring/基础/README.md",
-    "Spring/基础/AOP/README.md",
-    "Spring/基础/IOC/README.md",
-    "Spring/基础/AOP/attachements/Pasted image 20220826205114.png",
-    "Spring/基础/IOC/attachements/Pasted image 20220826210954.png",
+    "Spring/基础/Spring注解驱动开发/README.md",
     "笔记进度/README.md",
-    "Spring/基础/事务/README.md"
+    "Spring/基础/IOC/README.md",
+    "Spring/基础/README.md",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220828043207.png",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827174951.png",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827180206.png",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827180453.png",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827202432.png",
+    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827203101.png"
   ]
 }

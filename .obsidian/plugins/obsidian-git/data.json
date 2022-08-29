@@ -13,7 +13,6 @@
   "showStatusBar": true,
   "updateSubmodules": false,
   "syncMethod": "rebase",
-  "gitPath": "",
   "customMessageOnAutoBackup": true,
   "autoBackupAfterFileChange": false,
   "treeStructure": false,

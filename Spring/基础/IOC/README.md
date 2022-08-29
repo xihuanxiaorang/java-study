@@ -2,7 +2,7 @@
 title: Spring[IOC]
 tags: spring ioc
 created: 2022-08-23 14:52:50
-modified: 2022-08-26 21:10:31
+modified: 2022-08-28 21:15:19
 ---
 
 # 第一个 Spring 程序
@@ -50,7 +50,7 @@ Spring 的配置文件：<br/>![](attachements/Pasted%20image%2020220826210954.p
 
 ## 2、Spring 核心 API
 
-ApplicationContext：是一个接口，主要用于对象的创建。其实现类主要有 `ClassPathXmlApplicationContext` 和 `XmlWebApplicationContext`。ApplicationContext 工厂对象占用大量内存，一个应用中只会有一个工厂对象 (单例)，并且是线程安全的。<br />![image.png](https://cdn.nlark.com/yuque/0/2022/png/1554080/1647504014150-0d252feb-0ff6-452b-9801-a44ba011737e.png#clientId=u58c72a4d-3a53-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=603&id=u3f9a8dc0&originHeight=603&originWidth=645&originalType=binary&ratio=1&rotation=0&showTitle=false&size=211381&status=done&style=none&taskId=ue628a453-4df0-40bc-8596-34dfabe7bf4&title=&width=645)
+ApplicationContext：是一个接口，主要用于对象的创建。其实现类主要有 `ClassPathXmlApplicationContext` 和 `XmlWebApplicationContext`。ApplicationContext 工厂对象占用大量内存，一个应用中只会有一个工厂对象 (单例)，并且是线程安全的。<br />![|600](attachements/Pasted%20image%2020220827013311.png)
 
 ## 3、程序开发
 
@@ -958,7 +958,7 @@ public void test5() {
 
 ### 1、创建阶段 (Spring 工厂何时创建对象)
 
-结论：<br />当创建的是单例对象时，并且 `bean` 标签中的 `lazy-init` 属性为 false(默认为 false) 时，在 spring 工厂创建的时候就会创建出对象并给对象中的成员变量进行赋值。但如果 `bean` 标签中的 `lazy-init` 属性为 true，则会推迟到获取对象时才会去创建对象。<br />当创建的是原型 (prototype) 对象时，则在获取对象时才会去创建对象。  
+结论：<br />当创建的是单例对象时，并且 `bean` 标签中的 `lazy-init` 属性为 false(默认为 false) 时，在 spring 工厂创建的时候就会创建出对象并给对象中的成员变量进行赋值。但如果 `bean` 标签中的 `lazy-init` 属性为 true，则会推迟到获取对象时才会去创建对象。<br />当创建的是原型 (prototype) 对象时，则在获取对象时每次都会去创建一个新的对象。  
 
 #### 1、singleton && lazy-init=false
 
