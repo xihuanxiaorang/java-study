@@ -2,7 +2,7 @@
 title: Spring[AOP]
 tags: spring aop
 created: 2022-08-25 20:53:11
-modified: 2022-08-27 16:24:32
+modified: 2022-08-29 23:49:33
 ---
 
 ## 楔子
@@ -269,7 +269,7 @@ java.lang.RuntimeException: java.lang.RuntimeException: java.lang.Exception: spr
 
 ### 2、注解方式
 
-使用注解配置 Spring AOP 总体分为两步：第一步是编写一个配置类，使用 `@ComponentScan` 注解激活自动扫描组件功能，同时使用 `@EnableAspectJAutoProxy` 激活自动代理功能；第二步是为切面类添加注解。
+使用注解配置 Spring AOP 总体分为两步：第一步是编写一个配置类，使用 `@ComponentScan` 注解激活自动扫描组件功能，同时使用 `@EnableAspectJAutoProxy` 激活自动代理功能；第二步是为切面类标注 `@Aspect` 注解。
 
 #### 配置类
 
@@ -379,10 +379,6 @@ java.lang.RuntimeException: java.lang.RuntimeException: java.lang.Exception: spr
 ```
 
 结论：与 XML 配置方式测试的结果一样。
-
-```ad-question
-AOP通知的执行顺序为什么不一样？TODO：等到分析完源码之后回来！
-```
 
 ## 切入点表达式详解
 

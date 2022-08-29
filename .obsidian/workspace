@@ -7,9 +7,11 @@
         "id": "5345d3b6bdfc92fa",
         "type": "leaf",
         "state": {
-          "type": "kanban",
+          "type": "markdown",
           "state": {
-            "file": "笔记进度/README.md"
+            "file": "Spring/源码/Spring源码环境搭建/README.md",
+            "mode": "source",
+            "source": false
           }
         }
       }
@@ -60,8 +62,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 558,
-    "collapsed": true
+    "width": 444
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -77,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "笔记进度/README.md",
+                "file": "Spring/源码/Spring源码环境搭建/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -94,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记进度/README.md"
+                "file": "Spring/源码/Spring源码环境搭建/README.md"
               }
             }
           },
@@ -126,15 +127,15 @@
   },
   "active": "5345d3b6bdfc92fa",
   "lastOpenFiles": [
-    "Spring/基础/Spring注解驱动开发/README.md",
     "笔记进度/README.md",
-    "Spring/基础/IOC/README.md",
+    "Spring/源码/Spring源码环境搭建/README.md",
+    "Spring/源码/README.md",
+    "设计模式/代理模式.md",
+    "Spring/源码/AOP/RAEDME.md",
+    "Spring/基础/AOP/README.md",
+    "设计模式/单例模式.md",
     "Spring/基础/README.md",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220828043207.png",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827174951.png",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827180206.png",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827180453.png",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827202432.png",
-    "Spring/基础/Spring注解驱动开发/attachements/Pasted image 20220827203101.png"
+    "Spring/基础/Spring注解驱动开发/README.md",
+    "设计模式/README.md"
   ]
 }
