@@ -1,8 +1,8 @@
 ---
-title: Spring[AOP]源码
+title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-08-31 23:08:16
+modified: 2022-08-31 23:20:15
 ---
 
 # 1、AOP 环境搭建
@@ -1009,21 +1009,20 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 
 # 3、AOP 目标方法执行流程
 
-```markdown
 目标方法的执行，容器中保存了组件的代理对象「cglib 增强后的对象」，这个对象里面保存了详细信息（比如增强器、目标对象等）
-1.  `CglibAopProxy.intercept()`，拦截目标方法的执行；
-2.  根据 ProxyFactory 对象获取将要执行的目标方法的拦截器链， `List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass)`;
-    1.  List<Object> interceptorList：保存所有的拦截器，一个默认的 ExposeInvocationInterceptor 和四个增强器，即通知方法；
-    2.  遍历所有的增强器，将其转换成 Interceptor：`MethodInterceptor[] interceptors = registry.getInterceptors(advisor)`；
-    3.  将增强器转为 List<MethodInterceptor>；
-        1.  如果是 MethodInterceptor ，直接加入到集合中；
-        2.  如果不是 MethodInterceptor，则使用 AdvisorAdapter 将增强器转为 MethodInterceptor，转换完成后，返回 MethodInterceptor 数组。
-3.  如果没有拦截器链，则直接执行目标方法。「拦截器链：每一个通知方法又被包装成方法拦截器，利用 MethodInterceptor 拦截器机制执行」；
-4.  如果有拦截器链，把需要执行的目标对象、目标方法、拦截器链等信息传入创建的 CglibMethodInvokation 对象，并调用 `Object retVal = mi.procceed()`；
-5.  拦截器链的触发过程；
-    1.  如果没有拦截器或者拦截器索引和拦截器数组 - 1 的大小相同 (指定到了最后一个拦截器)，则执行目标方法；
-    2.  链式获取每一个拦截器，拦截器执行 `invoke()` 方法，每一个拦截器等待下一个拦截器执行完成返回以后再执行。为拦截器链的机制，保证通知方法和目标方法的执行顺序。
-```
+
+1. `CglibAopProxy.intercept()`，拦截目标方法的执行
+2. 根据 ProxyFactory 对象获取将要执行的目标方法的拦截器链， `List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass)`
+	1. `List<Object> interceptorList`：保存所有的拦截器，一个默认的 ExposeInvocationInterceptor 和四个增强器，即通知方法
+	2. 遍历所有的增强器，将其转换成 Interceptor：`MethodInterceptor[] interceptors = registry.getInterceptors(advisor)`
+	3. 将增强器转为 `List<MethodInterceptor>`
+		1. 如果是 MethodInterceptor ，直接加入到集合中
+		2. 如果不是 MethodInterceptor，则使用 AdvisorAdapter 将增强器转为 MethodInterceptor，转换完成后，返回 MethodInterceptor 数组
+3. 如果没有拦截器链，则直接执行目标方法。「拦截器链：每一个通知方法又被包装成方法拦截器，利用 MethodInterceptor 拦截器机制执行」
+4. 如果有拦截器链，把需要执行的目标对象、目标方法、拦截器链等信息传入创建的 `CglibMethodInvokation` 对象，并调用 `Object retVal = mi.procceed()`
+5. 拦截器链的触发过程
+	1. 如果没有拦截器或者拦截器索引和拦截器数组 - 1 的大小相同 (指定到了最后一个拦截器)，则执行目标方法
+	2. 链式获取每一个拦截器，拦截器执行 `invoke()` 方法，每一个拦截器等待下一个拦截器执行完成返回以后再执行。为拦截器链的机制，保证通知方法和目标方法的执行顺序
 
 ![AOP执行链执行流程](attachements/AOP执行链执行流程.jpg)  
 Cglib 代理对象执行目标方法时，会被 `CglibAopProxy$DynamicAdvisedInterceptor` 类中的 `intercept()` 方法所拦截。
@@ -1058,7 +1057,6 @@ public Object intercept(Object proxy, Method method, Object[] args, MethodProxy 
             retVal = methodProxy.invoke(target, argsToUse);
         }
         else {
-
             /**
 			 * 先将拦截器链包装到 CglibMethodInvocation 中，然后调用 proceed() 方法执行拦截器链
 			 */
