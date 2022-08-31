@@ -4,14 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "5345d3b6bdfc92fa",
+        "id": "3c988bcc672a3499",
         "type": "leaf",
         "state": {
-          "type": "markdown",
+          "type": "kanban",
           "state": {
-            "file": "Spring/源码/Spring源码环境搭建/README.md",
-            "mode": "source",
-            "source": false
+            "file": "笔记进度/README.md"
           }
         }
       }
@@ -32,7 +30,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "一篇文章",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -78,7 +76,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md",
+                "file": "笔记进度/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +93,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md"
+                "file": "笔记进度/README.md"
               }
             }
           },
@@ -123,19 +121,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 309.5
+    "width": 328.5
   },
-  "active": "5345d3b6bdfc92fa",
+  "active": "3c988bcc672a3499",
   "lastOpenFiles": [
-    "笔记进度/README.md",
-    "Spring/源码/Spring源码环境搭建/README.md",
     "Spring/源码/README.md",
-    "设计模式/代理模式.md",
+    "Spring/源码/Spring源码环境搭建/README.md",
     "Spring/源码/AOP/RAEDME.md",
+    "设计模式/代理模式.md",
+    "Spring/源码/AOP/assets/AOP介入流程.jpg",
+    "Spring/源码/AOP/attachements/AOP的创建流程.jpg",
+    "笔记进度/README.md",
     "Spring/基础/AOP/README.md",
-    "设计模式/单例模式.md",
-    "Spring/基础/README.md",
     "Spring/基础/Spring注解驱动开发/README.md",
-    "设计模式/README.md"
+    "JDK/基础/泛型.md"
   ]
 }

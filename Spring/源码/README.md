@@ -2,7 +2,7 @@
 title: Spring源码
 tags: spring 源码
 created: 2022-08-23 22:48:48
-modified: 2022-08-30 03:41:26
+modified: 2022-08-31 22:27:00
 ---
 
 ## Spring 版本命名规则
@@ -22,3 +22,7 @@ modified: 2022-08-30 03:41:26
 | 1   |    Spring 源码环境搭建                |          [Spring源码环境搭建](Spring源码环境搭建/README.md)                       |
 | 2    | Spring-IOC 源码 |                                 |
 | 3    | Spring-AOP 源码    | [Spring-AOP源码](AOP/RAEDME.md) |
+
+## 参考文档
+
+🎉[my-spring: Spring 源码注释](https://gitee.com/travelerly/my-spring)  

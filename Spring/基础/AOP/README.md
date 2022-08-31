@@ -2,7 +2,7 @@
 title: Spring[AOP]
 tags: spring aop
 created: 2022-08-25 20:53:11
-modified: 2022-08-29 23:49:33
+modified: 2022-08-31 04:46:55
 ---
 
 ## 楔子
@@ -60,6 +60,34 @@ Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功
 在 Spring AOP 中有两种代理方式：**JDK 动态代理** 和 **Cglib 代理**。默认情况下，目标对象实现了接口时，采用 JDK 动态代理；反之，使用 Cglib 代理。强制使用 Cglib 代理需要将 `<aop: config>` 中的 `proxy-target-class` 属性设置为 true。
 
 > 对于 **静态代理** 与 **动态代理** 的详细介绍可以参考设计模式中 [代理模式](../../../设计模式/代理模式.md) 这一篇文章，这里就不再赘述。
+
+## Spring 5.0 通知方法执行顺序
+
+```java
+try{
+	前置通知
+	目标方法
+	返回通知
+} catch(Exception e) {
+	异常通知
+} finally {
+	后置通知
+}
+```
+
+### 正常执行顺序
+
+1. 前置通知
+2. 目标方法
+3. 返回通知
+4. 后置通知
+
+### 异常执行顺序
+
+1. 前置通知
+2. 目标方法
+3. 异常通知
+4. 后置通知
 
 ##  AOP 的两种配置方式
 
@@ -377,8 +405,6 @@ public void test1() {
 
 java.lang.RuntimeException: java.lang.RuntimeException: java.lang.Exception: spring aop ThrowAdvice 演示
 ```
-
-结论：与 XML 配置方式测试的结果一样。
 
 ## 切入点表达式详解
 

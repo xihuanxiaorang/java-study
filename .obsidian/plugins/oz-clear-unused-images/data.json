@@ -1,0 +1,7 @@
+{
+  "deleteOption": ".trash",
+  "logsModal": true,
+  "excludedFolders": "Spring/源码/AOP/assets",
+  "ribbonIcon": false,
+  "excludeSubfolders": false
+}

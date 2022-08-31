@@ -11,17 +11,17 @@ kanban-plugin: basic
 ## TODO
 
 - [ ] Spring-IOC 源码
+- [ ] Springboot 源码
+- [ ] [ConcurrentHashMap](JDK/源码/集合/ConcurrentHashMap.md)
 - [ ] JDBC [README](../数据库编程/JDBC/README.md)
 - [ ] [SpringSecurity 源码剖析 (四)](SpringSecurity/SpringSecurity%20源码剖析%20(四).md)
-- [ ] [ConcurrentHashMap](JDK/源码/集合/ConcurrentHashMap.md)
-- [ ] Springboot 源码
+- [ ] [泛型](../JDK/基础/泛型.md)
 - [ ] Java 类加载过程
 - [ ] ASM
 
 
 ## PROCESSING
 
-- [ ] [Spring-AOP源码](../Spring/源码/AOP/RAEDME.md)
 
 
 ## ToBeImproved
@@ -59,6 +59,7 @@ kanban-plugin: basic
 - [x] [Spring-AOP](../Spring/基础/AOP/README.md)
 - [x] [Spring注解驱动开发](../Spring/基础/Spring注解驱动开发/README.md)
 - [x] [Spring源码环境搭建](../Spring/源码/Spring源码环境搭建/README.md)
+- [x] [Spring-AOP源码](../Spring/源码/AOP/RAEDME.md)
 
 %% kanban:settings
 ```
