@@ -2,7 +2,7 @@
 title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-08-31 23:20:15
+modified: 2022-09-01 16:31:06
 ---
 
 # 1、AOP 环境搭建
@@ -206,9 +206,43 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 }
 ```
 
-发现其实现了 `ImportBeanDefinitionRegistrar` 接口，并且重写了接口中的 `registerBeanDefinitions()` 方法，该方法主要用于向 Spring 容器中注册 bean 的定义信息。在 `AspectJAutoProxyRegistrar` 类的 `registerBeanDefinitions()` 方法中，就调用 `AopConfigUtils` 类中的 `registerAspectJAnnotationAutoProxyCreatorIfNecessary()` 方法 **向容器中注册一个基于注解的自动代理创建器的 bean 定义信息**，其中 beanName = `internalAutoProxyCreator`，class = `AnnotationAwareAspectJAutoProxyCreator`。值得一提的是，该 AspectJ 自动代理创建器，也就是 **`AnnotationAwareAspectJAutoProxyCreator` 是一个后置处理器**，间接实现了 `BeanPostProcessor` 接口。先来看下 `AnnotationAwareAspectJAutoProxyCreator` 类结构关系图：  
+发现其实现了 `ImportBeanDefinitionRegistrar` 接口，并且重写了接口中的 `registerBeanDefinitions()` 方法，该方法主要用于向 Spring 容器中注册 bean 的定义信息。在 `AspectJAutoProxyRegistrar` 类的 `registerBeanDefinitions()` 方法中，就调用 `AopConfigUtils` 类中的 `registerAspectJAnnotationAutoProxyCreatorIfNecessary()` 方法 **向容器中注册一个基于注解的自动代理创建器的 bean 定义信息**，其中 beanName = `internalAutoProxyCreator`，class = `AnnotationAwareAspectJAutoProxyCreator`。先来看下 `AnnotationAwareAspectJAutoProxyCreator` 类结构关系图：  
 ![AnnotationAwareAspectJAutoProxyCreator.drawio](attachements/AnnotationAwareAspectJAutoProxyCreator.drawio.svg)  
-至此，只知道通过 `@EnableAspectJAutoProxy` 注解向容器中注册了一个后置处理器 `AnnotationAwareAspectJAutoProxyCreator` 的定义信息。
+从上面 `AnnotationAwareAspectJAutoProxyCreator` 的类结构关系图可以看出：`AnnotationAwareAspectJAutoProxyCreator` 的父类 `AbstractAutoProxyCreator`，实现了 `SmartInstantiationAwareBeanPostProcessor` 接口，而 `SmartInstantiationAwareBeanPostProcessor` 接口继承自 `InstantiationAwareBeanPostProcessor` 接口，而 `InstantiationAwareBeanPostProcessor` 接口又继承自 `BeanPostProcessor` 接口。  也就是说 **`AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 后置处理器**。
+
+### 1、BeanPostProcessor 接口
+
+```java
+public interface BeanPostProcessor {
+    @Nullable
+    default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+
+    @Nullable
+    default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        return bean;
+    }
+}
+```
+
+**`BeanPostProcessor` 后置处理器的调用发生在容器完成 bean 实例对象的创建和属性的依赖注入之后**。其中的 `Before` 方法在 bean 执行初始化方法（如 `InitializingBean` 的 `afterPropertiesSet()` 或自定义 init 方法）之前调用，而 `After` 方法在 bean 执行初始化方法之后调用，两个方法的默认实现都是按原样返回给定的 bean。  
+💡需要注意的是：如果方法的返回值为 null ，则不会再调用后续的 BeanPostProcessors。
+
+### 2、SmartInstantiationAwareBeanPostProcessor 接口
+
+`SmartInstantiationAwareBeanPostProcessor` 接口对 `BeanPostProcessor` 接口进行了扩展，增加了一个重要的方法：
+
+```java
+public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
+    @Nullable
+    default Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
+        return null;
+    }
+}
+```
+
+看方法名字就知道，该 **`postProcessBeforeInstantiation()` 方法是在 bean 被实例化之前调用**。返回的 bean 对象可能是要使用的代理对象而不是目标 bean，从而有效地抑制了目标 bean 的默认实例化。如果这个方法返回了一个非空的对象，那么 bean 的创建过程就会短路，也就是不再执行后面的流程。  
 
 ## 2、注册后置处理器
 
@@ -383,41 +417,6 @@ public static void registerBeanPostProcessors(
 
 ## 3、创建增强器
 
-从上面 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器的类结构关系图可以看出：`AnnotationAwareAspectJAutoProxyCreator` 的父类 `AbstractAutoProxyCreator`，实现了 `SmartInstantiationAwareBeanPostProcessor` 接口，而 `SmartInstantiationAwareBeanPostProcessor` 接口继承自 `InstantiationAwareBeanPostProcessor` 接口，而 `InstantiationAwareBeanPostProcessor` 接口又继承自 `BeanPostProcessor` 接口。
-
-### 1、BeanPostProcessor 接口
-
-```java
-public interface BeanPostProcessor {
-    @Nullable
-    default Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-
-    @Nullable
-    default Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-}
-```
-
-**`BeanPostProcessor` 后置处理器的调用发生在容器完成 bean 实例对象的创建和属性的依赖注入之后**。其中的 `Before` 方法在 bean 执行初始化方法（如 `InitializingBean` 的 `afterPropertiesSet()` 或自定义 init 方法）之前调用，而 `After` 方法在 bean 执行初始化方法之后调用，两个方法的默认实现都是按原样返回给定的 bean。  
-💡需要注意的是：如果方法的返回值为 null ，则不会再调用后续的 BeanPostProcessors。
-
-### 2、SmartInstantiationAwareBeanPostProcessor 接口
-
-`SmartInstantiationAwareBeanPostProcessor` 接口对 `BeanPostProcessor` 接口进行了扩展，增加了一个重要的方法：
-
-```java
-public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
-    @Nullable
-    default Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-        return null;
-    }
-}
-```
-
-看方法名字就知道，该 **`postProcessBeforeInstantiation()` 方法是在 bean 被实例化之前调用**。返回的 bean 对象可能是要使用的代理对象而不是目标 bean，从而有效地抑制了目标 bean 的默认实例化。如果这个方法返回了一个非空的对象，那么 bean 的创建过程就会短路，也就是不再执行后面的流程。  
 在 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器的父类 `AbstractAutoProxyCreator` 中只重写了其中的两个方法 `postProcessBeforeInstantiation()` 和 `postProcessAfterInitialization()`。  
 ![](attachements/Pasted%20image%2020220830210920.png)  
 那就先来看下 `postProcessBeforeInstantiation()` 方法。
@@ -502,7 +501,7 @@ protected Object applyBeanPostProcessorsBeforeInstantiation(Class<?> beanClass, 
 ```
 
 4. 通过 `AnnotationAwareAspectJAutoProxyCreator` 类的结构关系图可以知道其父类 `AbstractAutoProxyCreator` 实现了 `InstantiationAwareBeanPostProcessor` 接口，那么此时在循环体中就会去执行后置处理器 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法。  
-至于怎么来到 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法的已经分析的很清楚，总的来说就是，Spring 容器刷新执行到 `finishBeanFactoryInitialization()` 方法时，初始化所有非懒加载的单例 bean，在实例化 bean 之前，后置处理器就会介入，即 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器会在 bean 实例化之前执行 `postProcessBeforeInstantiation()` 方法。
+至于怎么来到 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法的已经分析的很清楚，总的来说就是，Spring 容器刷新执行到 `finishBeanFactoryInitialization()` 方法时，实例化所有剩余的非懒加载的单实例 bean，在实例化 bean 之前，后置处理器就会介入，即 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器会在 bean 实例化之前执行 `postProcessBeforeInstantiation()` 方法。
 
 现在来看下 `postProcessBeforeInstantiation()` 方法在底层到底干了什么？  
 
@@ -1254,7 +1253,7 @@ public Object proceed() throws Throwable {
 2. `@EnableAspectJAutoProxy` 会给容器中注册一个组件 `AnnotationAwareAspectJAutoProxyCreator`，是一个后置处理器
 3. 容器的创建过程：
 	1. `registerBeanPostProcessors()` 注册后置处理器，创建 `AnnotationAwareAspectJAutoProxyCreator` 实例对象
-	2. `finishBeanFactoryInitialization(beanFactory)` 初始化剩余的非懒加载的单实例 bean
+	2. `finishBeanFactoryInitialization(beanFactory)` 实例化所有剩余的非懒加载的单实例 bean
 		1. 创建业务逻辑组件和切面组件
 		2. `AnnotationAwareAspectJAutoProxyCreator` 后置处理器拦截组件的创建过程
 		3. 组成创建完成后，判断组件是否需要增强，需要增强的话，将切面中的通知方法包装成一个个的增强器 `Advisor`，给业务逻辑组件创建一个 Cglib 代理对象

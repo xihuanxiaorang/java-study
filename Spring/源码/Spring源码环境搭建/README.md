@@ -2,7 +2,7 @@
 title: Spring源码环境搭建
 tags: spring 源码
 created: 2022-08-30 02:01:56
-modified: 2022-08-30 03:40:21
+modified: 2022-08-31 23:46:47
 ---
 
 ## 源码下载
@@ -55,7 +55,7 @@ repositories {
 
 `build.gradle` 和 `settings.gradle` 文件配置好后，开始配置 gradle，将 IDEA 中的 gradle 指定到自己下载的 gradle，配置步骤如下所示：  
 ![|600](attachements/Pasted%20image%2020220830025606.png)<br />  
-![](attachements/Pasted%20image%2020220830025843.png)  
+![](attachements/Pasted%20image%2020220831234644.png)  
 配置好 gradle 路径之后，开始编译。编译的时间长短可能与小伙伴的网速有关，因为要下载大量的 jar 包和插件，不过咱们配置了阿里云镜像，再慢也不会慢到哪里去 ，静静等待即可。等出现 BUILD SUCCESSFUL 字样就表示已经编程成功。  
 ![](attachements/Pasted%20image%2020220830030432.png)  
 编译成功之后，使用 gradle 测试一下。  

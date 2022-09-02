@@ -2,12 +2,11 @@
 title: Springboot 自动配置原理剖析
 tags: springboot 源码
 created: 2022-05-06 21:24:27
-modified: 2022-08-23 22:49:42
+modified: 2022-09-01 17:10:03
 ---
 
 在开始剖析 Springboot 自动配置原理之前，首先得明白 **Springboot 的自动配置是什么**？  
-Springboot 自动配置 => 英文是 AutoConfiguration，它是指根据你所添加的 jar 包 (依赖) 自动配置你的 Spring 应用程序，它为 Springboot 框架的 " 开箱即用 " 提供了基础支 0 撑。  
-![[Springboot 源码阅读环境构建]]
+Springboot 自动配置 => 英文是 AutoConfiguration，它是指根据你所添加的 jar 包 (依赖) 自动配置你的 Spring 应用程序，它为 Springboot 框架的 " 开箱即用 " 提供了基础支持。  
 
 ```ad-important
 **阅读源码**的时候**带着目的去读**，**先抓主干**，**不要一开始就陷入到各个分支**(即一直F5进一个方法)当中无法自拔。需要注意的是，这篇文章我为了解释每个方法的作用，会进入到每个方法当中去。
@@ -44,16 +43,15 @@ public SpringApplication(Class<?>... primarySources) {
    this(null, primarySources);  
 }
 
-public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {  
-   this.resourceLoader = resourceLoader;  
-   Assert.notNull(primarySources, "PrimarySources must not be null");  
-   this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));  
-   this.webApplicationType = WebApplicationType.deduceFromClasspath();
-   this.bootstrapRegistryInitializers = new ArrayList<>(  
-         getSpringFactoriesInstances(BootstrapRegistryInitializer.class));  
-   setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));  
-   setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));  
-   this.mainApplicationClass = deduceMainApplicationClass();  
+public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
+    this.resourceLoader = resourceLoader;
+    Assert.notNull(primarySources, "PrimarySources must not be null");
+    this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
+    this.webApplicationType = WebApplicationType.deduceFromClasspath();
+    this.bootstrapRegistryInitializers = new ArrayList<>(getSpringFactoriesInstances(BootstrapRegistryInitializer.class));
+    setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
+    setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+    this.mainApplicationClass = deduceMainApplicationClass();
 }
 ```
 
@@ -61,16 +59,17 @@ public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySourc
 第一个是 WebApplicationType.deduceFromClasspath(); 该方法用于判断当前 Springboot 应用是什么类型，可选值有 REACTIVE(响应式)、NONE、SERVLET(✔)。
 
 ```java
-static WebApplicationType deduceFromClasspath() {  
-   if (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, null) && !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, null)  
-         && !ClassUtils.isPresent(JERSEY_INDICATOR_CLASS, null)) {  
-      return WebApplicationType.REACTIVE;  
-   }  
-   for (String className : SERVLET_INDICATOR_CLASSES) {  
-      if (!ClassUtils.isPresent(className, null)) {  
-         return WebApplicationType.NONE;  
-      }  
-   }   return WebApplicationType.SERVLET;  
+static WebApplicationType deduceFromClasspath() {
+    if (ClassUtils.isPresent(WEBFLUX_INDICATOR_CLASS, null) && !ClassUtils.isPresent(WEBMVC_INDICATOR_CLASS, null)
+        && !ClassUtils.isPresent(JERSEY_INDICATOR_CLASS, null)) {
+        return WebApplicationType.REACTIVE;
+    }
+    for (String className : SERVLET_INDICATOR_CLASSES) {
+        if (!ClassUtils.isPresent(className, null)) {
+            return WebApplicationType.NONE;
+        }
+    }
+    return WebApplicationType.SERVLET;
 }
 ```
 
@@ -104,7 +103,7 @@ public static List<String> loadFactoryNames(Class<?> factoryType, @Nullable Clas
 }
 ```
 
-loadSpringFactories 方法 = ↓
+核心方法 `loadSpringFactories()` 方法 = ↓
 
 ```java
 private static Map<String, List<String>> loadSpringFactories(ClassLoader classLoader) {  
@@ -143,14 +142,15 @@ private static Map<String, List<String>> loadSpringFactories(ClassLoader classLo
 ```
 
 在这个方法中有一个常量 **FACTORIES_RESOURCE_LOCATION**，这个常量的值 = **META-INF/spring.factories**，通过 classLoader 类加载器检索类路径下所有的 META-INF/spring.factories 文件，主要位于两处地方，分别在 spring-boot 和 spring-boot-autoconfigure 模块的 resources/META-INF/spring.factories。  
-![|600](../Attachments/Pasted%20image%2020220507013216.png)  
+![|600](../../Attachments/Pasted%20image%2020220507013216.png)  
 让咱们来看看 spring-boot-autoconfigure 模块下的 spring.factories 文件长什么样 =↓  
-![|800](../Attachments/Pasted%20image%2020220507013645.png)  
+![|800](attachements/Pasted%20image%2020220507013645.png)  
 上面的图只截取了部分，该文件类似于 Properties 配置文件，一个 key 对应多个值，每个值之间用逗号分隔。  
 找到所有的 META-INF/spring.factories 文件之后，之后会把每个 META-INF/spring.factories 文件中的内容转换之后存放到一个 Map 集合中，最后会把 这个 Map 集合放到一个 cache(缓存) 当中，方便下次获取的时候直接从缓存中拿，而不需要再重新解析 META-INF/spring.factories 文件获取。  
-![|1000](../Attachments/Pasted%20image%2020220507014543.png)  
+![|1000](../../Attachments/Pasted%20image%2020220507014543.png)  
 回到 SpringFactoriesLoader.loadFactoryNames(type, classLoader); 方法，一开始传进来的 type 是 BootstrapRegistryInitializer 类型，那么就从 Map 集合中获取 key = ApplicationContextInitializer 类型的所有值。  
-![|800](../Attachments/Pasted%20image%2020220507020045.png) 返回的 names 大小为 0，说明 META-INF/spring.factories 文件中没有配置 BootstrapRegistryInitializer 类型的值。  
+![|800](../../Attachments/Pasted%20image%2020220507020045.png)  
+返回的 names 大小为 0，说明 META-INF/spring.factories 文件中没有配置 BootstrapRegistryInitializer 类型的值。  
 跳出 getSpringFactoriesInstances 方法，回到 SpringApplication 构造方法中，下一步执行 getSpringFactoriesInstances(ApplicationContextInitializer.class); 方法，这个方法是不是很熟悉，和上面是一样的解析过程是一模一样的，只是换了一个 type 类型，这次获取的是 ApplicationContextInitializer 类型的值。点进去这个方法，
 
 ```java
@@ -169,7 +169,7 @@ private <T> Collection<T> getSpringFactoriesInstances(Class<T> type, Class<?>[] 
 ```
 
 SpringFactoriesLoader.loadFactoryNames(type, classLoader); 方法在上面已经详细分析过了，我们就不再 Debug 进这个方法了，直接选中这行代码，Ctrl +U，计算一下这行代码的返回值。  
-![|600](../Attachments/Pasted%20image%2020220507021036.png)  
+![|600](../../Attachments/Pasted%20image%2020220507021036.png)  
 方法返回值有 7 个。接下来执行其中的 createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names); 该方法用于根据返回的全限定名通过反射技术创建出相应的实例。
 
 ```java
@@ -194,7 +194,7 @@ private <T> List<T> createSpringFactoriesInstances(Class<T> type, Class<?>[] par
 
 当 type = ApplicationContextInitializer 类型时，将创建出来的实例返回并设置到 SpringApplication 类中的 initializers 属性中保存起来。  
 回到 SpringApplication 构造方法中，下一步执行 getSpringFactoriesInstances(ApplicationListener.class); 方法，和上面的两个方法类似，就不点进这个方法看了，直接计算一下这个方法的返回值得了。  
-![|600](../Attachments/Pasted%20image%2020220507022014.png)  
+![|600](../../Attachments/Pasted%20image%2020220507022014.png)  
 当 type = ApplicationListener 类型时，将创建出来的实例返回并设置到 SpringApplication 类中的 listeners 属性中保存起来。  
 接着执行下一步 deduceMainApplicationClass(); 该方法推断出当前 Springboot 应用的主类是谁。当前程序主类肯定是 smoketest.freemarker.SampleWebFreeMarkerApplication 类呀！将推断出来的主类保存到 mainApplicationClass 属性中。
 
@@ -215,7 +215,7 @@ private Class<?> deduceMainApplicationClass() {
 }
 ```
 
-🎨结论：SpringFactories 机制类似于 Java SPI 加载机制，通过 SpringFactoriesLoader 类检索类路径下所有的 META-INF/spring.factories 文件，将文件中的内容解析封装到一个 Map 集合中。？？？  
+🎨结论：SpringFactories 机制类似于 Java SPI 加载机制，通过 SpringFactoriesLoader 类检索类路径下所有的 META-INF/spring.factories 文件，将文件中的内容解析封装到一个 Map 集合中。  
 SpringApplication 构造方法中的内容就全部 Debug 完毕，接下来会调用该 SpringApplication 实例的 run 方法。
 
 ```java
@@ -273,7 +273,7 @@ private SpringApplicationRunListeners getRunListeners(String[] args) {
 ```
 
 有没有觉得很熟悉呢？是不是和前面介绍的几个方法类似，通过读取 META-INF/spring.factories 文件中 key = SpringApplicationRunListener 所对应的值，将对应的值实例化成对象并返回。既然这样，咱们就不 Debug 进去了，直接计算一下结果，发现只存在一个 EventPublishingRunListener 监听器在其中。  
-![|600](../Attachments/Pasted%20image%2020220507142924.png)  
+![|600](../../Attachments/Pasted%20image%2020220507142924.png)  
 执行 listeners.starting(bootstrapContext, this.mainApplicationClass); 发布 Springboot 应用程序开始启动的时间。  
 接着执行 prepareEnvironment(listeners, bootstrapContext, applicationArguments); 方法，该方法用于创建并返回一个 ConfigurableEnvironment 接口类型的环境变量 = ↓
 
@@ -360,9 +360,9 @@ protected void customizePropertySources(MutablePropertySources propertySources) 
 
 我们打个断点在该方法中，计算一下 getSystemProperties() 方法 和 getSystemEnvironment() 方法获取的是什么东西。  
 可以看到 getSystemProperties() 方法获取到的是系统配置 =>  
-![|600](../Attachments/Pasted%20image%2020220507151411.png)  
+![|600](../../Attachments/Pasted%20image%2020220507151411.png)  
 而 getSystemEnvironment() 方法获取到的是系统环境 =>  
-![|600](../Attachments/Pasted%20image%2020220507151753.png)  
+![|600](../../Attachments/Pasted%20image%2020220507151753.png)  
 以上就是创建 Environment 的整个流程，主要就是将系统环境和系统配置封装到 Environment 类中，至于怎么配置 Environment 的就不细说了。创建完 Environment 之后，就使用监听器 listeners 发布一个环境已经准备完毕的事件。  
 好，回到 run 方法中，执行到 createApplicationContext() 方法，在前面只是声明了一个 ConfigurableApplicationContext 接口类型的变量，此处就是将创建出来的实现类赋值给这个变量 = ↓
 
@@ -379,7 +379,8 @@ ApplicationContextFactory DEFAULT = (webApplicationType) -> {
          if (context != null) {  
             return context;  
          }  
-      }      return new AnnotationConfigApplicationContext();  
+      }      
+      return new AnnotationConfigApplicationContext();  
    }  
    catch (Exception ex) {  
       throw new IllegalStateException("Unable create a default ApplicationContext instance, "  
@@ -498,7 +499,7 @@ public static Set<BeanDefinitionHolder> registerAnnotationConfigProcessors(
 }
 ```
 
-在 AnnotatedBeanDefinitionReader 类的构造方法中，调用了 AnnotationConfigUtils 工具类的静态方法 registerAnnotationConfigProcessors(); 往容器中添加了大量有关注解的后置处理器的 bean 定义信息。其中咱们以最典型的 **ConfigurationClassPostProcessor 后置处理器 (该后置处理器属于 BeanFactoryPostProcessor)** 为例，看看是添加进去到容器中的 = ↓
+在 AnnotatedBeanDefinitionReader 类的构造方法中，调用了 AnnotationConfigUtils 工具类的静态方法 registerAnnotationConfigProcessors(); 往容器中添加了大量有关注解的后置处理器的 bean 定义信息。其中咱们以最典型的 **ConfigurationClassPostProcessor 后置处理器 (该后置处理器属于 BeanFactoryPostProcessor)** 为例，看看是怎么添加到容器中的 = ↓
 
 ```java
 if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {  
@@ -604,7 +605,7 @@ private void prepareContext(DefaultBootstrapContext bootstrapContext, Configurab
 listeners.contextPrepared(context); 发布应用上下文已经准备完毕的事件。  
 接着往容器注册了 springApplicationArguments 和 springBootBanner 的单例对象。  
 接着执行 load(context, sources.toArray(new Object[0])); 方法，往容器中注册 SampleWebFreeMarkerApplication 启动类的 bean 定义信息。  
-![|1000](../Attachments/Pasted%20image%2020220507170650.png)  
+![|1000](../../Attachments/Pasted%20image%2020220507170650.png)  
 最后，listeners.contextLoaded(context); 发布应用上下文已经加载完毕的事件。  
 回到 run 方法，开始 **执行其中最最关键的一个方法 refreshContext(context);** 该方法连接 Springboot 与 Spring，前面已经讲了 Springboot 是如何解析 META-INF/spring.factories 文件的，后面会开始讲 **Spring 中最最重要的 AbstractApplicationContext 类中的 refresh 方法中的 13 个方法** =↓
 
@@ -728,8 +729,8 @@ public static void invokeBeanFactoryPostProcessors(
 ```
 
 首先，从容器中获取 BeanDefinitionRegistryPostProcessor 类型的 bean 名称，而我们上面提到的 **ConfigurationClassPostProcessor 后置处理器** 正好是 BeanDefinitionRegistryPostProcessor 接口的实现类，并且在上面就已经将 ConfigurationClassPostProcessor 后置处理器的 bean 定义信息注册到容器中了，所以此处就可以得到 ConfigurationClassPostProcessor 后置处理器的 beanName。  
-![|1000](../Attachments/Pasted%20image%2020220507180913.png)  
-S 循环遍历获取到的后置处理器名称，判断该后置处理器是否实现 PriorityOrdered 接口，ConfigurationClassPostProcessor 刚好也是 PriorityOrdered 接口的实现类，满足条件。  
+![|1000](../../Attachments/Pasted%20image%2020220507180913.png)  
+循环遍历获取到的后置处理器名称，判断该后置处理器是否实现 PriorityOrdered 接口，ConfigurationClassPostProcessor 刚好也是 PriorityOrdered 接口的实现类，满足条件。  
 调用 **beanFactory.getBean 方法从容器中获取 ConfigurationClassPostProcessor 后置处理器，容器中不存在的话则会创建，并存放到容器中**。beanFactory.getBean 方法非常重要，也非常复杂，此处就不细讲了，以后有机会会详细地说一遍 getBean 方法的整体流程。将创建出来的 ConfigurationClassPostProcessor 后置处理器放到 currentRegistryProcessors 临时的集合中。  
 接着执行 invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry, beanFactory.getApplicationStartup()); 方法 =↓
 
@@ -783,7 +784,7 @@ for (String beanName : candidateNames) {
 ```
 
 从容器中获取 bean 定义信息名称将其放到 candidateNames 数组中，循环遍历 candidateNames 数组，根据 beanName 去容器中获取相应的 bean 定义信息。调用 ConfigurationClassUtils 工具类的静态方法 checkConfigurationClassCandidate 来判断 bean 定义信息的元数据中是否存在 @Configuration 注解，如果存在，则将该 bean 定义信息放到 configCandidates 集合中。  
-![|1000](../Attachments/Pasted%20image%2020220507224549.png)  
+![|1000](../../Attachments/Pasted%20image%2020220507224549.png)  
 Debug 可以看到在容器中存在 7 条 bean 定义信息，可是满足元数据中存在 @Configuration 注解的 bean 定义信息只有一条，那就是咱们的启动类 sampleWebFreeMarkerApplication。为什么启动类满足呢？我们回过头去可以看到在咱们的启动类上方有一个 @SpringBootApplication 注解，该注解是一个组合注解，它由 @SpringBootConfiguration 、@EnableAutoConfiguration、@ComponentScan 三个注解组成。
 
 ```java
@@ -1003,7 +1004,7 @@ protected final SourceClass doProcessConfigurationClass(
 该方法里的注释写的很清楚，**用来处理配置类上标注的 @Component 、@PropertySource、@ComponentScan、@Import、@ImportResource、@Bean 注解**。这些注解有没有觉得很熟悉，为什么咱们平时往一个类上标注 @Component 注解，该类就能被放到 spring 容器中，没错，spring 就是在这一步进行处理的。  
 和本次主题相关的是 @ComponentScan 和 @Import 注解，咱们就来着重看下处理 @ComponentScan 和 @Import 注解部分的代码。  
 首先是 **处理 @ComponentScan 注解**，先获取配置类上的 @ComponentScan 注解中的属性信息，根据注解中的属性信息开始使用 componentScanParser 中的 parse 方法开始扫描组件，并 **将扫描到的组件的 bean 定义信息注册到 spring 容器中**。需要注意的是，如果 **@ComponentScan 注解没有明确配置 basePackage 属性，那么就会把该注解标注所在类的包当作 basePackage 属性的值**，此时我们解析的是启动类上的 @ComponentScan，即 basePackage = smoketest.freemarker，**扫描启动类所在包及其子包下的所有组件**，照咱们的例子只能扫描到一个 WelcomeController 组件。  
-![|1000](../Attachments/Pasted%20image%2020220507234243.png)  
+![|1000](../../Attachments/Pasted%20image%2020220507234243.png)  
 接下来是 **处理 @Import 注解**，大家是否还记得上面提到的启动类上标注的 @SpringBootApplication 注解是一个组合注解，由三个注解组成，@SpringBootConfiguration 和 @ComponentScan 注解已经说过了，咱们就来看下最后一个注解 @EnableAutoConfiguration 注解，看名字就知道跟 Springboot 的自动配置有关，**开启自动配置功能** = ↓
 
 ```java
@@ -1016,7 +1017,7 @@ public @interface AutoConfigurationPackage {
 ```
 
 该注解也是一个组合注解，其中的 @AutoConfigurationPackage 注解内部也是由一个 @Import 注解构成。咱们刚才 Debug 到用来处理 @Import 注解的方法 processImports(configClass, sourceClass, getImports(sourceClass), filter, true); 其中的 getImports(sourceClass) 方法是用来递归获取 配置类上 @Import 注解中的内容，即需要注册到 spring 容器中的 Class。  
-![|1000](../Attachments/Pasted%20image%2020220507235456.png)  
+![|1000](../../Attachments/Pasted%20image%2020220507235456.png)  
 计算得出两条记录，这两条记录不正是启动类上 @Import 注解中的内容嘛！  
 咱们来到 processImports 方法内部 = ↓
 
@@ -1065,7 +1066,7 @@ private void processImports(ConfigurationClass configClass, SourceClass currentS
 
 循环遍历想要注册到 spring 容器的 Class 集合 ，首先判断该类是否实现 ImportSelector 接口，集合中的一条记录 AutoConfigurationImportSelector 类，AutoConfigurationImportSelector -> DeferredImportSelector -> ImportSelector，AutoConfigurationImportSelector 实现了 DeferredImportSelector 接口，而 DeferredImportSelector 接口继承自 ImportSelector 接口，所以满足条件。然后接着判断是否实现 DeferredImportSelector 接口，如果实现了 DeferredImportSelector 接口的话，则将其添加 deferredImportSelectors 集合中，后续会使用到；如果没有实现 DeferredImportSelector 接口的话，则会执行接口中的 selectImports 方法。而 AutoConfigurationImportSelector 刚好也实现了 DeferredImportSelector 接口，所以被添加到 deferredImportSelectors 集合中。集合中另外一条记录在此就不再过多描述，相信看到这大家有能力自己搞定。  
 回到 ConfigurationClassParser 类中重载的 parse 方法，在前面咱们提过一嘴，执行 this.deferredImportSelectorHandler.process(); 方法，此处代码不好从正面跟踪，咱们直接在 AutoConfigurationImportSelector 类中的 getAutoConfigurationEntry 方法中打一个断点 (这是因为我已经知道结果，为了不贴大量代码以及方便描述，就直接这样做了)，看一下方法调用栈情况，看一下经过了哪些方法来到这里。  
-![|800](../Attachments/Pasted%20image%2020220508010802.png)  
+![|800](../../Attachments/Pasted%20image%2020220508010802.png)  
 好，现在咱们的程序来到 AutoConfigurationImportSelector 类中的 getAutoConfigurationEntry 方法 = ↓
 
 ```java
@@ -1098,9 +1099,9 @@ protected Class<?> getSpringFactoriesLoaderFactoryClass() {
 ```
 
 在此方法中会调用 getCandidateConfigurations(annotationMetadata, attributes); 方法，而在 getCandidateConfigurations 方法中咱们是不是看到点熟悉的东西😮，SpringFactoriesLoader.loadFactoryNames() 方法呀，此方法在最上面提过是从 META-INF/spring.factories 文件中获取 type = EnableAutoConfiguration 类型所对应的值，这里获取到的就是需要注册到 spring 容器中的所有的自动配置类，让我们计算一下看看都有哪些  
-![|1000](../Attachments/Pasted%20image%2020220508012153.png)  
+![|1000](../../Attachments/Pasted%20image%2020220508012153.png)  
 在这里告诉你一个结论，并不是这 133 个自动配置类都会被注册到 spring 容器中，Springboot 可是按需配置的，会根据自动配置类上的 @Conditional 注解进行过滤筛选。  
-![|1000](../Attachments/Pasted%20image%2020220508012929.png)  
+![|1000](../../Attachments/Pasted%20image%2020220508012929.png)  
 接下来返回到上图的方法中 = ↓
 
 ```java
@@ -1131,8 +1132,8 @@ public void processGroupImports() {
 程序回到 ConfigurationClassPostProcessor 类的 processConfigBeanDefinitions 方法，执行完 parse 方法之后，开始执行 this.reader.loadBeanDefinitions(configClasses); 方法，该方法用于将配置类的 bean 定义信息注册到 spring 容器中。  
 在执行该方法之前，咱们来看看几个重要的变量。  
 ① beanDefinitionMap，熟悉的小伙伴应该知道这是存放 bean 定义信息的集合，看下图发现此时还没有自动配置类的 bean 定义信息。  
-![|1200](../Attachments/Pasted%20image%2020220508014003.png)② configClasses => 配置类集合，此集合包含启动类 (SampleWebFreeMarkerApplication)、扫描的组件 (WelcomeController) 以及获取到的自动配置类 (xxxAutoConfiguration)  
-![|1200](../Attachments/Pasted%20image%2020220508014452.png) 执行完该方法之后，再次查看 beanDefinitionMap 变量，发现集合中的数量变多了，说明已经将自动配置类中的组件的 bean 定义信息添加到该集合中了。  
-![|1200](../Attachments/Pasted%20image%2020220508014914.png) 至于这个 this.reader.loadBeanDefinitions(configClasses); 怎么运行的，有兴趣的小伙伴可以自己看一下，这里我将其作为一个 ==TODO==，以后有机会分析一下该方法。  
+![|1200](../../Attachments/Pasted%20image%2020220508014003.png)② configClasses => 配置类集合，此集合包含启动类 (SampleWebFreeMarkerApplication)、扫描的组件 (WelcomeController) 以及获取到的自动配置类 (xxxAutoConfiguration)  
+![|1200](../../Attachments/Pasted%20image%2020220508014452.png) 执行完该方法之后，再次查看 beanDefinitionMap 变量，发现集合中的数量变多了，说明已经将自动配置类中的组件的 bean 定义信息添加到该集合中了。  
+![|1200](../../Attachments/Pasted%20image%2020220508014914.png) 至于这个 this.reader.loadBeanDefinitions(configClasses); 怎么运行的，有兴趣的小伙伴可以自己看一下，这里我将其作为一个 ==TODO==，以后有机会分析一下该方法。  
 bean 定义信息都已经存在 spring 容器中，至于怎么将 bean 定义信息转换成单例对象的，相信自己看过 spring 源码的小伙伴都知道在 AbstractApplicationContext 类中的 refresh 方法中，有 13 个方法，其中最为关键的一个方法是 finishBeanFactoryInitialization(beanFactory); 方法，该方法就是用来将 bean 定义信息转换成单例对象然后存放在 spring 容器中的。这里我也将其作为一个 ==TODO==，以后有机会分析一下该方法。  
 至此，Springboot 的自动配置原理就已经全部分析完毕🥳，篇幅是有点长，毕竟花了我两天的时间🥺，对于其中有哪些讲的不好的地方或者错误的地方，小伙伴可以自己去 Debug 调试一下，可以把这篇文章当作一个辅助工具。学习源码一定要学习 Debug，不然看完之后还是我的，而不是你的。学习源码肯定痛苦，但是熬过来之后会发现自己收获满满，加油，骚年！💪

@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "3c988bcc672a3499",
+        "id": "a72433d86010b611",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Spring/源码/Spring源码环境搭建/README.md",
+            "file": "Springboot/源码/Springboot自动配置原理/README.md",
             "mode": "source",
             "source": false
           }
@@ -62,7 +62,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 444
+    "width": 444,
+    "collapsed": true
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -78,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md",
+                "file": "Springboot/源码/Springboot自动配置原理/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +96,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md"
+                "file": "Springboot/源码/Springboot自动配置原理/README.md"
               }
             }
           },
@@ -106,7 +107,7 @@
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": true
+                "useHierarchy": false
               }
             }
           },
@@ -123,19 +124,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 328.5
+    "width": 340.5
   },
-  "active": "3c988bcc672a3499",
+  "active": "a72433d86010b611",
   "lastOpenFiles": [
-    "Spring/源码/README.md",
-    "Spring/基础/README.md",
-    "Spring/基础/事务/README.md",
-    "Spring/基础/AOP/README.md",
-    "Spring/基础/Spring注解驱动开发/README.md",
-    "Spring/基础/IOC/README.md",
-    "Spring/源码/Spring源码环境搭建/README.md",
+    "JDK/进阶/Java SPI.md",
+    "Springboot/源码/Springboot自动配置原理/README.md",
     "Spring/源码/AOP/RAEDME.md",
-    "笔记进度/README.md",
-    "设计模式/代理模式.md"
+    "JDK/源码/集合/ArrayList.md",
+    "JDK/源码/集合/ConcurrentHashMap.md",
+    "JDK/源码/集合/HashMap.md",
+    "JDK/源码/集合/LinkedList.md",
+    "JDK/源码/集合/Vector.md",
+    "SpringSecurity/SpringSecurity 源码剖析 (一).md",
+    "SpringSecurity/SpringSecurity 源码剖析 (四).md"
   ]
 }
