@@ -4,12 +4,12 @@
     "type": "split",
     "children": [
       {
-        "id": "a72433d86010b611",
+        "id": "08035e86789b7d06",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Springboot/源码/Springboot自动配置原理/README.md",
+            "file": "数据库编程/JDBC/README.md",
             "mode": "source",
             "source": false
           }
@@ -32,7 +32,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "一篇文章",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -62,8 +62,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 444,
-    "collapsed": true
+    "width": 412
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -79,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Springboot/源码/Springboot自动配置原理/README.md",
+                "file": "数据库编程/JDBC/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -96,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Springboot/源码/Springboot自动配置原理/README.md"
+                "file": "数据库编程/JDBC/README.md"
               }
             }
           },
@@ -124,19 +123,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 340.5
+    "width": 284.5
   },
-  "active": "a72433d86010b611",
+  "active": "08035e86789b7d06",
   "lastOpenFiles": [
-    "JDK/进阶/Java SPI.md",
+    "Springboot/源码/README.md",
+    "笔记进度/README.md",
+    "数据库编程/JDBC/README.md",
     "Springboot/源码/Springboot自动配置原理/README.md",
-    "Spring/源码/AOP/RAEDME.md",
-    "JDK/源码/集合/ArrayList.md",
-    "JDK/源码/集合/ConcurrentHashMap.md",
-    "JDK/源码/集合/HashMap.md",
-    "JDK/源码/集合/LinkedList.md",
-    "JDK/源码/集合/Vector.md",
-    "SpringSecurity/SpringSecurity 源码剖析 (一).md",
-    "SpringSecurity/SpringSecurity 源码剖析 (四).md"
+    "Spring/基础/README.md",
+    "Spring/基础/AOP/README.md",
+    "数据库编程/Mybatis/README.md",
+    "设计模式/代理模式.md",
+    "设计模式/模板方法模式.md",
+    "设计模式/抽象工厂模式.md"
   ]
 }

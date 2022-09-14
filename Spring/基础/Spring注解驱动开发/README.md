@@ -77,7 +77,7 @@ public class SpringXmlConfigurationTest {
 ```
 
 测试结果如下所示:  
-![](attachements/Pasted%20image%2020220827203738.png)  
+![](attachments/Pasted%20image%2020220827203738.png)  
 
 在上面已经简单演示如何通过 XML 配置文件的方式将 JavaBean 对象注册到 Spring 容器中。那么使用注解的方式又该如何实现呢？使用注解的方式比使用 XML 配置文件的方式要简单的多，先创建一个 `MainConfig` 类，并 **在该类上添加 `@Configuration` 注解用来标注该类是 Spring 中的一个配置类**，最后 **通过 `@Bean` 注解将 `Person` 类对象注册到 Spring 容器中**。  
 
@@ -106,7 +106,7 @@ public class SpringAnnotationConfigurationTest {
 }
 ```
 
-![](attachements/Pasted%20image%2020220827203918.png)
+![](attachments/Pasted%20image%2020220827203918.png)
 
 从上面的代码可以看出，使用注解驱动方式开发之后，就不再需要 XML 配置文件。只需将配置文件 => 配置类 (`@Configuration`)，`<bean id="" class="" />` 标签 => `@Bean` 注解，容器对象从 `ClassPathXmlApplicationContext` => `AnnotationConfigApplicationContext` 。  
 **结论**：`@Configuration` 注解搭配 `@Bean` 注解可以代替 XML 配置文件完成对象的创建和管理。
@@ -196,7 +196,7 @@ public class BookController {
 ```
 
 运行 `SpringXmlConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示: 只要是在 `top.xiaorang.spring.annotation` 包及其子包下标注了 `@Repository`、`@Service`、`@Controller` 和 `@Component` 注解的类都被扫描到，然后注册到 Spring 容器中。  
-![](attachements/Pasted%20image%2020220827203642.png)  
+![](attachments/Pasted%20image%2020220827203642.png)  
 
 现在开始使用 `@ComponentScan` 注解来配置包扫描。非常简单，只需要在配置类 `MainConfig` 上加上 `@ComponentScan` 注解，然后指定要扫描的包路径即可。具体实现过程如下：
 
@@ -212,7 +212,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220827204903.png)
+![](attachments/Pasted%20image%2020220827204903.png)
 
 ```java
 @Retention(RetentionPolicy.RUNTIME)
@@ -326,7 +326,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220827204903.png)  
+![](attachments/Pasted%20image%2020220827204903.png)  
 发现 `BookRepository` 还是自动注册到 Spring 容器中，为什么猜想不对呢？其实，在分析 `@ComponentScan` 注解源码的时候，其中有一个属性，`useDefaultFilters` ，是否对带有 `@Repository`、`@Service`、`@Controller` 和 `@Component` 注解的类开启检测，默认是开启的。要想 `includeFilters` 属性达到预期效果，就需要将 `useDefaultFilters` 属性置为 false。
 
 ```java
@@ -344,7 +344,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  发现只有 `BookController` 和 `BookService` 被扫描到 Spring 容器中，相当于间接将 `BookRepository` 被排除在外。  
-![](attachements/Pasted%20image%2020220828040106.png)
+![](attachments/Pasted%20image%2020220828040106.png)
 
 #### 细节分析 2：按照过滤规则排除组件
 
@@ -367,7 +367,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828041001.png)
+![](attachments/Pasted%20image%2020220828041001.png)
 
 #### 细节分析 3：自定义过滤规则
 
@@ -435,7 +435,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828043207.png)
+![](attachments/Pasted%20image%2020220828043207.png)
 
 #### 细节分析 4：重复注解
 
@@ -483,7 +483,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828045537.png)
+![](attachments/Pasted%20image%2020220828045537.png)
 
 ### 3、@Scope 注解
 
@@ -569,7 +569,7 @@ public class SpringAnnotationConfigurationOfScopeTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828053803.png)  
+![](attachments/Pasted%20image%2020220828053803.png)  
 结果表明：**容器中的组件默认是单实例的，在容器启动的时候就会去实例化并初始化组件，并将其存放到容器当中，之后每次从容器中获取到的实例对象都是同一个**。  
 💡需要注意的是：单例对象是整个应用共享的，所以需要考虑线程安全问题。
 
@@ -601,7 +601,7 @@ public class MainConfig {
 ```
 
 测试代码不变，运行 `SpringAnnotationConfigurationOfScopeTest` 测试类中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828054447.png)  
+![](attachments/Pasted%20image%2020220828054447.png)  
 结果表明：**容器启动时并不会实例化对象，而是在每次从容器获取对象时都去创建一个新的实例对象返回**。
 
 ### 4、@Lazy 注解
@@ -635,7 +635,7 @@ public class MainConfig {
 ```
 
 测试代码不变，运行 `SpringAnnotationConfigurationOfScopeTest` 测试类中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828151214.png)
+![](attachments/Pasted%20image%2020220828151214.png)
 
 ### 5、@Conditional 注解
 
@@ -731,11 +731,11 @@ public class MainConfig {
 ```
 
 现在使用的是 Windows 系统，所以只会向容器中注册 bill 的组件。运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828154558.png)  
+![](attachments/Pasted%20image%2020220828154558.png)  
 现在将运行环境改成 Linux 环境，怎么做呢？打开 Run/Debug Configurations => 添加 JVM 参数 `-Dos.name=Linux`。  
-![](attachements/Pasted%20image%2020220828154846.png)  
+![](attachments/Pasted%20image%2020220828154846.png)  
 现在运行环境就变成 Linux 系统环境，运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828155145.png)  
+![](attachments/Pasted%20image%2020220828155145.png)  
 只向容器中注册 linus 的组件，而没有将 bill 组件注册到容器中。
 
 ### 6、@Import 注解
@@ -805,7 +805,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828171620.png)
+![](attachments/Pasted%20image%2020220828171620.png)
 
 #### 2、ImportSelector 接口
 
@@ -903,7 +903,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828173940.png)
+![](attachments/Pasted%20image%2020220828173940.png)
 
 #### 3、ImportBeanDefinitionRegistrar 接口
 
@@ -1014,7 +1014,7 @@ public class MainConfig {
 ```
 
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828175709.png)
+![](attachments/Pasted%20image%2020220828175709.png)
 
 ### 7、FactoryBean
 
@@ -1095,7 +1095,7 @@ public class SpringAnnotationConfigurationOfFactoryBeanTest {
 ```
 
 测试结果如下所示：  如果调用 `getBean() ` 方法时想获取一个新的实例对象，怎么做呢？很简单，只需要让 `isSingleton()` 方法返回 false 即可。  
-![](attachements/Pasted%20image%2020220828215752.png)  
+![](attachments/Pasted%20image%2020220828215752.png)  
 使用 `@Bean` 注解向 Spring 容器中注册的是 `ColorFactoryBean`，调用 getBean() 方法获取出来的却是 `Color` 对象，那么我就是想获取 `ColorFactoryBean` 类型的对象实例呢？其实，也很简单，只需在调用 `getBean()` 方法时传入的 id 前加上 `&` 符号，如 `&colorFactoryBean`，获取的就是 `ColorFactoryBean` 对象实例。
 
 ```java
@@ -1122,7 +1122,7 @@ public class SpringAnnotationConfigurationOfFactoryBeanTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220828220708.png)
+![](attachments/Pasted%20image%2020220828220708.png)
 
 ## 生命周期
 
@@ -1188,7 +1188,7 @@ public class SpringXmlConfigurationTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829003241.png)  
+![](attachments/Pasted%20image%2020220829003241.png)  
 
 XML 配置的方式已经了解，那么如何使用注解的方式指定 bean 的初始化和销毁方法呢？别急，先看看下面的例子。
 
@@ -1239,7 +1239,7 @@ public class SpringAnnotationConfigurationOfLifeCycleTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829004313.png)  
+![](attachments/Pasted%20image%2020220829004313.png)  
 
 一个典型的使用场景就是对于数据源的管理。如，在配置数据源时，在初始化时，可以对数据源的属性进行赋值操作；在销毁的时候，需要对数据源的连接信息进行关闭和清理。此时，就可以在自定义的初始化和销毁方法中来做这些事情了。  
 💡需要注意的是：多实例的 bean 在容器关闭的时候是不进行销毁的，也就是说，Spring 容器创建出多实例对象后，至于什么时候销毁就是自己的事情，Spring 不再管理这些多实例 bean 对象。
@@ -1301,7 +1301,7 @@ public class MainConfigOfLifeCycle {
 ```
 
 运行 `SpringAnnotationConfigurationOfLifeCycleTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829011208.png)
+![](attachments/Pasted%20image%2020220829011208.png)
 
 ## 属性赋值
 
@@ -1409,7 +1409,7 @@ public class SpringAnnotationConfigurationOfPropertyValueTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829023251.png)  
+![](attachments/Pasted%20image%2020220829023251.png)  
 细心的小伙伴可能已经发现，`teacher` 实例对象中的 `workDate` 属性值好像有点不对啊！这是怎么回事？原因是环境变量中并没有该配置，所以直接将表达式原样输出，并没有像网上说的那样直接报错（可能是版本不同吧）。那么这个问题怎么解决呢？  
 现在需要使用另外一个注解 `@ProperySource`，该注解等价于 XML 配置文件中的 `<context:property-placeholder location="classpath:xxx.properties"/>` 标签，用于将配置文件中的 key=value 存储到 Spring 的环境变量 `Environment` 中，然后 `Environment` 接口提供了方法去读取配置文件中的值，当然也可以通过 `@Value` 注解以 `${}` 的方式获取配置文件中对应 key 的 value 值注入到 bean 的属性中。  
 在资源目录下增加一个 `teacher.properties` 配置文件：
@@ -1433,7 +1433,7 @@ public class MainConfigOfPropertyValue {
 ```
 
 再次执行测试类 `SpringAnnotationConfigurationOfPropertyValueTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829025823.png)
+![](attachments/Pasted%20image%2020220829025823.png)
 
 💡需要注意的是，**`#{}` 主要用于执行 SPEL 表达式**，**`${}` 主要用于获取配置文件的值**。
 
@@ -1531,7 +1531,7 @@ public class SpringXmlConfigurationTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829034855.png)  
+![](attachments/Pasted%20image%2020220829034855.png)  
 虽然通过 XML 的方式可以实现将一个 bean 注入给另外一个 bean 中的属性中，但是这样非常繁琐，有没有更加简便的方式呢？那就不得不提到今天的主角 `@Autowired` 注解。
 
 ```java
@@ -1625,7 +1625,7 @@ public class SpringAnnotationConfigurationOfAutowiredTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829040722.png)  
+![](attachments/Pasted%20image%2020220829040722.png)  
 💡需要注意的是：**`@Autowired` 注解默认是按照类型进行装配的**。那么存在多个类型相同的组件时该如何进行装配呢？  
 定义一个 `OrderService` 接口，存在两个实现类 `OrderServiceImpl` 和 `OrderServiceImpl2`：
 
@@ -1678,7 +1678,7 @@ public class OrderController {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829045411.png)  
+![](attachments/Pasted%20image%2020220829045411.png)  
 发现报错，意思是需要注入唯一的一个 bean，但是却发现 2 个匹配的，此时怎么办呢？**`@Autowired` 注解默认是按照类型进行装配的，当找到多个相同类型的组件时，将继续按照属性名称去匹配**。
 
 #### 1、修改属性名
@@ -1726,7 +1726,7 @@ public class SpringAnnotationConfigurationOfAutowiredTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829052537.png)
+![](attachments/Pasted%20image%2020220829052537.png)
 
 #### 2、@Qualifier 注解
 
@@ -1757,7 +1757,7 @@ public class OrderController {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829052736.png)  
+![](attachments/Pasted%20image%2020220829052736.png)  
 💡需要注意的是：当属性名与 `@Qualifier` 注解一起作用时，以 `@Qualifier` 注解为主，如果找不到 `@Qualifier` 注解标注的组件，则直接报错。
 
 #### 3、@Primary 注解
@@ -1806,7 +1806,7 @@ public class OrderServiceImpl2 implements OrderService {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829053637.png)  
+![](attachments/Pasted%20image%2020220829053637.png)  
 💡需要注意的是：当属性名与 `@Primary` 注解一起作用时，以 `@Primary` 注解为主；当 `@Primary` 与 `@Qualifier` 注解一起作用时，以 `@Qualifier` 注解为主；如果找不到 `@Qualifier` 注解标注的组件，则直接报错。  
 💡需要注意的是：`@Autowired` 注解默认是必须找到某个 bean 进而完成注入，如果找不到，则会抛出异常。如果想要找不到不抛出异常，只需要将 `@Autowired` 注解的 `required` 属性置为 false 即可。
 
@@ -1883,7 +1883,7 @@ public class OrderServiceImpl2 implements OrderService {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829063203.png)  
+![](attachments/Pasted%20image%2020220829063203.png)  
 报错信息 `No qualifying bean of type 'top.xiaorang.spring.annotation.service.OrderService' available: expected single matching bean but found 2: orderServiceImpl,orderServiceImpl2`，大概意思就是找到两个类型相同的组件。如何解决呢？①在 `@Autowired` 注解中的解决方案在这里都适用，如修改属性名，搭配 `@Qualifier` 注解或者 `@Primary` 注解。②或者指定 `@Reaource` 标签中的 `name` 属性和 `type` 属性。  
 现在试下指定 `@Resource` 注解的 `name` 属性为 `orderServiceImpl2`：
 
@@ -1910,7 +1910,7 @@ public class OrderController {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829063708.png)
+![](attachments/Pasted%20image%2020220829063708.png)
 
 ### 3、@Profile 注解
 
@@ -1984,7 +1984,7 @@ public class SpringAnnotationConfigurationOfProfileTest {
 ```
 
 测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829183648.png)  
+![](attachments/Pasted%20image%2020220829183648.png)  
 惊讶地发现没有找到任何 `Person` 组件，这是为什么？？原因是所有 bean 都加了 `@Profile` 注解，只有在指定的环境下当前的 bean 才会被注册到容器中，然而 **默认的环境为 `default`**，在 `default` 环境下当然找不到 `Person` 组件，所以现在让默认环境下将 `Person` 张三注册到 Spring 容器中。
 
 ```java
@@ -2011,12 +2011,12 @@ public class MainConfigOfProfile {
 ```
 
 运行测试类 `SpringAnnotationConfigurationOfProfileTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829183543.png)  
+![](attachments/Pasted%20image%2020220829183543.png)  
 假如，想将 Person 李四和王五注册到 Spring 容器中，就需要修改环境，怎么修改呢？在 `@Profile` 注解的注释明确指出了以下几种方法来切换环境：
 
 >可以通过 ConfigurableEnvironment.setActiveProfiles 以编程方式激活，或者通过将 spring.profiles.active 属性设置为 JVM 系统属性、环境变量或 web.xml 中的 Servlet 上下文参数以声明方式激活应用程序
 
 现在通过使用虚拟机参数来将环境切换到 dev 和 prod 环境，`-Dspring.profiles.active=test,prod`。  
-![](attachements/Pasted%20image%2020220829183101.png)  
+![](attachments/Pasted%20image%2020220829183101.png)  
 运行测试类 `SpringAnnotationConfigurationOfProfileTest` 中的 `test()` 方法，测试结果如下所示：  
-![](attachements/Pasted%20image%2020220829183420.png)  
+![](attachments/Pasted%20image%2020220829183420.png)  

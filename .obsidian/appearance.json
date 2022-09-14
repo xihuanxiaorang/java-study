@@ -1,11 +1,11 @@
 {
   "cssTheme": "Minimal",
-  "theme": "moonstone",
-  "interfaceFontFamily": "霞鹜文楷",
+  "theme": "system",
+  "interfaceFontFamily": "霞鹜文楷,仓耳今楷03",
   "baseFontSize": 16,
   "baseFontSizeAction": true,
-  "monospaceFontFamily": "JetBrains Mono,FiraCode Nerd Font Mono,霞鹜文楷",
-  "textFontFamily": "霞鹜文楷",
+  "monospaceFontFamily": "JetBrains Mono",
+  "textFontFamily": "霞鹜文楷,仓耳今楷03",
   "enabledCssSnippets": [
     "tag-pills",
     "round-checkbox",

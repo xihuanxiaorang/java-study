@@ -7,7 +7,7 @@ modified: 2022-09-01 16:31:06
 
 # 1、AOP 环境搭建
 
-利用上篇文章 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 搭建好的 Spring 源码环境，首先编写一个 AOP 的测试案例，然后再根据案例去逐步分析 AOP 的整个源码。
+利用这篇文章 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 搭建好的 Spring 源码环境，首先编写一个 AOP 的测试案例，然后再根据案例去逐步分析 AOP 的整个源码。
 
 ## 1、引入相关依赖
 
@@ -155,14 +155,14 @@ public class SpringAopSourceTests {
 ```
 
 正常通知测试测试结果如下所示：  
-![](attachements/Pasted%20image%2020220831155044.png)  
+![](attachments/Pasted%20image%2020220831155044.png)  
 异常通知测试测试结果如下所示：  
-![](attachements/Pasted%20image%2020220831154953.png)  
+![](attachments/Pasted%20image%2020220831154953.png)  
 测试成功，达到预期效果！🎉 接下来，就根据该测试案例来逐步分析 AOP 的整个源码。加油！🎯
 
 # 2、AOP 创建流程
 
-![AOP的创建流程](attachements/AOP的创建流程.jpg)
+![AOP的创建流程](attachments/AOP的创建流程.jpg)
 
 ## 1、开启 AOP
 
@@ -207,7 +207,7 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 ```
 
 发现其实现了 `ImportBeanDefinitionRegistrar` 接口，并且重写了接口中的 `registerBeanDefinitions()` 方法，该方法主要用于向 Spring 容器中注册 bean 的定义信息。在 `AspectJAutoProxyRegistrar` 类的 `registerBeanDefinitions()` 方法中，就调用 `AopConfigUtils` 类中的 `registerAspectJAnnotationAutoProxyCreatorIfNecessary()` 方法 **向容器中注册一个基于注解的自动代理创建器的 bean 定义信息**，其中 beanName = `internalAutoProxyCreator`，class = `AnnotationAwareAspectJAutoProxyCreator`。先来看下 `AnnotationAwareAspectJAutoProxyCreator` 类结构关系图：  
-![AnnotationAwareAspectJAutoProxyCreator.drawio](attachements/AnnotationAwareAspectJAutoProxyCreator.drawio.svg)  
+![AnnotationAwareAspectJAutoProxyCreator.drawio](attachments/AnnotationAwareAspectJAutoProxyCreator.drawio.svg)  
 从上面 `AnnotationAwareAspectJAutoProxyCreator` 的类结构关系图可以看出：`AnnotationAwareAspectJAutoProxyCreator` 的父类 `AbstractAutoProxyCreator`，实现了 `SmartInstantiationAwareBeanPostProcessor` 接口，而 `SmartInstantiationAwareBeanPostProcessor` 接口继承自 `InstantiationAwareBeanPostProcessor` 接口，而 `InstantiationAwareBeanPostProcessor` 接口又继承自 `BeanPostProcessor` 接口。  也就是说 **`AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 后置处理器**。
 
 ### 1、BeanPostProcessor 接口
@@ -332,7 +332,7 @@ public void refresh() throws BeansException, IllegalStateException {
 ```
 
 当容器刷新执行到 `registerBeanPostProcessors()` 方法时，该方法用于注册后置处理器，在此处打一个断点，调试一下。发现容器中已经存在 8 个 bean 的定义信息：  
-![](attachements/Pasted%20image%2020220831155633.png)  
+![](attachments/Pasted%20image%2020220831155633.png)  
 其中绿色的为 Spring 内部自己注册的 bean 定义信息，紫色的为配置类，橘黄色的为切面类，蓝色的为目标对象，红色的为今天的主角，也就是第 2.1 节最后分析出来的后置处理器 `AnnotationAwareAspectJAutoProxyCreator`。  F5 进入方法内部，发现调用另外一个方法。
 
 ```java
@@ -411,20 +411,20 @@ public static void registerBeanPostProcessors(
 }
 ```
 
-在该方法的第二个循环体内部打一个断点，使用 `getBean()` 方法从容器中获取 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器，其实就是去创建一个 `AnnotationAwareAspectJAutoProxyCreator` 实例对象保存到容器中后再返回。由于还实现了 `BeanFactoryAware` 接口，在其初始化期间，为其属性 `aspectJAdvisorFactory` 创建并保存了用于利用反射创建增强器的工厂 `ReflectiveAspectJAdvisorFactory`，同时为其属性 `aspectJAdvisorsBuilder` 创建并保存了用于负责保存和产生功能增强器的 `BeanFactoryAspectJAdvisorsBuilderAdapter`。由于 `AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 的后置处理器，那么就会介入到每个 bean 的创建过程中。  
-![](attachements/Pasted%20image%2020220831041032.png)  
+在该方法的第二个循环体内部打一个断点，使用 `getBean()` 方法从容器中获取 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器，其实就是去创建一个 `AnnotationAwareAspectJAutoProxyCreator` 实例对象保存到容器中后再返回。由于还实现了 `BeanFactoryAware` 接口，在其初始化期间，为其属性 `aspectJAdvisorFactory` 创建并保存了用于利用反射创建增强器的工厂 `ReflectiveAspectJAdvisorFactory`，同时还为其属性 `aspectJAdvisorsBuilder` 创建并保存了用于负责保存和产生功能增强器的 `BeanFactoryAspectJAdvisorsBuilderAdapter`。由于 `AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 的后置处理器，那么就会介入到每个 bean 的创建过程中。  
+![](attachments/Pasted%20image%2020220831041032.png)  
 至此，`AnnotationAwareAspectJAutoProxyCreator` 后置处理器就已经被注册到容器当中，后面如果要用到该后置处理器，则直接从容器中拿即可。
 
 ## 3、创建增强器
 
 在 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器的父类 `AbstractAutoProxyCreator` 中只重写了其中的两个方法 `postProcessBeforeInstantiation()` 和 `postProcessAfterInitialization()`。  
-![](attachements/Pasted%20image%2020220830210920.png)  
+![](attachments/Pasted%20image%2020220830210920.png)  
 那就先来看下 `postProcessBeforeInstantiation()` 方法。
 
 ### 3、postProcessBeforeInstantiation() 方法
 
 在 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法打一个断点，看下整个方法的调用栈：  
-![](attachements/Pasted%20image%2020220830164939.png)  
+![](attachments/Pasted%20image%2020220830164939.png)  
 从整个方法的调用栈可以看出：
 
 1. 当调用 `getBean` 方法从容器中获取指定 bean 时（此时 beanName = ”mainConfig“，即获取配置类的组件），从容器中获取不到时，则会调用 `AbstractAutowireCapableBeanFactory` 类的 `createBean()` 方法创建 bean 实例对象。
@@ -586,7 +586,6 @@ protected boolean shouldSkip(Class<?> beanClass, String beanName) {
 	 * 找到候选的增强器，即为所有标注了注解 @Aspect 的切面类构建增强器。  
 	 * 遍历容器中所有组件来筛选切面，继而为其构建增强器  
 	 * 构建好的增强器保存在缓存 advisorsCache 中，使用时直接到缓存中获取  
-	 * TODO: Consider optimization by caching the list of the aspect names  
 	 */ 
    List<Advisor> candidateAdvisors = findCandidateAdvisors();  
    for (Advisor advisor : candidateAdvisors) {  
@@ -625,7 +624,7 @@ protected List<Advisor> findCandidateAdvisors() {
 ```
 
 在方法的最后打一个断点，看下获取到了哪些候选的增强器？  
-![](attachements/Pasted%20image%2020220831160040.png)
+![](attachments/Pasted%20image%2020220831160040.png)
 
 本案例使用的基于 `@Aspect` 注解的方式来配置切面类，所以调用 `buildAspectJAdvisors()` 方法来构建所有的增强器。
 
@@ -817,7 +816,7 @@ private AspectJExpressionPointcut getPointcut(Method candidateAdviceMethod, Clas
 ## 4、创建代理对象
 
 在 `AbstractAutoProxyCreator` 中的 `postProcessAfterInitialization()` 方法打一个断点，看下整个方法的调用栈：  
-![](attachements/Pasted%20image%2020220831163633.png)  
+![](attachments/Pasted%20image%2020220831163633.png)  
 从整个方法的调用栈可以看出：在 bean 实例化以及属性赋值之后的初始化阶段，执行完自定义的初始化方法之后，`AnnotationAwareAspectJAutoProxyCreator` 后置处理器会再次介入，执行 `postProcessAfterInitialization()` 方法。  
 现在来看下 `postProcessAfterInitialization()` 方法在底层到底干了什么？  
 
@@ -925,7 +924,7 @@ protected List<Advisor> findEligibleAdvisors(Class<?> beanClass, String beanName
 ```
 
 在方法的最后打一个断点，查看一下当 bean 为 `HelloService` 时获取到符合条件的增强器有哪些？  
-![](attachements/Pasted%20image%2020220831172217.png)
+![](attachments/Pasted%20image%2020220831172217.png)
 
 ### 2、创建代理对象
 
@@ -999,12 +998,12 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 }
 ```
 
-💡需要注意的是：如何判断是使用 jdk 动态代理还是使用 Cglib 动态代理 ？默认情况下当前 bean 如果实现接口，则使用 JDK 动态代理，如果没有实现接口，则使用 Cglib 动态代理；当然可以通过设置 `@@EnableAspectJAutoProxy` 注解中的 `proxyTargetClass` 属性为 true，开启强制使用 Cglib 动态代理。  
+💡需要注意的是：如何判断是使用 jdk 动态代理还是使用 Cglib 动态代理 ？默认情况下当前 bean 如果实现接口，则使用 JDK 动态代理，如果没有实现接口，则使用 Cglib 动态代理；当然可以通过设置 `@EnableAspectJAutoProxy` 注解中的 `proxyTargetClass` 属性为 true，开启强制使用 Cglib 动态代理。  
 
 > 对于 **JDK 动态代理** 和 **Cglib 动态代理** 不清楚的小伙伴可以查看 [代理模式](../../../设计模式/代理模式.md) 这一篇文章，文章中详细地介绍了 JDK 动态代理和 Cglib 动态代理是如何使用的，以及两者之间的区别。  
 
 最后，在 `wrapIfNecessary()` 方法的 `createProxy()` 后打一个断点，查看一下当前 bean 的代理对象：  
-![](attachements/Pasted%20image%2020220831182609.png)  
+![](attachments/Pasted%20image%2020220831182609.png)  
 
 # 3、AOP 目标方法执行流程
 
@@ -1023,7 +1022,7 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 	1. 如果没有拦截器或者拦截器索引和拦截器数组 - 1 的大小相同 (指定到了最后一个拦截器)，则执行目标方法
 	2. 链式获取每一个拦截器，拦截器执行 `invoke()` 方法，每一个拦截器等待下一个拦截器执行完成返回以后再执行。为拦截器链的机制，保证通知方法和目标方法的执行顺序
 
-![AOP执行链执行流程](attachements/AOP执行链执行流程.jpg)  
+![AOP执行链执行流程](attachments/AOP执行链执行流程.jpg)  
 Cglib 代理对象执行目标方法时，会被 `CglibAopProxy$DynamicAdvisedInterceptor` 类中的 `intercept()` 方法所拦截。
 
 ```java
@@ -1175,7 +1174,7 @@ public List<Object> getInterceptorsAndDynamicInterceptionAdvice(
 ```
 
 在 `intercept()` 方法中打一个断点，查看一下构建出来的拦截器链：  
-![](attachements/Pasted%20image%2020220831222334.png)
+![](attachments/Pasted%20image%2020220831222334.png)
 
 ## 2、执行拦截器链
 

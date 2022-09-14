@@ -37,7 +37,7 @@ modified: 2022-08-31 23:20:40
 </dependencies>
 ```
 
-Spring 的配置文件：<br/>![](attachements/Pasted%20image%2020220826210954.png)
+Spring 的配置文件：<br/>![](attachments/Pasted%20image%2020220826210954.png)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -50,7 +50,7 @@ Spring 的配置文件：<br/>![](attachements/Pasted%20image%2020220826210954.p
 
 ## 2、Spring 核心 API
 
-ApplicationContext：是一个接口，主要用于对象的创建。其实现类主要有 `ClassPathXmlApplicationContext` 和 `XmlWebApplicationContext`。ApplicationContext 工厂对象占用大量内存，一个应用中只会有一个工厂对象 (单例)，并且是线程安全的。<br />![|600](attachements/Pasted%20image%2020220827013311.png)
+ApplicationContext：是一个接口，主要用于对象的创建。其实现类主要有 `ClassPathXmlApplicationContext` 和 `XmlWebApplicationContext`。ApplicationContext 工厂对象占用大量内存，一个应用中只会有一个工厂对象 (单例)，并且是线程安全的。<br />![|600](attachments/Pasted%20image%2020220827013311.png)
 
 ## 3、程序开发
 

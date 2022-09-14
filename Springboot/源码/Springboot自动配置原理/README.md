@@ -2,24 +2,24 @@
 title: SpringBoot 自动配置原理
 tags: springboot 源码
 created: 2022-09-01 17:43:09
-modified: 2022-09-02 02:05:04
+modified: 2022-09-14 18:03:32
 ---
 
-# 1、SpringBoot 的自动配置是什么？
+# 1 1、SpringBoot 的自动配置是什么？
 
 SpringBoot 自动配置：英文是 AutoConfiguration，它是指基于你引入的 jar 包 (依赖) ，对 SpringBoot 应用进行自动配置，它为 SpringBoot 框架的 " 开箱即用 " 提供了基础支撑。
 
-# 2、环境搭建
+# 2 2、环境搭建
 
 咱们就从一个最简单的案例开始，来一步步剖析 SpringBoot 的自动配置原理到底是如何实现的。现在新建一个项目，项目名字随便取，勾选 Spring  Web 依赖。  
 
-> ![](attachements/Pasted%20image%2020220901231342.png)  
+![](attachements/Pasted%20image%2020220901231342.png)  
 
 其实，至此一个简单的 SpringBoot 项目就已经搭建好了，不得不感叹 Spring 家族是真厉害！
 
-# 3、SpringBoot 启动流程
+# 3 3、SpringBoot 启动流程
 
-## 1、启动类
+## 3.1 1、启动类
 
 找到目前项目中唯一的一个类 `SpringbootStudyDemoApplication`，也是本项目的 **启动类**，**主配置类**。启动类上方标注 **`@SpringBootApplication`** 注解，该注解非常重要，在后面会详细分析，现在留个印象。
 
@@ -46,7 +46,7 @@ public static ConfigurableApplicationContext run(Class<?>[] primarySources, Stri
 
 最终调用重载的 `run()` 方法，在方法中 `new` 一个 `SpringApplication` 对象，将启动类的 Class 对象传入构造方法中，最后再调用创建出来的 `SpringApplication` 实例对象的 `run()` 方法。
 
-## 2、初始化 SpringApplication
+## 3.2 2、初始化 SpringApplication
 
 ```java
 public SpringApplication(Class<?>... primarySources) {  
@@ -73,7 +73,7 @@ public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySourc
 }
 ```
 
-### 1、判断 SpringBoot 应用类型
+### 3.2.1 1、判断 SpringBoot 应用类型
 
 `WebApplicationType.deduceFromClasspath();` 方法，用于判断当前 SpringBoot 应用是什么类型，可选值有 REACTIVE(响应式)、NONE、SERVLET(✔).。
 
@@ -93,10 +93,9 @@ static WebApplicationType deduceFromClasspath() {
 ```
 
 在构造方法中，打一个断点确认当前 SpringBoot 应用是什么类型。  
+![](attachements/Pasted%20image%2020220901234415.png)
 
->![](attachements/Pasted%20image%2020220901234415.png)
-
-### 2、加载所有与容器上下文相关的初始化器
+### 3.2.2 2、加载所有与容器上下文相关的初始化器
 
 ```java
 setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
@@ -104,7 +103,7 @@ setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextIniti
 
 当 `type = ApplicationContextInitializer` 类型时，将创建出来的实例返回并设置到 `SpringApplication` 类中的 `initializers` 属性中保存起来。
 
-#### SpringBoot 自动配置原理
+#### 3.2.2.1 SpringBoot 自动配置原理
 
 其中，**`getSpringFactoriesInstances()` 方法算是 SpringBoot 自动配置最最最核心的方法**，那么就来着重分析一下 `getSpringFactoriesInstances()` 方法，源码如下所示：
 
@@ -123,7 +122,7 @@ private <T> Collection<T> getSpringFactoriesInstances(Class<T> type, Class<?>[] 
 }
 ```
 
-##### 细节分析 1：获取指定类型的工厂实现的完全限定类名
+##### 3.2.2.1.1 细节分析 1：获取指定类型的工厂实现的完全限定类名
 
 在该方法中有一个关键性方法 `SpringFactoriesLoader.loadFactoryNames(type, classLoader);` **使用给定的类加载器从所有的 =="META-INF/spring.factories"== 加载给定类型的工厂实现的完全限定类名**。
 
@@ -178,17 +177,17 @@ private static Map<String, List<String>> loadSpringFactories(ClassLoader classLo
 
 在这个方法中有一个常量 **`FACTORIES_RESOURCE_LOCATION`**，这个常量的值 = **=="META-INF/spring.factories"==**，**通过类加载器检索类路径下所有的 META-INF/spring.factories 文件**，该文件主要位于两处地方，分别在处在 `spring-boot` 和 `spring-boot-autoconfigure ` 模块的资源目录下。  
 
-> ![|600](attachements/Pasted%20image%2020220902010442.png)  
+![|600](attachements/Pasted%20image%2020220902010442.png)  
 
-让咱们来看看 `spring-boot-autoconfigure` 模块下的 spring.factories 文件具体长什么样子。  
+让咱们来看看 `spring-boot-autoconfigure` 模块下的 spring.factories 文件具体长什么样子。
 
->![|1000](attachements/Pasted%20image%2020220902010606.png)  
+![|1000](attachements/Pasted%20image%2020220902010606.png)  
 上图只截取了一部分，该文件类似于 `Properties` 配置文件，一个 key 对应多个值，每个值之间用逗号分隔。`loadSpringFactories()` 方法就是在找到所有的 **=="META-INF/spring.factories"==** 文件之后，循环遍历每个 **=="META-INF/spring.factories"==** 文件，把文件中内容的转换之后存放到一个 `Map` 集合中，最后会把这个 `Map` 集合存放一个 `cache` 缓存中，方便下次获取的时候直接从缓存中拿，而不用再重新解析 **=="META-INF/spring.factories"==** 文件获取。  
 让咱们在 `loadSpringFactories()` 方法的最后打一个断点，看下返回的结果。 可知，当 key 的类型为 `ApplicationContextInitializer` 时，对应的 value 值为一个 list 集合，说明存在 7 个应用上下文初始化器。  
 
->![](attachements/Pasted%20image%2020220902005041.png)  
+![](attachements/Pasted%20image%2020220902005041.png)  
 
-##### 细节分析 2：实例化指定类型的所有工厂实现
+##### 3.2.2.1.2 细节分析 2：实例化指定类型的所有工厂实现
 
 回到 `getSpringFactoriesInstances()` 方法，执行完 `SpringFactoriesLoader.loadFactoryNames(type, classLoader);` 方法之后，开始执行 `createSpringFactoriesInstances()` 方法。该方法就是根据 `SpringFactoriesLoader.loadFactoryNames(type, classLoader);` 方法获取出来的全限定类名通过反射技术创建出相应的实例。
 
@@ -212,13 +211,13 @@ private <T> List<T> createSpringFactoriesInstances(Class<T> type, Class<?>[] par
 }
 ```
 
-##### 彩蛋
+##### 3.2.2.1.3 彩蛋
 
 SpringFactories 机制类似于 Java SPI 加载机制，通过 SpringFactoriesLoader 类检索类路径下所有的 META-INF/spring.factories 文件，将文件中的内容解析封装到一个 Map 集合中。
 
-> 对于 **Java SPI 加载机制** 不清楚的小伙伴可以查看 [Java SPI](../../../JDK/进阶/Java%20SPI.md) 这一篇文章，文章中详细地介绍了 Java SPI 加载机制是什么以及如何使用该特性进行扩展。  
+> 对于 **Java SPI 加载机制** 不清楚的小伙伴可以查看 [README](../../../JDK/进阶/Java%20SPI/README.md) 这一篇文章，文章中详细地介绍了 Java SPI 加载机制是什么以及如何使用该特性进行扩展。  
 
-### 3、加载所有的应用程序监听器
+### 3.2.3 3、加载所有的应用程序监听器
 
 ```java
 this.setListeners(this.getSpringFactoriesInstances(ApplicationListener.class));
@@ -226,11 +225,11 @@ this.setListeners(this.getSpringFactoriesInstances(ApplicationListener.class));
 
 `getSpringFactoriesInstances(ApplicationListener.class)` 是不是很熟悉，和上面的解析过程是一模一样的，只不过换了一个 `type` 而已，这次获取的是 `ApplicationListener` 类型的值。咱们就不点进去这个方法查看了，选中 `this.getSpringFactoriesInstances(ApplicationListener.class)`，然后 **==Ctrl + U==**，计算一下方法的返回值。  
 
->![|1100](attachements/Pasted%20image%2020220902014422.png)  
+![|1100](attachements/Pasted%20image%2020220902014422.png)  
 
 当 `type = ApplicationListener` 类型时，将创建出来的实例返回并设置到 `SpringApplication` 类中的 `listeners` 属性中保存起来。
 
-### 4、推导主应用程序类
+### 3.2.4 4、推导主应用程序类
 
 该方法从当前的栈信息中寻找 `main()` 方法所在的类，为后面的包扫描做准备。
 
@@ -251,4 +250,4 @@ private Class<?> deduceMainApplicationClass() {
 }
 ```
 
-## 3、运行 SpringApplication
+## 3.3 3、运行 SpringApplication

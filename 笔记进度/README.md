@@ -10,8 +10,9 @@ kanban-plugin: basic
 
 ## TODO
 
-- [ ] Springboot 源码
 - [ ] [Spring事务](../Spring/基础/事务/README.md)
+- [ ] Spring-BeanDefinitionReader
+- [ ] Spring-ConfigurationClassPostProcessor
 - [ ] Spring-MVC源码分析
 - [ ] Spring-IOC 源码
 - [ ] [ConcurrentHashMap](JDK/源码/集合/ConcurrentHashMap.md)
@@ -24,10 +25,12 @@ kanban-plugin: basic
 
 ## PROCESSING
 
+- [ ] [Springboot自动配置原理](../Springboot/源码/Springboot自动配置原理/README.md)
 
 
 ## ToBeImproved
 
+- [ ] [JDBC](../数据库编程/JDBC/README.md)
 
 
 ## Done
@@ -53,11 +56,11 @@ kanban-plugin: basic
 - [x] [抽象工厂模式](设计模式/抽象工厂模式.md)
 - [x] [HashMap](JDK/源码/集合/HashMap.md)
 - [x] [代理模式](设计模式/代理模式.md)
-- [x] [SpringMVC](SpringMVC/README.md)
+- [x] [SpringMVC](../SpringMVC/基础/README.md)
 - [x] [Spring-IOC](../Spring/基础/IOC/README.md)
 - [x] [Mybatis](../数据库编程/Mybatis/README.md)
 - [x] [MybatisPlus](../数据库编程/MybatisPlus/README.md)
-- [x] [Java SPI](../JDK/进阶/Java%20SPI.md)
+- [x] [README](../JDK/进阶/Java%20SPI/README.md)
 - [x] [Spring-AOP](../Spring/基础/AOP/README.md)
 - [x] [Spring注解驱动开发](../Spring/基础/Spring注解驱动开发/README.md)
 - [x] [Spring源码环境搭建](../Spring/源码/Spring源码环境搭建/README.md)
@@ -65,6 +68,6 @@ kanban-plugin: basic
 
 %% kanban:settings
 ```
-{"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false,"date-picker-week-start":1}
+{"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false,"date-picker-week-start":1,"lane-width":320}
 ```
 %%
