@@ -2,7 +2,7 @@
 title: JDBC
 tags: JDBC
 created: 2022-08-24 18:12:20
-modified: 2022-09-14 18:05:53
+modified: 2022-09-14 18:10:56
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -13,12 +13,13 @@ JDBC，全称是 Java DataBase Connectivity。
 - JDBC 即使用 Java 语言来访问 **关系型数据库** 的一套 API。
 - **JDBC 是一种标准**，JDBC 标准提供的接口存在于 `java.sql` 包中。在这个包中定义有 **数据库的连接标准**、**数据库的操作标准** 以及 **数据库结果集的处理标准**。每个数据库厂商会提供各自的 JDBC 实现，程序员只需要面向接口和标准编程，不需要关心具体实现。  
 ![jdbc标准.drawio](attachments/jdbc标准.drawio.svg)  
-| 接口/类              | 作用                                       |  
-| ----------------- | ------------------------------------------ |  
-| Driver            | 驱动接口                                   |  
-| DriverManager     | 工具类，用于管理驱动，可以获取数据库的链接 |  
-| Connection        | 表示 Java 与数据库建立的连接对象（接口）     |  
-| PreparedStatement | 发送 SQL 语句的工具                          |  
+
+| 接口/类           | 作用                                       |
+| ----------------- | ------------------------------------------ |
+| Driver            | 驱动接口                                   |
+| DriverManager     | 工具类，用于管理驱动，可以获取数据库的链接 |
+| Connection        | 表示 Java 与数据库建立的连接对象（接口）   |
+| PreparedStatement | 发送 SQL 语句的工具                        |
 | ResultSet         | 结果集，用于获取查询语句的结果             |
 
 ## 2. JDBC 执行流程
