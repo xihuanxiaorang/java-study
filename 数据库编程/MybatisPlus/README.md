@@ -2,7 +2,7 @@
 title: MybatisPlus
 tags: Mybatis MybatisPlus ORM
 created: 2022-08-23 21:02:51
-modified: 2022-08-23 21:30:32
+modified: 2022-09-15 05:22:46
 ---
 
 # 1、简介
@@ -222,7 +222,7 @@ public void testInsert() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639570930699-b9d7909b-b73f-46ea-ba48-1824d4ad951f.png#clientId=u50584c14-f6ea-4&from=paste&height=268&id=ubb182b39&originHeight=268&originWidth=812&originalType=binary&ratio=1&size=36778&status=done&style=none&taskId=u8ca80a22-2e4f-475a-a9a2-05dd6b9d269&width=812)<br />💡注意：主键 id 已经反填。
+![|700](attachments/Pasted%20image%2020220915050058.png)<br />💡注意：主键 id 已经反填。
 
 ## 6.2、主键生成策略
 
@@ -235,11 +235,12 @@ public void testInsert() {
 1. 在实体类字段上增加 `@TableId_(_type = IdType._AUTO)_`
 1. 数据库字段一定要是自增！
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639570831912-15cbd377-60d8-45d2-8154-747428d1c780.png#clientId=u50584c14-f6ea-4&from=paste&id=u61da96d7&originHeight=636&originWidth=862&originalType=binary&ratio=1&size=51237&status=done&style=none&taskId=ue6dc5c8a-0b52-4658-af37-72ef14c8312)
+![|800](attachments/Pasted%20image%2020220915050122.png)
 
 3. 再次测试插入
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639570999365-001947d3-b79e-4c1c-a32b-dfbd9f770dab.png#clientId=u50584c14-f6ea-4&from=paste&id=u9d70a997&originHeight=488&originWidth=1425&originalType=binary&ratio=1&size=94648&status=done&style=none&taskId=u3f9ff5a8-1edf-41d6-98eb-7ffba41be85)<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639571053977-40300b39-a9d2-400f-8054-f74a32a3818b.png#clientId=u50584c14-f6ea-4&from=paste&id=u7a7362f9&originHeight=256&originWidth=814&originalType=binary&ratio=1&size=41109&status=done&style=none&taskId=ua8345391-26a4-4b0f-9260-a2de37d5dfc)<br />通过注解注解 [@TableId](https://baomidou.com/pages/223848/#tableid) + [@IdType](https://baomidou.com/pages/223848/#idtype) 来配置主键的生成策略：
+![](attachments/Pasted%20image%2020220915050138.png)<br />  
+![|700](attachments/Pasted%20image%2020220915050228.png)<br />通过注解注解 [@TableId](https://baomidou.com/pages/223848/#tableid) + [@IdType](https://baomidou.com/pages/223848/#idtype) 来配置主键的生成策略：
 
 | 值 | 描述 |
 | --- | --- |
@@ -276,7 +277,7 @@ public void testUpdate() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639572475668-10a1d5c8-6a6c-4032-b3b8-754842fac5ef.png#clientId=u50584c14-f6ea-4&from=paste&height=455&id=ue77cf13a&originHeight=455&originWidth=1424&originalType=binary&ratio=1&size=83351&status=done&style=none&taskId=u976c163c-ee48-45b3-9728-d05a21daeeb&width=1424)<br />可以看出 sql 语句中赋值了哪些字段就更新哪些字段！
+![](attachments/Pasted%20image%2020220915050311.png)<br />可以看出 sql 语句中赋值了哪些字段就更新哪些字段！
 
 ## 6.4、自动填充功能
 
@@ -291,7 +292,7 @@ alter table user add column update_time DATETIME NULL default CURRENT_TIMESTAMP 
 alter table user add column create_time DATETIME NULL default CURRENT_TIMESTAMP comment '创建时间';
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639625437818-1b0ec7d5-baf7-4c59-8c2a-01954402f416.png#clientId=ua21c7576-870c-4&from=paste&height=681&id=u3c569233&originHeight=681&originWidth=1238&originalType=binary&ratio=1&size=43199&status=done&style=none&taskId=u5ba40997-16dc-49b0-b01f-a9c93894c68&width=1238)
+![](attachments/Pasted%20image%2020220915050323.png)
 
 2. 实体类增加 `createTime` 和 `updateTime` 字段
 
@@ -320,10 +321,11 @@ public void testInsert() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639626519606-01eeb182-22eb-4043-b523-ee1751134af3.png#clientId=ua21c7576-870c-4&from=paste&height=452&id=u1bf86e5c&originHeight=452&originWidth=1419&originalType=binary&ratio=1&size=100656&status=done&style=none&taskId=ucbed3862-42ec-46a3-a0eb-165c3d8f815&width=1419)<br />💡注意：主键 id 反填，但是创建时间与更新时间并没有反填！<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639626432372-f940b2fd-a8d9-434a-9925-550f97ed9845.png#clientId=ua21c7576-870c-4&from=paste&height=287&id=u0dd66989&originHeight=287&originWidth=1193&originalType=binary&ratio=1&size=71454&status=done&style=none&taskId=u7afe59fe-4c9c-45d8-8c29-a90780bc206&width=1193)  
+![](attachments/Pasted%20image%2020220915050337.png)<br />💡注意：主键 id 反填，但是创建时间与更新时间并没有反填！<br />  
+![](attachments/Pasted%20image%2020220915050407.png)
 
 ```ad-important
-💣数据库填写的时间与当前系统的时间相差 8 个小时：<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639626690208-931ba4db-5e52-410a-9789-fd5fa8eb6899.png#clientId=ua21c7576-870c-4&from=paste&height=206&id=No47G&originHeight=301&originWidth=413&originalType=binary&ratio=1&size=9942&status=done&style=none&taskId=u7c0bdfb9-aae8-428f-9101-19000fab7d7&width=283)<br />不用慌，使用 `select now();` 来查看 mysql 时间，如果时间与当前系统时间一致，则说明 mysql 的时间没有问题，问题出在 java 时间上，将 jdbc url 参数修改成 `serverTimezone=Asia/Shanghai`；如果 mysql 时间与当前系统不一致，则使用以下 sql 设置 mysql 时区：<br />show variables like '%time_zone%'; -- 查询当前时区<br />set global time_zone='+8:00';  -- 在标准时区上加 +8 小时,即东 8 区时间<br />set time_zone = '+08:00';<br />flush privileges; -- 立即生效<br />再次执行插入操作，发现此时插入的时间与当前系统的时间终于一致！🎉🎉🎉<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639633313491-1952c362-d361-4fa2-abbd-78f6d96694de.png#clientId=udf3629f7-273e-4&from=paste&height=321&id=uf7c3a860&originHeight=321&originWidth=1579&originalType=binary&ratio=1&size=93793&status=done&style=none&taskId=ub92b7079-095f-4f68-9c1d-f95011d2311&width=1579)  
+💣数据库填写的时间与当前系统的时间相差 8 个小时：<br />![|400](attachments/Pasted%20image%2020220915050456.png)<br />不用慌，使用 `select now();` 来查看 mysql 时间，如果时间与当前系统时间一致，则说明 mysql 的时间没有问题，问题出在 java 时间上，将 jdbc url 参数修改成 `serverTimezone=Asia/Shanghai`；如果 mysql 时间与当前系统不一致，则使用以下 sql 设置 mysql 时区：<br />show variables like '%time_zone%'; -- 查询当前时区<br />set global time_zone='+8:00';  -- 在标准时区上加 +8 小时,即东 8 区时间<br />set time_zone = '+08:00';<br />flush privileges; -- 立即生效<br />再次执行插入操作，发现此时插入的时间与当前系统的时间终于一致！🎉🎉🎉<br />![](attachments/Pasted%20image%2020220915050701.png)  
 ```
 
 4. 更新测试
@@ -336,7 +338,8 @@ public void testUpdate() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639633621140-6b04398f-d94f-47ce-b42c-780c80c48db1.png#clientId=u2f1c5c28-19b4-4&from=paste&height=452&id=u0c0b534a&originHeight=452&originWidth=1425&originalType=binary&ratio=1&size=89579&status=done&style=none&taskId=u12d52246-f1fc-488f-bb49-c58dc8f8538&width=1425)<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639633724231-3f44b5a3-b85f-47be-afe9-405c947d4580.png#clientId=u2f1c5c28-19b4-4&from=paste&height=321&id=u3eb49e51&originHeight=321&originWidth=1207&originalType=binary&ratio=1&size=81072&status=done&style=none&taskId=u690d45c1-4816-4a2b-b392-ad4ea678f6e&width=1207)
+![](attachments/Pasted%20image%2020220915050826.png)<br />  
+![|1000](attachments/Pasted%20image%2020220915050901.png)
 
 ### 6.4.2、代码级别
 
@@ -403,7 +406,11 @@ public enum FieldFill {
 }
 ```
 
-删除数据库中字段的默认值与更新操作！<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639642260132-98e1a4f8-76f0-44f5-a3eb-4ffad6a7a928.png#clientId=u2f1c5c28-19b4-4&from=paste&height=332&id=ue046bf33&originHeight=332&originWidth=1087&originalType=binary&ratio=1&size=39888&status=done&style=none&taskId=u0c7d9451-d946-4b76-a768-df6c04b47da&width=1087)<br />1、插入测试：<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639642987685-9181a633-eef6-4873-bdb1-9879a51cc062.png#clientId=u2f1c5c28-19b4-4&from=paste&height=495&id=u592074bb&originHeight=495&originWidth=1423&originalType=binary&ratio=1&size=110857&status=done&style=none&taskId=u821f019c-7adf-48b9-b281-a41d1eee63e&width=1423)<br />发现使用官网的方法，创建时间与更新时间都为 null，这是为什么呢？？找到源码，发现 自动填充的字段必须要注解了 fill，并且字段名和字段属性都要匹配才会进行填充！所以当我们的字段类型是 `java.util.Date` ，而填充的类型是 `LocalDateTime` 类型时，就会填充不进去。<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639643182093-236ee0ed-8b53-4825-88cd-7901a5702bd5.png#clientId=u2f1c5c28-19b4-4&from=paste&height=617&id=ub7030f91&originHeight=617&originWidth=1536&originalType=binary&ratio=1&size=112303&status=done&style=none&taskId=u35683872-75f0-4626-ad3b-28746608eb1&width=1536)<br />那么如何修改呢？
+删除数据库中字段的默认值与更新操作！<br />  
+![800](attachments/Pasted%20image%2020220915050931.png)<br />  
+1、插入测试：<br />  
+![](attachments/Pasted%20image%2020220915051011.png)<br />发现使用官网的方法，创建时间与更新时间都为 null，这是为什么呢？？找到源码，发现 自动填充的字段必须要注解了 fill，并且字段名和字段属性都要匹配才会进行填充！所以当我们的字段类型是 `java.util.Date` ，而填充的类型是 `LocalDateTime` 类型时，就会填充不进去。<br />  
+![](attachments/Pasted%20image%2020220915051032.png)<br />那么如何修改呢？
 
 ```java
 @Slf4j
@@ -424,7 +431,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639644889025-429a8c17-63ec-4bdf-a6a6-356d836091cc.png#clientId=u2f1c5c28-19b4-4&from=paste&height=546&id=u7b100cfc&originHeight=546&originWidth=1429&originalType=binary&ratio=1&size=125900&status=done&style=none&taskId=u1a5f33de-cb1e-4201-8bda-d5026040362&width=1429)<br />可以看到，改完之后，创建时间和更新时间都已经有值并且也反填回来了！🎉🎉🎉<br />2、更新测试：
+![](attachments/Pasted%20image%2020220915051054.png)<br />可以看到，改完之后，创建时间和更新时间都已经有值并且也反填回来了！🎉🎉🎉<br />2、更新测试：
 
 ```java
 @Test
@@ -434,7 +441,7 @@ public void testUpdate() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639645302561-798a4f5f-0913-467e-ad6c-17448accadd9.png#clientId=u2f1c5c28-19b4-4&from=paste&height=471&id=u1643265d&originHeight=471&originWidth=1425&originalType=binary&ratio=1&size=103327&status=done&style=none&taskId=u042742ff-3a09-4808-ac25-563c4b3815a&width=1425)<br />可以看到，我的更新操作当中并没有主动给更新时间赋值，但是生成的 sql 语句中 有 `update_time` 这个字段，而且给它赋值当前时间！
+![](attachments/Pasted%20image%2020220915051102.png)<br />可以看到，我的更新操作当中并没有主动给更新时间赋值，但是生成的 sql 语句中 有 `update_time` 这个字段，而且给它赋值当前时间！
 
 ## 6.5、乐观锁
 
@@ -486,7 +493,7 @@ public void testUpdate() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639659570354-7c591d7f-2ebb-4d8c-b427-8992fc9cfdac.png#clientId=u2c49c086-6b12-4&from=paste&height=466&id=ucb7d2971&originHeight=466&originWidth=1412&originalType=binary&ratio=1&size=477332&status=done&style=none&taskId=u0b61973b-2af7-4a3a-a4d5-6a9d4ab9c22&width=1412)<br />从上面打印出来的 sql 语句发现更新的时候并没有更新 version 版本号，为什么会这样呢？🤔
+![](attachments/Pasted%20image%2020220915051120.png)<br />从上面打印出来的 sql 语句发现更新的时候并没有更新 version 版本号，为什么会这样呢？🤔
 
 ```java
 @Test
@@ -497,7 +504,8 @@ public void testUpdate2() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639659887682-916358ab-f35c-4c98-8e25-554c0d47765a.png#clientId=u2c49c086-6b12-4&from=paste&height=793&id=ubf61d348&originHeight=793&originWidth=1426&originalType=binary&ratio=1&size=872586&status=done&style=none&taskId=u7131cddb-8185-45c3-a6f0-df1581d1b53&width=1426)<br />查看源码发现：<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639660651488-ca989f8c-7c09-4902-93f7-34e4007f3e47.png#clientId=u2c49c086-6b12-4&from=paste&height=620&id=u81dfac30&originHeight=620&originWidth=1767&originalType=binary&ratio=1&size=745486&status=done&style=none&taskId=u9e2217ad-826e-4bac-ab1d-252022e043d&width=1767)<br />📢结论：使用乐观锁之前一定要先查询拿到版本号，如果不拿到版本号就直接更新是更新不了的；并且 **如果版本号为 null，再通过版本号去更新数据，无论怎样更新该条数据都不会使版本号 +1，而是一直为 null**。<br />接下来测试一下模仿多线程下更新用户，看看乐观锁是否起到作用？
+![](attachments/Pasted%20image%2020220915051159.png)<br />查看源码发现：<br />  
+![](attachments/Pasted%20image%2020220915051222.png)<br />📢结论：使用乐观锁之前一定要先查询拿到版本号，如果不拿到版本号就直接更新是更新不了的；并且 **如果版本号为 null，再通过版本号去更新数据，无论怎样更新该条数据都不会使版本号 +1，而是一直为 null**。<br />接下来测试一下模仿多线程下更新用户，看看乐观锁是否起到作用？
 
 ```java
 @Test
@@ -513,7 +521,8 @@ public void testUpdate3() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639662009975-32a4e166-673b-4827-b2b1-3cc322ae5cb7.png#clientId=u2c49c086-6b12-4&from=paste&height=560&id=u6b0c1570&originHeight=560&originWidth=1419&originalType=binary&ratio=1&size=605246&status=done&style=none&taskId=ud7484a63-4622-4e66-ae94-864e42f360c&width=1419)<br />🤔从上面可以看出查询了两遍数据库，感觉一级缓存没有生效，为什么要创建一个新的 SqlSession ？？？<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639662252888-83d8d7d2-8567-4086-bdba-e4494172b675.png#clientId=u2c49c086-6b12-4&from=paste&height=563&id=u4b5370ca&originHeight=563&originWidth=1423&originalType=binary&ratio=1&size=626840&status=done&style=none&taskId=u44992735-4685-4b76-92b5-9b018bac4b6&width=1423)<br />从上图可以看出乐观锁已经生效，后面更新的数据是不会被更新的！
+![](attachments/Pasted%20image%2020220915051232.png)<br />🤔从上面可以看出查询了两遍数据库，感觉一级缓存没有生效，为什么要创建一个新的 SqlSession ？？？<br />  
+![](attachments/Pasted%20image%2020220915051250.png)<br />从上图可以看出乐观锁已经生效，后面更新的数据是不会被更新的！
 
 ## 6.6、[查询操作](https://baomidou.com/pages/49cc81/#select) 
 
@@ -552,7 +561,7 @@ public void testSelectByBatchId(){
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639663042136-99ba464c-5856-48b4-b7cc-97a3ee5e1a6f.png#clientId=u2c49c086-6b12-4&from=paste&height=627&id=u8fab9bff&originHeight=627&originWidth=1429&originalType=binary&ratio=1&size=662292&status=done&style=none&taskId=u78a61814-8d96-4fc1-8a08-08e737bba6a&width=1429)
+![](attachments/Pasted%20image%2020220915051303.png)
 
 2. 根据 map 中的条件进行查询
 
@@ -567,7 +576,7 @@ public void testSelectByMap() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639663202341-b72d6956-4d55-4a38-ad7a-63e6b6aac0b6.png#clientId=u2c49c086-6b12-4&from=paste&height=534&id=u1ca32b2e&originHeight=534&originWidth=1426&originalType=binary&ratio=1&size=543053&status=done&style=none&taskId=u2146f7ba-58e0-481d-9a7d-ffae3202790&width=1426)
+![](attachments/Pasted%20image%2020220915051318.png)
 
 ## 6.8、分页查询
 
@@ -600,7 +609,7 @@ public void testPage() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639663663276-770e24fe-13de-4654-a267-617956ceee14.png#clientId=u2c49c086-6b12-4&from=paste&height=750&id=uc19f3fac&originHeight=750&originWidth=1423&originalType=binary&ratio=1&size=815829&status=done&style=none&taskId=ub8937e90-4dd4-4119-a726-7453686b7f5&width=1423)
+![](attachments/Pasted%20image%2020220915051329.png)
 
 ## 6.9、[删除操作](https://baomidou.com/pages/49cc81/#delete) 
 
@@ -631,7 +640,7 @@ public void testDeleteByBatchId() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639793895331-9383258e-649e-4482-ad09-22bc22349a62.png#clientId=ube9bdc9a-1e88-4&from=paste&height=505&id=ufd3a9580&originHeight=505&originWidth=1424&originalType=binary&ratio=1&size=504389&status=done&style=none&taskId=uf1568169-fb12-487e-987d-e1839cae4df&width=1424)
+![](attachments/Pasted%20image%2020220915051342.png)
 
 ```java
 @Test
@@ -642,7 +651,7 @@ public void testDeleteMap(){
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639794101673-9aafd802-09e4-4603-8dbc-f7e7738fd653.png#clientId=ube9bdc9a-1e88-4&from=paste&height=542&id=ue51b03eb&originHeight=542&originWidth=1425&originalType=binary&ratio=1&size=531197&status=done&style=none&taskId=ue877d5ee-7a4a-4e05-95ec-5a1d9462ff2&width=1425)
+![](attachments/Pasted%20image%2020220915051352.png)
 
 ## 6.10、逻辑删除
 
@@ -700,7 +709,7 @@ public void testDeleteById() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639733590737-1a1adf57-9dee-47ee-af91-1545931c0d25.png#clientId=u07a73002-e363-4&from=paste&height=443&id=u6dc95136&originHeight=443&originWidth=1425&originalType=binary&ratio=1&size=85786&status=done&style=none&taskId=u01e6b650-0145-430d-9aab-500e659e0e8&width=1425)<br />从上图可以发现，走的不再是 delete 语句，而是更新语句！
+![](attachments/Pasted%20image%2020220915051405.png)<br />从上图可以发现，走的不再是 delete 语句，而是更新语句！
 
 ```java
 @Test
@@ -710,7 +719,7 @@ public void testSelectById() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639733814543-b41c32da-99aa-4007-9565-72d1dd255303.png#clientId=u07a73002-e363-4&from=paste&height=482&id=ua59fd64d&originHeight=482&originWidth=1423&originalType=binary&ratio=1&size=92924&status=done&style=none&taskId=u584a2ff2-7301-4b2e-af2a-70580bbd4a1&width=1423)<br />从上图可以发现查询的时候 条件上自动带上了 deleted = 0，表示逻辑删除的记录是查不到的！
+![](attachments/Pasted%20image%2020220915051418.png)<br />从上图可以发现查询的时候 条件上自动带上了 deleted = 0，表示逻辑删除的记录是查不到的！
 
 ## 6.11、性能分析插件
 
@@ -786,7 +795,7 @@ public void testSelectById() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639734884903-946df929-3912-47cc-bc33-de3431e5aa17.png#clientId=u07a73002-e363-4&from=paste&height=580&id=u4be72e94&originHeight=580&originWidth=1420&originalType=binary&ratio=1&size=111124&status=done&style=none&taskId=uf2359d5d-489a-4932-96ef-05c4e8cdbbf&width=1420)<br />从上图发现具体的 SQL 语句以及执行时长！
+![](attachments/Pasted%20image%2020220915051437.png)<br />从上图发现具体的 SQL 语句以及执行时长！
 
 ## 6.12、[条件构造器](https://baomidou.com/pages/10c804/#abstractwrapper)📌
 
@@ -802,7 +811,7 @@ public void testWrapper() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640051179431-a97af651-71e2-420c-a521-298997abb2bb.png#clientId=ube86e957-c613-4&from=paste&height=500&id=ub7d803c6&originHeight=500&originWidth=1410&originalType=binary&ratio=1&size=101669&status=done&style=none&taskId=ubd6f69a7-2d16-479c-9c7c-a7b58006c26&width=1410)<br />2.查询名字是 `J` 开头并且年龄大于 18 的用户
+![](attachments/Pasted%20image%2020220915051457.png)<br />2.查询名字是 `J` 开头并且年龄大于 18 的用户
 
 ```java
 @Test
@@ -814,7 +823,7 @@ public void testWrapper1() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640051418439-37051718-89e2-4983-9e6b-10e962a894bb.png#clientId=ube86e957-c613-4&from=paste&height=685&id=u4dd1839a&originHeight=685&originWidth=1428&originalType=binary&ratio=1&size=137100&status=done&style=none&taskId=ub0c2d9ff-c4a8-403b-b7f6-c92ad8c8425&width=1428)<br />3.查询所有的用户并且按照年龄升序排列
+![](attachments/Pasted%20image%2020220915051506.png)<br />3.查询所有的用户并且按照年龄升序排列
 
 ```java
 @Test
@@ -826,7 +835,7 @@ public void testWrapper2() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640051609880-183c9380-43cb-4bd4-80b4-de1384b04c94.png#clientId=ube86e957-c613-4&from=paste&height=553&id=u75ebe165&originHeight=553&originWidth=1428&originalType=binary&ratio=1&size=115747&status=done&style=none&taskId=u6ae166be-eb73-47ec-8650-5bf0c271b20&width=1428)<br />4.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
+![](attachments/Pasted%20image%2020220915051516.png)<br />4.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
 
 ```java
 @Test
@@ -838,7 +847,7 @@ public void testWrapper3() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640051877303-d34621cb-d55d-4eb7-b65c-2f00b5b018c3.png#clientId=ube86e957-c613-4&from=paste&height=593&id=u589e0f0b&originHeight=593&originWidth=1425&originalType=binary&ratio=1&size=118317&status=done&style=none&taskId=ufc1175d7-3c18-425b-880d-adf95223fa3&width=1425)<br />上面使用 `QueryWrapper` 查询时，参数中 column 那一列全是写死的，即硬编码或者魔法代码，如果这个时候数据库表中字段被修改了，这个时候在编译时是不会报错的，只有等到运行到这里的时候才会报错，所以有没有更加好一点的办法呢？使用 `LamdaQueryWrapper` 就可以解决这个问题！<br />5.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
+![](attachments/Pasted%20image%2020220915051528.png)<br />上面使用 `QueryWrapper` 查询时，参数中 column 那一列全是写死的，即硬编码或者魔法代码，如果这个时候数据库表中字段被修改了，这个时候在编译时是不会报错的，只有等到运行到这里的时候才会报错，所以有没有更加好一点的办法呢？使用 `LamdaQueryWrapper` 就可以解决这个问题！<br />5.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
 
 ```java
 @Test
@@ -850,7 +859,7 @@ public void testWrapper4() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640052234696-94f9c880-732d-4cfa-899b-a55abed4d111.png#clientId=ube86e957-c613-4&from=paste&height=563&id=ud95a9cca&originHeight=563&originWidth=1424&originalType=binary&ratio=1&size=115301&status=done&style=none&taskId=u2e6dc635-7d83-4fde-a31d-8bee015228d&width=1424)<br />从上图可以看出来，`LamdaQueryWrapper` 产生的 SQL 语句和 `QueryWrapper` 产生的 SQL 语句一样，但是 `LamadQueryWrapper` 编码的时候却比 `QueryWrapper` 优秀而且便于维护，所以以后尽量使用 `LamadQueryWrapper`。<br />6.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26
+![](attachments/Pasted%20image%2020220915051536.png)<br />从上图可以看出来，`LamdaQueryWrapper` 产生的 SQL 语句和 `QueryWrapper` 产生的 SQL 语句一样，但是 `LamadQueryWrapper` 编码的时候却比 `QueryWrapper` 优秀而且便于维护，所以以后尽量使用 `LamadQueryWrapper`。<br />6.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26
 
 ```java
 @Test
@@ -862,7 +871,7 @@ public void testWrapper5() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640052798407-fbd82b08-844f-471e-b413-364e8b6e75e9.png#clientId=ube86e957-c613-4&from=paste&height=567&id=u83905915&originHeight=567&originWidth=1425&originalType=binary&ratio=1&size=105393&status=done&style=none&taskId=uf15033cf-b1d0-4904-941b-47f3f005aa2&width=1425)<br />7.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26（将上面的条件与赋值分开）
+![](attachments/Pasted%20image%2020220915051721.png)<br />7.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26（将上面的条件与赋值分开）
 
 ```java
 @Test
@@ -875,7 +884,7 @@ public void testWrapper6() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640053037534-7ae88f30-d395-4bfe-b76a-c7b609654bc4.png#clientId=ube86e957-c613-4&from=paste&height=588&id=u0595551f&originHeight=588&originWidth=1422&originalType=binary&ratio=1&size=120428&status=done&style=none&taskId=u60254c37-dbd3-4217-a21c-c011d1e2b06&width=1422)<br />从上图可以发现，查询与赋值分开后，会比上面那种更新生成的 SQL 语句多更新一个更新时间字段。<br />以上就列举这么多，看上去还挺简单的，像这种哪里不懂就可以查询官方文档。
+![](attachments/Pasted%20image%2020220915051728.png)<br />从上图可以发现，查询与赋值分开后，会比上面那种更新生成的 SQL 语句多更新一个更新时间字段。<br />以上就列举这么多，看上去还挺简单的，像这种哪里不懂就可以查询官方文档。
 
 # 7、代码生成器📌
 
@@ -931,7 +940,9 @@ public class Knife4jConfig {
 }
 ```
 
-启动程序，发现直接报错？这是什么鬼？？？<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639982630979-f4b9a541-d6af-43f8-8515-dbbe1dce4d9e.png#clientId=u33f8f517-f3e2-4&from=paste&height=688&id=u1d913e4e&originHeight=688&originWidth=1786&originalType=binary&ratio=1&size=246445&status=done&style=none&taskId=ucf190413-b385-4f59-be1c-5aa8f780ea9&width=1786)<br />在网上找了以下解决方案，引入 knife4j 会出现这个错误，需要在配置文件中加入以下配置才行：
+启动程序，发现直接报错？这是什么鬼？？？<br />  
+![|300](attachments/Pasted%20image%2020220915051816.png)<br />  
+在网上找了以下解决方案，引入 knife4j 会出现这个错误，需要在配置文件中加入以下配置才行：
 
 ```yaml
 spring:
@@ -993,7 +1004,9 @@ public static void main(String[] args) {
   }
 ```
 
-执行 main 方法，输入想要自动生成代码的表名，回车之后就会自动生成了！（注意：使用 @Test 方法测试时，控制台输入无效，查阅资料好像是 idea 的 bug，所以改成 main 方法）。<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639982880157-3dc7c127-51dd-4508-9084-66af607da39d.png#clientId=u33f8f517-f3e2-4&from=paste&height=561&id=u90bbab63&originHeight=561&originWidth=355&originalType=binary&ratio=1&size=45175&status=done&style=none&taskId=u7151b8e7-cfbf-4226-b417-acdddb439bc&width=355)<br />用红框框中的全是自动生成的代码，感觉极大的提高了开发效率！
+执行 main 方法，输入想要自动生成代码的表名，回车之后就会自动生成了！（注意：使用 @Test 方法测试时，控制台输入无效，查阅资料好像是 idea 的 bug，所以改成 main 方法）。<br />  
+![|300](attachments/Pasted%20image%2020220915051851.png)<br />  
+用红框框中的全是自动生成的代码，感觉极大的提高了开发效率！
 
 # 8、批量插入📌
 
@@ -1025,7 +1038,7 @@ public class BatchSaveTest {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640066139278-b9635764-4148-43f5-8341-696154d6bb0a.png#clientId=u6975805d-c2c4-4&from=paste&height=452&id=u677f5599&originHeight=452&originWidth=1832&originalType=binary&ratio=1&size=94005&status=done&style=none&taskId=uf84a5198-55df-4674-9d05-e46acf84c20&width=1832)<br />从上图可以看出循环单次插入 1W 条数据需要 3 分多钟，有点难接受！就别提 10W 条数据了，反正我是测试到一半就停下了，挺难等的！
+![](attachments/Pasted%20image%2020220915051911.png)<br />从上图可以看出循环单次插入 1W 条数据需要 3 分多钟，有点难接受！就别提 10W 条数据了，反正我是测试到一半就停下了，挺难等的！
 
 ## 8.2、MP 批量插入
 
@@ -1049,7 +1062,9 @@ public class BatchSaveTest {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640066778954-bd7dbb73-972b-4b74-9e84-9876dd10cf57.png#clientId=u38923ba6-23e3-4&from=paste&height=439&id=u65f90a06&originHeight=439&originWidth=1832&originalType=binary&ratio=1&size=86419&status=done&style=none&taskId=uddafd6c6-0e07-4c47-b257-a49c8e4b9cd&width=1832)<br />测试一下，发现居然大概要 1 分多钟，有点不能忍，按理说批量保存应该挺快的才对啊！查看一下源码：<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639989393389-64bd3eb5-d218-4e0d-bc40-ba3744cf82b4.png#clientId=u33f8f517-f3e2-4&from=paste&height=275&id=uc092d3b8&originHeight=275&originWidth=898&originalType=binary&ratio=1&size=41745&status=done&style=none&taskId=u9587dbaf-da99-41c8-b4a4-fe2c439c843&width=898)<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639989428503-b97e20b0-b3ec-405d-a65b-ccb0967271cb.png#clientId=u33f8f517-f3e2-4&from=paste&height=496&id=u8aed47d2&originHeight=496&originWidth=1597&originalType=binary&ratio=1&size=84774&status=done&style=none&taskId=ucefefcfd-44ba-441b-aa6c-3c491b9ff93&width=1597)<br />从上图可以发现 mybatis-plus 内部源码实际上是 **不支持批量插入** 的，IService 接口下的 **saveBatch 方法实际上是循环插入**。那该怎么办呢？😱  
+![](attachments/Pasted%20image%2020220915051922.png)<br />测试一下，发现居然大概要 1 分多钟，有点不能忍，按理说批量保存应该挺快的才对啊！查看一下源码：<br />  
+![|700](attachments/Pasted%20image%2020220915051933.png)<br />  
+![](attachments/Pasted%20image%2020220915051952.png)<br />从上图可以发现 mybatis-plus 内部源码实际上是 **不支持批量插入** 的，IService 接口下的 **saveBatch 方法实际上是循环插入**。那该怎么办呢？😱  
 
 ```ad-important
 🎨通过 [查询资料](https://blog.csdn.net/weixin_33694136/article/details/113430434) 发现 MySQL JDBC 驱动默认情况下会无视 executeBatch() 语句，会把批量语句拆散一条一条的发给数据库执行，批量插入实际上是单条插入，直接造成较低的性能。<br />只有把 `rewriteBatchedStatements` 参数置为 true, 驱动才会帮你批量执行 SQL，另外这个选项对 insert/update/delete 都是生效的。
@@ -1066,7 +1081,9 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
 ```
 
-再测试一下，发现插入 1W 条数据居然只要 2~3 秒，10W 条数据只要 12 秒钟，牛皮！！！<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640066320610-239a7543-1ae0-4f0d-8a5b-64c2d6cb3076.png#clientId=u6975805d-c2c4-4&from=paste&height=450&id=JWmkF&originHeight=450&originWidth=1829&originalType=binary&ratio=1&size=90715&status=done&style=none&taskId=ubc3172a8-40e9-4e2e-9a66-e5d7b2f69b3&width=1829)<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640069474931-7ee0c5c7-7475-4459-a4e1-4384e5f3ae87.png#clientId=u38923ba6-23e3-4&from=paste&height=509&id=u03d88d03&originHeight=509&originWidth=1828&originalType=binary&ratio=1&size=103516&status=done&style=none&taskId=u2d7594b6-7f24-4c95-86be-00fb1b1b6f0&width=1828)<br />上面的解决方案是服务器 ->数据库层级的，速度慢还是需要在服务器层级上解决。
+再测试一下，发现插入 1W 条数据居然只要 2~3 秒，10W 条数据只要 12 秒钟，牛皮！！！<br />  
+![](attachments/Pasted%20image%2020220915052005.png)<br />  
+![](attachments/Pasted%20image%2020220915052023.png)<br />上面的解决方案是服务器 ->数据库层级的，速度慢还是需要在服务器层级上解决。
 
 ## 8.3、原生批量插入
 
@@ -1110,7 +1127,14 @@ void batchSave3() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640067933850-e3dbcb04-a46d-4db1-8997-0b70e5a5f9d0.png#clientId=u38923ba6-23e3-4&from=paste&height=691&id=u8e3f3894&originHeight=691&originWidth=1828&originalType=binary&ratio=1&size=141715&status=done&style=none&taskId=u99189aac-4240-43e8-a66e-3e82dde7e78&width=1828)<br />从上图可以发现居然只要 1 秒多钟就完成了插入全部数据，但是别高兴太早，当插入 10W 条数据的时候，居然报错了！<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640068427223-bb168adf-8376-44b9-a74d-c63c5132b5c4.png#clientId=u38923ba6-23e3-4&from=paste&height=69&id=u62a05136&originHeight=69&originWidth=1368&originalType=binary&ratio=1&size=22620&status=done&style=none&taskId=u02ad2a08-30de-449b-ba3d-fb44e307b8c&width=1368)<br />那么这是为什么呢？查阅了一下资料，原来是我们使用原生方法将 10W 条数据拼接成一条 SQL 语句执行时，由于拼接的 SQL 过大，超出了设置的 4M 大小，所以程序就报错了！<br />查看 `max_allowed_packet ` 大小的命令： `show VARIABLES like'%max_allowed_packet%';`<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640068953877-190cf525-9c75-461b-bcda-82aa18cd6913.png#clientId=u38923ba6-23e3-4&from=paste&height=103&id=uaa5880e7&originHeight=103&originWidth=503&originalType=binary&ratio=1&size=13988&status=done&style=none&taskId=uebcc1574-c3b2-42a7-9ffb-351dddec5e9&width=503)<br />我们可以临时更改 MySQL 最大执行 SQL 大小为 10M ：`set global max_allowed_packet = 10*1024*1024;`<br />设置完成之后，程序执行成功并且插入全部的数据只要 6 秒钟，是真的恐怖！<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1640069247064-ef3138f8-1d27-4def-8ad5-f16dd3c3a96d.png#clientId=u38923ba6-23e3-4&from=paste&height=428&id=u82e7e36d&originHeight=428&originWidth=1834&originalType=binary&ratio=1&size=102157&status=done&style=none&taskId=u509ae88d-19f3-4d97-8a5e-f7a63eab7c6&width=1834)<br />但是上面的解决方案任是治标不治本，因为我们无法预测程序钟最大的执行 SQL 到底有多大。所以不推荐使用！
+![](attachments/Pasted%20image%2020220915052035.png)<br />从上图可以发现居然只要 1 秒多钟就完成了插入全部数据，但是别高兴太早，当插入 10W 条数据的时候，居然报错了！<br />  
+![|1000](attachments/Pasted%20image%2020220915052050.png)<br />  
+那么这是为什么呢？查阅了一下资料，原来是我们使用原生方法将 10W 条数据拼接成一条 SQL 语句执行时，由于拼接的 SQL 过大，超出了设置的 4M 大小，所以程序就报错了！<br />  
+查看 `max_allowed_packet ` 大小的命令： `show VARIABLES like'%max_allowed_packet%';`<br />  
+![|400](attachments/Pasted%20image%2020220915052129.png)<br />  
+我们可以临时更改 MySQL 最大执行 SQL 大小为 10M ：`set global max_allowed_packet = 10*1024*1024;`<br />  
+设置完成之后，程序执行成功并且插入全部的数据只要 6 秒钟，是真的恐怖！<br />  
+![](attachments/Pasted%20image%2020220915052200.png)<br />但是上面的解决方案任是治标不治本，因为我们无法预测程序钟最大的执行 SQL 到底有多大。所以不推荐使用！
 
 ## 8.4、参考文档
 

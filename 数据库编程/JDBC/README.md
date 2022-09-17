@@ -2,7 +2,7 @@
 title: JDBC
 tags: JDBC
 created: 2022-08-24 18:12:20
-modified: 2022-09-14 18:10:56
+modified: 2022-09-14 18:13:12
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -739,7 +739,7 @@ public void testTransferWithTransaction() throws SQLException {
 ![](attachments/Pasted%20image%2020220914175607.png)  
 然后查看数据库用户表中的数据：  
 ![|700](attachments/Pasted%20image%2020220914175802.png)  
-发现在增加事务之后，即使在出现异常的情况下，也不会发生用户 1 已经扣 1000，而用户 2 没有加钱的尴尬情况。所以说事务控制非常有比要。
+发现在增加事务之后，即使在出现异常的情况下，也不会发生用户 1 已经扣 1000，而用户 2 没有加钱的尴尬情况。
 
 ## 5. 数据库连接池
 
