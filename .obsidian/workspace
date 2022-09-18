@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Spring/源码/Spring源码环境搭建/README.md",
+            "file": "Spring/基础/README.md",
             "mode": "source",
             "source": false
           }
@@ -62,8 +62,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310,
-    "collapsed": true
+    "width": 310
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -79,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md",
+                "file": "Spring/基础/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -96,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring源码环境搭建/README.md"
+                "file": "Spring/基础/README.md"
               }
             }
           },
@@ -120,7 +119,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -128,15 +127,15 @@
   },
   "active": "08035e86789b7d06",
   "lastOpenFiles": [
-    "Spring/源码/README.md",
-    "Spring/基础/README.md",
-    "Spring/基础/IOC/README.md",
     "Spring/基础/JDBC/RAEDME.md",
+    "Spring/基础/README.md",
     "Spring/基础/Spring注解驱动开发/README.md",
-    "Spring/基础/AOP/README.md",
     "Spring/基础/事务/README.md",
+    "Spring/基础/AOP/README.md",
+    "Spring/基础/IOC/README.md",
     "Spring/源码/Spring源码环境搭建/README.md",
-    "SpringMVC/源码/README.md",
-    "笔记进度/README.md"
+    "Spring/源码/README.md",
+    "Spring/源码/AOP/RAEDME.md",
+    "SpringMVC/源码/README.md"
   ]
 }

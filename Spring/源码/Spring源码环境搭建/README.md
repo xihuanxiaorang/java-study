@@ -2,7 +2,7 @@
 title: Spring源码环境搭建
 tags: spring 源码
 created: 2022-08-30 02:01:56
-modified: 2022-09-18 17:30:08
+modified: 2022-09-18 21:01:22
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -76,7 +76,10 @@ repositories {
 
 选中项目右键新建一个模块，选择 Gradle，点击下一步，模块名填自己喜欢的即可，这里我就填 `spring-aop-study`，最后点击确定即可。  
 ![|600](attachments/Pasted%20image%2020220918162748.png)<br />  
-模块建好之后，在模块的 `build.gradle` 文件中引入以下依赖：
+
+#### 3.1.1. 引入相关依赖
+
+在模块的 `build.gradle` 文件中引入以下依赖：
 
 ```gradle
 dependencies {  
@@ -90,6 +93,8 @@ dependencies {
 }
 ```
 
+#### 3.1.2. 增加 Log4j 配置文件
+
 由于引入了 `Log4j`，所以需要在资源目录 `resources` 下创建一个 `log4j.properties` 配置文件：
 
 ```properties
@@ -101,6 +106,8 @@ log4j.appender.console.Target=System.out
 log4j.appender.console.layout=org.apache.log4j.PatternLayout  
 log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
 ```
+
+#### 3.1.3. 切面类
 
 开始编写测试代码，先定义一个切面类 `LogAspect`：
 
@@ -164,6 +171,8 @@ public class LogAspect {
 }
 ```
 
+#### 3.1.4. 目标对象
+
 创建一个业务类：`HelloService`：
 
 ```java
@@ -189,6 +198,8 @@ public class HelloService {
 }
 ```
 
+#### 3.1.5. 配置类
+
 创建一个配置类 `MainConfig`：
 
 ```java
@@ -198,6 +209,8 @@ public class HelloService {
 public class MainConfig {  
 }
 ```
+
+#### 3.1.6. 测试类
 
 最后创建一个测试类 `SpringAopSourceTests`：
 
@@ -215,8 +228,11 @@ public class SpringAopSourceTests {
 }
 ```
 
-测试结果如下所示：  
+正常通知测试测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220918164857.png)  
+异常通知测试测试结果如下所示：  
+![](attachments/Pasted%20image%2020220918210103.png)  
+测试成功，达到预期效果！🎉 接下来，就可以根据该测试案例去逐步分析 SpringAOP 的整个源码。加油！🎯
 
 ### 3.2. SpringMVC 简单案例
 

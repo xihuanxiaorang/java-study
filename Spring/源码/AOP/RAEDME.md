@@ -2,170 +2,18 @@
 title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-09-17 17:56:09
+modified: 2022-09-18 20:59:10
 number headings: auto, first-level 1, max 6, 1.1.
 ---
 
-# 1. AOP 环境搭建
+利用 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 这篇文章中搭建好的 Spring 源码环境以及编写好的 SpringAOP 测试案例，根据该测试案例去逐步分析 SpringAOP 的整个源码。  
+此处就不再赘述，直接开始今天的主题。
 
-利用这篇文章 [Spring 源码环境搭建](../Spring源码环境搭建/README.md) 搭建好的 Spring 源码环境，首先编写一个 AOP 的测试案例，然后再根据案例去逐步分析 AOP 的整个源码。
-
-## 1.1. 引入相关依赖
-
-```gradle
-dependencies {  
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'  
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'  
-    implementation(project(':spring-context'))  
-    implementation(project(':spring-aspects'))  
-    implementation 'log4j:log4j:1.2.17'  
-    implementation 'org.slf4j:slf4j-log4j12:2.0.0'  
-    implementation 'org.slf4j:slf4j-api:2.0.0'  
-}
-```
-
-## 1.2. 增加 Log4j 配置文件
-
-```properties
-# resources文件夹根目录下  
-### 配置根  
-log4j.rootLogger=debug,console  
-### 日志输出到控制台显示  
-log4j.appender.console=org.apache.log4j.ConsoleAppender  
-log4j.appender.console.Target=System.out  
-log4j.appender.console.layout=org.apache.log4j.PatternLayout  
-log4j.appender.console.layout.ConversionPattern=%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n
-```
-
-## 1.3. 测试案例
-
-### 1.3.1. 目标对象
-
-```java
-@Service  
-public class HelloService {  
-   private static final Logger LOGGER = LoggerFactory.getLogger(HelloService.class);  
-  
-   public HelloService() {  
-      LOGGER.info("...HelloService创建了...");  
-   }  
-  
-   /**  
-    * 切面目标方法  
-    */  
-   public String sayHello(String name) {  
-      LOGGER.info("目标方法执行：你好，{}", name);  
-  
-      // 模拟异常  
-      // Object o1 = new ArrayList<>(10).get(11);  
-  
-      return "你好，返回通知";  
-   }  
-}
-```
-
-### 1.3.2. 切面类
-
-```java
-@Component  
-@Aspect  
-public class LogAspect {  
-   private static final Logger LOGGER = LoggerFactory.getLogger(LogAspect.class);  
-  
-   public LogAspect() {  
-      LOGGER.info("...LogAspect创建了...");  
-   }  
-  
-   @Pointcut("execution(* top.xiaorang.aop.service.HelloService.sayHello(..))")  
-   public void pointcut() {  
-   }  
-   /**  
-    * 前置通知，增强方法/增强器  
-    *  
-    * @param joinPoint 封装了 AOP 中切面方法的信息  
-    */  
-   @Before("pointcut()")  
-   public void logStart(JoinPoint joinPoint) {  
-      String name = joinPoint.getSignature().getName();  
-      LOGGER.info("前置通知logStart==>{}===【args:{}}】", name, Arrays.asList(joinPoint.getArgs()));  
-   }  
-  
-   /**  
-    * 返回通知  
-    *  
-    * @param joinPoint 封装了 AOP 中切面方法的信息  
-    * @param result    目标方法的返回值  
-    */  
-   @AfterReturning(value = "pointcut()", returning = "result")  
-   public void logReturn(JoinPoint joinPoint, Object result) {  
-      String name = joinPoint.getSignature().getName();  
-      LOGGER.info("返回通知logReturn==>{}===【args:{}}】【result：{}】", name, Arrays.asList(joinPoint.getArgs()), result);  
-   }  
-  
-   /**  
-    * 后置通知  
-    *  
-    * @param joinPoint 封装了 AOP 中切面方法的信息  
-    */  
-   @After("pointcut()")  
-   public void logEnd(JoinPoint joinPoint) {  
-      String name = joinPoint.getSignature().getName();  
-      LOGGER.info("后置通知logEnd==>{}===【args:{}】", name, Arrays.asList(joinPoint.getArgs()));  
-   }  
-  
-   /**  
-    * 异常通知  
-    *  
-    * @param joinPoint 封装了 AOP 中切面方法的信息  
-    * @param e         异常  
-    */  
-   @AfterThrowing(value = "pointcut()", throwing = "e")  
-   public void logError(JoinPoint joinPoint, Exception e) {  
-      String name = joinPoint.getSignature().getName();  
-      LOGGER.info("异常通知logError==>{}===【args:{}】【exception: {}】", name, Arrays.asList(joinPoint.getArgs()), e.getMessage());  
-   }  
-}
-```
-
-### 1.3.3. 配置类
-
-```java
-@Configuration  
-@EnableAspectJAutoProxy  
-@ComponentScan({"top.xiaorang.aop"})  
-public class MainConfig {  
-}
-```
-
-### 1.3.4. 测试类
-
-```java
-public class SpringAopSourceTests {  
-   private static final Logger LOGGER = LoggerFactory.getLogger(SpringAopSourceTests.class);  
-  
-   @Test  
-   public void test() {  
-      LOGGER.info("======================华丽的分割线=========================");  
-      ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MainConfig.class);  
-      HelloService helloService = applicationContext.getBean(HelloService.class);  
-      helloService.sayHello("小让");  
-      LOGGER.info("======================华丽的分割线=========================");  
-  
-   }  
-}
-```
-
-正常通知测试测试结果如下所示：  
-![](attachments/Pasted%20image%2020220831155044.png)  
-异常通知测试测试结果如下所示：  
-![](attachments/Pasted%20image%2020220831154953.png)  
-测试成功，达到预期效果！🎉 接下来，就根据该测试案例来逐步分析 AOP 的整个源码。加油！🎯
-
-# 2. AOP 创建流程
+# 1. AOP 代理对象创建流程
 
 ![AOP的创建流程](attachments/AOP的创建流程.jpg)
 
-## 2.1. 开启 AOP
+## 1.1. 开启 AOP
 
 在 [Spring-AOP 基础](../../基础/AOP/README.md) 一文中提到：使用注解配置 Spring AOP 总体分为两步：第一步是编写一个配置类，使用 `@ComponentScan` 注解激活自动扫描组件功能，同时使用 `@EnableAspectJAutoProxy` 激活自动代理功能；第二步是为切面类标注 `@Aspect` 注解。  
 其中，最为关键的一个注解为 **`@EnableAspectJAutoProxy` 注解**，==为什么使用该注解就开启了 Spring AOP 的功能？==咱们就从这个问题着手开始分析。先让咱们来看下 `@EnableAspectJAutoProxy` 注解的源码。
@@ -211,7 +59,7 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 ![AnnotationAwareAspectJAutoProxyCreator.drawio](attachments/AnnotationAwareAspectJAutoProxyCreator.drawio.svg)  
 从上面 `AnnotationAwareAspectJAutoProxyCreator` 的类结构关系图可以看出：`AnnotationAwareAspectJAutoProxyCreator` 的父类 `AbstractAutoProxyCreator`，实现了 `SmartInstantiationAwareBeanPostProcessor` 接口，而 `SmartInstantiationAwareBeanPostProcessor` 接口继承自 `InstantiationAwareBeanPostProcessor` 接口，而 `InstantiationAwareBeanPostProcessor` 接口又继承自 `BeanPostProcessor` 接口。  也就是说 **`AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 后置处理器**。
 
-### 2.1.1. BeanPostProcessor 接口
+### 1.1.1. BeanPostProcessor 接口
 
 ```java
 public interface BeanPostProcessor {
@@ -230,7 +78,7 @@ public interface BeanPostProcessor {
 **`BeanPostProcessor` 后置处理器的调用发生在容器完成 bean 实例对象的创建和属性的依赖注入之后**。其中的 `Before` 方法在 bean 执行初始化方法（如 `InitializingBean` 的 `afterPropertiesSet()` 或自定义 init 方法）之前调用，而 `After` 方法在 bean 执行初始化方法之后调用，两个方法的默认实现都是按原样返回给定的 bean。  
 💡需要注意的是：如果方法的返回值为 null ，则不会再调用后续的 BeanPostProcessors。
 
-### 2.1.2. SmartInstantiationAwareBeanPostProcessor 接口
+### 1.1.2. SmartInstantiationAwareBeanPostProcessor 接口
 
 `SmartInstantiationAwareBeanPostProcessor` 接口对 `BeanPostProcessor` 接口进行了扩展，增加了一个重要的方法：
 
@@ -245,7 +93,7 @@ public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
 
 看方法名字就知道，该 **`postProcessBeforeInstantiation()` 方法是在 bean 被实例化之前调用**。返回的 bean 对象可能是要使用的代理对象而不是目标 bean，从而有效地抑制了目标 bean 的默认实例化。如果这个方法返回了一个非空的对象，那么 bean 的创建过程就会短路，也就是不再执行后面的流程。  
 
-## 2.2. 注册后置处理器
+## 1.2. 注册后置处理器
 
 在测试代码中，`new AnnotationConfigApplicationContext(MainConfig.class);` 用于注册配置类的定义信息和刷新容器，刷新容器，即 `refresh()` 方法是整个 Spring 源码最为核心的一个点，算是整个 Spring 的一个入口。
 
@@ -416,13 +264,13 @@ public static void registerBeanPostProcessors(
 ![](attachments/Pasted%20image%2020220831041032.png)  
 至此，`AnnotationAwareAspectJAutoProxyCreator` 后置处理器就已经被注册到容器当中，后面如果要用到该后置处理器，则直接从容器中拿即可。
 
-## 2.3. 创建增强器
+## 1.3. 创建增强器
 
 在 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器的父类 `AbstractAutoProxyCreator` 中只重写了其中的两个方法 `postProcessBeforeInstantiation()` 和 `postProcessAfterInitialization()`。  
 ![](attachments/Pasted%20image%2020220830210920.png)  
 那就先来看下 `postProcessBeforeInstantiation()` 方法。
 
-### 2.3.1. postProcessBeforeInstantiation() 方法
+### 1.3.1. postProcessBeforeInstantiation() 方法
 
 在 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法打一个断点，看下整个方法的调用栈：  
 ![](attachments/Pasted%20image%2020220830164939.png)  
@@ -543,7 +391,7 @@ public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName
 }
 ```
 
-#### 2.3.1.1. 判断是不是 AOP 基础类
+#### 1.3.1.1. 判断是不是 AOP 基础类
 
 调用的是子类 `AnnotationAwareAspectJAutoProxyCreator` 中的 `isInfrastructureClass()` 方法：该方法用来寻找哪些是切面类。
 
@@ -577,7 +425,7 @@ protected boolean isInfrastructureClass(Class<?> beanClass) {
 }
 ```
 
-#### 2.3.1.2. 是否应该跳过
+#### 1.3.1.2. 是否应该跳过
 
 调用的是子类 `AnnotationAwareAspectJAutoProxyCreator` 中的 `shouldSkip()` 方法：
 
@@ -599,7 +447,7 @@ protected boolean shouldSkip(Class<?> beanClass, String beanName) {
 }
 ```
 
-#### 2.3.1.3. 获取候选的增强器
+#### 1.3.1.3. 获取候选的增强器
 
 调用的是子类 `AnnotationAwareAspectJAutoProxyCreator` 中的 `findCandidateAdvisors()` 方法：
 
@@ -629,7 +477,7 @@ protected List<Advisor> findCandidateAdvisors() {
 
 本案例使用的基于 `@Aspect` 注解的方式来配置切面类，所以调用 `buildAspectJAdvisors()` 方法来构建所有的增强器。
 
-#### 2.3.1.4. 构建所有的增强器
+#### 1.3.1.4. 构建所有的增强器
 
 `buildAspectJAdvisors()` 方法：从容器中获取标注 `@Aspect` 注解的 bean，然后为切面类中的每个通知方法生成一个增强器。
 
@@ -729,7 +577,7 @@ public List<Advisor> buildAspectJAdvisors() {
 }
 ```
 
-##### 2.3.1.4.1. 获取某个切面类中所有的增强器
+##### 1.3.1.4.1. 获取某个切面类中所有的增强器
 
 ```java
 public List<Advisor> getAdvisors(MetadataAwareAspectInstanceFactory aspectInstanceFactory) {
@@ -766,7 +614,7 @@ public List<Advisor> getAdvisors(MetadataAwareAspectInstanceFactory aspectInstan
 }
 ```
 
-##### 2.3.1.4.2. 通知方法转换成增强器
+##### 1.3.1.4.2. 通知方法转换成增强器
 
 ```java
 public Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInstanceFactory aspectInstanceFactory,
@@ -789,7 +637,7 @@ public Advisor getAdvisor(Method candidateAdviceMethod, MetadataAwareAspectInsta
 }
 ```
 
-##### 2.3.1.4.3. 获取切入点表达式
+##### 1.3.1.4.3. 获取切入点表达式
 
 ```java
 private AspectJExpressionPointcut getPointcut(Method candidateAdviceMethod, Class<?> candidateAspectClass) {
@@ -814,7 +662,7 @@ private AspectJExpressionPointcut getPointcut(Method candidateAdviceMethod, Clas
 }
 ```
 
-## 2.4. 创建代理对象
+## 1.4. 创建代理对象
 
 在 `AbstractAutoProxyCreator` 中的 `postProcessAfterInitialization()` 方法打一个断点，看下整个方法的调用栈：  
 ![](attachments/Pasted%20image%2020220831163633.png)  
@@ -882,7 +730,7 @@ protected Object wrapIfNecessary(Object bean, String beanName, Object cacheKey) 
 }
 ```
 
-### 2.4.1. 获取所有符合条件的增强器
+### 1.4.1. 获取所有符合条件的增强器
 
 ```java
 protected Object[] getAdvicesAndAdvisorsForBean(  
@@ -925,7 +773,7 @@ protected List<Advisor> findEligibleAdvisors(Class<?> beanClass, String beanName
 在方法的最后打一个断点，查看一下当 bean 为 `HelloService` 时获取到符合条件的增强器有哪些？  
 ![](attachments/Pasted%20image%2020220831172217.png)
 
-### 2.4.2. 创建代理对象
+### 1.4.2. 创建代理对象
 
 当存在增强器能切入当前 bean 时，则为当前 bean 创建一个代理对象，在创建代理对象时，会根据当前 bean 是否实现了接口，来区分是使用 JDK 动态代理还是 Cglib 动态代理，代理对象创建完成后保存到容器中。
 
@@ -1004,7 +852,7 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 最后，在 `wrapIfNecessary()` 方法的 `createProxy()` 后打一个断点，查看一下当前 bean 的代理对象：  
 ![](attachments/Pasted%20image%2020220831182609.png)  
 
-# 3. AOP 目标方法执行流程
+# 2. AOP 目标方法执行流程
 
 目标方法的执行，容器中保存了组件的代理对象「cglib 增强后的对象」，这个对象里面保存了详细信息（比如增强器、目标对象等）
 
@@ -1075,7 +923,7 @@ public Object intercept(Object proxy, Method method, Object[] args, MethodProxy 
 }
 ```
 
-## 3.1. 获取拦截器链
+## 2.1. 获取拦截器链
 
 ```java
 public List<Object> getInterceptorsAndDynamicInterceptionAdvice(Method method, @Nullable Class<?> targetClass) {  
@@ -1175,7 +1023,7 @@ public List<Object> getInterceptorsAndDynamicInterceptionAdvice(
 在 `intercept()` 方法中打一个断点，查看一下构建出来的拦截器链：  
 ![](attachments/Pasted%20image%2020220831222334.png)
 
-## 3.2. 执行拦截器链
+## 2.2. 执行拦截器链
 
 经过上一步获取拦截器链，如果没有拦截器链的话，则直接执行目标方法，如果有拦截器链的话，则把要执行的目标对象、目标方法、拦截器链等信息传入创建的 `CglibMethodInvocation` 实例对象中，并调用其 `proceed()` 方法开始执行拦截器链。
 
@@ -1245,7 +1093,7 @@ public Object proceed() throws Throwable {
 }
 ```
 
-# 4. AOP 总结
+# 3. AOP 总结
 
 1. `@EnableAspectJAutoProxy` 开启基于注解的 AOP 功能
 2. `@EnableAspectJAutoProxy` 会给容器中注册一个组件 `AnnotationAwareAspectJAutoProxyCreator`，是一个后置处理器
