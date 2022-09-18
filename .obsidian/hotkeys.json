@@ -46,5 +46,20 @@
     }
   ],
   "obsidian-underline:toggle-link-heading": [],
-  "obsidian-underline:toggle-link-block": []
+  "obsidian-underline:toggle-link-block": [],
+  "obsidian-editing-toolbar:header1-text": [],
+  "obsidian-editing-toolbar:header2-text": [],
+  "obsidian-editing-toolbar:header3-text": [],
+  "obsidian-editing-toolbar:header4-text": [],
+  "obsidian-editing-toolbar:header5-text": [],
+  "obsidian-editing-toolbar:header6-text": [],
+  "obsidian-editing-toolbar:header0-text": [],
+  "obsidian-editing-toolbar:hide-show-menu": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "+"
+    }
+  ]
 }

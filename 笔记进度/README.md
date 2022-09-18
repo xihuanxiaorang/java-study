@@ -11,8 +11,9 @@ kanban-plugin: basic
 ## TODO
 
 - [ ] Spring-IOC 源码
-- [ ] Spring-BeanDefinitionReader
-- [ ] Spring-ConfigurationClassPostProcessor
+- [ ] Spring-BeanDefinition注册
+- [ ] Spring-getBean的整体流程
+- [ ] Spring-ConfigurationClassPostProcessor包扫描
 - [ ] [Spring事务](../Spring/基础/事务/README.md)
 - [ ] [Spring-MVC源码分析](../SpringMVC/源码/README.md)
 - [ ] [ConcurrentHashMap](JDK/源码/集合/ConcurrentHashMap.md)

@@ -2,7 +2,7 @@
 title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-09-15 05:49:00
+modified: 2022-09-17 17:56:09
 number headings: auto, first-level 1, max 6, 1.1.
 ---
 
@@ -818,12 +818,10 @@ private AspectJExpressionPointcut getPointcut(Method candidateAdviceMethod, Clas
 
 在 `AbstractAutoProxyCreator` 中的 `postProcessAfterInitialization()` 方法打一个断点，看下整个方法的调用栈：  
 ![](attachments/Pasted%20image%2020220831163633.png)  
-从整个方法的调用栈可以看出：在 bean 实例化以及属性赋值之后的初始化阶段，执行完自定义的初始化方法之后，`AnnotationAwareAspectJAutoProxyCreator` 后置处理器会再次介入，执行 `postProcessAfterInitialization()` 方法。  
-现在来看下 `postProcessAfterInitialization()` 方法在底层到底干了什么？  
+从整个方法的调用栈可以看出：在当前 bean 实例化以及属性赋值之后的初始化阶段，执行完自定义的初始化方法之后，`AnnotationAwareAspectJAutoProxyCreator` 后置处理器会再次介入，执行 `postProcessAfterInitialization()` 方法。
 
-```ad-important
-🎨结论先行：在 bean 的初始化之后，`AnnotationAwareAspectJAutoProxyCreator` 会再次介入，执行 `postProcessAfterInitialization()` 方法，判断是否有切面的通知方法切入当前 bean 对象，即当前 bean 对象是切面的目标类，则会为当前 bean 创建动态代理，会根据 bean 是否实现了接口，来区分是使用 JDK 动态代理还是 Cglib 动态代理，代理对象创建完成保存进 ioc 容器。
-```
+Q：那么现在来看下 `postProcessAfterInitialization()` 方法在底层到底干了什么？  
+A：🎨结论先行：在 bean 的初始化之后，`AnnotationAwareAspectJAutoProxyCreator` 会再次介入，执行 `postProcessAfterInitialization()` 方法，判断是否有切面的通知方法切入当前 bean 对象，即当前 bean 对象是切面的目标类，如果是的话则会为当前 bean 创建动态代理，期间会根据 bean 是否实现了接口，来区分是使用 JDK 动态代理还是 Cglib 动态代理，代理对象创建完成之后就会保存到 ioc 容器中。
 
 `AbstractAutoProxyCreator` 中的 `postProcessAfterInitialization()` 方法源码如下所示：
 

@@ -7,9 +7,11 @@
         "id": "08035e86789b7d06",
         "type": "leaf",
         "state": {
-          "type": "kanban",
+          "type": "markdown",
           "state": {
-            "file": "笔记进度/README.md"
+            "file": "Spring/源码/Spring源码环境搭建/README.md",
+            "mode": "source",
+            "source": false
           }
         }
       }
@@ -60,7 +62,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310
+    "width": 310,
+    "collapsed": true
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -76,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "笔记进度/README.md",
+                "file": "Spring/源码/Spring源码环境搭建/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -93,7 +96,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "笔记进度/README.md"
+                "file": "Spring/源码/Spring源码环境搭建/README.md"
               }
             }
           },
@@ -125,15 +128,15 @@
   },
   "active": "08035e86789b7d06",
   "lastOpenFiles": [
-    "SpringMVC/源码/README.md",
-    "SpringMVC/基础/README.md",
-    "Spring/源码/Spring源码环境搭建/README.md",
     "Spring/源码/README.md",
-    "Spring/源码/AOP/RAEDME.md",
-    "数据库编程/JDBC/README.md",
-    "数据库编程/Mybatis/README.md",
-    "README.md",
-    "Springboot/源码/Springboot自动配置原理/README.md",
+    "Spring/基础/README.md",
+    "Spring/基础/IOC/README.md",
+    "Spring/基础/JDBC/RAEDME.md",
+    "Spring/基础/Spring注解驱动开发/README.md",
+    "Spring/基础/AOP/README.md",
+    "Spring/基础/事务/README.md",
+    "Spring/源码/Spring源码环境搭建/README.md",
+    "SpringMVC/源码/README.md",
     "笔记进度/README.md"
   ]
 }

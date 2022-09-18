@@ -2,18 +2,19 @@
 title: Spring注解驱动开发
 tags: spring 注解
 created: 2022-08-27 01:31:25
-modified: 2022-08-29 18:37:00
+modified: 2022-09-17 13:37:46
+number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
-## 楔子
+## 1. 楔子
 
 > 本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-study: 用于spring学习](https://github.com/xihuanxiaorang/spring-study) 仓库中的 `annotation` 模块，可以自行查看。 
 
 面向 Spring 开发已经逐渐从繁琐的 XML 配置文件发展到简单好用的注解驱动模式，尤其是在 Springboot 这样一款快速开发脚手架中，底层大量使用注解完成各种各样的高级功能，所以说非常有必要整理下 Spring 提供的常用注解。便于记忆，将其分为四个部分：**组件注册**、**生命周期**、**属性赋值** 和 **自动装配**。  
 
-## 组件注册
+## 2. 组件注册
 
-### 1、@Configuration&@Bean 注解
+### 2.1. @Configuration&@Bean 注解
 
 先来回顾一下使用 XML 配置文件的方式来创建和管理 bean 对象。  先来创建一个类：
 
@@ -111,7 +112,7 @@ public class SpringAnnotationConfigurationTest {
 从上面的代码可以看出，使用注解驱动方式开发之后，就不再需要 XML 配置文件。只需将配置文件 => 配置类 (`@Configuration`)，`<bean id="" class="" />` 标签 => `@Bean` 注解，容器对象从 `ClassPathXmlApplicationContext` => `AnnotationConfigApplicationContext` 。  
 **结论**：`@Configuration` 注解搭配 `@Bean` 注解可以代替 XML 配置文件完成对象的创建和管理。
 
-#### 细节分析 1：@Configuration 注解
+#### 2.1.1. 细节分析 1：@Configuration 注解
 
 ```java
 @Target(ElementType.TYPE)  
@@ -126,7 +127,7 @@ public @interface Configuration {
 
 表明当前类是 Spring 中的一个配置类，作用是 **代替 Spring 中的核心配置文件 `applicationContext.xml`** 。但其 **本质就是 `@Component` 注解**，所以说被此注解修饰的类，同样会被注册到 Spring 容器中。
 
-#### 细节分析 2：@Bean 注解
+#### 2.1.2. 细节分析 2：@Bean 注解
 
 ```java
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})  
@@ -154,7 +155,7 @@ public @interface Bean {
 **`@Bean` 注解添加在方法上**，**用于给 Spring 容器中注册 bean 实例**。其中，**bean 的类型为方法的返回值类型**，**bean 的 id 默认为方法名**，可以通过注解中的 name 或者 value 属性修改 bean 的 id。  
 💡需要注意的是：**被 `@Bean` 注解标注的方法中的参数都是从 Spring 容器中获取的**！
 
-### 2、@ComponentScan 注解
+### 2.2. @ComponentScan 注解
 
 在实际项目开发中，更多的是使用 Spring 的包扫描功能对项目中的包进行扫描，凡是在指定的包及其子包中标注了 `@Repository`、`@Service`、`@Controller` 和 `@Component` 注解的类都会被扫描到，然后注册到 Spring 容器中。  
 
@@ -306,7 +307,7 @@ public @interface ComponentScan {
 
 着重来分析下 `@ComponentScan` 注解中的 `includeFilters` 和 `excludeFilters` 两个属性。其中， `includeFilters` 属性用于指定包扫描时按照什么过滤规则去注册组件；而 `excludeFilters` 属性用于指定包扫描时按照什么过滤规则去排除组件。
 
-#### 细节分析 1：按照过滤规则注册组件
+#### 2.2.1. 细节分析 1：按照过滤规则注册组件
 
 在 `MainConfig` 配置类标注的 `@ComponentScan` 注解中配置 `includeFilters` 属性：让其只扫描被 `@Controller` 注解标注的类和 `BookService` 类，这样做的话，理论上，`BookRepository` 类不会被注册到 Spring 容器中。  
 配置类：
@@ -346,7 +347,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  发现只有 `BookController` 和 `BookService` 被扫描到 Spring 容器中，相当于间接将 `BookRepository` 被排除在外。  
 ![](attachments/Pasted%20image%2020220828040106.png)
 
-#### 细节分析 2：按照过滤规则排除组件
+#### 2.2.2. 细节分析 2：按照过滤规则排除组件
 
 在 `MainConfig` 配置类标注的 `@ComponentScan` 注解中配置 `excludeFilters` 属性：不扫描被 `@Service` 注解标注的类，这样做的话，理论上，现在就只剩下 `BookController` 类会被注册到 Spring 容器中。  
 
@@ -369,7 +370,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828041001.png)
 
-#### 细节分析 3：自定义过滤规则
+#### 2.2.3. 细节分析 3：自定义过滤规则
 
 组件扫描的过滤规则有 5 种，位于 FilterType 枚举类中。  
 
@@ -381,7 +382,7 @@ public class MainConfig {
 前面四种过滤规则都实现了 `TypeFilter` 接口，并且都有默认的实现类。如果想要自定义过滤规则的话，也需要实现 `TypeFilter` 接口。  
 需求：将标注了自定义注解 `@MyComponent` 的类也扫描到 Spring 容器中。  
 
-##### 1、自定义注解
+##### 2.2.3.1. 自定义注解
 
 ```java
 @Target(ElementType.TYPE)  
@@ -392,7 +393,7 @@ public @interface MyComponent {
 }
 ```
 
-##### 2、标注自定义注解的类
+##### 2.2.3.2. 标注自定义注解的类
 
 ```
 ```java
@@ -401,7 +402,7 @@ public class Man {
 }
 ```
 
-##### 3、自定义过滤规则
+##### 2.2.3.3. 自定义过滤规则
 
 ```java
 public class MyTypeFilter implements TypeFilter {  
@@ -413,7 +414,7 @@ public class MyTypeFilter implements TypeFilter {
 }
 ```
 
-##### 4、修改配置类
+##### 2.2.3.4. 修改配置类
 
 在原有的基础上，`includeFilters` 属性中增加一个自定义的过滤规则。
 
@@ -437,7 +438,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828043207.png)
 
-#### 细节分析 4：重复注解
+#### 2.2.4. 细节分析 4：重复注解
 
 不知道有没有细心的小伙伴注意到 `@ComponentScan` 注解上有一个 `@Repeatable` 注解，`@Repeatable` 注解是在 JDK1.8 出现的，作用是 **可以在一个类上标注重复的注解**。
 
@@ -485,7 +486,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828045537.png)
 
-### 3、@Scope 注解
+### 2.3. @Scope 注解
 
 Spring 容器中的组件 **默认是单例的**，在容器启动的时候就会去实例化并初始化对象，并将其存放到容器当中，之后每次获取组件时，就直接从 Spring 容器中获取，而不用再创建一个新的对象。如果说，从容器中获取组件时就是想获取一个新的实例，那么该如何处理呢？此时就需要用到 **`@Scope` 注解来设置组件的作用域**。`@Scope` 注解相当于配置文件中 `bean` 标签的 `scope` 属性。
 
@@ -525,7 +526,7 @@ public @interface Scope {
 - SCOPE_REQUEST：需要处在 web 环境下才能生效，表示每次请求都会创建一个新的实例对象，但是在同一次请求中只会创建一个实例对象。
 - SCOPE_SESSION：需要处在 web 环境下才能生效，表示在同一个 session 范围内，只会创建一个新的实例对象。
 
-#### 1、单实例 bean 作用域
+#### 2.3.1. 单实例 bean 作用域
 
 配置类：
 
@@ -573,7 +574,7 @@ public class SpringAnnotationConfigurationOfScopeTest {
 结果表明：**容器中的组件默认是单实例的，在容器启动的时候就会去实例化并初始化组件，并将其存放到容器当中，之后每次从容器中获取到的实例对象都是同一个**。  
 💡需要注意的是：单例对象是整个应用共享的，所以需要考虑线程安全问题。
 
-#### 2、多实例 bean 作用域
+#### 2.3.2. 多实例 bean 作用域
 
 修改原有的配置类，在 `@Bean` 注解标注的 `person()` 上加上 `@Scope` 注解，并且 `value` 属性值为 `prototype`。
 
@@ -604,7 +605,7 @@ public class MainConfig {
 ![](attachments/Pasted%20image%2020220828054447.png)  
 结果表明：**容器启动时并不会实例化对象，而是在每次从容器获取对象时都去创建一个新的实例对象返回**。
 
-### 4、@Lazy 注解
+### 2.4. @Lazy 注解
 
 Spring 容器启动时，默认会将单实例 bean 进行实例化，并加载到容器当中。如果需要将某个单实例 bean 进行延迟加载，那么该如何处理呢？此时，就需要用到 `@Lazy` 注解。  
 何为懒加载？懒加载也称延时加载，**仅针对单实例 bean 生效**。让单实例 bean 在 Spring 容器启动时，先不进行实例化，而是等到第一次获取该 bean 实例时才进行实例化和初始化，然后加载到 Spring 容器中并返回该单实例 bean。  
@@ -637,7 +638,7 @@ public class MainConfig {
 测试代码不变，运行 `SpringAnnotationConfigurationOfScopeTest` 测试类中的 `test()` 方法，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828151214.png)
 
-### 5、@Conditional 注解
+### 2.5. @Conditional 注解
 
 Spring 支持根据条件向容器中注册 bean，满足条件的 bean 才会被注册到容器中。那么在 Spring 中是如何实现根据条件向容器中注册 bean 的呢？此时，就需要用到 `@Conditional` 注解。
 
@@ -738,7 +739,7 @@ public class MainConfig {
 ![](attachments/Pasted%20image%2020220828155145.png)  
 只向容器中注册 linus 的组件，而没有将 bill 组件注册到容器中。
 
-### 6、@Import 注解
+### 2.6. @Import 注解
 
 在项目开发中，自己写的类可以通过包扫描 (`@ComponentScan`)+ 组件标注注解 (`@Controller`、`@Service`、`@Repository`、`@Component`) 的形式将 bean 对象注册到 Spring 容器当中，但是这种方式比较有局限性，只能是自己写的类，才能标注以上的注解。如果不是自己写的类，如引入的一些第三方类库中的类，那么如何将这样的类注册到 Spring 容器中呢？前面已经提到过一种解决方法：`@Configuration` + `@Bean`，现在介绍另外一种方法：使用 `@Import` 注解快速向 Spring 容器中导入一个组件。
 
@@ -757,7 +758,7 @@ public @interface Import {
 
 `@Import` 注解只能作用在类上，通常都是和配置类一起使用。从源码中可以看出 `@Import` 注解中的 `value` 属性可以使用标注 `@Configuration` 注解的类、实现 `ImportSelector` 接口的类、实现 `ImportBeanDefinitionRegistrar` 接口的类或者一个简单的类都可以。
 
-#### 1、简单的类
+#### 2.6.1. 简单的类
 
 ```java
 public class Color {  
@@ -807,7 +808,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828171620.png)
 
-#### 2、ImportSelector 接口
+#### 2.6.2. ImportSelector 接口
 
 `ImportSelector` 接口是 Spring 中导入外部配置的核心接口。现在来看看 `ImportSelector` 接口的源码：
 
@@ -905,7 +906,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828173940.png)
 
-#### 3、ImportBeanDefinitionRegistrar 接口
+#### 2.6.3. ImportBeanDefinitionRegistrar 接口
 
 ```java
 public interface ImportBeanDefinitionRegistrar {
@@ -1016,7 +1017,7 @@ public class MainConfig {
 运行 `SpringAnnotationConfigurationTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828175709.png)
 
-### 7、FactoryBean
+### 2.7. FactoryBean
 
 `FactoryBean` 接口在 Spring 框架中占用非常重要的地位，Spring 自身就提供了大量的 `FactoryBean` 接口实现。它们隐藏了实例化一些复杂对象时的具体细节，给上层应用带来了便利。 在 Spring 中最为典型的一个 `FactoryBean` 实现就是 `ProxyFactoryBean`， 用来创建 AOP 的代理对象 ；用过 `Mybatis` 的肯定也知道另一个 `FctoryBean` 接口实现 `SqlSessionFactoryBean`，用来创建 `SqlSessionFactory` 对象。从 Spring3.0 开始，FactoryBean 开始支持泛型，即接口声明改为 `FactoryBean<T>` 的形式。
 
@@ -1124,7 +1125,7 @@ public class SpringAnnotationConfigurationOfFactoryBeanTest {
 测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220828220708.png)
 
-## 生命周期
+## 3. 生命周期
 
 ```ad-important
 1. BeanNameAware 的 setBeanName  
@@ -1149,7 +1150,7 @@ public class SpringAnnotationConfigurationOfFactoryBeanTest {
 3. **自定义 destroy-method** 定义
 ```
 
-### 1、init-method & destroy-method
+### 3.1. init-method & destroy-method
 
 在使用 XML 配置文件注册 bean 时，可以通过 `bean` 标签中的 `init-method` 和 `destory-method` 属性分别指定 bean 的初始化和销毁方法。如下所示：  
 修改 `applicationContext.xml` 配置文件注释掉包扫描配置，去掉 `bean` 标签中的 `scope="prototype"` 属性。
@@ -1244,7 +1245,7 @@ public class SpringAnnotationConfigurationOfLifeCycleTest {
 一个典型的使用场景就是对于数据源的管理。如，在配置数据源时，在初始化时，可以对数据源的属性进行赋值操作；在销毁的时候，需要对数据源的连接信息进行关闭和清理。此时，就可以在自定义的初始化和销毁方法中来做这些事情了。  
 💡需要注意的是：多实例的 bean 在容器关闭的时候是不进行销毁的，也就是说，Spring 容器创建出多实例对象后，至于什么时候销毁就是自己的事情，Spring 不再管理这些多实例 bean 对象。
 
-### 2、InitializingBean & DisposableBean
+### 3.2. InitializingBean & DisposableBean
 
 Spring 容器在 bean 实例化以及属性赋值之后可以执行 `InitializingBean` 接口中的 `afterPropertiesSet()` 方法。
 
@@ -1303,7 +1304,7 @@ public class MainConfigOfLifeCycle {
 运行 `SpringAnnotationConfigurationOfLifeCycleTest` 测试类中的测试方法 `test()`，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220829011208.png)
 
-## 属性赋值
+## 4. 属性赋值
 
 在使用 XML 配置文件注册 bean 时，可以通过 `bean` 标签中嵌套 `property` 标签给 bean 中的属性赋值。如下所示：
 
@@ -1437,9 +1438,9 @@ public class MainConfigOfPropertyValue {
 
 💡需要注意的是，**`#{}` 主要用于执行 SPEL 表达式**，**`${}` 主要用于获取配置文件的值**。
 
-## 自动装配
+## 5. 自动装配
 
-### 1、@Autowired 注解
+### 5.1. @Autowired 注解
 
 在 XML 配置文件中给一个 bean 中的属性注入另一个 bean 时，需要用到 `property` 标签中的 `ref` 属性。如下所示：
 
@@ -1681,7 +1682,7 @@ public class OrderController {
 ![](attachments/Pasted%20image%2020220829045411.png)  
 发现报错，意思是需要注入唯一的一个 bean，但是却发现 2 个匹配的，此时怎么办呢？**`@Autowired` 注解默认是按照类型进行装配的，当找到多个相同类型的组件时，将继续按照属性名称去匹配**。
 
-#### 1、修改属性名
+#### 5.1.1. 修改属性名
 
 第一种解决方案就是修改属性名，使其与其中一个组件的名称相同。将 `orderService` 属性名改成 `orderServiceImpl`，如下所示：
 
@@ -1728,7 +1729,7 @@ public class SpringAnnotationConfigurationOfAutowiredTest {
 测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220829052537.png)
 
-#### 2、@Qualifier 注解
+#### 5.1.2. @Qualifier 注解
 
 通常情况下，`@Qualifier` 注解必须搭配 `@Autowired` 注解一起使用，同样能解决 `@Autowired` 注解匹配到多个类型相同的组件时而报错的问题，可以通过 `Qualifier` 注解明确需要装配哪个组件。
 
@@ -1760,7 +1761,7 @@ public class OrderController {
 ![](attachments/Pasted%20image%2020220829052736.png)  
 💡需要注意的是：当属性名与 `@Qualifier` 注解一起作用时，以 `@Qualifier` 注解为主，如果找不到 `@Qualifier` 注解标注的组件，则直接报错。
 
-#### 3、@Primary 注解
+#### 5.1.3. @Primary 注解
 
 当在某个接口的实现类组件上标注 `@Primary` 注解时，如果该接口存在多个实现类组件，则会优先注入标注了 `@Primary` 注解的实现类组件。  
 修改 `OrderController`，去掉 `orderService` 属性上标注的 `@Qualifier` 注解：
@@ -1814,7 +1815,7 @@ public class OrderServiceImpl2 implements OrderService {
 `@Autowried` 注解可以标注在类，方法，属性，参数位置上，但是**阿里巴巴开发手册**建议我们**标注在构造器上**，**如果标注在构造器上，那么构造器中的参数必须是IOC容器中的bean实例**，而且**如果只有一个有参构造器，那么构造器上的 @Autowired 注解可以省略**
 ```
 
-### 2、@Resourece 注解
+### 5.2. @Resourece 注解
 
 ```java
 @Target({TYPE, FIELD, METHOD})
@@ -1912,13 +1913,13 @@ public class OrderController {
 运行测试类 `SpringAnnotationConfigurationOfAutowiredTest` 中的 `test()` 方法，测试结果如下所示：  
 ![](attachments/Pasted%20image%2020220829063708.png)
 
-### 3、@Profile 注解
+### 5.3. @Profile 注解
 
-#### 写在前面
+#### 5.3.1. 写在前面
 
 在实际项目开发中，往往会将项目环境分为开发环境、测试环境和生产环境等等。在以前的开发过程中，需要手动修改配置文件的形式，将项目的配置修改成测试环境，然后才发布到测试环境中进行测试，测试通过后，再将项目的配置修改成生成环境，然后正式发布到生产环境中。这样手动修改配置文件的方式，不仅增加了开发和运维的工作量，而且总是手动修改各项配置文件很容易出问题。那么有没有办法解决这种吃力不讨好的方式呢？有，使用 `@Profile` 注解即可。
 
-#### 概述
+#### 5.3.2. 概述
 
 `@Profile` 注解是 Spring 提供的可以根据当前环境动态激活和切换一系列组件的功能。这个功能主要针对在不同的环境使用不同的变量，如，在开发环境、测试环境和生产环境下需要使用不同的数据源，在不改变代码的情况下，可以使用这个注解来动态地切换要连接地数据库。
 
@@ -1940,7 +1941,7 @@ public @interface Profile {
 从源码可以看出，`@Profile` 注解可以标注在类和方法上。  
 💡需要注意的是：当 `@Profile` 注解标注在配置类上时，只有在指定的环境下，整个配置类中的所有配置才会生效；当 bean 上标注 `@Profile` 注解，也只有在指定环境下才会被注册到 Spring 容器中，如果没有标注 `@Profile` 注解的话，那么这个 bean 在任何环境下都会被注册到 Spring 容器中，前提是配置类符合条件。
 
-#### 案例
+#### 5.3.3. 案例
 
 以一个简单的例子来演示一下，假如有三个人，分别是张三、李四、王五，在 dev 环境下存在张三，在 test 环境下存在李四，生产环境下存在王五，指定哪个环境，谁就被注册到容器中。  
 创建一个新的配置类 `MainConfigOfProfile`：
