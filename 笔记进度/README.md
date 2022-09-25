@@ -12,6 +12,8 @@ kanban-plugin: basic
 
 - [ ] Spring-IOC 源码
 - [ ] Spring-BeanDefinition注册
+- [ ] Spring-ResourceLoader
+- [ ] Spring-Enviroment配置文件信息
 - [ ] Spring-getBean的整体流程
 - [ ] Spring-ConfigurationClassPostProcessor包扫描
 - [ ] [Spring事务](../Spring/基础/事务/README.md)

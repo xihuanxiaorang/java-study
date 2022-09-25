@@ -2,7 +2,7 @@
 title: JDBC
 tags: JDBC
 created: 2022-08-24 18:12:20
-modified: 2022-09-14 18:13:12
+modified: 2022-09-25 12:19:56
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -743,4 +743,4 @@ public void testTransferWithTransaction() throws SQLException {
 
 ## 5. 数据库连接池
 
-待续。。。
+<span style="background:#d3f8b6">TODO</span>。。。

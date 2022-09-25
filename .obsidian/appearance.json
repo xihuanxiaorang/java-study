@@ -2,8 +2,8 @@
   "cssTheme": "Minimal",
   "theme": "system",
   "interfaceFontFamily": "霞鹜文楷,仓耳今楷03",
-  "baseFontSize": 16,
-  "baseFontSizeAction": true,
+  "baseFontSize": 15,
+  "baseFontSizeAction": false,
   "monospaceFontFamily": "JetBrains Mono",
   "textFontFamily": "霞鹜文楷,仓耳今楷03",
   "enabledCssSnippets": [
