@@ -1,8 +1,8 @@
 ---
-title: Spring-BeanDefinition 加载流程分析
+title: Spring-BeanDefinition加载流程分析
 tags: spring 源码
 created: 2022-09-24 01:47:36
-modified: 2022-09-25 18:20:46
+modified: 2022-09-30 16:07:17
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -159,7 +159,29 @@ public ClassPathXmlApplicationContext(
 ```
 
 可以看到在其重载的构造方法中，首先调用 `setConfigLocations(configLocations)` 方法将传入进来的 Spring 配置文件路径保存起来，用于后面加载 bean 定义信息时知道从哪去加载 bean 定义信息。然后有一个非常重要的 **容器刷新方法 `refresh()`**，该方法位于父类 **`AbstractApplicationContext`** 中，分析 Spring 源码就没有不讲该方法的，该 `refresh()` 方法是重中之重，一定要记住（自己多刷几遍自然就记住了）！ 毫不夸张的说，**该 `refresh()` 方法是整个 Spring 源码分析的入口**。  
-关于容器刷新 `refresh()` 方法的十二大步，小伙伴们应该都有所耳闻。以下源码是 `refresh()` 方法中有关今天主题的部分源码，算是 **第二大步：创建 bean 工厂实例以及加载 bean 定义信息到 bean 工厂**。其余的在后续源码分析的文章中会逐个分析。
+关于容器刷新 `refresh()` 方法的十二大步，小伙伴们应该都有所耳闻。
+
+### 2.1. Spring 容器初始化流程
+
+> Spring 容器初始化核心方法 AbstractApplicationContext#refresh
+
+- `├─` refresh Spring 初始化核心流程入口
+- `│ ├─` prepareRefresh ① 准备此上下文用于刷新，设置启动时间和 active 标志，初始化属性
+- `│ ├─` **obtainFreshBeanFactory** <span style="background:#affad1">② 本节主要跟踪的源码流程</span>
+- `│ ├─` prepareBeanFactory ③ 设置 beanFactory 的基本属性
+- `│ ├─` postProcessBeanFactory ④ 子类处理自定义的 BeanFactoryPostProcess
+- `│ ├─` invokeBeanFactoryPostProcessors ⑤ 调用所有的 BeanFactoryPostProcessor
+- `│ ├─` registerBeanPostProcessors ⑥ 注册，把实现了 BeanPostProcessor 接口的类实例化，加到 BeanFactory
+- `│ ├─` initMessageSource ⑦ 初始化上下文中的资源文件，如国际化文件的处理等
+- `│ ├─` initApplicationEventMulticaster ⑧ 初始化上下文的事件传播器
+- `│ ├─` onRefresh ⑨ 给子类扩展初始化其他 Bean，springboot 中用来做内嵌 tomcat 启动
+- `│ ├─` registerListeners ⑩ 在所有 bean 中查找监听 bean，然后注册到广播器中
+- `│ ├─` finishBeanFactoryInitialization ⑪ 初始化所有的单例 Bean、ioc、BeanPostProcessor 的执行、Aop 入口
+- `│ └─` finishRefresh ⑫ 完成刷新过程，发布相应的事件
+
+以下源码流程是基于 `obtainFreshBeanFactory()` 方法内的执行流程，主要包括：创建填充 `BeanFactory`、xml 标签的解析并填充到 `BeanDefinition`、并注册到 Spring IOC 容器。算是 **Spring 容器刷新十二大步中的第二大步：创建 bean 工厂实例以及加载 bean 定义信息到 bean 工厂**。其余的在后续源码分析的文章中会逐个分析。  
+
+### 2.2. 创建 BeanFactory 实例
 
 ```java
 public void refresh() throws BeansException, IllegalStateException {
@@ -179,7 +201,13 @@ protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
 }
 ```
 
-由于咱们使用的是应用上下文是 `ClassPathXmlApplicationContext` ，F4 查看 `ApplicationContext` 的继承结构体系可以发现 `ClassPathXmlApplicationContext` 一路继承自 `AbstractXmlApplicationContext` -> `AbstractRefreshableConfigApplicationContext` ->  `AbstractRefreshableApplicationContext` -> `AbstractApplicationContext`。在 `ClassPathXmlApplicationContext` 的父类， `AbstractApplicationContext` 的子类 `AbstractRefreshableApplicationContext` 中实现了该方法。  
+由于咱们使用的是应用上下文是 `ClassPathXmlApplicationContext` ，F4 查看 `ApplicationContext` 的继承结构体系可以发现  
+`|- ` `AbstractApplicationContext`  
+	`|-` `AbstractRefreshableApplicationContext`  
+		`|-` `AbstractRefreshableConfigApplicationContext`  
+			`|-` `AbstractXmlApplicationContext`  
+				`|-` `ClassPathXmlApplicationContext`  
+在 `ClassPathXmlApplicationContext` 的父类， `AbstractApplicationContext` 的子类 `AbstractRefreshableApplicationContext` 中实现了该方法。  
 ![ApplicationContext继承结构体系](attachments/ApplicationContext.svg)
 
 ```java
@@ -215,8 +243,6 @@ protected final void refreshBeanFactory() throws BeansException {
 
 该方法中有两个最重要的方法，一个是 `createBeanFactory()` 方法，创建 `BeanFactory` 的实例对象；另外一个方法就是 `loadBeanDefinitions(beanFactory)`，解析并加载 XML 配置中配置的所有 bean 定义信息。
 
-### 2.1. 创建 BeanFactory
-
 ```java
 protected DefaultListableBeanFactory createBeanFactory() {  
    return new DefaultListableBeanFactory(getInternalParentBeanFactory());  
@@ -233,7 +259,7 @@ protected DefaultListableBeanFactory createBeanFactory() {
 
 >首先需要知道的是，**如果一个类实现了某个接口，那么就具备了该接口的能力；如果一个接口继承自另一个接口，那么该接口就会同时具备另一个接口所具备的能力。** 
 
-#### 2.1.1. Bean 定义信息注册中心 - BeanDefinitionRegistry
+#### 2.2.1. BeanDefinitionRegistry
 
 别被上面 `BeanFactory` 的继承结构体系图给弄晕，咱们只关注与今天主题相关的，至于 `BeanFactory` 还具备什么能力，就留在以后的文章中分析。
 
@@ -304,9 +330,9 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
 观察上面源码不难发现，在 `DefaultListableBeanFactory` 中定义了两个集合，其中 **`beanDefinitionMap` 集合用来保存注册的 bean 定义信息，Key 是 bean 的名称，Value 是 `BeanDefinition` 的实例对象**；另外一个 List 集合专门用来保存注册的 bean 定义信息的名称。至于 `BeanDefinitionRegistry` 接口中定义的方法在 `DefaultListableBeanFactory` 中实现起来也非常简单，就是操作这两个集合。一个 bean 定义信息的注册中心就是这样实现的，是不是很简单！  
 
-#### 2.1.2. Bean 定义信息 - BeanDefinition
+#### 2.2.2. BeanDefinition
 
-##### 2.1.2.1. 简介
+##### 2.2.2.1. 简介
 
 有小伙伴可能会对 `BeanDefinition` 感到疑惑，这是什么东东？有什么用呢？根据它的名字不难猜出 **bean 的定义信息**。事实上就是这样，咱们在 XML 配置文件中的 bean 标签中配置的各种属性，这些属性不仅仅是和 Bean 对象相关，还和 Bean 的生命周期、销毁、初始化等等各种操作有关，咱们定义的关于 Bean 的生命周期、销毁、初始化等操作总得有一个对象来承载，那么这个对象就是 BeanDefinition。
 
@@ -375,7 +401,7 @@ public interface BeanDefinition extends AttributeAccessor, BeanMetadataElement {
 }
 ```
 
-BeanDefinition 中的方法虽然多，但是结合我们平时在 XML 中的配置，这些方法其实都很好理解，列举一些常用的方法：
+BeanDefinition 中的方法虽然多，但是结合我们平时在 XML 中的配置，这些方法其实都很好理解，列举一些常用的方法：<span style="background:rgba(240, 200, 0, 0.2)">TODO</span> 完善一下
 
 1. 首先一开始定义了两个变量用来描述 Bean 是不是单例的，后面的 setScope/getScope 方法可以用来修改/获取 scope 属性。
 2. setBeanClassName/getBeanClassName 这个就是配置 **Bean 的 Class 全路径**，对应 XML 中的 `<bean class="">` 配置。
@@ -394,7 +420,7 @@ BeanDefinition 中的方法虽然多，但是结合我们平时在 XML 中的配
 
 这个就是 BeanDefinition 的定义以及它里边方法的含义。 
 
-##### 2.1.2.2. 继承体系
+##### 2.2.2.2. 继承体系
 
 ![BeanDefinition](attachments/BeanDefinition.svg)  
 这么多实现类看着有点眼花缭乱，不过搞清楚了每一个接口和类的作用，再看就很容易了。
@@ -406,13 +432,13 @@ BeanDefinition 中的方法虽然多，但是结合我们平时在 XML 中的配
 5. AnnotatedBeanDefinition，**表示注解类型 BeanDefinition，拥有获取注解元数据和方法元数据的能力**。
 6. AnnotatedGenericBeanDefinition，使用了 **@Configuration 注解标记配置类会解析为 AnnotatedGenericBeanDefinition**。  
 
-##### 2.1.2.3. 实践
+##### 2.2.2.3. 实践
 
 理论讲了这么多，就以咱们的 `UserService` 为例，打个断点来看下 `UserService` 的 bean 定义信息长什么样。在哪打断点呢？根据上面已经分析出的， `DefaultListableBeanFactory` 作为 bean 定义信息的注册中心，那么咱们直接在该类的 `registerBeanDefinition()` 方法中打一个断点。  
 ![](attachments/Pasted%20image%2020220924183702.png)  
 可以看到将 XML 配置文件中的 `bean` 标签中的 `id` 作为 `beanName`，`BeanDefinition` 实例对象中的 `beanClass` 属性 = `bean` 标签中的 `class` 属性 ，`propertyValues` 属性 = `property` 标签中的 `name` 和 `value` 属性。咱们在 XML 配置文件中书写的 `bean` 标签就会对应一个 `BeanDefinition` 实例对象，`bean` 标签中的属性就会对应到 `BeanDefinition` 实例对象中相对应的属性。Spring 容器就会根据这一份 bean 定义信息图纸去生产相对应的 bean 实例对象。  
 
-### 2.2. 解析 XML 配置文件并加载 bean 定义信息
+### 2.3. 解析 XML 配置文件并加载 bean 定义信息
 
 `BeanFactory` 创建完成后，就开始解析 XML 配置文件并加载 bean 定义信息。
 
@@ -448,7 +474,7 @@ protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) throw
 }
 ```
 
-在该方法中创建出一个 `XmlBeanDefinitionReader` 实例对象，将咱们创建出来的 `beanFactory` 作为参数传入构造方法中，在 `XmlBeanDefinitionReader` 类中肯定会存在一个 `BeanDefinitionRegistry` 接口的属性用于保存该对象，为什么是 `BeanDefinitionRegistry` 接口的属性？相信应该不用再啰嗦了吧！  从类名就可以看出该类专门用来从 XML 配置文件读取 bean 定义信息。  
+在该方法中创建出一个 `XmlBeanDefinitionReader` 实例对象，将咱们创建出来的 `beanFactory` 作为参数传入构造方法中，在 `XmlBeanDefinitionReader` 类中肯定会存在一个 `BeanDefinitionRegistry` 接口的属性用于保存该对象，为什么是 `BeanDefinitionRegistry` 接口的属性？相信应该不用再啰嗦了吧！从类名就可以看出该类专门用来从 XML 配置文件读取 bean 定义信息。  
 创建出 `XmlBeanDefinitionReader` 对象之后，来到重载方法中，在重载方法中最终会调用 `XmlBeanDefinitionReader` 类中的 `loadBeanDefinitions()` 方法，将咱们的 Spring 配置文件路径作为参数传入。
 
 ```java
@@ -674,9 +700,9 @@ protected void parseBeanDefinitions(Element root, BeanDefinitionParserDelegate d
 
 在该方法中，首先会判断当前 root 元素是否是默认标签元素，即该标签元素的 `namespaceURI` 是否等于 "http://www.springframework.org/schema/beans" 。  
 ![](attachments/Pasted%20image%2020220925030240.png)  
-通过打断点可以知道当前 root 元素是 beans 标签元素，它的 `namespaceURI` = "http://www.springframework.org/schema/beans" ，所以满足条件，进入 if 中，获取该 beans 标签中所有的子标签元素，也就是咱们定义在 XML 配置文件中的所有标签元素。循环遍历每个标签元素，挨个判断每个标签是默认标签元素还是自定义标签元素，如果是默认标签元素，如 import、bean、alias、beans 标签，则走默认标签解析流程；如果是自定义标签元素，如 context:component-scan、aop:aspectj-autoproxy 等标签，则走自定义标签解析流程。
+通过打断点可以知道当前 root 元素是 beans 标签元素，它的 `namespaceURI` = "http://www.springframework.org/schema/beans" ，所以满足条件，进入 if 中，获取该 beans 标签中所有的子标签元素，也就是咱们定义在 XML 配置文件中的所有标签元素。循环遍历每个标签元素，挨个判断每个标签是默认标签元素还是自定义标签元素，如果是 **默认标签元素，如 `import`、`bean`、`alias`、`beans` 标签**，则走默认标签解析流程；如果是 **自定义标签元素，如 `context:component-scan`、`aop:aspectj-autoproxy ` 等标签**，则走自定义标签解析流程。
 
-#### 2.2.1. 默认标签解析
+#### 2.3.1. 默认标签解析
 
 ```java
 private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {  
@@ -843,9 +869,9 @@ public AbstractBeanDefinition parseBeanDefinitionElement(
 
 > 源码阅读技巧：搭建开发调试环境，编写 Demo 示例，然后通过 **打断点 DEBUG** 的方式，结合运行时数据，方便对代码的理解。
 
-#### 2.2.2. 自定义标签解析
+#### 2.3.2. 自定义标签解析
 
-##### 2.2.2.1. BeanDefinitionParserDelegate
+##### 2.3.2.1. BeanDefinitionParserDelegate
 
 如果当前标签元素不属于默认标签元素中的任何一种，则直接调用 `BeanDefinitionParserDelegate` 类中的 `parseCustomElement(ele)` 方法，解析当前标签元素。
 
@@ -883,7 +909,7 @@ public BeanDefinition parseCustomElement(Element ele, @Nullable BeanDefinition c
 ![](attachments/Pasted%20image%2020220925052007.png)  
 现在已经知道当前标签元素是 `context:component-scan`，那么怎么解析该标签元素呢？  
 
-##### 2.2.2.2. NamespaceHandlerResolver  
+##### 2.3.2.2. NamespaceHandlerResolver  
 
 细心的小伙伴可能已经知道 `this.readerContext.getNamespaceHandlerResolver()` 获取出来的对象是什么类型，在前面咱们提过一嘴，不过不知道的小伙伴不用慌，咱们还有绝招，在 DEBUG 的时候选中该代码使用 `CTRL+U` 计算一下结果。  
 ![|950](attachments/Pasted%20image%2020220925054010.png)  
@@ -924,7 +950,7 @@ public NamespaceHandler resolve(String namespaceUri) {
 }
 ```
 
-在该方法中，首先会所有获取所有的命名空间 URI 与命名空间处理器的映射关系，用一个 Map 集合存起来。
+在该方法中，首先会获取所有命名空间 URI 与命名空间处理器的映射关系，用一个 Map 集合存起来。
 
 ```java
 private Map<String, Object> getHandlerMappings() {  
@@ -958,10 +984,10 @@ private Map<String, Object> getHandlerMappings() {
 ```
 
 在该方法中使用 `PropertiesLoaderUtils` 工具类中的 `loadAllProperties()` 方法 **加载所有 `META-INF` 目录下的 `spring.handlers` 配置文件，建立命名空间 URI 与命名空间处理器的映射关系**。  
-![](attachments/Pasted%20image%2020220923161016.png)  
-![](attachments/Pasted%20image%2020220923160852.png)  
+![](attachments/Pasted%20image%2020220926162436.png)  
+![](attachments/Pasted%20image%2020220926162540.png)
 
-##### 2.2.2.3. NamespaceHandler
+##### 2.3.2.3. NamespaceHandler
 
 命名空间 URI 与命名空间处理器的映射关系建立完成之后，非常容易地就可以找到当前命名空间 URI 所对应的命名空间处理器，以当前测试案例来说，获取出来的命名空间处理器类的全限定名为 `org.springframework.context.config.ContextNamespaceHandler`，之后根据全限定名反射创建出 `ContextNamespaceHandler` 的实例对象，调用 `ContextNamespaceHandler` 的 `init()` 方法。
 
@@ -1005,7 +1031,7 @@ private BeanDefinitionParser findParserForElement(Element element, ParserContext
 
 代码果然和上面分析的一样，根据当前标签元素的名称找到对应的 bean 定义信息解析器，如 `component-scan` 标签对应的 bean 定义信息解析器为 `ComponentScanBeanDefinitionParser`，调用解析器中的 `parse()` 解析当前标签元素。
 
-##### 2.2.2.4. BeanDefinitionParser
+##### 2.3.2.4. BeanDefinitionParser
 
 ```java
 public BeanDefinition parse(Element element, ParserContext parserContext) {
@@ -1022,7 +1048,8 @@ public BeanDefinition parse(Element element, ParserContext parserContext) {
 }
 ```
 
-在该方法中，可以发现首先就获取当前 `context:component-scan` 标签中的 `base-package` 属性的值，然后使用 `Environment` 对象中的 `resolvePlaceholders()` 方法替换 `base-package` 字符串中占位符 `${}` 内的值。关于 `Environment` 对象，环境变量，收集所有的配置信息。<span style="background:#d3f8b6">TODO</span> 关于环境变量在后续也会专门写一篇文章分析，此处就不再做详细的描述。将 `base-package` 字符串按照逗号拆开成字符串数组，也就说咱们在使用 `context:component-scan` 标签时，其中的 `base-package` 属性可以定义多个包扫描路径，以逗号分隔即可。紧接着，调用 `configureScanner()` 方法返回一个 `ClassPathBeanDefinitionScanner` 实例对象，然后调用 `ClassPathBeanDefinitionScanner` 对象的 `doScan(basePackages)` 方法扫描包路径下所有符合条件的类，然后将类封装成 bean 定义信息保存到 bean 定义信息注册中心。在 `parse()` 方法的最后还调用 `registerComponents()` 方法往容器中注册其他组件，让咱们一起来看下注册了哪些组件？
+在该方法中，可以发现首先就获取当前 `context:component-scan` 标签中的 `base-package` 属性的值，然后使用 `Environment` 对象中的 `resolvePlaceholders()` 方法替换 `base-package` 字符串中占位符 `${}` 内的值。关于 `Environment` 对象，环境变量，收集所有的配置信息。<span style="background:#d3f8b6">TODO</span> 关于环境变量在后续也会专门写一篇文章分析，此处就不再做详细的描述。将 `base-package` 字符串按照逗号拆开成字符串数组，也就说咱们在使用 `context:component-scan` 标签时，其中的 `base-package` 属性可以定义多个包扫描路径，以逗号分隔即可。紧接着，调用 `configureScanner()` 方法返回一个 `ClassPathBeanDefinitionScanner` 实例对象，然后调用 `ClassPathBeanDefinitionScanner` 对象的 `doScan(basePackages)` 方法扫描包路径下所有符合条件的类，然后将类封装成 bean 定义信息保存到 bean 定义信息注册中心。  
+在 `parse()` 方法的最后还调用 **`registerComponents()` 方法往容器中注册其他组件**，让咱们一起来看下注册了哪些组件？
 
 ```java
 protected void registerComponents(  
@@ -1052,7 +1079,7 @@ protected void registerComponents(
 }
 ```
 
-在该方法中，最终会调用 `AnnotationConfigUtils` 工具类中的 `registerAnnotationConfigProcessors()` 方法 **往 Spring 容器中注册一些与注解有关的后置处理器的 bean 定义信息**，比较重要的有 `ConfigurationClassPostProcessor`、`AutowiredAnnotationBeanPostProcessor`、`CommonAnnotationBeanPostProcessor` 这几个后置处理器，其中 **`ConfigurationClassPostProcessor` 后置处理器就是在 Spring 注解驱动开发时专门被用来扫描组件的后置处理器**。可能有很多小伙伴阅读过 Spring 源码之后，在执行后置处理器阶段时，始终不明白为什么容器中已经存在 `ConfigurationClassPostProcessor` 的后置处理器，这就是原因。关于后置处理器是是什么以及有什么用？在后续的源码分析文章中会详细地说清楚。
+在该方法中，最终会调用 `AnnotationConfigUtils` 工具类中的 `registerAnnotationConfigProcessors()` 方法 **往 Spring 容器中注册一些与注解有关的后置处理器的 bean 定义信息**，比较重要的有 `ConfigurationClassPostProcessor`、`AutowiredAnnotationBeanPostProcessor`、`CommonAnnotationBeanPostProcessor` 这几个后置处理器，其中 **`ConfigurationClassPostProcessor` 后置处理器就是在 Spring 注解驱动开发时专门被用来扫描组件的后置处理器**。可能有很多小伙伴阅读过 Spring 源码之后，在执行后置处理器阶段时，始终不明白为什么容器中已经存在 `ConfigurationClassPostProcessor` 的后置处理器，这就是原因。<span style="background:#d3f8b6">TODO</span> 关于后置处理器是是什么以及有什么用？在后续的源码分析文章中会详细地说清楚。
 
 ```java
 public static Set<BeanDefinitionHolder> registerAnnotationConfigProcessors(
@@ -1128,7 +1155,7 @@ public static Set<BeanDefinitionHolder> registerAnnotationConfigProcessors(
 }
 ```
 
-##### 2.2.2.5. ClassPathBeanDefinitionScanner
+##### 2.3.2.5. ClassPathBeanDefinitionScanner
 
 ```java
 protected ClassPathBeanDefinitionScanner configureScanner(ParserContext parserContext, Element element) {
@@ -1183,7 +1210,7 @@ public ClassPathBeanDefinitionScanner(BeanDefinitionRegistry registry, boolean u
 }
 ```
 
-构造方法中的每个参数都有意义，`registry` 代表 bean 定义信息注册中心，`useDefaultFilters` 代表是否使用默认的过滤策略，`environment` 代表着封装的配置信息，`resourceLoader` 代表资源加载器，用于加载某路径下的文件将其转化成 `Resoure` 接口对象。当使用默认的过滤策略时，则会注册一些默认的过滤策略。
+构造方法中的每个参数都有意义，`registry` 代表 bean 定义信息注册中心，`useDefaultFilters` 代表是否使用默认的过滤策略，`environment` 代表着封装的配置信息，`resourceLoader` 代表资源加载器，用于加载某路径下的文件将其转化成 `Resoure` 接口对象。当使用默认的过滤策略时，则会注册一些默认的过滤策略，包含 @Component、@Inject 注解，由于@Repository、@Service、@Controller 注解具有 @Component 注解，所以标注这些注解的类也会被保留下来。
 
 ```java
 protected void registerDefaultFilters() {  
@@ -1258,7 +1285,7 @@ protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
 }
 ```
 
-在该方法中，循环遍历传入进来的包扫描路径数组，找到候选的组件，也就是将符合条件的类封装成 bean 定义信息，找到之后，开始给找到的每一个 bean 定义信息填充属性，如 (lazy，primary...)，最后，将其保存到 bean 定义信息注册中心，也就是咱们的 `DefaultListableBeanFactory` 实例对象中。Spring 是怎样扫描包路径下的类并将其转化成 bean 定义信息的呢？搞懂这个问题，就差不多结束了。
+在该方法中，循环遍历传入进来的包扫描路径数组，找到候选的组件，也就是将符合条件的类封装成 bean 定义信息，找到之后，开始给找到的每一个 bean 定义信息填充属性，如 (lazy，primary...)，最后，将其保存到 bean 定义信息注册中心，也就是咱们的 `DefaultListableBeanFactory` 实例对象中的 `beanDefinitionMap` 集合中。Spring 是怎样扫描包路径下的类并将其转化成 bean 定义信息的呢？搞懂这个问题，就差不多结束了。
 
 ```java
 public Set<BeanDefinition> findCandidateComponents(String basePackage) {  
@@ -1343,7 +1370,7 @@ private Set<BeanDefinition> scanCandidateComponents(String basePackage) {
 }
 ```
 
-其实就是递归遍历包路径，找到包路径下所有的.class 文件，打个断点调试一下，看看找到了哪些类。  
+其实就是 **递归遍历找到包路径及其子包下所有的.class 文件**，打个断点调试一下，看看找到了哪些类。  
 ![](attachments/Pasted%20image%2020220925174257.png)  
 以本测试案例来说，在包扫描路径下的类存在三个，分别是 `People`、`UserService` 和 `SpringBeanDefinitionTests`。肯定不可能三个类都需要，接下来就是过滤掉不需要的类，保留满足条件的类，此时过滤策略是不是就该起作用了？
 
@@ -1367,8 +1394,8 @@ protected boolean isCandidateComponent(MetadataReader metadataReader) throws IOE
 }
 ```
 
-在前面的分析中，`includeFilters` 集合中已经存放了一个 `@Component` 注解的过滤策略，所以才说标注了 `@Component` 注解的类才会被扫描到 Spring 容器中。现在想一下，咱们是不是可以基于这一点，模仿着自定义一个过滤策略，然后将咱们想要注册到 Spring 容器中的组件扫描进来，至于这个 Spring 的扩展点，后续会在专门的 [Spring 扩展](../../扩展/Spring%20扩展.md) 这一篇文章中提到。
+在前面的分析中，`includeFilters` 集合中已经存放了一个 `@Component` 注解的过滤策略，所以才说标注了 `@Component` 注解的类才会被扫描到 Spring 容器中。现在想一下，咱们是不是可以基于这一点，模仿着自定义一个过滤策略，然后将咱们想要注册到 Spring 容器中的组件扫描进来，<span style="background:#d3f8b6">TODO</span> 至于这个 Spring 的扩展点，后续会在专门的 [Spring 扩展](../../扩展/Spring%20扩展.md) 这一篇文章中提到。
 
 > 源码阅读技巧：学完某一块源码，要学会思考，咱们是不是可以基于咱们的学到的做一些扩展，模仿，不要只会死记硬背！
 
-至此，XML 版的 `BeanDefinition` 的整个加载流程就已经圆满结束了，一起跟下来的小伙伴想必也有所收获，咱们一起加油。🥳🥳🥳  
+至此，关于 XML 版的 `BeanDefinition` 的整个加载流程就已经圆满结束了，一起跟下来的小伙伴想必也有所收获，咱们一起加油。🥳🥳🥳  

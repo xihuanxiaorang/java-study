@@ -2,7 +2,7 @@
 title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-09-18 20:59:10
+modified: 2022-09-30 16:32:04
 number headings: auto, first-level 1, max 6, 1.1.
 ---
 
@@ -55,7 +55,8 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 }
 ```
 
-发现其实现了 `ImportBeanDefinitionRegistrar` 接口，并且重写了接口中的 `registerBeanDefinitions()` 方法，该方法主要用于向 Spring 容器中注册 bean 的定义信息。在 `AspectJAutoProxyRegistrar` 类的 `registerBeanDefinitions()` 方法中，就调用 `AopConfigUtils` 类中的 `registerAspectJAnnotationAutoProxyCreatorIfNecessary()` 方法 **向容器中注册一个基于注解的自动代理创建器的 bean 定义信息**，其中 beanName = `internalAutoProxyCreator`，class = `AnnotationAwareAspectJAutoProxyCreator`。先来看下 `AnnotationAwareAspectJAutoProxyCreator` 类结构关系图：  
+发现其实现了 `ImportBeanDefinitionRegistrar` 接口，并且重写了接口中的 `registerBeanDefinitions()` 方法，该方法主要用于向 Spring 容器中注册 bean 的定义信息。在 `AspectJAutoProxyRegistrar` 类的 `registerBeanDefinitions()` 方法中，就调用 `AopConfigUtils` 类中的 `registerAspectJAnnotationAutoProxyCreatorIfNecessary()` 方法 **向容器中注册一个基于注解的自动代理创建器的 bean 定义信息**，其中 beanName = `internalAutoProxyCreator`，class = **`AnnotationAwareAspectJAutoProxyCreator`**。  
+先来看下 `AnnotationAwareAspectJAutoProxyCreator` 类结构关系图：  
 ![AnnotationAwareAspectJAutoProxyCreator.drawio](attachments/AnnotationAwareAspectJAutoProxyCreator.drawio.svg)  
 从上面 `AnnotationAwareAspectJAutoProxyCreator` 的类结构关系图可以看出：`AnnotationAwareAspectJAutoProxyCreator` 的父类 `AbstractAutoProxyCreator`，实现了 `SmartInstantiationAwareBeanPostProcessor` 接口，而 `SmartInstantiationAwareBeanPostProcessor` 接口继承自 `InstantiationAwareBeanPostProcessor` 接口，而 `InstantiationAwareBeanPostProcessor` 接口又继承自 `BeanPostProcessor` 接口。  也就是说 **`AnnotationAwareAspectJAutoProxyCreator` 是一个 bean 后置处理器**。
 
@@ -350,9 +351,7 @@ protected Object applyBeanPostProcessorsBeforeInstantiation(Class<?> beanClass, 
 ```
 
 4. 通过 `AnnotationAwareAspectJAutoProxyCreator` 类的结构关系图可以知道其父类 `AbstractAutoProxyCreator` 实现了 `InstantiationAwareBeanPostProcessor` 接口，那么此时在循环体中就会去执行后置处理器 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法。  
-至于怎么来到 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法的已经分析的很清楚，总的来说就是，Spring 容器刷新执行到 `finishBeanFactoryInitialization()` 方法时，实例化所有剩余的非懒加载的单实例 bean，在实例化 bean 之前，后置处理器就会介入，即 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器会在 bean 实例化之前执行 `postProcessBeforeInstantiation()` 方法。
-
-现在来看下 `postProcessBeforeInstantiation()` 方法在底层到底干了什么？  
+至于怎么来到 `AbstractAutoProxyCreator` 中的 `postProcessBeforeInstantiation()` 方法的已经分析的很清楚，总的来说就是，Spring 容器刷新执行到 `finishBeanFactoryInitialization()` 方法时，实例化所有剩余的非懒加载的单实例 bean，在实例化 bean 之前，后置处理器就会介入，即 `AnnotationAwareAspectJAutoProxyCreator` 后置处理器会在 bean 实例化之前执行 `postProcessBeforeInstantiation()` 方法。现在来看下 `postProcessBeforeInstantiation()` 方法在底层到底干了什么？  
 
 ```ad-important
 🎨结论先行：**`AnnotationAwareAspectJAutoProxyCreator`** 会利用 **`postProcessBeforeInstantiation()`** 方法会**为容器中所有的切面中的所有的通知方法创建增强器**，即筛选所有组件中标注了 `@Aspect` 注解的切面，为其中的所有通知方法生成增强器 `Advisor`，排序后存入缓存中，**一个增强器 `Advisor` 即是一个 `InstantiationModelAwarePointcutAdvisorImpl` 类型的实例对象**，其封装了**增强方法** (通知方法) 和**切入点**等关键信息。  
@@ -858,7 +857,7 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 
 1. `CglibAopProxy.intercept()`，拦截目标方法的执行
 2. 根据 ProxyFactory 对象获取将要执行的目标方法的拦截器链， `List<Object> chain = this.advised.getInterceptorsAndDynamicInterceptionAdvice(method, targetClass)`
-	1. `List<Object> interceptorList`：保存所有的拦截器，一个默认的 ExposeInvocationInterceptor 和四个增强器，即通知方法
+	1. `List<Object> interceptorList`：保存所有的拦截器，一个默认的 `ExposeInvocationInterceptor` 和四个增强器，即通知方法
 	2. 遍历所有的增强器，将其转换成 Interceptor：`MethodInterceptor[] interceptors = registry.getInterceptors(advisor)`
 	3. 将增强器转为 `List<MethodInterceptor>`
 		1. 如果是 MethodInterceptor ，直接加入到集合中

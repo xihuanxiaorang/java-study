@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Spring/源码/Spring-BeanDefinition 加载流程分析/README.md",
+            "file": "小记/小记.md",
             "mode": "source",
             "source": false
           }
@@ -62,7 +62,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310
+    "width": 413
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -78,7 +78,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition 加载流程分析/README.md",
+                "file": "小记/小记.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +95,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition 加载流程分析/README.md"
+                "file": "小记/小记.md"
               }
             }
           },
@@ -123,19 +123,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 368.5
+    "width": 159.5
   },
   "active": "08035e86789b7d06",
   "lastOpenFiles": [
-    "Spring/源码/Spring源码环境搭建/README.md",
-    "Spring/源码/Spring-BeanDefinition 加载流程分析/README.md",
-    "Spring/扩展/Spring 扩展.md",
+    "手写源码/Spring/README.md",
+    "小记/小记.md",
+    "Spring/源码/Spring-Bean实例化流程分析/README.md",
     "Spring/基础/JDBC/RAEDME.md",
-    "Spring/源码/README.md",
-    "Spring/基础/事务/README.md",
-    "Spring/基础/AOP/README.md",
-    "Spring/基础/IOC/README.md",
-    "数据库编程/JDBC/README.md",
-    "笔记进度/README.md"
+    "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+    "Spring/源码/Spring事件监听机制及其原理分析/README.md",
+    "笔记进度/README.md",
+    "Spring/源码/AOP/RAEDME.md",
+    "JDK/进阶/Java8新特性/README.md",
+    "Spring/基础/事务/README.md"
   ]
 }

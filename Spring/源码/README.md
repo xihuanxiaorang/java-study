@@ -21,7 +21,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 | 序号 | 描述               | 链接                            |
 | ---- | ------------------ | ------------------------------- |
 | 1   |    Spring 源码环境搭建                |          [Spring源码环境搭建](Spring源码环境搭建/README.md)                       |
-| 2    | Spring-BeanDefinition 加载流程分析 |          [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition%20加载流程分析/README.md)                       |
+| 2    | Spring-BeanDefinition 加载流程分析 |          [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition加载流程分析/README.md)                       |
 | 3    | Spring-AOP 源码    | [Spring-AOP源码](AOP/RAEDME.md) |
 
 ## 3. 参考文档
