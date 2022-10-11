@@ -1,13 +1,16 @@
 ---
+
 title: README
 tags: 看板 进度
 created: 2022-08-21 14:53:10
 modified: 2022-09-30 16:32:32
 kanban-plugin: basic
+
 ---
 
 ## TODO
 
+- [ ] [多线程](../多线程/README.md)
 - [ ] Spring-ResourceLoader 资源加载器
 - [ ] Spring 配置文件解析与 Enviroment 环境变量
 - [ ] Spring-ConfigurationClassPostProcessor 包扫描
@@ -22,10 +25,14 @@ kanban-plugin: basic
 - [ ] [Java8新特性](../JDK/进阶/Java8新特性/README.md)
 - [ ] Java 类加载过程
 - [ ] ASM
+- [ ] 状态模式之Spring Shell
+- [ ] 代码生成器
+
 
 ## PROCESSING
 
 - [ ] [Springboot自动配置原理](../Springboot/源码/Springboot自动配置原理/README.md)
+
 
 ## ToBeImproved
 
@@ -33,15 +40,16 @@ kanban-plugin: basic
 - [ ] [Spring-BeanDefinition 加载流程分析](../Spring/源码/Spring-BeanDefinition加载流程分析/README.md)
 - [ ] [Spring-AOP源码](../Spring/源码/AOP/RAEDME.md)
 
+
 ## Done
 
 **完成**
-
 - [x] [建造者模式](设计模式/建造者模式.md)
 - [x] [二叉树](数据结构与算法/数据结构/二叉树.md)
 - [x] [ArrayList](JDK/源码/集合/ArrayList.md)
 - [x] [Vector](JDK/源码/集合/Vector.md)
 - [x] [LinkedList](JDK/源码/集合/LinkedList.md)
+
 
 ***
 
@@ -66,9 +74,7 @@ kanban-plugin: basic
 - [x] [Spring源码环境搭建](../Spring/源码/Spring源码环境搭建/README.md)
 
 %% kanban:settings
-
 ```
 {"kanban-plugin":"basic","show-checkboxes":false,"hide-tags-in-title":false,"date-picker-week-start":1,"lane-width":320,"hide-tags-display":false,"tag-colors":[]}
 ```
-
 %%

@@ -2,7 +2,7 @@
 title: Spring-AOP源码
 tags: spring aop 源码
 created: 2022-08-29 20:18:33
-modified: 2022-09-30 16:32:04
+modified: 2022-10-10 14:50:03
 number headings: auto, first-level 1, max 6, 1.1.
 ---
 
@@ -861,7 +861,7 @@ protected Object createProxy(Class<?> beanClass, @Nullable String beanName,
 	2. 遍历所有的增强器，将其转换成 Interceptor：`MethodInterceptor[] interceptors = registry.getInterceptors(advisor)`
 	3. 将增强器转为 `List<MethodInterceptor>`
 		1. 如果是 MethodInterceptor ，直接加入到集合中
-		2. 如果不是 MethodInterceptor，则使用 AdvisorAdapter 将增强器转为 MethodInterceptor，转换完成后，返回 MethodInterceptor 数组
+		2. 如果不是 MethodInterceptor，则使用 AdvisorAdapter （适配器模式）将增强器转为 MethodInterceptor，转换完成后，返回 MethodInterceptor 数组
 3. 如果没有拦截器链，则直接执行目标方法。「拦截器链：每一个通知方法又被包装成方法拦截器，利用 MethodInterceptor 拦截器机制执行」
 4. 如果有拦截器链，把需要执行的目标对象、目标方法、拦截器链等信息传入创建的 `CglibMethodInvokation` 对象，并调用 `Object retVal = mi.procceed()`
 5. 拦截器链的触发过程

@@ -2,7 +2,7 @@
 title: Spring-BeanDefinition加载流程分析
 tags: spring 源码
 created: 2022-09-24 01:47:36
-modified: 2022-09-30 16:07:17
+modified: 2022-09-30 18:25:44
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -202,7 +202,7 @@ protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
 ```
 
 由于咱们使用的是应用上下文是 `ClassPathXmlApplicationContext` ，F4 查看 `ApplicationContext` 的继承结构体系可以发现  
-`|- ` `AbstractApplicationContext`  
+`|-` `AbstractApplicationContext`  
 	`|-` `AbstractRefreshableApplicationContext`  
 		`|-` `AbstractRefreshableConfigApplicationContext`  
 			`|-` `AbstractXmlApplicationContext`  
