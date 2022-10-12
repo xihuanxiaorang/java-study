@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "设计模式/观察者模式.md",
+            "file": "设计模式/状态模式.md",
             "mode": "source",
             "source": false
           }
@@ -32,7 +32,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "√",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -62,7 +62,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 413
+    "width": 413,
+    "collapsed": true
   },
   "right": {
     "id": "039754b6c9feae6e",
@@ -78,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "设计模式/观察者模式.md",
+                "file": "设计模式/状态模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -95,7 +96,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "设计模式/观察者模式.md"
+                "file": "设计模式/状态模式.md"
               }
             }
           },
@@ -128,14 +129,14 @@
   "active": "74649e9b4db4aa83",
   "lastOpenFiles": [
     "设计模式/README.md",
-    "设计模式/观察者模式.md",
-    "设计模式/抽象工厂模式.md",
-    "设计模式/工厂方法模式.md",
-    "设计模式/单例模式.md",
-    "设计模式/代理模式.md",
-    "设计模式/建造者模式.md",
-    "Spring/源码/Spring事件监听机制及其原理分析/README.md",
-    "Spring/源码/AOP/RAEDME.md",
-    "数据库编程/JDBC/README.md"
+    "设计模式/状态模式.md",
+    "README.md",
+    "SpringSecurity/SpringSecurity 源码剖析 (一).md",
+    "SpringSecurity/SpringSecurity 源码剖析 (四).md",
+    "SpringSecurity/SpringSecurity 源码剖析 (二).md",
+    "设计模式/策略模式.md",
+    "设计模式/模板方法模式.md",
+    "设计模式/六大设计原则.md",
+    "设计模式/适配器模式.md"
   ]
 }
