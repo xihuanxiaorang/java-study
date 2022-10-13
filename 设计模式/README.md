@@ -2,7 +2,7 @@
 title: README
 tags: 设计模式
 created: 2022-08-16 17:18:35
-modified: 2022-10-13 18:38:31
+modified: 2022-10-14 03:50:02
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -43,5 +43,5 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 ## 2. 参考资料
 
-- [<span style="background:#affad1; font-weight: bold;">深入设计模式</span>](https://refactoringguru.cn/)  
+- 🎨[<span style="background:#affad1; font-weight: bold;">深入设计模式</span>](https://refactoringguru.cn/)，**强烈推荐**  
 - [小D深入浅出设计模式 · 语雀](https://www.yuque.com/heibaruge/wtu98p/xg8geb#ynaTa)
