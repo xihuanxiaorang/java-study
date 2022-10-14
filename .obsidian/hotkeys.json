@@ -1,13 +1,5 @@
 {
-  "obsidian-pangu:pangu-format": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "S"
-    }
-  ],
+  "obsidian-pangu:pangu-format": [],
   "easy-typing-obsidian:easy-typing-format-selection": [],
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
   "hotkey-helper:browse-plugins": [],
@@ -61,5 +53,12 @@
       ],
       "key": "+"
     }
-  ]
+  ],
+  "workspace:goto-tab-2": [],
+  "workspace:goto-tab-1": [],
+  "workspace:goto-tab-3": [],
+  "workspace:goto-tab-4": [],
+  "workspace:goto-tab-5": [],
+  "workspace:goto-tab-6": [],
+  "editor:toggle-checklist-status": []
 }
