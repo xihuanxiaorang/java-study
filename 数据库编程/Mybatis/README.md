@@ -1,8 +1,8 @@
 ---
 title: Mybatis
-tags: Mybatis ORM
+tags: mybatis orm
 created: 2022-08-23 20:52:50
-modified: 2022-09-15 05:00:15
+modified: 2022-10-14 14:34:17
 ---
 
 ## 0.1 1、Mybatis 简介

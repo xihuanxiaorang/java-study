@@ -1,8 +1,8 @@
 ---
 title: MybatisPlus
-tags: Mybatis MybatisPlus ORM
+tags: mybatis mybatisplus orm
 created: 2022-08-23 21:02:51
-modified: 2022-09-15 05:22:46
+modified: 2022-10-14 14:33:59
 ---
 
 # 1、简介

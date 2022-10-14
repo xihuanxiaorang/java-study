@@ -1,12 +1,13 @@
 ---
 title: SpringSecurity 源码剖析 (四)
-tags: SpringSecurity 源码
+tags: springsecurity 源码
 created: 2022-08-03 23:48:04
-modified: 2022-08-04 00:51:24
+modified: 2022-10-14 14:34:36
 ---
 
-SpringSecurity 最重要的功能就是认证。**认证就是用来识别当前访问系统的用户是不是系统合法用户**，常见的认证方式包括**用户名密码认证**，**手机验证码认证**，**第三方登录认证**等等。 由上面分析的内容可以知道，SpringSecurity 是通过一系列过滤器来实现认证和授权功能的。SpringSecurity 默认提供了其中最为常见的一种认证方法，用户名密码认证，这种认证方式是通过 **`UsernamePasswordAuthenticationFilter`** 过滤器来实现的。让我们通过该过滤器来熟悉 SpringSecurity 认证的整个模式，从而扩展到其他过滤器。
+SpringSecurity 最重要的功能就是认证。**认证就是用来识别当前访问系统的用户是不是系统合法用户**，常见的认证方式包括 **用户名密码认证**，**手机验证码认证**，**第三方登录认证** 等等。 由上面分析的内容可以知道，SpringSecurity 是通过一系列过滤器来实现认证和授权功能的。SpringSecurity 默认提供了其中最为常见的一种认证方法，用户名密码认证，这种认证方式是通过 **`UsernamePasswordAuthenticationFilter`** 过滤器来实现的。让我们通过该过滤器来熟悉 SpringSecurity 认证的整个模式，从而扩展到其他过滤器。  
 **一个过滤器中最主要的方法就是 `doFilter` 方法**。我们直接来到 `UsernamePasswordAuthenticationFilter` 的 `doFilter` 方法，看看这个过滤器到底是怎样实现认证功能的。
+
 ```java
 public class UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";  
@@ -33,7 +34,9 @@ public class UsernamePasswordAuthenticationFilter extends AbstractAuthentication
 	}
 }
 ```
+
 发现 `UsernamePasswordAuthenticationFilter` 过滤器中并没有 `doFilter` 方法，那么肯定在其父类 `AbstractAuthenticationProcessingFilter` 中。
+
 ```java
 public abstract class AbstractAuthenticationProcessingFilter {
 	@Override  
@@ -71,7 +74,9 @@ public abstract class AbstractAuthenticationProcessingFilter {
 	}
 }
 ```
+
 可以看到，当请求经过该过滤器的时候，首先会先判断该请求是否
+
 ```java
 protected boolean requiresAuthentication(HttpServletRequest request, HttpServletResponse response) {  
    if (this.requiresAuthenticationRequestMatcher.matches(request)) {  
