@@ -2,7 +2,7 @@
 title: Java基础面试题
 tags: 面试题 基础
 created: 2022-10-11 01:04:15
-modified: 2022-10-14 17:20:43
+modified: 2022-10-16 21:59:00
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -61,7 +61,7 @@ int b = i.intValue();
 
 #### 1.1.3. Integer 对象的 valueOf 方法
 
->`Integer` 对象中的 `valueOf()` 方法用到了享元模式，会返回缓存对象而不是创建新的对象。对于 **享元设计模式** 不清楚的小伙伴可以查看 [享元模式](../../设计模式/享元模式.md) 这一篇文章，文章中详细地介绍了使用享元模式的目的以及如何实现享元模式。  
+>`Integer` 对象中的 `valueOf()` 方法用到了享元模式，如何判断是否使用享元模式呢？它会先返回缓存对象而不是创建新的对象。对于 **享元设计模式** 不清楚的小伙伴可以查看 [享元模式](../../设计模式/享元模式.md) 这一篇文章，文章中详细地介绍了使用享元模式的目的以及如何实现享元模式。  
 
 ```java
 public static Integer valueOf(int i) {  
@@ -215,3 +215,8 @@ public static final Boolean FALSE = new Boolean(false);
 ```
 
 聪明的小伙伴肯定已经知道，用 == 比较两个 `Boolean` 类型的对象时，只要值相等，那么返回的结果就是 true；值如果不相等的话，返回的结果就是 false。
+
+## 2. new String("abc") 创建了几个对象？
+
+**字符串常量池**
+

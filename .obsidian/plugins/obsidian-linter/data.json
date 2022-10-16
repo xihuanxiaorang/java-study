@@ -183,7 +183,8 @@
   "lintOnSave": true,
   "displayChanged": false,
   "foldersToIgnore": [
-    "Templates"
+    "Templates",
+    "素材库"
   ],
   "linterLocale": "system-default",
   "logLevel": 4,

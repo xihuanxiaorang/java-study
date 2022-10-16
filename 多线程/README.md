@@ -15,9 +15,9 @@ number headings: auto, first-level 1, max 6, _.1.1.
 ## 2. 参考文章
 
 - 黑马 JUC 学习笔记
-	- [Prog](attachments/Prog.md)
-	- [并发编程](attachments/并发编程.pdf)
-	- [JUC](attachments/JUC.md)
+	- [Prog](../素材库/多线程/Prog.md)
+	- [并发编程](../素材库/多线程/并发编程.pdf)
+	- [JUC](../素材库/多线程/JUC.md)
 - 尚硅谷 JUC 学习笔记
 	- [并发大纲 · 语雀](https://www.yuque.com/liuyanntes/sibb9g/fpy93i)  
 	- [目录 | 小薛博客](https://blog.xueqimiao.com/juc/)

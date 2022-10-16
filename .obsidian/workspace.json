@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "0fd371a68653a508",
+        "id": "ad384e1923c1b3df",
         "type": "tabs",
         "children": [
           {
-            "id": "105814e5cff127e6",
+            "id": "1da67da6aa64afb8",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试题/Java基础/README.md",
+                "file": "设计模式/责任链模式.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "面试题/Java基础/README.md",
+                "file": "设计模式/责任链模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "面试题/Java基础/README.md"
+                "file": "设计模式/责任链模式.md"
               }
             }
           },
@@ -127,26 +127,26 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 361.5
+    "width": 297.5
   },
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "105814e5cff127e6",
+  "active": "1da67da6aa64afb8",
   "lastOpenFiles": [
-    "面试题/README.md",
-    "面试题/Java基础/README.md",
-    "JDK/基础/Integer.md",
-    "JDK/基础/内部类.md",
-    "JDK/基础/泛型.md",
-    "Spring/基础/AOP/README.md",
-    "Spring/基础/事务/README.md",
-    "SpringSecurity/SpringSecurity 源码剖析 (四).md",
-    "SpringSecurity/SpringSecurity 源码剖析 (二).md",
-    "SpringSecurity/SpringSecurity 源码剖析 (一).md"
+    "多线程/Java并发编程与多线程原理/README.md",
+    "Templates/设计模式.md",
+    "素材库/Redis/img/连续签到日期统计.jpg",
+    "素材库/Redis/img/缓存雪崩解决方案.jpeg",
+    "素材库/Redis/img/白名单过滤器架构说明.jpeg",
+    "设计模式/README.md",
+    "设计模式/责任链模式.md",
+    "设计模式/策略模式.md",
+    "设计模式/模板方法模式.md",
+    "设计模式/单例模式.md"
   ]
 }

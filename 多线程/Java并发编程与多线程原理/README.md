@@ -2,7 +2,7 @@
 title: Java并发编程与多线程原理
 tags: 多线程 juc
 created: 2022-10-01 15:29:07
-modified: 2022-10-14 14:33:35
+modified: 2022-10-16 07:47:28
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -541,3 +541,5 @@ public class TestReentrantLock4 {
 
 输出结果如下所示：  
 ![](attachments/Pasted%20image%2020221011062216.png)
+
+## 3. synchronized
