@@ -2,7 +2,7 @@
 title: Java基础面试题
 tags: 面试题 基础
 created: 2022-10-11 01:04:15
-modified: 2022-10-16 21:59:00
+modified: 2022-10-17 17:08:19
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
@@ -218,5 +218,20 @@ public static final Boolean FALSE = new Boolean(false);
 
 ## 2. new String("abc") 创建了几个对象？
 
-**字符串常量池**
+### 2.1. 查看字节码
 
+#### 2.1.1. javap 命令
+
+```shell
+javap -verbose Test2
+```
+
+运行结果如下所示：  
+![|1010](attachments/Pasted%20image%2020221017165707.png)  
+
+#### 2.1.2. jclassib Bytecode Viewer 插件
+
+IDEA 安装 `jclassib Bytecode Viewer` 插件，使用 `shift + shift` 快捷键搜索关键字 `jclassib`，打开插件界面。如下所示：  
+![|1132](attachments/Pasted%20image%2020221017170620.png)  
+在插件界面中找到你此时正在运行的类中对应的方法即可。  
+![|1132](attachments/Pasted%20image%2020221017170519.png)
