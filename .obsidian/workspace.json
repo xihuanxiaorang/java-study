@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+                "file": "设计模式/观察者模式.md",
                 "mode": "source",
                 "source": false
               }
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+                "file": "设计模式/观察者模式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md"
+                "file": "设计模式/观察者模式.md"
               }
             }
           },
@@ -138,15 +138,15 @@
   },
   "active": "689b7fbc4364f942",
   "lastOpenFiles": [
-    "Spring/源码/Spring事件订阅与发布原理分析/README.md",
+    "设计模式/责任链模式.md",
+    "设计模式/观察者模式.md",
+    "Templates/README.md",
+    "Templates/设计模式.md",
     "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+    "Spring/源码/Spring事件订阅与发布原理分析/README.md",
     "MySQL/README.md",
     "面试题/MySQL/README.md",
     "Spring/源码/README.md",
-    "Spring/源码/AOP/assets/AOP介入流程.jpg",
-    "Spring/源码/Spring事件的订阅发布原理分析/README.md",
-    "数据库编程/MySQL/README.md",
-    "设计模式/观察者模式.md",
-    "Spring/源码/Spring事件的订阅发布原理分析/attachments/Pasted image 20221019234030.png"
+    "Spring/源码/AOP/assets/AOP介入流程.jpg"
   ]
 }
