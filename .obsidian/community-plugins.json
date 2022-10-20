@@ -12,7 +12,6 @@
   "obsidian-style-settings",
   "obsidian-collapse-all-plugin",
   "obsidian-auto-link-title",
-  "obsidian-linter",
   "shortcuts-extender",
   "hotkey-helper",
   "cm-editor-syntax-highlight-obsidian",
@@ -26,6 +25,6 @@
   "obsidian-image-toolkit",
   "number-headings-obsidian",
   "obsidian-editing-toolbar",
-  "obsidian-stille",
-  "templater-obsidian"
+  "templater-obsidian",
+  "obsidian-linter"
 ]

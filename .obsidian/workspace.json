@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "ad384e1923c1b3df",
+        "id": "1b54c16783459f11",
         "type": "tabs",
         "children": [
           {
-            "id": "3862d64f68d063a2",
+            "id": "689b7fbc4364f942",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "数据库编程/JDBC/README.md",
+                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
                 "mode": "source",
                 "source": false
               }
             }
-          },
-          {
-            "id": "14753d777152aaa4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "数据库编程/MySQL/MySQL四种隔离级别/README.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -99,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "数据库编程/MySQL/MySQL四种隔离级别/README.md",
+                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -116,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "数据库编程/MySQL/MySQL四种隔离级别/README.md"
+                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md"
               }
             }
           },
@@ -144,22 +131,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 297.5
+    "width": 374.5
   },
   "ribbon": {
     "mostRecentAction": ""
   },
-  "active": "14753d777152aaa4",
+  "active": "689b7fbc4364f942",
   "lastOpenFiles": [
-    "面试题/Java基础/README.md",
-    "数据库编程/MySQL/MySQL四种隔离级别/README.md",
-    "数据库编程/JDBC/README.md",
-    "Spring/基础/事务/README.md",
-    "数据库编程/MySQL/MySQL四种隔离级别/attachments/事务示意图.drawio.svg",
+    "Spring/源码/Spring事件订阅与发布原理分析/README.md",
+    "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+    "MySQL/README.md",
+    "面试题/MySQL/README.md",
+    "Spring/源码/README.md",
+    "Spring/源码/AOP/assets/AOP介入流程.jpg",
+    "Spring/源码/Spring事件的订阅发布原理分析/README.md",
     "数据库编程/MySQL/README.md",
-    "Templates/README.md",
-    "Templates/设计模式.md",
-    "Spring/扩展/Spring 扩展.md",
-    "Spring/基础/Spring注解驱动开发/README.md"
+    "设计模式/观察者模式.md",
+    "Spring/源码/Spring事件的订阅发布原理分析/attachments/Pasted image 20221019234030.png"
   ]
 }
