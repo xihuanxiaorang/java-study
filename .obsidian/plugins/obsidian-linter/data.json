@@ -116,7 +116,7 @@
       "Style": "consistent"
     },
     "Two Spaces Between Lines with Content": {
-      "Makes sure that two spaces are added to the ends of lines with content continued on the next line for paragraphs, blockquotes, and list items": false
+      "Makes sure that two spaces are added to the ends of lines with content continued on the next line for paragraphs, blockquotes, and list items": true
     },
     "Unordered List Style": {
       "Makes sure that unordered lists follow the style specified.": false,
@@ -140,7 +140,7 @@
       "Ensures that there is an empty line around code fences unless they start or end a document.": false
     },
     "Empty Line Around Tables": {
-      "Ensures that there is an empty line around github flavored tables unless they start or end a document.": false
+      "Ensures that there is an empty line around github flavored tables unless they start or end a document.": true
     },
     "Heading blank lines": {
       "All headings have a blank line both before and after (except where the heading is at the beginning or end of the document).": true,
@@ -169,8 +169,8 @@
       "Ensures that Chinese and English or numbers are separated by a single space. Follows these [guidelines](https://github.com/sparanoid/chinese-copywriting-guidelines)": true
     },
     "Trailing spaces": {
-      "Removes extra spaces after every line.": true,
-      "Two Space Linebreak": true
+      "Removes extra spaces after every line.": false,
+      "Two Space Linebreak": false
     }
   },
   "lintOnSave": true,

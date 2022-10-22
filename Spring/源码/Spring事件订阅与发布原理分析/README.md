@@ -12,7 +12,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 ### 1.1. 创建 spring-event-study 模块
 
-选中项目右键新建一个模块，选择 Gradle，点击下一步，模块名填自己喜欢的即可，这里我就填 `spring-event-study`，最后点击确定即可。  
+选中项目右键新建一个模块，选择 Gradle，模块名填自己喜欢的即可，这里我就填 `spring-event-study`，最后点击确定即可。  
 ![|1290](attachments/Pasted%20image%2020221019233312.png)
 
 ### 1.2. 引入相关依赖
@@ -367,8 +367,7 @@ public interface ApplicationEventPublisher {
 `ApplicationContext` 继承了该接口，并且 `ApplicationContext` 接口的抽象实现类 `AbstractApplicationContext` 中维护了一个事件多播器 `ApplicationEventMulticaster` 的引用，在实现 `publishEvent()` 方法时，其实就是使用维护的事件多播器 `ApplicationEventMulticaster` 引用对象来广播事件给相关的事件监听器。
 
 ```java
-public abstract class AbstractApplicationContext extends DefaultResourceLoader
-		implements ConfigurableApplicationContext {
+public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
     /** Helper class used in event publishing. */
 	@Nullable
 	private ApplicationEventMulticaster applicationEventMulticaster;
@@ -384,41 +383,41 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	}
     
     protected void publishEvent(Object event, @Nullable ResolvableType eventType) {
-		Assert.notNull(event, "Event must not be null");
+        Assert.notNull(event, "Event must not be null");
 
-		// Decorate event as an ApplicationEvent if necessary
-		ApplicationEvent applicationEvent;
-		if (event instanceof ApplicationEvent) {
-			// 若事件实现了 ApplicationEvent 接口，则将事件封装成 ApplicationEvent
-			applicationEvent = (ApplicationEvent) event;
-		}
-		else {
-			// 没有实现 ApplicationEvent 接口的任意对象作为事件最终被封装到了 PayloadApplicationEvent 中
-			applicationEvent = new PayloadApplicationEvent<>(this, event);
-			if (eventType == null) {
-				eventType = ((PayloadApplicationEvent<?>) applicationEvent).getResolvableType();
-			}
-		}
+        // Decorate event as an ApplicationEvent if necessary
+        ApplicationEvent applicationEvent;
+        if (event instanceof ApplicationEvent) {
+            // 若事件实现了 ApplicationEvent 接口，则将事件封装成 ApplicationEvent
+            applicationEvent = (ApplicationEvent) event;
+        }
+        else {
+            // 没有实现 ApplicationEvent 接口的任意对象作为事件最终被封装到了 PayloadApplicationEvent 中
+            applicationEvent = new PayloadApplicationEvent<>(this, event);
+            if (eventType == null) {
+                eventType = ((PayloadApplicationEvent<?>) applicationEvent).getResolvableType();
+            }
+        }
 
-		// Multicast right now if possible - or lazily once the multicaster is initialized
-		if (this.earlyApplicationEvents != null) {
-			this.earlyApplicationEvents.add(applicationEvent);
-		}
-		else {
-			// 拿到事件多播器发送事件，使用事件多播器广播事件到相应的监听器
-			getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);
-		}
+        // Multicast right now if possible - or lazily once the multicaster is initialized
+        if (this.earlyApplicationEvents != null) {
+            this.earlyApplicationEvents.add(applicationEvent);
+        }
+        else {
+            // 拿到事件多播器发送事件，使用事件多播器广播事件到相应的监听器
+            getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);
+        }
 
-		// 同样，通过 parent 发布事件。Publish event via parent context as well...
-		if (this.parent != null) {
-			if (this.parent instanceof AbstractApplicationContext) {
-				((AbstractApplicationContext) this.parent).publishEvent(event, eventType);
-			}
-			else {
-				this.parent.publishEvent(event);
-			}
-		}
-	}
+        // 同样，通过 parent 发布事件。Publish event via parent context as well...
+        if (this.parent != null) {
+            if (this.parent instanceof AbstractApplicationContext) {
+                ((AbstractApplicationContext) this.parent).publishEvent(event, eventType);
+            }
+            else {
+                this.parent.publishEvent(event);
+            }
+        }
+    }
 }
 ```
 

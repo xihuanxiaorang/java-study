@@ -14,15 +14,17 @@ Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功
 
 > 本章节所涉及到的代码在 [GitHub - xihuanxiaorang/spring-study: 用于 spring 学习](https://github.com/xihuanxiaorang/spring-study) 仓库中的 `aop` 模块，可以自行查看。
 
-## 2. 概念
+## 2. 术语
 
 ### 2.1. 切面（Aspect）
 
-" 切面 " 的官方抽象定义为 " 一个关注点的模块化，这个关注点可能会横切多个对象 "。在 Spring 中可以使用 XML(`<aop: context>`) 和注解的方式进行组织实现。
+" 切面 " 的官方抽象定义为 " 一个关注点的模块化，这个关注点可能会横切多个对象 "。在 Spring 中可以使用 XML(`<aop:aspect>`) 或注解 (`@Aspect`) 的方式进行实现。
+
+**切面 = 切入点 + 通知**。
 
 ### 2.2. 连接点（JoinPoint）
 
-表示需要在程序中插入横切关注点的扩展点，连接点 可能是 **类初始化**、**方法执行**、**方法调用**、**字段调用** 或 **处理异常** 等等，但是 **在 Spring 中只支持【方法执行】连接点**。
+表示需要在程序中插入横切关注点的扩展点，连接点可能是 **类初始化**、**方法执行**、**方法调用**、**字段调用** 或 **处理异常** 等等，但是 **在 Spring 中只支持【方法执行】连接点**。
 
 ### 2.3. 通知（Advice）
 
@@ -30,23 +32,33 @@ Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功
 
 #### 2.3.1. 前置通知（Before Advice）
 
-前置通知是指在某连接点之前执行的通知，但这个通知不能阻止连接点之前代码的执行（除非它抛出一个异常）。`ApplicationContext` 中在 `<aop: aspect>` 里面使用 `<aop: before>` 元素进行声明。
+前置通知是指在某连接点之前执行的通知，但这个通知不能阻止连接点之前代码的执行（除非它抛出一个异常）。
 
-#### 2.3.2. 后置 (最终) 通知（After Advice）
+在 `<aop:aspect>` 里面使用 `<aop:before>` 元素进行声明。
 
-后置通知是指当某连接点退出时执行的通知（**不论是正常返回还是异常退出**）。`ApplicationContext` 中在 `<aop: aspect>` 里面使用 `<aop: after>` 元素进行声明。
+#### 2.3.2. 后置/最终通知（After Advice）
+
+后置通知是指当某连接点退出时执行的通知（**不论是正常返回还是异常退出**）。
+
+在 `<aop:aspect>` 里面使用 `<aop:after>` 元素进行声明。
 
 #### 2.3.3. 返回后通知（After Return Advice）
 
-返回后通知是指在某连接点 **正常完成后执行** 的通知，不包括抛出异常的情况。`ApplicationContext` 中在 `<aop: aspect>` 里面使用 `<aop: returning>` 元素进行声明。
+返回后通知是指在某连接点 **正常完成后执行** 的通知，不包括抛出异常的情况。
+
+在 `<aop:aspect>` 里面使用 `<aop:returning>` 元素进行声明。
 
 #### 2.3.4. 异常通知（After Throwing Advice）
 
-异常通知是指在方法抛出异常导致退出时执行的通知。`ApplicationContext` 中在 `<aop: aspect>` 里面使用 `<aop: throwing>` 元素进行声明。
+异常通知是指在方法抛出异常导致退出时执行的通知。
+
+在 `<aop:aspect>` 里面使用 `<aop:throwing>` 元素进行声明。
 
 #### 2.3.5. 环绕通知（Around Advice）
 
-环绕通知是指包围一个连接点的通知。这是最强大的一种通知类型。环绕通知可以在方法调用前后完成自定义的行为。它也会选择是否继续执行连接点或直接返回它自己的返回值或抛出异常来结束执行。`ApplicationContext` 中在 `<aop: aspect>` 里面使用 `<aop: around>` 元素进行声明。
+环绕通知是指包围一个连接点的通知。这是最强大的一种通知类型。环绕通知可以在方法调用前后完成自定义的行为。它也会选择是否继续执行连接点或直接返回它自己的返回值或抛出异常来结束执行。
+
+在 `<aop:aspect>` 里面使用 `<aop:around>` 元素进行声明。
 
 ### 2.4. 切入点（PointCut）
 
@@ -58,7 +70,7 @@ Spring AOP 是一种编程范式，主要目的是 **将非功能性需求从功
 
 ### 2.6. AOP 代理
 
-在 Spring AOP 中有两种代理方式：**JDK 动态代理** 和 **Cglib 代理**。默认情况下，目标对象实现了接口时，采用 JDK 动态代理；反之，使用 Cglib 代理。强制使用 Cglib 代理需要将 `<aop: config>` 中的 `proxy-target-class` 属性设置为 true。
+在 Spring AOP 中有两种代理方式：**JDK 动态代理** 和 **Cglib 代理**。默认情况下，目标对象实现了接口时，采用 JDK 动态代理；反之，使用 Cglib 代理。强制使用 Cglib 代理需要将 `<aop:config>` 中的 `proxy-target-class` 属性设置为 true。
 
 > 对于 **静态代理** 与 **动态代理** 的详细介绍可以参考设计模式中 [代理模式](../../../设计模式/代理模式.md) 这一篇文章，这里就不再赘述。
 
@@ -219,9 +231,9 @@ public class XmlAspect {
 }
 ```
 
-每个通知方法的第一个参数都是连接点（`JoinPoint`）。其实，在 Spring 中，**任何通知方法都可以将第一个参数定义为 `JoinPoint` 类型用于接收当前连接点对象**。`JoinPoint` 接口提供了一系列有用的方法，如 `getArgs()` 方法用于返回方法参数，`getThis()` 方法用于返回代理对象，`getTarget()` 方法用于返回目标对象、`getSignature()` 方法用于返回被通知的方法的相关信息和 `toString()` 方法用于打印正在被通知的方法的有用信息。
+每个通知方法的第一个参数都是连接点（`JoinPoint`）。其实，在 Spring 中，**任何通知方法都必须将第一个参数定义为 `JoinPoint` 类型用于接收当前连接点对象，否则 Spring 无法识别**。`JoinPoint` 接口提供了一系列有用的方法，如 `getArgs()` 方法用于返回方法参数，`getThis()` 方法用于返回代理对象，`getTarget()` 方法用于返回目标对象、`getSignature()` 方法用于返回被通知的方法的相关信息和 `toString()` 方法用于打印正在被通知的方法的有用信息。
 
-##### 4.1.2.3. 配置 SpringXML 配置文件
+##### 4.1.2.3. 配置 Spring 核心配置文件
 
 ```xml
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
@@ -298,7 +310,7 @@ java.lang.RuntimeException: java.lang.RuntimeException: java.lang.Exception: spr
 
 ### 4.2. 2、注解方式
 
-使用注解配置 Spring AOP 总体分为两步：第一步是编写一个配置类，使用 `@ComponentScan` 注解激活自动扫描组件功能，同时使用 `@EnableAspectJAutoProxy` 激活自动代理功能；第二步是为切面类标注 `@Aspect` 注解。
+使用注解配置 Spring AOP 总体分为两步：第一步是编写一个配置类，使用 `@ComponentScan` 注解激活自动扫描组件功能，同时使用 **`@EnableAspectJAutoProxy`** 激活自动代理功能；第二步是为切面类标注 `@Aspect` 注解。
 
 #### 4.2.1. 配置类
 
@@ -423,63 +435,20 @@ execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-patte
 - name-pattern：方法名
 - param-pattern：参数名
 - throws-pattern：异常  
-除 ret-type-pattern 和 name-pattern 之外，其余参数都是可选的。  
-下面给出一些通用切入点表达式的例子：
 
-```markdown
-// 任意公共方法的执行：
-execution（public * *（..））
+除 ret-type-pattern 和 name-pattern 之外，其余参数都是可选的。下面给出一些通用切入点表达式的例子：
 
-// 任何一个名字以“set”开始的方法的执行：
-execution（* set*（..））
-
-// AccountService接口定义的任意方法的执行：
-execution（* top.xiaorang.service.AccountService.*（..））
-
-// 在service包中定义的任意方法的执行：
-execution（* top.xiaorang.service.*.*（..））
-
-// 在service包或其子包中定义的任意方法的执行：
-execution（* top.xiaorang.service..*.*（..））
-
-// 在service包中的任意连接点（在Spring AOP中只是方法执行）：
-within（top.xiaorang.service.*）
-
-// 在service包或其子包中的任意连接点（在Spring AOP中只是方法执行）：
-within（top.xiaorang.service..*）
-
-// 实现了AccountService接口的代理对象的任意连接点 （在Spring AOP中只是方法执行）：
-this（top.xiaorang.service.AccountService）// 'this'在绑定表单中更加常用
-
-// 实现AccountService接口的目标对象的任意连接点 （在Spring AOP中只是方法执行）：
-target（top.xiaorang.service.AccountService） // 'target'在绑定表单中更加常用
-
-// 任何一个只接受一个参数，并且运行时所传入的参数是Serializable 接口的连接点（在Spring AOP中只是方法执行）
-args（java.io.Serializable） // 'args'在绑定表单中更加常用; 请注意在例子中给出的切入点不同于 execution(* *(java.io.Serializable))： args版本只有在动态运行时候传入参数是Serializable时才匹配，而execution版本在方法签名中声明只有一个 Serializable类型的参数时候匹配。
-
-// 目标对象中有一个 @Transactional 注解的任意连接点 （在Spring AOP中只是方法执行）
-@target（org.springframework.transaction.annotation.Transactional）// '@target'在绑定表单中更加常用
-
-// 任何一个目标对象声明的类型有一个 @Transactional 注解的连接点 （在Spring AOP中只是方法执行）：
-@within（org.springframework.transaction.annotation.Transactional） // '@within'在绑定表单中更加常用
-
-// 任何一个执行的方法有一个 @Transactional 注解的连接点 （在Spring AOP中只是方法执行）
-@annotation（org.springframework.transaction.annotation.Transactional） // '@annotation'在绑定表单中更加常用
-
-// 任何一个只接受一个参数，并且运行时所传入的参数类型具有@Classified 注解的连接点（在Spring AOP中只是方法执行）
-@args（top.xiaorang.security.Classified） // '@args'在绑定表单中更加常用
-
-// 任何一个在名为'tradeService'的Spring bean之上的连接点 （在Spring AOP中只是方法执行）
-bean（tradeService）
-
-// 任何一个在名字匹配通配符表达式'*Service'的Spring bean之上的连接点 （在Spring AOP中只是方法执行）
-bean（*Service）
-```
+| 表达式                                                   | 含义                                    |
+| -------------------------------------------------------- | --------------------------------------- |
+| `execution(public * *(..))`                              | 任意公共方法                            |
+| `execution(* set*(..))`                                  | 任何一个名字以“set”开始的方法           |
+| `execution(* top.xiaorang.service.AccountService.*(..))` | AccountService 接口中定义的任意方法      |
+| `execution(* top.xiaorang.service..*.*(..))`             | 在 service 包下任意类中的任意方法         |
+| `execution（* top.xiaorang.service..*.*(..))`            | 在 service 包以及子包下任意类中的任意方法 |
 
 此外 Spring 支持如下三个逻辑运算符来组合切入点表达式：
 
-```markdown
-&&：要求连接点同时匹配两个切入点表达式
-||：要求连接点匹配任意个切入点表达式
-!： 要求连接点不匹配指定的切入点表达式
-```
+| &&   | 要求连接点同时匹配两个切入点表达式 |
+| ---- | ---------------------------------- |
+| \|\| | 要求连接点匹配任意个切入点表达式   |
+| !    | 要求连接点不匹配指定的切入点表达式 |

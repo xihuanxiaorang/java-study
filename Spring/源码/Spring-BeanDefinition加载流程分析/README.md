@@ -12,7 +12,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 ### 1.1. 创建 spring-beandefinition-study 模块
 
-选中项目右键新建一个模块，选择 Gradle，点击下一步，模块名填自己喜欢的即可，这里我就填 `spring-beandefinition-study`，最后点击确定即可。  
+选中项目右键新建一个模块，选择 Gradle，模块名填自己喜欢的即可，这里我就填 `spring-beandefinition-study`，最后点击确定即可。  
 ![|1000](attachments/Pasted%20image%2020220924150532.png)
 
 ### 1.2. 引入相关依赖
@@ -112,7 +112,7 @@ public class People {
 
 ### 1.5. Spring 核心配置文件
 
-在资源目录 `resources` 下创建一个 Spring 的核心配置文件 `applicationContext.xml` 。
+在资源目录 `resources` 下创建一个 Spring 的核心配置文件 `applicationContext.xml` 。  
 ![](attachments/Pasted%20image%2020220924152030.png)
 
 ```xml
@@ -1422,7 +1422,7 @@ protected boolean isCandidateComponent(MetadataReader metadataReader) throws IOE
 }
 ```
 
-在前面的分析中，`includeFilters` 集合中已经存放了一个 `@Component` 注解的过滤策略，所以才说标注了 `@Component` 注解的类才会被扫描到 Spring 容器中。现在想一下，咱们是不是可以基于这一点，模仿着自定义一个过滤策略，然后将咱们想要注册到 Spring 容器中的组件扫描进来，<span style="background:#d3f8b6">TODO</span> 至于这个 Spring 的扩展点，后续会在专门的 [Spring 扩展](../../扩展/Spring%20扩展.md) 这一篇文章中提到。
+在前面的分析中，`includeFilters` 集合中已经存放了一个 `@Component` 注解的过滤策略，所以才说标注了 `@Component` 注解的类才会被扫描到 Spring 容器中。现在想一下，咱们是不是可以基于这一点，模仿着自定义一个过滤策略，然后将咱们想要注册到 Spring 容器中的组件扫描进来，<span style="background:#d3f8b6">TODO</span> 至于这个 Spring 的扩展点，后续会在专门的 [Spring扩展](../../扩展/Spring扩展.md) 这一篇文章中提到。
 
 > 源码阅读技巧：学完某一块源码，要学会思考，咱们是不是可以基于咱们的学到的做一些扩展，模仿，不要只会死记硬背！
 
