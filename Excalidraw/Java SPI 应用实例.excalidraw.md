@@ -1,17 +1,15 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-假设有一家公司A，它需要连接互联网。它定义了一个连接网络的API，由中国移动和中国联通来提供网络服务。
-那么这个场景设计到了三方：1. 公司A ；2. 中国移动；3. 中国联通。
-其中公司A负责开发项目simple-company和simple-api，simple-company代表的是业务应用程序，simple-api即SPI中的Service接口，
-而移动和联通则以jar包的形式分别提供各自的联网服务 ^FcbfGSNY
+
+假设有一家公司 A，它需要连接互联网。它定义了一个连接网络的 API，由中国移动和中国联通来提供网络服务。  
+那么这个场景设计到了三方：1. 公司 A ；2. 中国移动；3. 中国联通。  
+其中公司 A 负责开发项目 simple-company 和 simple-api，simple-company 代表的是业务应用程序，simple-api 即 SPI 中的 Service 接口，  
+而移动和联通则以 jar 包的形式分别提供各自的联网服务 ^FcbfGSNY
 
 simple-isp-mobile ^rB3CfMnt
 
@@ -21,14 +19,16 @@ simple-company ^XnG8ewmx
 
 simple-api ^NC64Gp3m
 
-
 # Embedded files
-14a813ddf4dbcebfc3776e615e90a932cbe4b855: [[Attachments/Pasted Image 20220421155602_328.svg]]
-44d5a7be0f7748bf6a06ceff4d3f17da6be7a5b3: [[Attachments/Pasted Image 20220421155854_534.svg]]
+
+14a813ddf4dbcebfc3776e615e90a932cbe4b855: [[Attachments/Pasted Image 20220421155602_328.svg]]  
+44d5a7be0f7748bf6a06ceff4d3f17da6be7a5b3: [[Attachments/Pasted Image 20220421155854_534.svg]]  
 8b3cbc6075376776ec36d5a31eb4b8e1ca0ee381: [[Attachments/Pasted Image 20220421155522_298.svg]]
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

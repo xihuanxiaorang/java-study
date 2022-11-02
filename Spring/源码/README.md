@@ -6,25 +6,18 @@ modified: 2022-10-14 14:48:01
 number headings: auto, first-level 1, max 6, _.1.1.
 ---
 
-## 1. Spring 版本命名规则
+## 1. 阅读顺序
 
-| 描述方式 | 说明     | 含义                                     |
-| -------- | -------- | ---------------------------------------- |
-| Snapshot | 快照版   | 尚不稳定、处于开发种的版本               |
-| Release  | 稳定版   | 功能相对稳定，可以对外发行，但有时间限制 |
-| **GA**       | **正式版**   | 代表广泛可用的稳定版                     |
-| M        | 里程碑版 | 具有一些全新的功能或具有里程碑意义的版本 |
-| RC       | 终测版   | 最终测试，即将作为正式版发布                                         |
+| 序号 | 文章                                                         | 描述                                                         |
+| :--- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 1    | [Spring源码环境搭建](Spring源码环境搭建/README.md)           | 下载 Spring 源码并编译，最后增加两个测试案例验证             |
+| 2    | [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition%E5%8A%A0%E8%BD%BD%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90/README.md) | Spring 解析 XML 配置文件中标签的流程                         |
+| 3    | [Spring注册Bean的几种方式](Spring注册Bean的几种方式/README.md) | 总结往 Spring 容器中注册 Bean 有哪几种方式                   |
+| 4    | [Spring-ConfigurationClassPostProcessor后置处理器详解](Spring-ConfigurationClassPostProcessor后置处理器详解/README.md) | 分析 ConfigurationClassPostProcessor 后置处理器是如何解析 `@Component`、`@Configuration`、`@Bean`、`@Import` 等注解的 |
+| 5    | [Spring事件订阅与发布原理分析](Spring事件订阅与发布原理分析/README.md) | 分析 Spring 事件机制的原理                                   |
+| 6    | [Spring-AOP详解](Spring-AOP详解/RAEDME.md)                   | 分析 Spring 中 AOP 的实现原理                                |
 
-## 2. 阅读顺序
-
-| 序号 | 描述                               | 链接                                                         |
-| ---- | ---------------------------------- | ------------------------------------------------------------ |
-| 1    | Spring 源码环境搭建                | [Spring源码环境搭建](Spring源码环境搭建/README.md)           |
-| 2    | Spring-BeanDefinition 加载流程分析 | [Spring-BeanDefinition加载流程分析](Spring-BeanDefinition加载流程分析/README.md) |
-| 3    | Spring 事件订阅与发布原理分析      | [Spring事件订阅与发布原理分析](Spring事件订阅与发布原理分析/README.md) |
-| 4    | Spring-AOP 源码                    | [Spring-AOP源码](AOP/RAEDME.md)                              |
-
-## 3. 参考文档
+## 2. 参考文档
 
 - [my-spring: Spring 源码注释](https://gitee.com/travelerly/my-spring)🔥🔥  
+

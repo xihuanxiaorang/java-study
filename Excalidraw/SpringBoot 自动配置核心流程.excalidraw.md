@@ -1,30 +1,30 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-SpringBoot应用程序启动 ^AyONPHuA
 
-通过SpringFactories机制加载配置文件 ^gpR53eqy
+SpringBoot 应用程序启动 ^AyONPHuA
+
+通过 SpringFactories 机制加载配置文件 ^gpR53eqy
 
 筛选出所有的自动配置类 ^raXdhc2K
 
-将这些类注入到Spring IOC容器中 ^lvL0rooq
+将这些类注入到 Spring IOC 容器中 ^lvL0rooq
 
-即通过ClassLoader去获取classpath中的配置文件META-INF/spring.factories
-题外话：SpringFactories机制是Spring框架内置的，是Spring框架对外扩展的
+即通过 ClassLoader 去获取 classpath 中的配置文件 META-INF/spring.factories  
+题外话：SpringFactories 机制是 Spring 框架内置的，是 Spring 框架对外扩展的  
 重要入口，在很多地方都会用到。 ^wGMl7gzh
 
-在所有的配置文件META-INF/spring.factories中筛选出
-以EnableAutoConfiguration为key的配置值 ^6hsYQJoE
+在所有的配置文件 META-INF/spring.factories 中筛选出  
+以 EnableAutoConfiguration 为 key 的配置值 ^6hsYQJoE
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

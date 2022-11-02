@@ -1,5 +1,6 @@
 ---
 title: Spring源码环境搭建
+description: Spring源码环境搭建
 tags: spring 源码
 created: 2022-08-30 02:01:56
 modified: 2022-09-18 21:01:22
@@ -11,17 +12,17 @@ number headings: auto, first-level 1, max 6, _.1.1.
 spring 源码地址为：[https://github.com/spring-projects/spring-framework](https://github.com/spring-projects/spring-framework)  
 可以直接使用 `git clone https://github.com/spring-projects/spring-framework.git` 命令下载或者直接下载压缩包。  
 由于某些原因，可能有的小伙伴下载起来会非常的慢！所以，建议先将项目从 Github 中导入到 Gitee 中，然后直接从 Gitee 中下载，你会发现下载速度非常快！🚀🚀🚀  
-![|1000](attachments/Pasted%20image%2020220830022514.png)  
-![|800](attachments/Pasted%20image%2020220830022717.png)  
-导入完成之后，就可以开始下载，下载源码方式分为两种，可以使用 git 命令或者 zip 压缩包（这样 git 就只会有自己的提交记录），本人是选择 **直接下载的 zip 压缩包** ，版本选的是 **5.3.x** 版本，。  
-![|250](attachments/Pasted%20image%2020220918155702.png)  
+![|1000](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830022514.png)  
+![|800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830022717.png)  
+导入完成之后，就可以开始下载，下载源码方式分为两种，可以使用 git 命令或者 zip 压缩包（这样 git 就只会有自己的提交记录），本人是选择 **直接下载的 zip 压缩包** 。版本选的是 **5.3.x** 版本。  
+![Pasted%20image%2020220918155702](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918155702.png)
 
 ## 2. 配置
 
 本人使用的 IDEA 版本是 2022 版，使用 IDEA 导入下载好的 Spring 项目，默认会开始编译，此时 **先停止编译**，等配置完成之后再开始编译项目，否则会需要很长时间。  
-![](attachments/Pasted%20image%2020220830024127.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830024127.png)  
 Spring 源码使用 gradle 来构建编译，在编译过程中需要下载一堆的插件和 jar 包，众所周知，下载的资源都是从国外下载，如果不使用国内源来下载，怕是编译时黄花菜都凉了，所以在这里得先配置将源换到国内的源，阿里云仓库：[https://developer.aliyun.com/mvn/guide?spm=a2c6h.13651104.0.0.435836a4x5Dhns](https://developer.aliyun.com/mvn/guide?spm=a2c6h.13651104.0.0.435836a4x5Dhns).  
-![](attachments/Pasted%20image%2020220830024553.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830024553.png)
 
 ```gradle
 maven { url "https://maven.aliyun.com/repository/public" }  
@@ -55,16 +56,16 @@ repositories {
 ```
 
 等 `build.gradle` 和 `settings.gradle` 文件配置好后，开始配置 gradle，将 IDEA 中的 gradle 指定到自己下载的 gradle，配置步骤如下所示：  
-![|600](attachments/Pasted%20image%2020220830025606.png)<br />  
-![](attachments/Pasted%20image%2020220916040709.png)  
+![|600](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830025606.png)<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220916040709.png)  
 配置好 gradle 之后，开始编译。编译的时间长短可能与小伙伴的网速有关，因为要下载大量的 jar 包和插件，不过咱们配置了阿里云镜像，再慢也不会慢到哪里去 ，静静等待即可。等出现 BUILD SUCCESSFUL 字样就表示已经编程成功。  
-![](attachments/Pasted%20image%2020220918160640.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918160640.png)  
 编译成功之后，使用 gradle 测试一下。  
-![|400](attachments/Pasted%20image%2020220918161114.png)<br />  
+![|400](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918161114.png)<br />  
 双击点击执行，在执行过程中发现报错，其实是因为 `isAccessible()` 方法被弃用了，咱们把这个方法改成 `canAccess(null)` 方法。  
-![](attachments/Pasted%20image%2020220830031806.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220830031806.png)  
 再测试一下，发现执行成功！最后会提示 'git' 相关错误，但是不影响使用。  
-![](attachments/Pasted%20image%2020220918161325.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918161325.png)  
 上面关于 git 的错误的意思是当前不是一个 git 仓库。这个好办，咱们直接使用 `git init` 命令建一个 git 仓库就好，然后再使用 `git add .` 将文件添加到暂存区，最后使用 `git commit -m "fix:  git command error"` 提交到仓库，有需要的小伙伴还可以在 Github 或者 Gitee 建立一个远程仓库，然后将代码推送到远程仓库中。
 
 ## 3. 测试案例
@@ -75,7 +76,7 @@ repositories {
 ### 3.1. SpringAOP 简单案例
 
 选中项目右键新建一个模块，选择 Gradle，点击下一步，模块名填自己喜欢的即可，这里我就填 `spring-aop-study`，最后点击确定即可。  
-![|600](attachments/Pasted%20image%2020220918162748.png)<br />  
+![|600](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918162748.png)<br />  
 
 #### 3.1.1. 引入相关依赖
 
@@ -229,15 +230,15 @@ public class SpringAopSourceTests {
 ```
 
 正常通知测试测试结果如下所示：  
-![](attachments/Pasted%20image%2020220918164857.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918164857.png)  
 异常通知测试测试结果如下所示：  
-![](attachments/Pasted%20image%2020220918210103.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918210103.png)  
 测试成功，达到预期效果！🎉 接下来，就可以根据该测试案例去逐步分析 SpringAOP 的整个源码。加油！🎯
 
 ### 3.2. SpringMVC 简单案例
 
 选中项目右键新建一个模块，选择 Gradle，点击下一步，模块名填自己喜欢的即可，这里我就填 `spring-webmvc-study`，最后点击确定即可。  
-![|600](attachments/Pasted%20image%2020220918165500.png)  
+![|600](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918165500.png)  
 模块建好之后，在模块的 `build.gradle` 文件中引入以下依赖：
 
 ```gradle
@@ -252,9 +253,9 @@ dependencies {
 ```
 
 💡需要特别注意的一个点：除了在 `build.gradle` 文件中引入依赖之外，还得在 plugins 选项中增加 `id: 'war'`，否则使用 Tomcat 启动时会一直报错！这个地方摸索了一天，在此提出来，希望小伙伴们可以少走弯路。如下所示：  
-![|800](attachments/Pasted%20image%2020220918170444.png)  
+![|800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918170444.png)  
 配置项目结构：  
-![](attachments/Pasted%20image%2020220918171436.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918171436.png)  
 开始编写测试代码，在 webapp 目录下新建 `index.jsp` 页面。
 
 ```jsp
@@ -334,8 +335,8 @@ public class AppQuickStater extends AbstractAnnotationConfigDispatcherServletIni
 ```
 
 配置 Tomcat：  
-![|800](attachments/Pasted%20image%2020220918172518.png)  
-![|800](attachments/Pasted%20image%2020220918172244.png)  
+![|800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918172518.png)  
+![|800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918172244.png)  
 配置完成之后，就可以启动 Tomcat 看看效果。  
-![](attachments/Pasted%20image%2020220918172808.png)  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220918172808.png)  
 浏览器访问 [localhost:8080/mvc/hello](http://localhost:8080/mvc/hello)，发现成功输出 `Hello SpringMVC !`。至此，Spring 源码环境搭建成功！🥳🥳🥳  

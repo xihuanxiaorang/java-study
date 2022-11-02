@@ -4,55 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "6bfe18fc01ad2bef",
+        "id": "173ccce72f289b04",
         "type": "tabs",
         "children": [
           {
-            "id": "2a74fe02345edb33",
+            "id": "9d6139caa789e9bd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
+                "file": "Spring/源码/Spring注册Bean的几种方式/README.md",
                 "mode": "source",
                 "source": false
               }
-            }
-          },
-          {
-            "id": "d65770b7d6ad4a41",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "4dd7eca1ea7e9042",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Spring/源码/Spring-AOP详解/RAEDME.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "28ff4f5468ce3a64",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {}
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -119,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring-AOP详解/RAEDME.md",
+                "file": "Spring/源码/Spring注册Bean的几种方式/README.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -136,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring-AOP详解/RAEDME.md"
+                "file": "Spring/源码/Spring注册Bean的几种方式/README.md"
               }
             }
           },
@@ -164,21 +131,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 374.5
+    "width": 478.5
   },
-  "ribbon": {
-    "mostRecentAction": ""
-  },
-  "active": "4dd7eca1ea7e9042",
+  "active": "9d6139caa789e9bd",
   "lastOpenFiles": [
-    "Spring/基础/事务/README.md",
-    "Spring/基础/AOP/README.md",
-    "Spring/扩展/Spring中添加Bean的多种方式.md",
-    "Spring/扩展/Spring扩展.md",
-    "Spring/源码/Spring-BeanDefinition加载流程分析/README.md",
-    "Spring/源码/README.md",
-    "Spring/扩展/Spring中各种Bean的添加方式.md",
-    "Spring/基础/JDBC/RAEDME.md",
-    "数据库编程/JDBC/README.md"
+    "数据库编程/MybatisPlus/README.md",
+    "Spring/源码/Spring注册Bean的几种方式/README.md",
+    "Spring/基础/Spring注解驱动开发/README.md",
+    "Spring/源码/Spring源码环境搭建/README.md",
+    "Springboot/源码/Springboot自动配置原理/README.md",
+    "面试题/MySQL/刷题/牛客网.md",
+    "Springboot/基础/注解篇.md",
+    "Springboot/源码/Springboot自动配置原理/Springboot 自动配置原理剖析.md",
+    "MySQL/README.md",
+    "面试题/MySQL/README.md"
   ]
 }

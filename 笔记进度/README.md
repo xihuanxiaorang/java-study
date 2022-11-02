@@ -1,11 +1,9 @@
 ---
-
 title: README
 tags: 看板 进度
 created: 2022-08-21 14:53:10
 modified: 2022-09-30 16:32:32
 kanban-plugin: basic
-
 ---
 
 ## TODO
@@ -25,21 +23,18 @@ kanban-plugin: basic
 - [ ] [Java8新特性](../JDK/进阶/Java8新特性/README.md)
 - [ ] Java 类加载过程
 - [ ] ASM
-- [ ] 状态模式之Spring Shell
+- [ ] 状态模式之 Spring Shell
 - [ ] 代码生成器
-
 
 ## PROCESSING
 
 - [ ] [Springboot自动配置原理](../Springboot/源码/Springboot自动配置原理/README.md)
-
 
 ## ToBeImproved
 
 - [ ] [JDBC](../数据库编程/JDBC/README.md)
 - [ ] [Spring-BeanDefinition 加载流程分析](../Spring/源码/Spring-BeanDefinition加载流程分析/README.md)
 - [ ] [Spring-AOP源码](../Spring/源码/AOP/RAEDME.md)
-
 
 ## Done
 

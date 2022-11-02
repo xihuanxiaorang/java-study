@@ -1,32 +1,32 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-protected Object[] elementData;
-protected int elementCount;
+
+protected Object[] elementData;  
+protected int elementCount;  
 protected int capacityIncrement; ^OvI9giMz
 
 Vector - 可变数组 ^o20GN8ro
 
-无参构造 new Vector<E>();  => this.elementData = new Object[10];this.capacityIncrement = 0;
-有参构造 new Vector<E>(initialCapacity); => this.elementData = new Object[initialCapacity];this.capacityIncrement = 0;
-有参构造 new Vector<E>(initialCapacity, capacityIncrement); => this.elementData = new Object[initialCapacity];this.capacityIncrement = capacityIncrement;
-其中，initialCapacity表示数组初始容量大小；capacityIncrement表示每次容量扩容时应该增加的大小 ^ZlSAOEqx
+无参构造 new Vector<E>();  => this.elementData = new Object[10];this.capacityIncrement = 0;  
+有参构造 new Vector<E>(initialCapacity); => this.elementData = new Object[initialCapacity];this.capacityIncrement = 0;  
+有参构造 new Vector<E>(initialCapacity, capacityIncrement); => this.elementData = new Object[initialCapacity];this.capacityIncrement = capacityIncrement;  
+其中，initialCapacity 表示数组初始容量大小；capacityIncrement 表示每次容量扩容时应该增加的大小 ^ZlSAOEqx
 
 初始化 ^p0cKMFme
 
-add(E e) => 添加一个元素，每次添加元素前判断是否需要进行扩容
-首先判断所需的最小容量是否大于当前数组的容量，如果大于的话，则需要进行扩容操作。
-扩容时判断当capacityIncrement<=0时，每次扩容至原来容量大小的2倍；当capacityIncrement>0时，每次扩容至原来容量大小+capacityIncrement ^Sj5qwXNW
+add(E e) => 添加一个元素，每次添加元素前判断是否需要进行扩容  
+首先判断所需的最小容量是否大于当前数组的容量，如果大于的话，则需要进行扩容操作。  
+扩容时判断当 capacityIncrement<=0 时，每次扩容至原来容量大小的 2 倍；当 capacityIncrement>0 时，每次扩容至原来容量大小 +capacityIncrement ^Sj5qwXNW
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

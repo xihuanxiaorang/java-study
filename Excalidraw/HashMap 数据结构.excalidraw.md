@@ -1,13 +1,11 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
+
 Node ^VcsCbEHl
 
 next ^nqV2fXB7
@@ -36,9 +34,9 @@ value ^RvNw5rE6
 
 key ^I192NGP0
 
-当红黑树的节点个数小于等于6时，红黑树转化为链表 ^l3oniCcx
+当红黑树的节点个数小于等于 6 时，红黑树转化为链表 ^l3oniCcx
 
-当链表长度大于等于8并且数组长度大于等于64时，链表转化为红黑树 ^sEQqreNh
+当链表长度大于等于 8 并且数组长度大于等于 64 时，链表转化为红黑树 ^sEQqreNh
 
 Node1 ^h5ZCQeWA
 
@@ -77,7 +75,9 @@ NULL ^htUcJlFn
 NULL ^g3vQ092E
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

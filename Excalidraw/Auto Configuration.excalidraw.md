@@ -1,24 +1,22 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-SpringBoot项目 ^SLxJHFpZ
 
-默认会自动扫描当前项目的package,
-将其中的配置类注入到IOC容器中 ^T0z5GtcE
+SpringBoot 项目 ^SLxJHFpZ
 
-IOC容器 ^3N431Teh
+默认会自动扫描当前项目的 package,  
+将其中的配置类注入到 IOC 容器中 ^T0z5GtcE
+
+IOC 容器 ^3N431Teh
 
 其他框架 ^nBlbS3Hi
 
-·mybatis
-·rabbitmq
+·mybatis  
+·rabbitmq  
 ··· ^0YrdJxXS
 
 Auto-Configuration ^sy0c6sqO
@@ -30,7 +28,9 @@ Auto-Configuration ^sy0c6sqO
 不支持直接扫描注入 ^cIcTXzbk
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

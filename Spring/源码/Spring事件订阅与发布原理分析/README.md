@@ -13,7 +13,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 ### 1.1. 创建 spring-event-study 模块
 
 选中项目右键新建一个模块，选择 Gradle，模块名填自己喜欢的即可，这里我就填 `spring-event-study`，最后点击确定即可。  
-![|1290](attachments/Pasted%20image%2020221019233312.png)
+![|1290](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221019233312.png)
 
 ### 1.2. 引入相关依赖
 
@@ -127,7 +127,7 @@ dependencies {
 
 在资源目录 `resources` 下创建一个 Spring 的核心配置文件 `applicationContext.xml` 。
 
-![](attachments/Pasted%20image%2020221019234741.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221019234741.png)
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -157,7 +157,7 @@ public class SpringEventTests {
 ```
 
 测试结果如下所示：  
-![](attachments/Pasted%20image%2020221019235023.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221019235023.png)
 
 ## 2. 源码分析
 
@@ -215,8 +215,8 @@ public abstract class ApplicationEvent extends EventObject {
 }
 ```
 
-继承结构体系图如下所示：
-![ApplicationEvent](attachments/ApplicationEvent.svg)
+继承结构体系图如下所示：  
+![ApplicationEvent](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/ApplicationEvent.svg)  
 从上图中可以看到除了咱们自定义的 `MyEvent` 事件之外，在 Spring 中还内置了很多其他事件，其中主要包括四个与 Spring 容器生命周期相关的事件：
 
 - `ContextStartedEvent`：当容器启动时发布，即调用 `start()` 方法，已启用意味着所有的 Lifecycle Bean 都已显示接收到了 start 信号。
@@ -348,8 +348,8 @@ public interface ApplicationEventMulticaster {
 
 #### 2.1.4. ApplicationEventPublisher
 
-> **事件发布器**，封装事件发布功能的接口。事件发布器将事件转发给事件多播器，然后由事件多播器根据事件类型决定转发给哪些事件监听器。
->![spring 事件流程|667](attachments/spring%20事件流程.jpg)
+> **事件发布器**，封装事件发布功能的接口。事件发布器将事件转发给事件多播器，然后由事件多播器根据事件类型决定转发给哪些事件监听器。  
+>![spring 事件流程|667](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/spring%20%E4%BA%8B%E4%BB%B6%E6%B5%81%E7%A8%8B.jpg)
 
 `ApplicationEventPublisher` Spring 提供的的事件发布器接口，在该接口中提供了一个 `publishEvent()` 方法。
 
@@ -484,7 +484,7 @@ protected void registerListeners() {
 
 分析源码最好的方式就是 Debug，咱们就在该方法处打一个断点，看下方法中各个变量的值。
 
-![](attachments/Pasted%20image%2020221020214241.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221020214241.png)
 
 从上图中可以看到，从容器中获取所有 `ApplicationListener` 类型的事件监听器组件的名称，获取到的组件名称有 `myApplicationEventListener`，该组件不正是咱们在测试案例中自定义事件监听器的第一种方式编写的事件监听器类的名称吗？
 
@@ -496,13 +496,13 @@ protected void registerListeners() {
 
 ##### 2.2.2.2. 方法上标注 `@EventListener` 注解方式
 
-前面一种注册事件监听器的方式还是很简单的，那么在方法上标注 `@EventListener` 注解的这种方式是如何注册事件监听器的呢？
+前面一种注册事件监听器的方式还是很简单的，那么在方法上标注 `@EventListener` 注解的这种方式是如何注册事件监听器的呢？咱们接着往下看。
 
-记性好的小伙伴可能还记得在 [Spring-BeanDefinition加载流程分析](../Spring-BeanDefinition加载流程分析/README.md) 这一篇文章中的 `2.3.3.2.3` 小节有提到过现在源码分析时需要用到的两个类，`EventListenerMethodProcessor` 后置处理器和 `DefaultEventListenerFactory` 默认的事件监听器工厂类，已经不记得的小伙伴可以回过头看一下。
+记性好的小伙伴可能还记得在 [Spring-BeanDefinition加载流程分析](../Spring-BeanDefinition加载流程分析/README.md) 这一篇文章的 `2.3.3.2.3` 小节中，最后会调用 `AnnotationConfigUtils` 工具类中的 `registerAnnotationConfigProcessors()` 方法 **往 Spring 容器中注册一些与注解有关的后置处理器的 bean 定义信息**，其中就包括现在源码分析时需要用到的两个类，`EventListenerMethodProcessor` 后置处理器和 `DefaultEventListenerFactory` 默认的事件监听器工厂类。
 
 在上面咱们不是说在本章的源码分析中，容器刷新方法除了上面主要的三步之外，为了实现使用 `@EventListener` 注解的方式注册监听器还会涉及到第五步和第十一步吗？现在正是时候！
 
-Spring 中大部分功能都是通过 bean 后置处理器扩展出来的，有时间的话一定要写一篇关于后置处理器的文章。
+Spring 中大部分功能都是通过 bean 后置处理器扩展出来的，以后有时间的话一定要专门写一篇关于后置处理器的文章。
 
 ###### 2.2.2.2.1. 注册事件监听器工厂
 
@@ -585,7 +585,7 @@ public static void invokeBeanFactoryPostProcessors(
 
 因为 `EventListenerMethodProcessor`bean 工厂后置处理器并没有实现 `PriorityOrdered` 和 `Ordered` 接口，所以会在最后实例化并执行其中的 `postProcessBeanFactory()` 方法。咱们打个断点查看一下，`EventListenerMethodProcessor`bean 工厂后置处理器的名称是否在 `nonOrderedPostProcessorNames` 变量中。
 
-![](attachments/Pasted%20image%2020221020233911.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221020233911.png)
 
 从上图中可以看到，`org.springframework.context.event.internalEventListenerProcessor` 其实就是 `EventListenerMethodProcessor`bean 工厂后置处理器在容器中的名称，因为 `EventListenerMethodProcessor` 是 Spring 内部的 bean 工厂后置处理器，所以在名称前面加了 `internal`，应该是为了方便区分吧。
 
@@ -618,7 +618,7 @@ public class EventListenerMethodProcessor
 
 让我们在该方法上打一个断点，看下获取到了哪些事件监听器工厂。
 
-![](attachments/Pasted%20image%2020221020235641.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221020235641.png)
 
 从图中可以很清楚地知道获取到的事件监听器工厂只有一个，就是上面提到过的 `DefaultEventListenerFactory` 默认的事件监听器工厂类。该类有什么用呢？既然是一个工厂类，并且与事件监听器有关，盲猜是用于生成事件监听器的，猜的对不对呢？咱们接着往下看。
 
@@ -781,7 +781,7 @@ private void processBean(final String beanName, final Class<?> targetType) {
 
 在咱们的测试案例中只有一个 `MyEventHandler` 类中的 `handleEvent()` 方法上标注了 `@EventListener` 注解，咱们打个断点看一下效果。
 
-![](attachments/Pasted%20image%2020221021010955.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020221021010955.png)
 
 #### 2.2.3. 发布事件
 
@@ -883,6 +883,6 @@ private void doInvokeListener(ApplicationListener listener, ApplicationEvent eve
 
 最后贴张图总结一下，有需要的小伙伴可以再对照着这张图回顾一下。
 
-![](attachments/Spring监听器原理.jpg)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Spring%E7%9B%91%E5%90%AC%E5%99%A8%E5%8E%9F%E7%90%86.jpg)
 
 至此，关于 Spring 事件订阅与发布原理的分析流程就已经圆满结束了，撒花！🌸🌸🌸

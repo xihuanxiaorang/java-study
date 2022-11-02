@@ -7,7 +7,7 @@ modified: 2022-10-14 14:33:59
 
 # 1、简介
 
-![|200](attachments/202112151929211.png)<br />[Mybatis-Plus](https://baomidou.com/)（简称 MP）是一个 [Mybatis](https://mybatis.net.cn/) 的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提升效率而生。
+![|200](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202112151929211.png)<br />[Mybatis-Plus](https://baomidou.com/)（简称 MP）是一个 [Mybatis](https://mybatis.net.cn/) 的增强工具，在 Mybatis 的基础上只做增强不做改变，为简化开发、提升效率而生。
 
 # 2、特性
 
@@ -27,7 +27,7 @@ modified: 2022-10-14 14:33:59
 
 # 3、框架结构
 
-![](attachments/202112120847638.jpeg)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202112120847638.jpeg)
 
 # 4、快速开始📌
 
@@ -202,7 +202,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ```
 
-![](attachments/202112121000587.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202112121000587.png)
 
 # 6、Mapper CRUD📌
 
@@ -222,7 +222,7 @@ public void testInsert() {
 }
 ```
 
-![|700](attachments/Pasted%20image%2020220915050058.png)<br />💡注意：主键 id 已经反填。
+![|700](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050058.png)<br />💡注意：主键 id 已经反填。
 
 ## 6.2、主键生成策略
 
@@ -235,12 +235,12 @@ public void testInsert() {
 1. 在实体类字段上增加 `@TableId_(_type = IdType._AUTO)_`
 1. 数据库字段一定要是自增！
 
-![|800](attachments/Pasted%20image%2020220915050122.png)
+![|800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050122.png)
 
 3. 再次测试插入
 
-![](attachments/Pasted%20image%2020220915050138.png)<br />  
-![|700](attachments/Pasted%20image%2020220915050228.png)<br />通过注解注解 [@TableId](https://baomidou.com/pages/223848/#tableid) + [@IdType](https://baomidou.com/pages/223848/#idtype) 来配置主键的生成策略：
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050138.png)<br />  
+![|700](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050228.png)<br />通过注解注解 [@TableId](https://baomidou.com/pages/223848/#tableid) + [@IdType](https://baomidou.com/pages/223848/#idtype) 来配置主键的生成策略：
 
 | 值 | 描述 |
 | --- | --- |
@@ -277,7 +277,7 @@ public void testUpdate() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915050311.png)<br />可以看出 sql 语句中赋值了哪些字段就更新哪些字段！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050311.png)<br />可以看出 sql 语句中赋值了哪些字段就更新哪些字段！
 
 ## 6.4、自动填充功能
 
@@ -292,7 +292,7 @@ alter table user add column update_time DATETIME NULL default CURRENT_TIMESTAMP 
 alter table user add column create_time DATETIME NULL default CURRENT_TIMESTAMP comment '创建时间';
 ```
 
-![](attachments/Pasted%20image%2020220915050323.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050323.png)
 
 2. 实体类增加 `createTime` 和 `updateTime` 字段
 
@@ -321,8 +321,8 @@ public void testInsert() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915050337.png)<br />💡注意：主键 id 反填，但是创建时间与更新时间并没有反填！<br />  
-![](attachments/Pasted%20image%2020220915050407.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050337.png)<br />💡注意：主键 id 反填，但是创建时间与更新时间并没有反填！<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050407.png)
 
 ```ad-important
 💣数据库填写的时间与当前系统的时间相差 8 个小时：<br />![|400](attachments/Pasted%20image%2020220915050456.png)<br />不用慌，使用 `select now();` 来查看 mysql 时间，如果时间与当前系统时间一致，则说明 mysql 的时间没有问题，问题出在 java 时间上，将 jdbc url 参数修改成 `serverTimezone=Asia/Shanghai`；如果 mysql 时间与当前系统不一致，则使用以下 sql 设置 mysql 时区：<br />show variables like '%time_zone%'; -- 查询当前时区<br />set global time_zone='+8:00';  -- 在标准时区上加 +8 小时,即东 8 区时间<br />set time_zone = '+08:00';<br />flush privileges; -- 立即生效<br />再次执行插入操作，发现此时插入的时间与当前系统的时间终于一致！🎉🎉🎉<br />![](attachments/Pasted%20image%2020220915050701.png)  
@@ -338,8 +338,8 @@ public void testUpdate() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915050826.png)<br />  
-![|1000](attachments/Pasted%20image%2020220915050901.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050826.png)<br />  
+![|1000](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050901.png)
 
 ### 6.4.2、代码级别
 
@@ -407,10 +407,10 @@ public enum FieldFill {
 ```
 
 删除数据库中字段的默认值与更新操作！<br />  
-![800](attachments/Pasted%20image%2020220915050931.png)<br />  
+![800](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915050931.png)<br />  
 1、插入测试：<br />  
-![](attachments/Pasted%20image%2020220915051011.png)<br />发现使用官网的方法，创建时间与更新时间都为 null，这是为什么呢？？找到源码，发现 自动填充的字段必须要注解了 fill，并且字段名和字段属性都要匹配才会进行填充！所以当我们的字段类型是 `java.util.Date` ，而填充的类型是 `LocalDateTime` 类型时，就会填充不进去。<br />  
-![](attachments/Pasted%20image%2020220915051032.png)<br />那么如何修改呢？
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051011.png)<br />发现使用官网的方法，创建时间与更新时间都为 null，这是为什么呢？？找到源码，发现 自动填充的字段必须要注解了 fill，并且字段名和字段属性都要匹配才会进行填充！所以当我们的字段类型是 `java.util.Date` ，而填充的类型是 `LocalDateTime` 类型时，就会填充不进去。<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051032.png)<br />那么如何修改呢？
 
 ```java
 @Slf4j
@@ -431,7 +431,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051054.png)<br />可以看到，改完之后，创建时间和更新时间都已经有值并且也反填回来了！🎉🎉🎉<br />2、更新测试：
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051054.png)<br />可以看到，改完之后，创建时间和更新时间都已经有值并且也反填回来了！🎉🎉🎉<br />2、更新测试：
 
 ```java
 @Test
@@ -441,7 +441,7 @@ public void testUpdate() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051102.png)<br />可以看到，我的更新操作当中并没有主动给更新时间赋值，但是生成的 sql 语句中 有 `update_time` 这个字段，而且给它赋值当前时间！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051102.png)<br />可以看到，我的更新操作当中并没有主动给更新时间赋值，但是生成的 sql 语句中 有 `update_time` 这个字段，而且给它赋值当前时间！
 
 ## 6.5、乐观锁
 
@@ -493,7 +493,7 @@ public void testUpdate() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051120.png)<br />从上面打印出来的 sql 语句发现更新的时候并没有更新 version 版本号，为什么会这样呢？🤔
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051120.png)<br />从上面打印出来的 sql 语句发现更新的时候并没有更新 version 版本号，为什么会这样呢？🤔
 
 ```java
 @Test
@@ -504,8 +504,8 @@ public void testUpdate2() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051159.png)<br />查看源码发现：<br />  
-![](attachments/Pasted%20image%2020220915051222.png)<br />📢结论：使用乐观锁之前一定要先查询拿到版本号，如果不拿到版本号就直接更新是更新不了的；并且 **如果版本号为 null，再通过版本号去更新数据，无论怎样更新该条数据都不会使版本号 +1，而是一直为 null**。<br />接下来测试一下模仿多线程下更新用户，看看乐观锁是否起到作用？
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051159.png)<br />查看源码发现：<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051222.png)<br />📢结论：使用乐观锁之前一定要先查询拿到版本号，如果不拿到版本号就直接更新是更新不了的；并且 **如果版本号为 null，再通过版本号去更新数据，无论怎样更新该条数据都不会使版本号 +1，而是一直为 null**。<br />接下来测试一下模仿多线程下更新用户，看看乐观锁是否起到作用？
 
 ```java
 @Test
@@ -521,8 +521,8 @@ public void testUpdate3() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051232.png)<br />🤔从上面可以看出查询了两遍数据库，感觉一级缓存没有生效，为什么要创建一个新的 SqlSession ？？？<br />  
-![](attachments/Pasted%20image%2020220915051250.png)<br />从上图可以看出乐观锁已经生效，后面更新的数据是不会被更新的！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051232.png)<br />🤔从上面可以看出查询了两遍数据库，感觉一级缓存没有生效，为什么要创建一个新的 SqlSession ？？？<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051250.png)<br />从上图可以看出乐观锁已经生效，后面更新的数据是不会被更新的！
 
 ## 6.6、[查询操作](https://baomidou.com/pages/49cc81/#select) 
 
@@ -561,7 +561,7 @@ public void testSelectByBatchId(){
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051303.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051303.png)
 
 2. 根据 map 中的条件进行查询
 
@@ -576,7 +576,7 @@ public void testSelectByMap() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051318.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051318.png)
 
 ## 6.8、分页查询
 
@@ -609,7 +609,7 @@ public void testPage() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051329.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/Pasted%20image%2020220915051329.png)
 
 ## 6.9、[删除操作](https://baomidou.com/pages/49cc81/#delete) 
 
@@ -631,7 +631,7 @@ public void testDeleteById() {
 }
 ```
 
-![image.png](https://cdn.nlark.com/yuque/0/2021/png/1554080/1639793801515-de640560-1f16-489c-a748-4d5af4fdd68f.png#clientId=ube9bdc9a-1e88-4&from=paste&height=497&id=ub0da8031&originHeight=497&originWidth=1423&originalType=binary&ratio=1&size=499348&status=done&style=none&taskId=u23d2c8de-b9c2-4810-af17-4ba707a6c23&width=1423)
+![image](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310715102.png)
 
 ```java
 @Test
@@ -640,7 +640,7 @@ public void testDeleteByBatchId() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051342.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310715831.png)
 
 ```java
 @Test
@@ -651,7 +651,7 @@ public void testDeleteMap(){
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051352.png)
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310715732.png)
 
 ## 6.10、逻辑删除
 
@@ -677,7 +677,7 @@ public void testDeleteMap(){
 
 - 逻辑删除是为了方便数据恢复和保护数据本身价值等等的一种方案，但实际就是删除
 - 如果你需要频繁查出来看就不应使用逻辑删除，而是以一个状态去表示  
-``` 
+```
 
 ### 6.10.1、增加字段以及注解
 
@@ -709,7 +709,7 @@ public void testDeleteById() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051405.png)<br />从上图可以发现，走的不再是 delete 语句，而是更新语句！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310715078.png)<br />从上图可以发现，走的不再是 delete 语句，而是更新语句！
 
 ```java
 @Test
@@ -719,7 +719,7 @@ public void testSelectById() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051418.png)<br />从上图可以发现查询的时候 条件上自动带上了 deleted = 0，表示逻辑删除的记录是查不到的！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716803.png)<br />从上图可以发现查询的时候 条件上自动带上了 deleted = 0，表示逻辑删除的记录是查不到的！
 
 ## 6.11、性能分析插件
 
@@ -736,7 +736,7 @@ public void testSelectById() {
 - 批量操作不打印 sql，去除 excludecategories 中的 batch
 - 批量操作打印重复的问题请使用 MybatisPluLogFactory（3.2.1 新增）
 - 该插件有性能损耗，不建议生产环境使用  
-```  
+```
 
 ### 6.11.1、引入依赖
 
@@ -795,7 +795,7 @@ public void testSelectById() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051437.png)<br />从上图发现具体的 SQL 语句以及执行时长！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716034.png)<br />从上图发现具体的 SQL 语句以及执行时长！
 
 ## 6.12、[条件构造器](https://baomidou.com/pages/10c804/#abstractwrapper)📌
 
@@ -811,7 +811,7 @@ public void testWrapper() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051457.png)<br />2.查询名字是 `J` 开头并且年龄大于 18 的用户
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716277.png)<br />2.查询名字是 `J` 开头并且年龄大于 18 的用户
 
 ```java
 @Test
@@ -823,7 +823,7 @@ public void testWrapper1() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051506.png)<br />3.查询所有的用户并且按照年龄升序排列
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716741.png)<br />3.查询所有的用户并且按照年龄升序排列
 
 ```java
 @Test
@@ -835,7 +835,7 @@ public void testWrapper2() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051516.png)<br />4.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716008.png)<br />4.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
 
 ```java
 @Test
@@ -847,7 +847,7 @@ public void testWrapper3() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051528.png)<br />上面使用 `QueryWrapper` 查询时，参数中 column 那一列全是写死的，即硬编码或者魔法代码，如果这个时候数据库表中字段被修改了，这个时候在编译时是不会报错的，只有等到运行到这里的时候才会报错，所以有没有更加好一点的办法呢？使用 `LamdaQueryWrapper` 就可以解决这个问题！<br />5.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716897.png)<br />上面使用 `QueryWrapper` 查询时，参数中 column 那一列全是写死的，即硬编码或者魔法代码，如果这个时候数据库表中字段被修改了，这个时候在编译时是不会报错的，只有等到运行到这里的时候才会报错，所以有没有更加好一点的办法呢？使用 `LamdaQueryWrapper` 就可以解决这个问题！<br />5.查询名字是 `J` 开头或者年龄大于 24 岁的用户，并且按照年龄升序排列
 
 ```java
 @Test
@@ -859,7 +859,7 @@ public void testWrapper4() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051536.png)<br />从上图可以看出来，`LamdaQueryWrapper` 产生的 SQL 语句和 `QueryWrapper` 产生的 SQL 语句一样，但是 `LamadQueryWrapper` 编码的时候却比 `QueryWrapper` 优秀而且便于维护，所以以后尽量使用 `LamadQueryWrapper`。<br />6.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716647.png)<br />从上图可以看出来，`LamdaQueryWrapper` 产生的 SQL 语句和 `QueryWrapper` 产生的 SQL 语句一样，但是 `LamadQueryWrapper` 编码的时候却比 `QueryWrapper` 优秀而且便于维护，所以以后尽量使用 `LamadQueryWrapper`。<br />6.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26
 
 ```java
 @Test
@@ -871,7 +871,7 @@ public void testWrapper5() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051721.png)<br />7.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26（将上面的条件与赋值分开）
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716503.png)<br />7.更新名字为 `Jone` 的用户的名字为 'xiaorang' 和 年龄 = 26（将上面的条件与赋值分开）
 
 ```java
 @Test
@@ -884,7 +884,7 @@ public void testWrapper6() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051728.png)<br />从上图可以发现，查询与赋值分开后，会比上面那种更新生成的 SQL 语句多更新一个更新时间字段。<br />以上就列举这么多，看上去还挺简单的，像这种哪里不懂就可以查询官方文档。
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716527.png)<br />从上图可以发现，查询与赋值分开后，会比上面那种更新生成的 SQL 语句多更新一个更新时间字段。<br />以上就列举这么多，看上去还挺简单的，像这种哪里不懂就可以查询官方文档。
 
 # 7、代码生成器📌
 
@@ -941,7 +941,7 @@ public class Knife4jConfig {
 ```
 
 启动程序，发现直接报错？这是什么鬼？？？<br />  
-![|300](attachments/Pasted%20image%2020220915051816.png)<br />  
+![|300](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310716873.png)<br />  
 在网上找了以下解决方案，引入 knife4j 会出现这个错误，需要在配置文件中加入以下配置才行：
 
 ```yaml
@@ -1005,7 +1005,7 @@ public static void main(String[] args) {
 ```
 
 执行 main 方法，输入想要自动生成代码的表名，回车之后就会自动生成了！（注意：使用 @Test 方法测试时，控制台输入无效，查阅资料好像是 idea 的 bug，所以改成 main 方法）。<br />  
-![|300](attachments/Pasted%20image%2020220915051851.png)<br />  
+![|300](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717414.png)<br />  
 用红框框中的全是自动生成的代码，感觉极大的提高了开发效率！
 
 # 8、批量插入📌
@@ -1038,7 +1038,7 @@ public class BatchSaveTest {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051911.png)<br />从上图可以看出循环单次插入 1W 条数据需要 3 分多钟，有点难接受！就别提 10W 条数据了，反正我是测试到一半就停下了，挺难等的！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717445.png)<br />从上图可以看出循环单次插入 1W 条数据需要 3 分多钟，有点难接受！就别提 10W 条数据了，反正我是测试到一半就停下了，挺难等的！
 
 ## 8.2、MP 批量插入
 
@@ -1062,13 +1062,13 @@ public class BatchSaveTest {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915051922.png)<br />测试一下，发现居然大概要 1 分多钟，有点不能忍，按理说批量保存应该挺快的才对啊！查看一下源码：<br />  
-![|700](attachments/Pasted%20image%2020220915051933.png)<br />  
-![](attachments/Pasted%20image%2020220915051952.png)<br />从上图可以发现 mybatis-plus 内部源码实际上是 **不支持批量插入** 的，IService 接口下的 **saveBatch 方法实际上是循环插入**。那该怎么办呢？😱  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717322.png)<br />测试一下，发现居然大概要 1 分多钟，有点不能忍，按理说批量保存应该挺快的才对啊！查看一下源码：<br />  
+![|700](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717605.png)<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717458.png)<br />从上图可以发现 mybatis-plus 内部源码实际上是 **不支持批量插入** 的，IService 接口下的 **saveBatch 方法实际上是循环插入**。那该怎么办呢？😱  
 
 ```ad-important
 🎨通过 [查询资料](https://blog.csdn.net/weixin_33694136/article/details/113430434) 发现 MySQL JDBC 驱动默认情况下会无视 executeBatch() 语句，会把批量语句拆散一条一条的发给数据库执行，批量插入实际上是单条插入，直接造成较低的性能。<br />只有把 `rewriteBatchedStatements` 参数置为 true, 驱动才会帮你批量执行 SQL，另外这个选项对 insert/update/delete 都是生效的。
-```  
+```
 
 所以当前数据源配置：
 
@@ -1082,8 +1082,8 @@ spring:
 ```
 
 再测试一下，发现插入 1W 条数据居然只要 2~3 秒，10W 条数据只要 12 秒钟，牛皮！！！<br />  
-![](attachments/Pasted%20image%2020220915052005.png)<br />  
-![](attachments/Pasted%20image%2020220915052023.png)<br />上面的解决方案是服务器 ->数据库层级的，速度慢还是需要在服务器层级上解决。
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717021.png)<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717443.png)<br />上面的解决方案是服务器 ->数据库层级的，速度慢还是需要在服务器层级上解决。
 
 ## 8.3、原生批量插入
 
@@ -1127,14 +1127,14 @@ void batchSave3() {
 }
 ```
 
-![](attachments/Pasted%20image%2020220915052035.png)<br />从上图可以发现居然只要 1 秒多钟就完成了插入全部数据，但是别高兴太早，当插入 10W 条数据的时候，居然报错了！<br />  
-![|1000](attachments/Pasted%20image%2020220915052050.png)<br />  
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717604.png)<br />从上图可以发现居然只要 1 秒多钟就完成了插入全部数据，但是别高兴太早，当插入 10W 条数据的时候，居然报错了！<br />  
+![|1000](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717007.png)<br />  
 那么这是为什么呢？查阅了一下资料，原来是我们使用原生方法将 10W 条数据拼接成一条 SQL 语句执行时，由于拼接的 SQL 过大，超出了设置的 4M 大小，所以程序就报错了！<br />  
 查看 `max_allowed_packet ` 大小的命令： `show VARIABLES like'%max_allowed_packet%';`<br />  
-![|400](attachments/Pasted%20image%2020220915052129.png)<br />  
+![|400](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717959.png)<br />  
 我们可以临时更改 MySQL 最大执行 SQL 大小为 10M ：`set global max_allowed_packet = 10*1024*1024;`<br />  
 设置完成之后，程序执行成功并且插入全部的数据只要 6 秒钟，是真的恐怖！<br />  
-![](attachments/Pasted%20image%2020220915052200.png)<br />但是上面的解决方案任是治标不治本，因为我们无法预测程序钟最大的执行 SQL 到底有多大。所以不推荐使用！
+![](https://cdn.jsdelivr.net/gh/xihuanxiaorang/images/202210310717987.png)<br />但是上面的解决方案任是治标不治本，因为我们无法预测程序钟最大的执行 SQL 到底有多大。所以不推荐使用！
 
 ## 8.4、参考文档
 

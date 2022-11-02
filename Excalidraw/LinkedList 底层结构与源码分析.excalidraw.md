@@ -1,39 +1,37 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
+
 LinkedList - 双向链表 ^UeynDHph
 
-private Node<E> first = null;
-private Node<E> last = null;
+private Node<E> first = null;  
+private Node<E> last = null;  
 private int size = 0; ^M1ITKymo
 
-private Node<E> prev;
-private Node<E> next;
+private Node<E> prev;  
+private Node<E> next;  
 private E item; ^D5TU7CJn
 
 Node<E> - 节点 ^kUyROJ6e
 
 初始化 ^diFxI4sT
 
-add(E e) => 添加一个元素，添加到链表的最后面
-1.定义一个临时节点L指向当前last
-2.新建一个节点newNode用于保存e，newNode的prev指向last，newNode的last=null
-3.将last指向当前新建的节点，last = newNode
-4.如果临时节点L=NULL，则表示当前链表中只有当前的新建的节点，那么将first也指向newNode；
-如果临时节点L != NULL，则表示当前链表中还有其他节点，则将节点L的next指向newNode
-5.size++，数量+1 ^DyjO2EJY
+add(E e) => 添加一个元素，添加到链表的最后面  
+1.定义一个临时节点 L 指向当前 last  
+2.新建一个节点 newNode 用于保存 e，newNode 的 prev 指向 last，newNode 的 last=null  
+3.将 last 指向当前新建的节点，last = newNode  
+4.如果临时节点 L=NULL，则表示当前链表中只有当前的新建的节点，那么将 first 也指向 newNode；  
+如果临时节点 L != NULL，则表示当前链表中还有其他节点，则将节点 L 的 next 指向 newNode  
+5.size++，数量 +1 ^DyjO2EJY
 
-Node1{
-prev = NULL;
-next = null;
-item = e;
+Node1{  
+prev = NULL;  
+next = null;  
+item = e;  
 } ^z5BlyKrf
 
 first ^wHBIOSbj
@@ -42,46 +40,46 @@ last ^wAJdLiIS
 
 第一次添加元素情况 ^s3ved3oI
 
-Node1{
-prev = NULL;
-next = Node2;
-item = e;
+Node1{  
+prev = NULL;  
+next = Node2;  
+item = e;  
 } ^vadYUbSW
 
 first ^ttrMv66i
 
-Node2{
-prev = Node1;
-next = null;
-item = e2;
+Node2{  
+prev = Node1;  
+next = null;  
+item = e2;  
 } ^4UvWRuUm
 
 第二次添加元素情况 ^OJyC84bf
 
-添加元素的关键点在于让当前新增节点的prev指向last，last的next指向新增的节点 ^8BQkLN7c
+添加元素的关键点在于让当前新增节点的 prev 指向 last，last 的 next 指向新增的节点 ^8BQkLN7c
 
 last ^UQFyC2BO
 
-remove() => 删除一个元素，删除的是第一个节点
-1.定义一个临时节点f指向当前first
-2.定义一个临时节点next指向临时节点的next节点，即原来链表中当前要被删除节点的下一个节点
-3.将节点f的item置为null，next置为null，为了让GC回收
-4.将first指向临时节点next，即fisrt指向下一个节点
-5.如果临时节点next=null，则表示当前链表中只有当前要被删除的节点，所以将last置为null；
-如果临时节点next != null，则将临时节点next的prev置为null
-其中的临时节点next可以替换为下一个节点
-6.size--，数量-1 ^i2f1uKfY
+remove() => 删除一个元素，删除的是第一个节点  
+1.定义一个临时节点 f 指向当前 first  
+2.定义一个临时节点 next 指向临时节点的 next 节点，即原来链表中当前要被删除节点的下一个节点  
+3.将节点 f 的 item 置为 null，next 置为 null，为了让 GC 回收  
+4.将 first 指向临时节点 next，即 fisrt 指向下一个节点  
+5.如果临时节点 next=null，则表示当前链表中只有当前要被删除的节点，所以将 last 置为 null；  
+如果临时节点 next != null，则将临时节点 next 的 prev 置为 null  
+其中的临时节点 next 可以替换为下一个节点  
+6.size--，数量 -1 ^i2f1uKfY
 
-Node1{
-prev = NULL;
-next = Node2;
-item = e1;
+Node1{  
+prev = NULL;  
+next = Node2;  
+item = e1;  
 } ^CPIRM2sT
 
-Node2{
-prev = Node1;
-next = NULL;
-item = e2;
+Node2{  
+prev = Node1;  
+next = NULL;  
+item = e2;  
 } ^LSOK6bff
 
  ^y50cLjcu
@@ -92,10 +90,10 @@ last ^3JEKWeyY
 
 未删除头节点前的情况 ^vK8cZG6K
 
-Node2{
-prev = NULL;
-next = NULL;
-item = e2;
+Node2{  
+prev = NULL;  
+next = NULL;  
+item = e2;  
 } ^CTv9fr6c
 
 first ^PgS0it5s
@@ -104,10 +102,12 @@ last ^cNI8YQ6b
 
 删除头节点后的情况 ^D1BA6ELf
 
-删除元素的关键点在于让当前要被删除节点的下一个节点的prev置为null ^lIvKLEeD
+删除元素的关键点在于让当前要被删除节点的下一个节点的 prev 置为 null ^lIvKLEeD
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

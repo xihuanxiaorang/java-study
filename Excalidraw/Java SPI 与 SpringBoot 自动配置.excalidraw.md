@@ -1,13 +1,11 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
+
 Java SPI 的设计思想 ^EyK3lsZi
 
 1 ^zmRTvB6Y
@@ -16,35 +14,37 @@ Java SPI 的设计思想 ^EyK3lsZi
 
 2 ^QwAaTl71
 
-谁提供jar包，也负责提供配置文件：
+谁提供 jar 包，也负责提供配置文件：  
 ·高内聚低耦合，代码和配置一肩挑 ^zfvK9MFL
 
 3 ^E9PBRhaK
 
-使用ClassLoader的getResource和getResources方法
-来读取classpath中的配置文件 ^BOzEbEQo
+使用 ClassLoader 的 getResource 和 getResources 方法  
+来读取 classpath 中的配置文件 ^BOzEbEQo
 
 Java SPI 的设计思想 ^ztyXzSLV
 
 1 ^swfjgPZ3
 
-使用约定的配置文件：
-1.文件路径是 META-INF/spring.factories
-2.文件内容是"key=value1,value2,...valueN"的格式。
-其中key是"EnableAutoConfiguration"的类名，value是自动配置类的类名 ^SHXhBGft
+使用约定的配置文件：  
+1.文件路径是 META-INF/spring.factories  
+2.文件内容是 "key=value1,value2,...valueN" 的格式。  
+其中 key 是 "EnableAutoConfiguration" 的类名，value 是自动配置类的类名 ^SHXhBGft
 
 2 ^RRxV1rrb
 
-提供自动配置类的jar包中，也同时提供配置文件
+提供自动配置类的 jar 包中，也同时提供配置文件  
 META-INF/spring.factories ^gPUZsW0Y
 
 3 ^c7c47ilZ
 
-和SPI一样，使用ClassLoader的getResource和getResources方法
-来读取classpath中的配置文件 ^3VRVzSqH
+和 SPI 一样，使用 ClassLoader 的 getResource 和 getResources 方法  
+来读取 classpath 中的配置文件 ^3VRVzSqH
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

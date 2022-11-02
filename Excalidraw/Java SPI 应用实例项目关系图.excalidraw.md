@@ -1,13 +1,11 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
+
 simple-company ^tarRvEF4
 
 Application ^IwL6ADby
@@ -23,7 +21,9 @@ simple-isp-unicom ^rU51Qn0x
 Service-Provider ^DMopCkA1
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

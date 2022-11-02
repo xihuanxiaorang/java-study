@@ -1,5 +1,5 @@
 ---
-title: Spring注解驱动开发
+title: Spring 注解驱动开发
 tags: spring 注解
 created: 2022-08-27 01:31:25
 modified: 2022-09-17 13:37:46
@@ -16,7 +16,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 ### 2.1. @Configuration&@Bean 注解
 
-先来回顾一下使用 XML 配置文件的方式来创建和管理 bean 对象。  先来创建一个类：
+先来回顾一下使用 XML 配置文件的方式来创建和管理 bean 对象。先来创建一个类：
 
 ```java
 public class Person {  
@@ -80,7 +80,7 @@ public class SpringXmlConfigurationTest {
 测试结果如下所示:  
 ![](attachments/Pasted%20image%2020220827203738.png)  
 
-在上面已经简单演示如何通过 XML 配置文件的方式将 JavaBean 对象注册到 Spring 容器中。那么使用注解的方式又该如何实现呢？使用注解的方式比使用 XML 配置文件的方式要简单的多，先创建一个 `MainConfig` 类，并 **在该类上添加 `@Configuration` 注解用来标注该类是 Spring 中的一个配置类**，最后 **通过 `@Bean` 注解将 `Person` 类对象注册到 Spring 容器中**。  
+在上面已经简单演示如何通过 XML 配置文件的方式将 JavaBean 对象注册到 Spring 容器中。那么使用注解的方式又该如何实现呢？使用注解的方式比使用 XML 配置文件的方式要简单的多，首先创建一个类，并 **在该类上添加 `@Configuration` 注解用来标识该类是 Spring 中的一个配置类**，最后 **通过在该类中的某个方法上添加 `@Bean` 注解标识将该方法的返回值对象注册到 Spring 容器中**。  
 
 ```java
 @Configuration  
@@ -396,7 +396,7 @@ public @interface MyComponent {
 ##### 2.2.3.2. 标注自定义注解的类
 
 ```
-```java
+​```java
 @MyComponent  
 public class Man {  
 }
@@ -840,7 +840,7 @@ public interface ImportSelector {
 }
 ```
 
-`ImportSelector` 接口主要作用是收集需要导入的配置类，其中的 `selectImports()` 方法的返回值就是 **需要向 Spring 容器中导入的类的<u>全限定类名</u>**。如果该接口的实现类同时实现 `EnvironmentAware`、`BeanFactoryAware`、`BeanClassLoaderAware` 和 `ResourceLoaderAware` 接口，那么在调用其 `selectImports()` 方法之前会先调用上述接口中对应的方法，如果需要在所有的 `@Configuration` 类处理完再导入，那么可以实现 `DeferredImportSelector` 接口。  
+`ImportSelector` 接口主要作用是收集需要导入的配置类，其中的 `selectImports()` 方法的返回值就是 **需要向 Spring 容器中导入的类的<u>完全限定名</u>**。如果该接口的实现类同时实现 `EnvironmentAware`、`BeanFactoryAware`、`BeanClassLoaderAware` 和 `ResourceLoaderAware` 接口，那么在调用其 `selectImports()` 方法之前会先调用上述接口中对应的方法，如果需要在所有的 `@Configuration` 类处理完再导入，那么可以实现 `DeferredImportSelector` 接口。  
 在 `selectImports()` 方法中，存在一个 `AnnotationMetadata` 类型的参数，这个参数能够获取到当前标注 `@Import` 注解的类的所有注解信息，也就说不仅能获取到 `@Import` 注解里面的信息，还能获取到类上其他注解的信息。
 
 需求：使用 `ImportSelector` 接口的方式向 Spring 容器中导入 `yellow` 和 `blue` 两个组件。

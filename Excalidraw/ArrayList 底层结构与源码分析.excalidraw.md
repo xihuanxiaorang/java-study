@@ -1,29 +1,29 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-transient Object[] elementData;
+
+transient Object[] elementData;  
 private int size = 0; ^lxE17dBJ
 
 ArrayList - 可变数组 ^kT6uxKVV
 
-无参构造 new ArrayList<E>() => this.elementData = {};
+无参构造 new ArrayList<E>() => this.elementData = {};  
 有参构造 new ArrayList<E>(initialCapacity) => this.elementData =  new Object[initialCapacity]; ^s8hjXJtP
 
 初始化 ^rjtBS96L
 
-add(E e) => 添加一个元素，每次添加元素之前都需要判断是否需要扩容，
-首先判断所需的最小容量是否大于当前数组的容量，如果大于的话，则需要进行扩容操作。
-扩容时分为两种情况：如果当前容量为0，则将容量扩大至默认容量10；如果当前容量不为0，则将数组容量扩大至当前容量的1.5倍。 ^NYVI3RSh
+add(E e) => 添加一个元素，每次添加元素之前都需要判断是否需要扩容，  
+首先判断所需的最小容量是否大于当前数组的容量，如果大于的话，则需要进行扩容操作。  
+扩容时分为两种情况：如果当前容量为 0，则将容量扩大至默认容量 10；如果当前容量不为 0，则将数组容量扩大至当前容量的 1.5 倍。 ^NYVI3RSh
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",

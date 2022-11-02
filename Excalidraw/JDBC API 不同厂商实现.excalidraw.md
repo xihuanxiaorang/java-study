@@ -1,14 +1,12 @@
 ---
-
 excalidraw-plugin: parsed
 tags: [excalidraw]
-
 ---
 ==⚠  Switch to EXCALIDRAW VIEW in the MORE OPTIONS menu of this document. ⚠==
 
-
 # Text Elements
-Java程序应用 ^o8Oc2Fzc
+
+Java 程序应用 ^o8Oc2Fzc
 
 JDBC API ^rmzYssp4
 
@@ -25,7 +23,9 @@ MySQL 数据库 ^mmAmCrmU
 SQL Server 数据库 ^pI8aWB7Z
 
 %%
+
 # Drawing
+
 ```json
 {
 	"type": "excalidraw",
