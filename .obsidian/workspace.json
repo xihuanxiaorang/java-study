@@ -4,18 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "173ccce72f289b04",
+        "id": "92dee97bc7543c18",
         "type": "tabs",
         "children": [
           {
-            "id": "9d6139caa789e9bd",
+            "id": "8588e08e1d8d3366",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "excalidraw",
               "state": {
-                "file": "Spring/源码/Spring注册Bean的几种方式/README.md",
-                "mode": "source",
-                "source": false
+                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md"
               }
             }
           }
@@ -38,7 +36,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "红黑树",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": true,
@@ -86,7 +84,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Spring/源码/Spring注册Bean的几种方式/README.md",
+                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -103,7 +101,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Spring/源码/Spring注册Bean的几种方式/README.md"
+                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md"
               }
             }
           },
@@ -131,19 +129,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 478.5
+    "width": 326.5
   },
-  "active": "9d6139caa789e9bd",
+  "active": "8588e08e1d8d3366",
   "lastOpenFiles": [
-    "数据库编程/MybatisPlus/README.md",
-    "Spring/源码/Spring注册Bean的几种方式/README.md",
-    "Spring/基础/Spring注解驱动开发/README.md",
-    "Spring/源码/Spring源码环境搭建/README.md",
-    "Springboot/源码/Springboot自动配置原理/README.md",
-    "面试题/MySQL/刷题/牛客网.md",
-    "Springboot/基础/注解篇.md",
-    "Springboot/源码/Springboot自动配置原理/Springboot 自动配置原理剖析.md",
-    "MySQL/README.md",
-    "面试题/MySQL/README.md"
+    "数据结构与算法/数据结构/红黑树.md",
+    "数据结构与算法/数据结构/二叉树.md",
+    "数据结构与算法/数据结构/线性表/数组.md",
+    "数据结构与算法/数据结构/线性表/链表.md",
+    "面试题/数据结构/LeetCode/206. 反转链表.md",
+    "面试题/数据结构/LeetCode/237. 删除链表中的节点.md",
+    "面试题/数据结构/README.md",
+    "JDK/源码/集合/HashMap.md",
+    "Templates/LeetCode-数据结构.md",
+    "Templates/README.md"
   ]
 }

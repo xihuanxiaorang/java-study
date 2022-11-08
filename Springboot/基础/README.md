@@ -24,7 +24,7 @@ person:
     age: 3
 ```
 
-然后可以通过`@value`注解绑定到你想要的属性上面，如：
+然后可以通过 `@value` 注解绑定到你想要的属性上面，如：
 
 ```java
 @RestController
@@ -58,11 +58,11 @@ public class Person {
 
 
 
-`@ConfigurationProperties(prefix = "person")`告诉 Springboot 将本类中的所有属性与全局配置文件中相关的配置进行绑定，其中`prefix = “person”`指明与配置文件中哪个下面的所有属性进行一一映射。
+`@ConfigurationProperties(prefix = "person")` 告诉 Springboot 将本类中的所有属性与全局配置文件中相关的配置进行绑定，其中 `prefix = “person”` 指明与配置文件中哪个下面的所有属性进行一一映射。
 
 
 
-但是需要注意一点，只有这个组件是容器中的组件，才能使用容器提供的`@ConfigurationProperties`功能。
+但是需要注意一点，只有这个组件是容器中的组件，才能使用容器提供的 `@ConfigurationProperties` 功能。
 
 
 
@@ -80,7 +80,7 @@ public class Person {
 
 
 
-`@value`与@`@ConfigurationProperties`比较
+`@value` 与@`@ConfigurationProperties` 比较
 
 |              | @ConfigurationProperties | [@value ]() |
 | ------------ | ------------------------ | ----------- |
@@ -89,8 +89,6 @@ public class Person {
 | SpEL         | 不支持                   | 支持        |
 | JSR303 校验  | 支持                     | 不支持      |
 | 复杂类型封装 | 支持                     | 不支持      |
-
-
 
 - **松散绑定**：类属性名在配置文件中可以使用短横线或下划线来替代驼峰形式命名的属性。
 - **SpEL**：EL 表达式
@@ -120,8 +118,6 @@ Value: 23234564654
 Reason: 不是一个合法的电子邮件地址
 ```
 
-- **复杂类型封装**：如**map**，**list**等，`@value`并不支持读取复杂类型的配置项。
-
-
+- **复杂类型封装**：如 **map**，**list** 等，`@value` 并不支持读取复杂类型的配置项。
 
 ### 0.1. 
