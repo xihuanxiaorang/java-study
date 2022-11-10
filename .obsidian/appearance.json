@@ -1,11 +1,11 @@
 {
   "cssTheme": "Minimal",
   "theme": "system",
-  "interfaceFontFamily": "霞鹜文楷,仓耳今楷03",
+  "interfaceFontFamily": "小赖字体 SC,霞鹜文楷,仓耳今楷03",
   "baseFontSize": 15,
   "baseFontSizeAction": false,
-  "monospaceFontFamily": "JetBrains Mono",
-  "textFontFamily": "霞鹜文楷,仓耳今楷03",
+  "monospaceFontFamily": "JetBrains Mono,小赖字体 SC",
+  "textFontFamily": "小赖字体 SC,霞鹜文楷,仓耳今楷03",
   "enabledCssSnippets": [
     "tag-pills",
     "round-checkbox",

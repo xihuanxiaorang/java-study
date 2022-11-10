@@ -1,6 +1,5 @@
 [
   "quickadd",
-  "obsidian-excalidraw-plugin",
   "convert-url-to-iframe",
   "obsidian-admonition",
   "obsidian-kanban",
@@ -26,5 +25,6 @@
   "number-headings-obsidian",
   "obsidian-editing-toolbar",
   "templater-obsidian",
-  "obsidian-linter"
+  "obsidian-linter",
+  "obsidian-excalidraw-plugin"
 ]

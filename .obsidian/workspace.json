@@ -8,12 +8,14 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8588e08e1d8d3366",
+            "id": "9b64673fab2e0422",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "markdown",
               "state": {
-                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md"
+                "file": "数据结构与算法/算法/逆波兰表达式.md",
+                "mode": "source",
+                "source": false
               }
             }
           }
@@ -84,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md",
+                "file": "数据结构与算法/算法/逆波兰表达式.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "byCreatedTime",
@@ -101,7 +103,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/红黑树插入操作演示.excalidraw.md"
+                "file": "数据结构与算法/算法/逆波兰表达式.md"
               }
             }
           },
@@ -131,17 +133,17 @@
     "direction": "horizontal",
     "width": 326.5
   },
-  "active": "8588e08e1d8d3366",
+  "active": "9b64673fab2e0422",
   "lastOpenFiles": [
-    "数据结构与算法/数据结构/红黑树.md",
-    "数据结构与算法/数据结构/二叉树.md",
+    "数据结构与算法/数据结构/线性表/栈.md",
+    "数据结构与算法/算法/逆波兰表达式.md",
+    "数据结构与算法/数据结构/线性表/应用/逆波兰表达式.md",
     "数据结构与算法/数据结构/线性表/数组.md",
-    "数据结构与算法/数据结构/线性表/链表.md",
-    "面试题/数据结构/LeetCode/206. 反转链表.md",
+    "Spring/源码/README.md",
     "面试题/数据结构/LeetCode/237. 删除链表中的节点.md",
-    "面试题/数据结构/README.md",
-    "JDK/源码/集合/HashMap.md",
-    "Templates/LeetCode-数据结构.md",
-    "Templates/README.md"
+    "面试题/数据结构/LeetCode/206. 反转链表.md",
+    "面试题/数据结构/LeetCode/20. 有效的括号.md",
+    "数据结构与算法/数据结构/线性表/队列.md",
+    "Excalidraw/ArrayList 底层结构与源码分析.excalidraw.md"
   ]
 }

@@ -4,7 +4,7 @@
   "darkStyle": "minimal-dark",
   "lightScheme": "minimal-default-light",
   "darkScheme": "minimal-default-dark",
-  "editorFont": "'霞鹜文楷',-apple-system,BlinkMacSystemFont,\"Segoe UI Emoji\",\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif",
+  "editorFont": "'小赖字体 SC','霞鹜文楷',-apple-system,BlinkMacSystemFont,\"Segoe UI Emoji\",\"Segoe UI\",Roboto,Oxygen-Sans,Ubuntu,Cantarell,sans-serif",
   "lineHeight": 1.5,
   "lineWidth": 40,
   "lineWidthWide": 50,
