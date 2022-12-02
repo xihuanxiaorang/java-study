@@ -28,11 +28,11 @@ JDBC，全称是 Java DataBase Connectivity。
 - JDBC 即使用 Java 语言来访问数据库的一套 API
 - 每个数据库厂商会提供各自的 JDBC 实现
 
-![JDBC API 不同厂商实现.excalidraw](attachments/JDBC%20API%20不同厂商实现.excalidraw.svg)
+![JDBC API 不同厂商实现.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350683.svg)
 
 JDBC 的调用流程：
 
-![JDBC 执行流程.excalidraw](attachments/JDBC%20执行流程.excalidraw.svg)
+![JDBC 执行流程.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350460.svg)
 
 在 Java SPI 出现之前，程序们使用 `Class.forName ` 来加载数据库驱动：
 
@@ -94,7 +94,7 @@ public class Driver extends NonRegisteringDriver implements java.sql.Driver {
         }  
     }  
 }
-```  
+```
 
 # 4、SPI 的三大规范要素
 
@@ -105,7 +105,7 @@ public class Driver extends NonRegisteringDriver implements java.sql.Driver {
 - **文件内容**：Service **实现类的全限定名**。如果 **有多个实现类**，那么 **每一个实现类在文件中单独占据一行**
 
 以 MySQL 为例，查看 mysql-connector-java 的 jar 包，可以看到目录 META-INF/services 下确实存在一个名为 java.sql.Driver 的配置文件，而文件内容则是 MySQL 的数据库驱动类。  
-![Pasted image 20220421102435 | 800](attachments/Pasted%20image%2020220421102435.png)  
+![Pasted image 20220421102435 | 800](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350904.png)  
 
 ## 2、Service Provider 类必须具备无参构造方法
 
@@ -141,9 +141,9 @@ Service **接口的实现类**，即 Service Provider 类，**必须具备无参
 ## 1、背景
 
 我们从从开始手撸一个 SPI 应用，在正式撸码之前，我们先介绍一下背景：  
-![Java SPI 应用实例.excalidraw](attachments/Java%20SPI%20应用实例.excalidraw.svg)  
+![Java SPI 应用实例.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350898.svg)  
 项目关系图如下：simple-company 调用 simple-api，而 simple-isp-mobile 和 simple-isp-unicom 则实现了 simple-api。  
-![Java SPI 应用实例项目关系图.excalidraw](attachments/Java%20SPI%20应用实例项目关系图.excalidraw.svg)
+![Java SPI 应用实例项目关系图.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350178.svg)
 
 ## 2、代码编程：
 
@@ -154,35 +154,35 @@ Service **接口的实现类**，即 Service Provider 类，**必须具备无参
 ### 1、simple-api
 
 整个项目只定义了一个 Service 接口，这就是 SPI 中的 Service 接口。  
-![Pasted image 20220421162738 | 1000](attachments/Pasted%20image%2020220421162738.png)
+![Pasted image 20220421162738 | 1000](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350133.png)
 
 ### 2、simple-isp-mobile
 
-![Pasted image 20220421171530](attachments/Pasted%20image%2020220421171530.png)  
+![Pasted image 20220421171530](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251350969.png)  
 移动提供的 simple-isp-mobile 也非常简单，从图中可以看出它提供了两个 Service Provider，一个是 ChinaMobile，另一个是 BeijingChinaMobile，这两个类都实现了 InternetService 接口中的 connectInternet 方法。
 
-```ad-important
+```text
 有一个非常关键的点，在**创建 META-INF/services 目录的时候，一定得一级一级创建**，不然很容易就只创建出一级目录，名字叫 META-INF.services，这个会导致后续使用的时候根本找不到。
 ```
 
-![Pasted image 20220421171718 | 800](attachments/Pasted%20image%2020220421171718.png)  
+![Pasted image 20220421171718 | 800](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251351773.png)  
 然后再看一下配置文件，注意它是放在目录 META-INF/services 下的，文件名是 InternetService 接口的全限定名，文件内容则有两行，分别是 ChinaMobile 和 BeijingChinaMobile 的类名。
 
 ### 3、simple-isp-unicom
 
-![Pasted image 20220421172221 | 1000](attachments/Pasted%20image%2020220421172221.png)  
-![Pasted image 20220421172254 | 800](attachments/Pasted%20image%2020220421172254.png)  
+![Pasted image 20220421172221 | 1000](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251351336.png)  
+![Pasted image 20220421172254 | 800](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352233.png)  
 再来看看联通提供的 simple-isp-unicom，整个代码实现和移动的很相似，唯一不同的是联通只提供了一个 ServiceProvider，即类 ChinaUnicom。
 
 ### 4、simple-company
 
-![Pasted image 20220421171044](attachments/Pasted%20image%2020220421171044.png)  
+![Pasted image 20220421171044](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352838.png)  
 最后看一下 simple-company 的实现，也非常简单。在 main 方法中，先调用 ServiceLoader 的 load 方法获取所有的 Provider，然后逐一调用 connectInternet 方法就完事了。  
 在运行 simple-company 的时候，先只引入移动的 jar 包 simple-isp-mobile，程序运行完毕可以看到控制台打印：  
-![Pasted image 20220421171112 | 500](attachments/Pasted%20image%2020220421171112.png)  
+![Pasted image 20220421171112 | 500](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352761.png)  
 分别表示，通过中国移动和北京移动联网成功！  
 接着我们将网络服务商替换成联通，也就是将依赖的 jar 包换成联通的 simple-isp-unicom，其余什么都不用改，运行程序后可以看到控制台打印：  
-![Pasted image 20220421171234 | 500](attachments/Pasted%20image%2020220421171234.png)  
+![Pasted image 20220421171234 | 500](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352100.png)  
 更换为中国联通联网成功了！
 
 # 7、SPI 与 SpringBoot 自动配置
@@ -196,7 +196,7 @@ SpringBoot 自动配置，即大名鼎鼎的 Auto-Configuration：
 
 SpringBoot 项目启动的时候 **默认会自动扫描当前项目的 package**，然后将其中的配置类注入到 IOC 容器中。但是，当我们与其他框架进行集成的时候，如 mybatis、rabbitmq 框架等等，SpringBoot 是不支持直接扫描其他框架的 package 的，这个时候则需要使用 **Auto-Configuration 机制**，**基于你引入的依赖 jar 包对 SpringBoot 应用进行自动配置**，换言之呢，就是将其他 jar 包的配置类注入到 IOC 容器中。
 
-![Auto Configuration.excalidraw](attachments/Auto%20Configuration.excalidraw.svg)
+![Auto Configuration.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352542.svg)
 
 如果你是 SpringBoot 的开发人员，你会怎样实现 Auto-Configuration 呢？  
 大 A：作为 Leader，我先提几点要求：首先，不能脱离 SpringBoot 框架，我可不想重复造轮子！  
@@ -205,10 +205,11 @@ SpringBoot 项目启动的时候 **默认会自动扫描当前项目的 package*
 细 B：让用户使用注解 @ComponentScan 来扫描第三方的 package 吧！  
 大 A：听起来对用户很不友好啊！用户只想引入依赖的 jar 包就行。既然我们叫“自动配置”，那么能否实现全自动，而不要是半自动呢？  
 细 B：让我想想，这个需求听起来很耳熟。。。要不我们参考参考 Java SPI 的设计思想？  
-![Java SPI 与 SpringBoot 自动配置.excalidraw](attachments/Java%20SPI%20与%20SpringBoot%20自动配置.excalidraw.svg)  
+![Java SPI 与 SpringBoot 自动配置.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352745.svg)  
 我们来看一个 SpringBoot 自动配置案例：Mybatis，先在 github 上找到对应的 [源码](https://github.com/mybatis/spring-boot-starter/tree/master/mybatis-spring-boot-autoconfigure) 。  
-![Pasted image 20220421152621](attachments/Pasted%20image%2020220421152621.png)  
+![Pasted image 20220421152621](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352068.png)  
 可以看到，mybatis 总共有两个自动配置类，分别是 `MybatisAutoConfiguration` 和 `MybatisLanguageDriverAutoConfiguration`，然后在目录 META-INF 中也确实存在一个配置文件 `spring.factories`，里面的内容是 key-value 的格式，其中 key 是 `EnableAutoConfiguration` 的全限定类名，value 则是两个自动配置类的全限定类名，两个类名直接用逗号隔开。  
 简单总结一下 SpringBoot 自动配置的核心流程：  
-![SpringBoot 自动配置核心流程.excalidraw](attachments/SpringBoot%20自动配置核心流程.excalidraw.svg)  
+![SpringBoot 自动配置核心流程.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211251352549.svg)  
 以上，就是 SpringBoot 自动配置的原理，它是不是和 SPI 的设计思想有着异曲同工之妙呢？
+

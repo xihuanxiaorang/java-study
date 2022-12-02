@@ -1,5 +1,5 @@
 ---
-title: Spring中注册Bean的几种方式
+title: Spring注册Bean的几种方式
 tags: spring
 created: 2022-09-24 14:47:10
 modified: 2022-09-24 14:56:53

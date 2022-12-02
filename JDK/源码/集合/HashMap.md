@@ -10,7 +10,7 @@ number headings: auto, first-level 1, max 6, _.1.1.
 
 HashMap 底层的数据结构主要是：`数组 + 链表 + 红黑树 `。其中，当链表的长度大于等于 8 并且数组的长度大于 64 时，链表会转化为红黑树，而当红黑树的节点个数小于等于 6 时，红黑树为转化为链表。
 
-![HashMap 数据结构.excalidraw](../../../Attachments/HashMap%20数据结构.excalidraw.svg)
+![HashMap 数据结构.excalidraw](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906927.svg)
 
 ## 2. 重要属性
 
@@ -76,7 +76,7 @@ static final int hash(Object key) {
 ## 4. 计算数组下标 index
 
 数组下标 index 如何确定？使用 (n-1) & hash，其中 n 为数组长度，如默认的初始化容量为 16，即数组长度 n = 16，那么 n - 1 = 15，换算成二进制为 00001111，那么 (n-1)&hash 取的是 hash 值的低四位，4 个 bit 位的最大值为 15，所以往数组中存放元素时的数组下标就可以使用该方式确定。  
-![](../../../Attachments/Pasted%20image%2020220727023353.png)
+![](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906773.png)
 
 ## 5. resize 扩容方法
 
@@ -187,16 +187,16 @@ final Node<K,V>[] resize() {
 
 详细说明一下节点在扩容时位于原位置还是原位置 + 原来数组长度的位置，这个结论是怎么来的？以及 HashMap 源码是如何来判断的？  
 首先看下下面这张图，图 `a` 表示扩容前 key1 和 key2 确定数组下标的位置，图 `b` 表示扩容后 key1 和 key2 确定数组下标的位置。  
-![扩容前后元素数组下标确定示意图 | 800](../../../Attachments/Pasted%20image%2020220727062737.png)  
+![扩容前后元素数组下标确定示意图 | 800](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906171.png)  
 数组在扩容后，因为数组长度 n 变为原来的 2 倍，即 n - 1 就会比原来在高位处多 1 bit 位，因此新的数组下标就会发生这样的变化：  
-![扩容前后元素数组下标确定示意图 2 | 800](../../../Attachments/Pasted%20image%2020220727063356.png)  
+![扩容前后元素数组下标确定示意图 2 | 800](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906699.png)  
 所以在扩容时，只需要看 hash 值在原数组长度所对应二进制的最高位的位置是 0 还是 1，0 的话表示还是原位置，1 的话表示当前节点所在新数组的位置=原位置 + 原来的数组长度。
 
 ## 6. put 添加节点
 
 ### 6.1. 流程
 
-![hashmap-put](../../../Attachments/hashmap-put.svg)
+![hashmap-put](https://fastly.jsdelivr.net/gh/xihuanxiaorang/images/202211270906397.svg)
 
 ### 6.2. 代码分析
 
