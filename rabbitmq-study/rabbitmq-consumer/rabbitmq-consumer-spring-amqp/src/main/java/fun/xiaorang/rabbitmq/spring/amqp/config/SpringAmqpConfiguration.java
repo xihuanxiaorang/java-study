@@ -27,4 +27,21 @@ public class SpringAmqpConfiguration {
     public void listenSimpleQueueMessage(String msg) {
         LOGGER.info("从 {} 队列中收到一条消息：{}", "simple.queue", msg);
     }
+
+    @Bean
+    public Queue workQueue() {
+        return new Queue("work.queue");
+    }
+
+    @RabbitListener(queues = {"work.queue"})
+    public void listenWorkQueueMessage1(String msg) throws InterruptedException {
+        LOGGER.info("【消费者1】从 {} 队列中收到一条消息：{}", "work.queue", msg);
+        Thread.sleep(20);
+    }
+
+    @RabbitListener(queues = {"work.queue"})
+    public void listenWorkQueueMessage2(String msg) throws InterruptedException {
+        LOGGER.error("【消费者2】从 {} 队列中收到一条消息：{}", "work.queue", msg);
+        Thread.sleep(200);
+    }
 }

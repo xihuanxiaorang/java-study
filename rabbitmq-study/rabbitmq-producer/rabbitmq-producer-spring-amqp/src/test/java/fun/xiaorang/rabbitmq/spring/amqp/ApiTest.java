@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author liulei
@@ -24,5 +23,15 @@ public class ApiTest {
         String queueName = "simple.queue";
         String message = "hello, spring amqp!";
         rabbitTemplate.convertAndSend(queueName, message);
+    }
+
+    @Test
+    public void testSendMessage2WorkQueue() throws InterruptedException {
+        String queueName = "work.queue";
+        String message = "hello, message__";
+        for (int i = 1; i <= 50; i++) {
+            rabbitTemplate.convertAndSend(queueName, message + i);
+            Thread.sleep(20);
+        }
     }
 }
