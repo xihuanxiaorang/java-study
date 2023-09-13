@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--    <bean name="person" class="fun.xiaorang.spring.pojo.Person">-->
+    <!--        <property name="name" value="xiaorang"/>-->
+    <!--        <property name="age" value="18"/>-->
+    <!--    </bean>-->
+    <bean id="person" class="fun.xiaorang.spring.pojo.Person" scope="prototype">
+        <constructor-arg value="xiaorang"/>
+        <constructor-arg value="18"/>
+        <constructor-arg value="珠光村东区91栋413"/>
+    </bean>
+
+    <bean class="fun.xiaorang.spring.pojo.Customer">
+        <property name="name" value="xiaorang"/>
+        <property name="age" value="18"/>
+        <property name="emails">
+            <array>
+                <value>15019474951@163.com</value>
+                <value>623052545@qq.com</value>
+                <value>2329862718@qq.com</value>
+            </array>
+        </property>
+        <property name="tels">
+            <set>
+                <value>15019474951</value>
+                <value>13838384388</value>
+            </set>
+        </property>
+        <property name="addresses">
+            <list>
+                <value>珠光村东区91栋413</value>
+                <value>龙胜一小队xxx栋605</value>
+            </list>
+        </property>
+        <property name="qqs">
+            <map>
+                <entry>
+                    <key>
+                        <value>xiaorang</value>
+                    </key>
+                    <value>2329862718</value>
+                </entry>
+                <entry key="sanshi" value="623052545"/>
+            </map>
+        </property>
+        <property name="p">
+            <props>
+                <prop key="birthday">1995-07-13</prop>
+                <prop key="height">168cm</prop>
+            </props>
+        </property>
+        <property name="recordDate" value="2022-03-17"/>
+    </bean>
+
+    <bean id="userDao" class="fun.xiaorang.spring.dao.UserDao"/>
+
+    <bean class="fun.xiaorang.spring.service.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <!--    实现FactoryBean接口的方式创建复杂对象，推荐-->
+    <!--    <bean class="fun.xiaorang.spring.factorybean.ConnectionFactoryBean">-->
+    <!--        <property name="url"-->
+    <!--                  value="jdbc:mysql://localhost:3306/atguigudb?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai"/>-->
+    <!--        <property name="username" value="root"/>-->
+    <!--        <property name="password" value="123456"/>-->
+    <!--    </bean>-->
+
+    <context:property-placeholder location="db.properties"/>
+
+    <!--    实例工厂的方式创建复杂对象-->
+    <bean id="connectionFactory" class="fun.xiaorang.spring.factorybean.ConnectionFactory">
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <bean id="connection" factory-bean="connectionFactory" factory-method="getConnection" scope="prototype"/>
+
+    <!--    静态工厂的方式创建复杂对象-->
+    <!--    <bean id="connection" class="fun.xiaorang.spring.factorybean.StaticConnectionFactory"-->
+    <!--          factory-method="getConnection" scope="prototype"/>-->
+
+    <bean id="student" class="fun.xiaorang.spring.pojo.Student" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="name" value="xiaorang"/>
+        <property name="age" value="18"/>
+        <property name="sex" value="0"/>
+    </bean>
+
+    <bean id="myDateConverter" class="fun.xiaorang.spring.converter.MyDateConverter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
+
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="myDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
+    <bean class="fun.xiaorang.spring.beanpostprocessor.MyBeanPostProcessor"/>
+</beans>
