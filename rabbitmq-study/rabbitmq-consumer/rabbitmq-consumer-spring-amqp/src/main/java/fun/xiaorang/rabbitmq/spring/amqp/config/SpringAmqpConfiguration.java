@@ -40,8 +40,11 @@ public class SpringAmqpConfiguration {
     }
 
     @RabbitListener(queues = {"simple.queue"})
-    public void listenSimpleQueueMessage(String msg) {
-        LOGGER.info("从 {} 队列中收到一条消息：{}", "simple.queue", msg);
+    public void listenSimpleQueueMessage(String message) {
+        LOGGER.info("从 {} 队列中收到一条消息：{}", "simple.queue", message);
+        // 模拟异常
+        int i = 1 / 0;
+        LOGGER.info("消息处理成功！");
     }
 
     @Bean

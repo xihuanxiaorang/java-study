@@ -8,3 +8,4 @@ spring:
     listener:
       simple:
         prefetch: 1 # 消费者每次只能从队列中预取一条消息，只有等消费者处理完并返回确认后才能继续取下一条消息
+        acknowledge-mode: auto # 自动签收，默认情况下就是该模式
