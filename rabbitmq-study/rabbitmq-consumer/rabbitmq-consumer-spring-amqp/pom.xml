@@ -5,16 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>fun.xiaorang</groupId>
-        <artifactId>rabbitmq-study</artifactId>
+        <artifactId>rabbitmq-consumer</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>rabbitmq-consumer</artifactId>
-
-    <packaging>pom</packaging>
-    <modules>
-        <module>rabbitmq-consumer-native</module>
-        <module>rabbitmq-consumer-spring-amqp</module>
-    </modules>
+    <artifactId>rabbitmq-consumer-spring-amqp</artifactId>
 
 </project>
