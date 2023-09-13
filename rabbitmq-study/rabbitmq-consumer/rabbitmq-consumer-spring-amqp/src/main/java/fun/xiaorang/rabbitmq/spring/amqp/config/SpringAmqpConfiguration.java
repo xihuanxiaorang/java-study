@@ -3,6 +3,8 @@ package fun.xiaorang.rabbitmq.spring.amqp.config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.Exchange;
+import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,5 +45,21 @@ public class SpringAmqpConfiguration {
     public void listenWorkQueueMessage2(String msg) throws InterruptedException {
         LOGGER.error("【消费者2】从 {} 队列中收到一条消息：{}", "work.queue", msg);
         Thread.sleep(200);
+    }
+
+    @RabbitListener(bindings = {
+            @QueueBinding(value = @org.springframework.amqp.rabbit.annotation.Queue("direct.queue1"),
+                    exchange = @Exchange(name = "itcast.direct"), key = {"red", "blue"})
+    })
+    public void listenDirectQueueMessage1(String msg) {
+        LOGGER.info("【消费者1】从 {} 队列中收到一条消息：{}", "direct.queue1", msg);
+    }
+
+    @RabbitListener(bindings = {
+            @QueueBinding(value = @org.springframework.amqp.rabbit.annotation.Queue("direct.queue2"),
+                    exchange = @Exchange(name = "itcast.direct"), key = {"red", "yellow"})
+    })
+    public void listenDirectQueueMessage2(String msg) {
+        LOGGER.info("【消费者2】从 {} 队列中收到一条消息：{}", "direct.queue2", msg);
     }
 }

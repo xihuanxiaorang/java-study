@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.stream.Stream;
+
 /**
  * @author liulei
  * @description <p style = " font-weight:bold ; "><p/>
@@ -40,5 +42,13 @@ public class ApiTest {
         String exchangeName = "itcast.fanout";
         String message = "hello, every one!";
         rabbitTemplate.convertAndSend(exchangeName, "", message);
+    }
+
+    @Test
+    public void testSendMessage2DirectExchange() {
+        String exchangeName = "itcast.direct";
+        String message = "hello, ";
+        Stream.of("red", "blue", "yellow").forEach(color ->
+                rabbitTemplate.convertAndSend(exchangeName, color, message + color));
     }
 }
