@@ -9,3 +9,8 @@ spring:
       simple:
         prefetch: 1 # 消费者每次只能从队列中预取一条消息，只有等消费者处理完并返回确认后才能继续取下一条消息
         acknowledge-mode: auto # 自动签收，默认情况下就是该模式
+        retry:
+          enabled: true # 开启消费者失败重试
+          initial-interval: 1000 # 重新投递消息的间隔时间（单位毫秒）
+          max-attempts: 3 # 最大重试次数
+          stateless: true # true：无状态，false：有状态；如果业务中包含事务，这里改为 false
