@@ -34,4 +34,11 @@ public class ApiTest {
             Thread.sleep(20);
         }
     }
+
+    @Test
+    public void testSendMessage2FanoutExchange() {
+        String exchangeName = "itcast.fanout";
+        String message = "hello, every one!";
+        rabbitTemplate.convertAndSend(exchangeName, "", message);
+    }
 }
