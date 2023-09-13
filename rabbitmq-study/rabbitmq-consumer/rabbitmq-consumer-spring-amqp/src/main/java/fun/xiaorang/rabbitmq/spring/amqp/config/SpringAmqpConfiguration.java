@@ -2,6 +2,7 @@ package fun.xiaorang.rabbitmq.spring.amqp.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
@@ -61,5 +62,21 @@ public class SpringAmqpConfiguration {
     })
     public void listenDirectQueueMessage2(String msg) {
         LOGGER.info("【消费者2】从 {} 队列中收到一条消息：{}", "direct.queue2", msg);
+    }
+
+    @RabbitListener(bindings = {
+            @QueueBinding(value = @org.springframework.amqp.rabbit.annotation.Queue("topic.queue1"),
+                    exchange = @Exchange(name = "itcast.topic", type = ExchangeTypes.TOPIC), key = {"china.#"})
+    })
+    public void listenTopicQueueMessage1(String msg) {
+        LOGGER.info("【消费者1】从 {} 队列中收到一条消息：{}", "topic.queue1", msg);
+    }
+
+    @RabbitListener(bindings = {
+            @QueueBinding(value = @org.springframework.amqp.rabbit.annotation.Queue("topic.queue2"),
+                    exchange = @Exchange(name = "itcast.topic", type = ExchangeTypes.TOPIC), key = {"#.news"})
+    })
+    public void listenTopicQueueMessage2(String msg) {
+        LOGGER.info("【消费者2】从 {} 队列中收到一条消息：{}", "topic.queue2", msg);
     }
 }

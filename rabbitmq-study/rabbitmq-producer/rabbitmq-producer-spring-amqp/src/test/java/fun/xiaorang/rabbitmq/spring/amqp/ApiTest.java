@@ -5,6 +5,8 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -50,5 +52,14 @@ public class ApiTest {
         String message = "hello, ";
         Stream.of("red", "blue", "yellow").forEach(color ->
                 rabbitTemplate.convertAndSend(exchangeName, color, message + color));
+    }
+
+    @Test
+    public void testSendMessage2TopicExchange() {
+        String exchangeName = "itcast.topic";
+        Map<String, String> map = new HashMap<>(2);
+        map.put("china.news", "中华人民共和国成立啦！");
+        map.put("china.weather", "今天阳光明媚");
+        map.forEach((routingKey, message) -> rabbitTemplate.convertAndSend(exchangeName, routingKey, message));
     }
 }
