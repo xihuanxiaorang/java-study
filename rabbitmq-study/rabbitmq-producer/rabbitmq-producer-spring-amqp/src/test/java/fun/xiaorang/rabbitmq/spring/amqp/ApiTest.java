@@ -111,4 +111,28 @@ public class ApiTest {
                 .build();
         rabbitTemplate.convertAndSend("simple.queue", message);
     }
+
+    @Test
+    public void testTTLQueue() {
+        // 发送消息
+        rabbitTemplate.convertAndSend("ttl.direct", "ttl", "hello, ttl queue");
+        // 记录日志
+        LOGGER.info("发送消息成功");
+    }
+
+    @Test
+    public void testTTLMessage() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String content = objectMapper.writeValueAsString("hello, ttl message");
+        Message message = MessageBuilder
+                .withBody(content.getBytes(StandardCharsets.UTF_8))
+                .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+                // 设置过期时间
+                .setExpiration("5000")
+                .build();
+        // 发送消息
+        rabbitTemplate.convertAndSend("ttl.direct", "ttl", message);
+        // 记录日志
+        LOGGER.info("发送消息成功");
+    }
 }
