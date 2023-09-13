@@ -5,3 +5,7 @@ spring:
     virtual-host: /
     username: guest
     password: guest
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true

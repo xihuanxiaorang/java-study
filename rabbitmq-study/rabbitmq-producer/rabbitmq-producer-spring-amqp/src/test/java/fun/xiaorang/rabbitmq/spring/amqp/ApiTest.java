@@ -1,12 +1,16 @@
 package fun.xiaorang.rabbitmq.spring.amqp;
 
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 /**
@@ -18,15 +22,34 @@ import java.util.stream.Stream;
  */
 @SpringBootTest
 public class ApiTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiTest.class);
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     @Test
     public void testSendMessage2SimpleQueue() {
-        String queueName = "simple.queue";
+        // 消息体
         String message = "hello, spring amqp!";
-        rabbitTemplate.convertAndSend(queueName, message);
+        // 全局唯一的消息 ID，需要封装到 CorrelationData 中
+        CorrelationData correlationData = new CorrelationData(UUID.randomUUID().toString());
+        // 添加 callback
+        correlationData.getFuture().addCallback(result -> {
+            assert result != null;
+            if (result.isAck()) {
+                // ack，消息成功投递到交换机
+                LOGGER.info("消息成功投递到交换机，ID：{}", correlationData.getId());
+            } else {
+                // nack，消息投递到交换机失败
+                LOGGER.error("消息投递到交换机失败，ID：{}，原因：{}", correlationData.getId(), result.getReason());
+                // 重发消息
+            }
+        }, ex -> {
+            // 记录日志
+            LOGGER.error("消息发送异常，ID：{}，原因：{}", correlationData.getId(), ex.getMessage());
+            // 重发消息
+        });
+        rabbitTemplate.convertAndSend("", "simple.queue1", message, correlationData);
     }
 
     @Test
