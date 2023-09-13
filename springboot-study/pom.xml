@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>wx-mp-study</module>
+        <module>springboot-annotation-study</module>
     </modules>
 
     <properties>
@@ -19,6 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <wx.mp.version>4.5.0</wx.mp.version>
         <lombok.version>1.18.26</lombok.version>
+        <javax.inject.version>1</javax.inject.version>
     </properties>
 
     <dependencyManagement>
@@ -34,6 +36,11 @@
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>wx-java-mp-spring-boot-starter</artifactId>
                 <version>${wx.mp.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
