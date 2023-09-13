@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="person" class="fun.xiaorang.springboot.annotation.pojo.Person">
+        <property name="name" value="xiaorang"/>
+        <property name="age" value="18"/>
+        <property name="pet" ref="pet"/>
+    </bean>
+
+    <bean id="pet" class="fun.xiaorang.springboot.annotation.pojo.Pet">
+        <property name="name" value="xiaobai"/>
+        <property name="age" value="2"/>
+    </bean>
+</beans>

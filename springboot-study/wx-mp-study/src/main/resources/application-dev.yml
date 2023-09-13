@@ -1,0 +1,7 @@
+server:
+  port: 8500
+wx:
+  mp:
+    app-id: wxe04ed9ab275e518f
+    secret: dc8ab44fbd2be76a1690f9acedbe1c18
+    token: xiaorang
