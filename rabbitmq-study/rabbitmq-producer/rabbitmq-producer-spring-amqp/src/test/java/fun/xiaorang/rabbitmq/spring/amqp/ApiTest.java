@@ -151,4 +151,10 @@ public class ApiTest {
         // 记录日志
         LOGGER.info("发送消息成功");
     }
+
+    @Test
+    public void testLazyQueue() {
+        // 发送消息
+        rabbitTemplate.convertAndSend("lazy.queue", "hello, lazy queue");
+    }
 }
