@@ -14,6 +14,7 @@
         <module>datastructure-study</module>
         <module>spi-study</module>
         <module>spring-study</module>
+        <module>design-pattern-study</module>
     </modules>
 
     <properties>
