@@ -12,6 +12,7 @@
     <modules>
         <module>algorithm-study</module>
         <module>datastructure-study</module>
+        <module>spi-study</module>
     </modules>
 
     <properties>

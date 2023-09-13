@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fun.xiaorang</groupId>
+        <artifactId>java-study</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>spi-study</artifactId>
+
+    <packaging>pom</packaging>
+    <modules>
+        <module>simple-api</module>
+        <module>simple-company</module>
+        <module>simple-isp-mobile</module>
+        <module>simple-isp-unicom</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>fun.xiaorang</groupId>
+                <artifactId>simple-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fun.xiaorang</groupId>
+                <artifactId>simple-company</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fun.xiaorang</groupId>
+                <artifactId>simple-isp-unicom</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fun.xiaorang</groupId>
+                <artifactId>simple-isp-mobile</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
