@@ -2,8 +2,10 @@ package fun.xiaorang.rabbitmq.spring.amqp.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,8 +28,15 @@ public class SpringAmqpConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(SpringAmqpConfiguration.class);
 
     @Bean
+    public DirectExchange simpleExchange() {
+        // 三个参数：交换机名称，是否持久化，当没有队列与其绑定时是否自动删除
+        return new DirectExchange("simple.direct", true, false);
+    }
+
+    @Bean
     public Queue simpleQueue() {
-        return new Queue("simple.queue");
+        // 使用 QueueBuilder 构建队列，使用 durable 指定持久化
+        return QueueBuilder.durable("simple.queue").build();
     }
 
     @RabbitListener(queues = {"simple.queue"})

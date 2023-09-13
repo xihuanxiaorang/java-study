@@ -1,13 +1,19 @@
 package fun.xiaorang.rabbitmq.spring.amqp;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
+import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -93,5 +99,16 @@ public class ApiTest {
         message.put("name", "xiaorang");
         message.put("age", 18);
         rabbitTemplate.convertAndSend(queueName, message);
+    }
+
+    @Test
+    public void testSendDurableMessage() throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String content = objectMapper.writeValueAsString("hello, spring amqp");
+        Message message = MessageBuilder
+                .withBody(content.getBytes(StandardCharsets.UTF_8))
+                .setDeliveryMode(MessageDeliveryMode.PERSISTENT)
+                .build();
+        rabbitTemplate.convertAndSend("simple.queue", message);
     }
 }
