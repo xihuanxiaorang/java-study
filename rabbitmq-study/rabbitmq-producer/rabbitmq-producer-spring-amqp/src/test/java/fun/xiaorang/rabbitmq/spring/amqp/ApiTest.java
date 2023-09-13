@@ -62,4 +62,13 @@ public class ApiTest {
         map.put("china.weather", "今天阳光明媚");
         map.forEach((routingKey, message) -> rabbitTemplate.convertAndSend(exchangeName, routingKey, message));
     }
+
+    @Test
+    public void testSendMessage2ObjectQueue() {
+        String queueName = "object.queue";
+        Map<String, Object> message = new HashMap<>(2);
+        message.put("name", "xiaorang");
+        message.put("age", 18);
+        rabbitTemplate.convertAndSend(queueName, message);
+    }
 }

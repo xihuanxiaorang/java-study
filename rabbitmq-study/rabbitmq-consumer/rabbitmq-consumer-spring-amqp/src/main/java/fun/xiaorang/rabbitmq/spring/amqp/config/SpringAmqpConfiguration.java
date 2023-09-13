@@ -7,8 +7,12 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Map;
 
 /**
  * @author liulei
@@ -78,5 +82,15 @@ public class SpringAmqpConfiguration {
     })
     public void listenTopicQueueMessage2(String msg) {
         LOGGER.info("【消费者2】从 {} 队列中收到一条消息：{}", "topic.queue2", msg);
+    }
+
+    @Bean
+    public MessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    @RabbitListener(queuesToDeclare = {@org.springframework.amqp.rabbit.annotation.Queue("object.queue")})
+    public void listenObjectQueueMessage(Map<String, Object> msg) {
+        LOGGER.info("【消费者】从 {} 队列中收到一条消息：{}", "object.queue", msg);
     }
 }
