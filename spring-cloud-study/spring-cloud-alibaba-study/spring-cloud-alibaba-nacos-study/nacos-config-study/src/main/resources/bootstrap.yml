@@ -1,0 +1,17 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: nacos-config
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+  profiles:
+    active: product
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

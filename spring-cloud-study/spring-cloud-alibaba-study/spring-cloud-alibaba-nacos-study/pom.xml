@@ -13,5 +13,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>nacos-discovery-study</module>
+        <module>nacos-config-study</module>
     </modules>
 </project>
