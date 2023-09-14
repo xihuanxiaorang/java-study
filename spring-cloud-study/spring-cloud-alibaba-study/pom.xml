@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spring-cloud-alibaba-nacos-study</module>
+        <module>spring-cloud-alibaba-rest-study</module>
     </modules>
 
     <properties>

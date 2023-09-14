@@ -1,0 +1,17 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: rest-consumer
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      config:
+        file-extension: yaml
+  profiles:
+    active: dev
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
