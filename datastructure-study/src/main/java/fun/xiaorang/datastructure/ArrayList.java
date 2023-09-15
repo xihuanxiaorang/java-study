@@ -5,22 +5,52 @@ import java.util.Objects;
 
 /**
  * @author liulei
- * @description <p style = " font-weight:bold ; ">顺序表<p/>
+ * @description <p style = " font-weight:bold ; ">顺序表 | 动态数组<p/>
  * @github <a href="https://github.com/xihuanxiaorang/java-study">java-study</a>
  * @Copyright 博客：<a href="https://blog.xiaorang.fun">小让的糖果屋</a>  - show me the code
  * @date 2023/8/24 13:37
  */
 public class ArrayList<E> implements List<E> {
+    /**
+     * 默认的初始容量
+     */
     private static final int DEFAULT_CAPACITY = 10;
+    
+    /**
+     * 用于空实例的共享空数组实例
+     */
     private static final Object[] EMPTY_ELEMENT_DATA = {};
+
+    /**
+     * 用于默认大小(10)的空实例的共享空数组实例。
+     * 将它与 EMPTY_ELEMENT_DATA 区别开来，以了解添加第一个元素时要膨胀多少
+     */
     private static final Object[] DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA = {};
+
+    /**
+     * 数组缓冲区，数组列表的元素被存储在其中。数组列表的容量就是这个数组缓冲区的长度。
+     * 当添加第一个元素时，如果 data == DEFAULT_CAPACITY_EMPTY_ELEMENT_DATA，则进行第一次扩容，容量大小变为 DEFAULT_CAPACITY。
+     */
     private Object[] elementData;
+
+    /**
+     * 数组中元素的数量
+     */
     private int size;
 
+    /**
+     * 无参构造函数
+     */
     public ArrayList() {
         elementData = new Object[DEFAULT_CAPACITY];
     }
 
+    /**
+     * 构造具有指定初始容量的空数组
+     *
+     * @param initialCapacity 初始容量大小
+     * @throws IllegalArgumentException 如果指定的初始容量为负数
+     */
     public ArrayList(int initialCapacity) {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Illegal Capacity: " + initialCapacity);
@@ -30,7 +60,6 @@ public class ArrayList<E> implements List<E> {
             elementData = EMPTY_ELEMENT_DATA;
         }
     }
-
 
     @Override
     public int size() {
