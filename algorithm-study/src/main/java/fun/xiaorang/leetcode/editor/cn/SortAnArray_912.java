@@ -21,8 +21,35 @@ public class SortAnArray_912 {
     class Solution {
         public int[] sortArray(int[] nums) {
 //            bubbleSort(nums);
-            selectionSort(nums);
+//            selectionSort(nums);
+            insertionSort(nums);
             return nums;
+        }
+
+        /**
+         * 插入排序
+         *
+         * @param nums 待排序的数组
+         */
+        private void insertionSort(int[] nums) {
+            // 由于第一个元素已经是有序区，所以 i 从 1 开始
+            for (int i = 1; i < nums.length; i++) {
+                // 由于插入位置是和有序区的元素比较，所以 j = i - 1
+                int j = i - 1;
+                // 设置基准元素为当前元素
+                int base = nums[i];
+                // 内层循环用于比较有序区的元素并找到插入位置
+                // 如果当前元素比有序区的元素小，就将有序区的元素后移一位
+                // 如果当前元素比有序区的元素大，说明找到了插入位置，退出循环
+                // 由于有序区的元素是从后往前比较的，所以有序区的元素会依次后移
+                // 当有序区的元素后移之后，就相当于空出了一个位置，这个位置就是插入位置
+                while (j >= 0 && nums[j] > base) {
+                    nums[j + 1] = nums[j];
+                    j--;
+                }
+                // 将当前元素插入到插入位置
+                nums[j + 1] = base;
+            }
         }
 
         /**
