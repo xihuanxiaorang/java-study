@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class SortAnArray_912 {
     public static void main(String[] args) {
         Solution solution = new SortAnArray_912().new Solution();
-        int[] nums = new int[]{5, 1, 1, 2, 0, 0, 6, 7, 8};
+        int[] nums = new int[]{5, 1, 1, 2, 0, 0};
         solution.sortArray(nums);
         System.out.println(Arrays.toString(nums));
     }
@@ -20,8 +20,37 @@ public class SortAnArray_912 {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int[] sortArray(int[] nums) {
-            bubbleSort(nums);
+//            bubbleSort(nums);
+            selectionSort(nums);
             return nums;
+        }
+
+        /**
+         * 选择排序
+         *
+         * @param nums 待排序的数组
+         */
+        private void selectionSort(int[] nums) {
+            // 外层循环控制比较的轮数，最多需要比较 n-1 轮
+            // 每一轮比较之后，无序区的长度都会减1
+            // 所以下一轮比较的时候，内层循环的边界就是上一轮比较的最后位置
+            // 由于最后一轮只剩一个元素，所以不需要比较，因此 i < nums.length - 1
+            for (int i = 0; i < nums.length - 1; i++) {
+                // 用于记录最小元素的下标
+                int minIndex = i;
+                // 内层循环用于比较无序区的元素并找出最小元素的下标
+                for (int j = i + 1; j < nums.length; j++) {
+                    // 如果当前元素比最小元素小，更新最小元素的下标
+                    if (nums[j] < nums[minIndex]) {
+                        // 更新最小元素的下标
+                        minIndex = j;
+                    }
+                }
+                // 如果最小元素不是当前元素，则交换位置
+                if (minIndex != i) {
+                    swap(nums, i, minIndex);
+                }
+            }
         }
 
         /**
