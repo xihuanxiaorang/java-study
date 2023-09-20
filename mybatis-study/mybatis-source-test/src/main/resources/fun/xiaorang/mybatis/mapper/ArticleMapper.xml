@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fun.xiaorang.mybatis.mapper.ArticleMapper">
+    <resultMap id="authorResult" type="fun.xiaorang.mybatis.entity.Author" autoMapping="true">
+        <id property="id" column="author_id"/>
+        <result property="sex" column="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="articleResult" type="Article" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="type" column="type" typeHandler="ArticleTypeHandler"/>
+        <association property="author" javaType="fun.xiaorang.mybatis.entity.Author" resultMap="authorResult"/>
+    </resultMap>
+
+    <select id="findOne" resultMap="articleResult">
+        select ar.id,
+               ar.author_id,
+               ar.title,
+               ar.type,
+               ar.content,
+               ar.create_time,
+               au.name,
+               au.age,
+               au.sex,
+               au.email
+        from `article` ar,
+             `author` au
+        where ar.author_id = au.id
+          and ar.id = #{id}
+    </select>
+</mapper>

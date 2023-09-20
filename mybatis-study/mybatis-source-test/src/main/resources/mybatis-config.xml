@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="db.properties"/>
+
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="SLF4J"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="ArticleTypeHandler" type="fun.xiaorang.mybatis.handler.ArticleTypeHandler"/>
+        <package name="fun.xiaorang.mybatis.entity"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="fun.xiaorang.mybatis.handler.ArticleTypeHandler"/>
+    </typeHandlers>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="fun.xiaorang.mybatis.config.MyDruidDataSourceFactory">
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+                <property name="initialSize" value="${initialSize}"/>
+                <property name="minIdle" value="${minIdle}"/>
+                <property name="maxActive" value="${maxActive}"/>
+                <property name="maxWait" value="${maxWait}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <package name="fun.xiaorang.mybatis.mapper"/>
+    </mappers>
+</configuration>
