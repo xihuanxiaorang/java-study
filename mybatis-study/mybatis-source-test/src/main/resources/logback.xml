@@ -1,0 +1,81 @@
+<!--开启调试功能，配置文件将10秒钟扫描一次更改，当检测到配置文件发生改变时，该配置文件将会被重新加载-->
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <!-- 定义变量 -->
+    <!-- 定义root日志级别，优先级：TRACE < DEBUG < INFO < WARN < ERROR -->
+    <property name="LOG_ROOT_LEVEL" value="DEBUG"/>
+    <!-- 定义日志输出路径 -->
+    <property name="LOG_HOME" value="logs"/>
+    <!-- 定义日志输出格式，其中 %d：表示日期，%thread：表示线程名，%-5level：表示日志级别，从左开始显示5个字符宽度，
+        %logger{36}：输出日志事件的位置，即类名，%msg：表示日志信息，%n：表示换行符 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n"/>
+    <!-- 定义控制台日志输出格式，其中 %d：表示日期，%thread：表示线程名，%-5level：表示日志级别，从左开始显示5个字符宽度，
+            %logger{36}：输出日志事件的位置，即类名，%msg：表示日志信息，%n：表示换行符，%highlight()&%cyan()：着色-->
+    <property name="LOG_CONSOLE_PATTERN"
+              value="%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}) - %msg%n"/>
+    <!-- 定义单个文件大小上限，超过之后会生成新文件  -->
+    <property name="LOG_MAX_FILE_SIZE" value="512MB"/>
+    <!-- 定义日志文件最大保留天数 -->
+    <property name="LOG_MAX_HISTORY" value="30"/>
+    <!-- 定义日志总大小，超过将删除最旧存档  -->
+    <property name="LOG_TOTAL_SIZE_CAP" value="3GB"/>
+
+    <!-- 控制台日志输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- INFO 级别的文件日志 -->
+    <appender name="FILE_INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 定义输出时的级别过滤器，对于 ERROR 级别的日志全部 ACCEPT 接收 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+        </filter>
+        <!-- 定义滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 单个文件大小上限 -->
+            <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <!-- 输出格式 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ERROR 级别的文件日志 -->
+    <appender name="FILE_ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 定义输出时的级别过滤器，对于低于 ERROR 级别的日志全部拒绝 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <!-- 定义滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_HOME}/error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 单个文件大小上限 -->
+            <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+            <!-- keep 30 days' worth of history capped at 3GB total size -->
+            <maxHistory>${LOG_MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${LOG_TOTAL_SIZE_CAP}</totalSizeCap>
+        </rollingPolicy>
+        <!-- 输出格式 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <root level="${LOG_ROOT_LEVEL}">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE_INFO_LOG"/>
+        <appender-ref ref="FILE_ERROR_LOG"/>
+    </root>
+</configuration>
