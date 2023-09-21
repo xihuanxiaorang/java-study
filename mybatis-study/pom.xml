@@ -27,8 +27,6 @@
         <mysql.version>8.0.29</mysql.version>
         <druid.version>1.2.8</druid.version>
         <mybatis.version>3.5.13-MY</mybatis.version>
-        <javassist.version>3.29.2-GA</javassist.version>
-        <ognl.version>3.3.4</ognl.version>
     </properties>
 
     <dependencyManagement>
@@ -81,21 +79,6 @@
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
-            </dependency>
-            <!-- 解决测试时抛出的异常 -->
-            <dependency>
-                <groupId>org.javassist</groupId>
-                <artifactId>javassist</artifactId>
-                <version>${javassist.version}</version>
-                <scope>compile</scope>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>ognl</groupId>
-                <artifactId>ognl</artifactId>
-                <version>${ognl.version}</version>
-                <scope>compile</scope>
-                <optional>true</optional>
             </dependency>
         </dependencies>
     </dependencyManagement>
