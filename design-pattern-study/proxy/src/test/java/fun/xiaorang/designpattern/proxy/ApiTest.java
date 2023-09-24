@@ -2,13 +2,17 @@ package fun.xiaorang.designpattern.proxy;
 
 import fun.xiaorang.designpattern.proxy.cglib.CglibYouTubeCacheProxy;
 import fun.xiaorang.designpattern.proxy.jdk.JdkYouTubeCacheProxy;
-import fun.xiaorang.designpattern.proxy.statics.*;
+import fun.xiaorang.designpattern.proxy.statics.ThirdPartyYouTubeLib;
+import fun.xiaorang.designpattern.proxy.statics.ThirdPartyYouTubeLibClass;
+import fun.xiaorang.designpattern.proxy.statics.YouTubeCacheProxy;
+import fun.xiaorang.designpattern.proxy.statics.YouTubeDownloader;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+
+import static net.sf.cglib.core.DebuggingClassWriter.DEBUG_LOCATION_PROPERTY;
 
 /**
  * @author liulei
@@ -20,25 +24,13 @@ import java.util.Map;
  */
 class ApiTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApiTest.class);
-    private static final Map<String, Video> cacheAll = new HashMap<>();
-    private static final Map<String, Video> cachePopular = new HashMap<>();
 
-    @Test
-    public void test_00() {
-        ThirdPartyYouTubeLib thirdPartyYouTubeLib = new ThirdPartyYouTubeLibClass();
-        YouTubeDownloader naiveDownloader = new YouTubeDownloader(thirdPartyYouTubeLib);
-        YouTubeDownloader smartDownloader =
-                new YouTubeDownloader(new YouTubeCacheProxy(thirdPartyYouTubeLib));
-
-        long naive = test(naiveDownloader);
-        LOGGER.info(
-                "--------------------------------------------------------------------------------\n");
-        long smart = test(smartDownloader);
-        LOGGER.info("通过缓存代理可以节约 {} ms", (naive - smart));
+    public static void main(String[] args) {
+//        test_01();
+        test_02();
     }
 
-    @Test
-    public void test_01() {
+    public static void test_01() {
         ThirdPartyYouTubeLib thirdPartyYouTubeLib = new ThirdPartyYouTubeLibClass();
         ThirdPartyYouTubeLib proxy = new JdkYouTubeCacheProxy().getProxy(thirdPartyYouTubeLib);
         YouTubeDownloader naiveDownloader = new YouTubeDownloader(thirdPartyYouTubeLib);
@@ -51,21 +43,7 @@ class ApiTest {
         LOGGER.info("通过缓存代理可以节约 {} ms", (naive - smart));
     }
 
-    @Test
-    public void test_02() {
-        ThirdPartyYouTubeLibClass thirdPartyYouTubeLib = new ThirdPartyYouTubeLibClass();
-        ThirdPartyYouTubeLib proxy = new CglibYouTubeCacheProxy().getProxy(thirdPartyYouTubeLib);
-        YouTubeDownloader naiveDownloader = new YouTubeDownloader(thirdPartyYouTubeLib);
-        YouTubeDownloader smartDownloader = new YouTubeDownloader(proxy);
-
-        long naive = test(naiveDownloader);
-        LOGGER.info(
-                "--------------------------------------------------------------------------------\n");
-        long smart = test(smartDownloader);
-        LOGGER.info("通过缓存代理可以节约 {} ms", (naive - smart));
-    }
-
-    private long test(YouTubeDownloader downloader) {
+    public static long test(YouTubeDownloader downloader) {
         long startTime = System.currentTimeMillis();
 
         // 应用中的用户行为如下：
@@ -80,5 +58,33 @@ class ApiTest {
         long estimatedTime = System.currentTimeMillis() - startTime;
         LOGGER.info("测试总共耗时 {} ms", estimatedTime);
         return estimatedTime;
+    }
+
+    public static void test_02() {
+        System.setProperty(DEBUG_LOCATION_PROPERTY, new File("").getAbsolutePath() + "/cglib");
+        ThirdPartyYouTubeLibClass thirdPartyYouTubeLib = new ThirdPartyYouTubeLibClass();
+        ThirdPartyYouTubeLib proxy = new CglibYouTubeCacheProxy().getProxy(thirdPartyYouTubeLib);
+        YouTubeDownloader naiveDownloader = new YouTubeDownloader(thirdPartyYouTubeLib);
+        YouTubeDownloader smartDownloader = new YouTubeDownloader(proxy);
+
+        long naive = test(naiveDownloader);
+        LOGGER.info(
+                "--------------------------------------------------------------------------------\n");
+        long smart = test(smartDownloader);
+        LOGGER.info("通过缓存代理可以节约 {} ms", (naive - smart));
+    }
+
+    @Test
+    public void test_00() {
+        ThirdPartyYouTubeLib thirdPartyYouTubeLib = new ThirdPartyYouTubeLibClass();
+        YouTubeDownloader naiveDownloader = new YouTubeDownloader(thirdPartyYouTubeLib);
+        YouTubeDownloader smartDownloader =
+                new YouTubeDownloader(new YouTubeCacheProxy(thirdPartyYouTubeLib));
+
+        long naive = test(naiveDownloader);
+        LOGGER.info(
+                "--------------------------------------------------------------------------------\n");
+        long smart = test(smartDownloader);
+        LOGGER.info("通过缓存代理可以节约 {} ms", (naive - smart));
     }
 }

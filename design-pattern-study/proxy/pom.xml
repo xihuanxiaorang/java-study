@@ -11,6 +11,10 @@
 
     <artifactId>proxy</artifactId>
 
+    <properties>
+        <logback.version>1.3.0</logback.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>cglib</groupId>
