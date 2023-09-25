@@ -9,17 +9,6 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>proxy</artifactId>
+    <artifactId>adapter</artifactId>
 
-    <properties>
-        <logback.version>1.3.0</logback.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib</artifactId>
-            <version>3.3.0</version>
-        </dependency>
-    </dependencies>
 </project>

@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public class JdkYouTubeCacheProxy implements InvocationHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdkYouTubeCacheProxy.class);
-    private static final Map<String, Video> cacheAll = new HashMap<>();
+    private static final Map<String, Video> CACHE_ALL = new HashMap<>();
     private static Map<String, Video> cachePopular = new HashMap<>();
     private ThirdPartyYouTubeLib thirdPartyYouTubeLib;
 
@@ -46,10 +46,10 @@ public class JdkYouTubeCacheProxy implements InvocationHandler {
             return cachePopular;
         } else if ("getVideo".equals(methodName)) {
             String videoId = (String) args[0];
-            Video video = cacheAll.get(videoId);
+            Video video = CACHE_ALL.get(videoId);
             if (video == null) {
                 video = (Video) method.invoke(thirdPartyYouTubeLib, args);
-                cacheAll.put(videoId, video);
+                CACHE_ALL.put(videoId, video);
             } else {
                 LOGGER.info("从缓存中下载 {} 视频... ", videoId);
             }

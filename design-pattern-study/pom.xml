@@ -16,6 +16,7 @@
         <module>singleton</module>
         <module>proxy</module>
         <module>simple-factory</module>
+        <module>adapter</module>
     </modules>
 
 </project>

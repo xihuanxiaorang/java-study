@@ -1,0 +1,23 @@
+<!--开启调试功能，配置文件将10秒钟扫描一次更改，当检测到配置文件发生改变时，该配置文件将会被重新加载-->
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <!-- 定义变量 -->
+    <!-- 定义root日志级别，优先级：TRACE < DEBUG < INFO < WARN < ERROR -->
+    <property name="LOG_ROOT_LEVEL" value="DEBUG"/>
+    <!-- 定义控制台日志输出格式，其中 %d：表示日期，%thread：表示线程名，%-5level：表示日志级别，从左开始显示5个字符宽度，
+            %logger{36}：输出日志事件的位置，即类名，%msg：表示日志信息，%n：表示换行符，%highlight()&%cyan()：着色-->
+    <property name="LOG_CONSOLE_PATTERN"
+              value="%d{HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger{50}) - %msg%n"/>
+
+    <!-- 控制台日志输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_CONSOLE_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="${LOG_ROOT_LEVEL}">
+        <appender-ref ref="STDOUT"/>
+        <!--        <appender-ref ref="FILE_INFO_LOG"/>-->
+        <!--        <appender-ref ref="FILE_ERROR_LOG"/>-->
+    </root>
+</configuration>
