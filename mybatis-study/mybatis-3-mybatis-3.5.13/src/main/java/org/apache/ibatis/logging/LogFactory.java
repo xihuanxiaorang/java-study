@@ -31,6 +31,8 @@ public final class LogFactory {
   private static Constructor<? extends Log> logConstructor;
 
   static {
+    // 依次尝试使用不同的日志框架 SLF4J > LOG4J2 > LOG4J > JDK > NO LOGGING
+    // 在使用日志框架时，可以通过在类路径下放置相应的日志框架的实现类，来切换日志框架
     tryImplementation(LogFactory::useSlf4jLogging);
     tryImplementation(LogFactory::useCommonsLogging);
     tryImplementation(LogFactory::useLog4J2Logging);
@@ -103,11 +105,15 @@ public final class LogFactory {
 
   private static void setImplementation(Class<? extends Log> implClass) {
     try {
+      // 获取 Log 接口的实现类（适配器）的构造方法
       Constructor<? extends Log> candidate = implClass.getConstructor(String.class);
+      // 尝试加载当前使用的日志框架的适配器类，如果加载失败，则抛出异常
       Log log = candidate.newInstance(LogFactory.class.getName());
       if (log.isDebugEnabled()) {
+        // 如果开启 DEBUG 日志，则打印当前使用的日志框架的名称
         log.debug("Logging initialized using '" + implClass + "' adapter.");
       }
+      // 加载成功，则更新 logConstructor 属性，记录适配器的构造方法
       logConstructor = candidate;
     } catch (Throwable t) {
       throw new LogException("Error setting Log implementation.  Cause: " + t, t);

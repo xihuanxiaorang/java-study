@@ -15,22 +15,16 @@
  */
 package org.apache.ibatis.logging.jdbc;
 
+import org.apache.ibatis.builder.SqlSourceBuilder;
+import org.apache.ibatis.logging.Log;
+import org.apache.ibatis.reflection.ArrayUtil;
+
 import java.lang.reflect.Method;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
-
-import org.apache.ibatis.builder.SqlSourceBuilder;
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.reflection.ArrayUtil;
 
 /**
  * Base class for proxies to do logging.
@@ -40,16 +34,50 @@ import org.apache.ibatis.reflection.ArrayUtil;
  */
 public abstract class BaseJdbcLogger {
 
+  /**
+   * 存储 PreparedStatement 中所有 set 方法的名称，例如：setString、setInt、setLong 等
+   * 作用：用于判断当前方法是否为 PreparedStatement 中的 set 方法
+   */
   protected static final Set<String> SET_METHODS;
+
+  /**
+   * 存储 PreparedStatement 中所有 execute 方法的名称，例如：execute、executeUpdate、executeQuery、addBatch 等
+   * 作用：用于判断当前方法是否为 PreparedStatement 中的 execute 方法
+   */
   protected static final Set<String> EXECUTE_METHODS = new HashSet<>();
 
-  private final Map<Object, Object> columnMap = new HashMap<>();
+  static {
+    SET_METHODS = Arrays.stream(PreparedStatement.class.getDeclaredMethods())
+      .filter(method -> method.getName().startsWith("set")).filter(method -> method.getParameterCount() > 1)
+      .map(Method::getName).collect(Collectors.toSet());
 
-  private final List<Object> columnNames = new ArrayList<>();
-  private final List<Object> columnValues = new ArrayList<>();
+    EXECUTE_METHODS.add("execute");
+    EXECUTE_METHODS.add("executeUpdate");
+    EXECUTE_METHODS.add("executeQuery");
+    EXECUTE_METHODS.add("addBatch");
+  }
 
+  /**
+   * 日志对象，用于记录日志，
+   * 使用适配器模式将不同的日志框架进行统一，例如：Log4j、Log4j2、Logback、JDK Logging 等
+   */
   protected final Log statementLog;
   protected final int queryStack;
+
+  /**
+   * 用于存储 PreparedStatement 中的 set 方法的参数（占位符），其中 Key = 参数的索引位置，Value = 参数的值
+   */
+  private final Map<Object, Object> columnMap = new HashMap<>();
+
+  /**
+   * 用于存储 PreparedStatement 中的 set 方法的参数名称（即参数的索引位置），例如：setString(1, "张三") 中的 1
+   */
+  private final List<Object> columnNames = new ArrayList<>();
+
+  /**
+   * 用于存储 PreparedStatement 中的 set 方法的参数值，例如：setString(1, "张三") 中的 "张三"
+   */
+  private final List<Object> columnValues = new ArrayList<>();
 
   /*
    * Default constructor
@@ -61,17 +89,6 @@ public abstract class BaseJdbcLogger {
     } else {
       this.queryStack = queryStack;
     }
-  }
-
-  static {
-    SET_METHODS = Arrays.stream(PreparedStatement.class.getDeclaredMethods())
-        .filter(method -> method.getName().startsWith("set")).filter(method -> method.getParameterCount() > 1)
-        .map(Method::getName).collect(Collectors.toSet());
-
-    EXECUTE_METHODS.add("execute");
-    EXECUTE_METHODS.add("executeUpdate");
-    EXECUTE_METHODS.add("executeQuery");
-    EXECUTE_METHODS.add("addBatch");
   }
 
   protected void setColumn(Object key, Object value) {
