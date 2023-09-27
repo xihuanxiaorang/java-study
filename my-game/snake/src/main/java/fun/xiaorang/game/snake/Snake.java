@@ -15,27 +15,81 @@ public class Snake {
      * 蛇的全部节点
      */
     private final LinkedList<Node> nodes = new LinkedList<>();
-    /**
-     * 蛇的方向
-     */
-    private final Direction direction = Direction.RIGHT;
 
     public Snake() {
-        this.nodes.add(Node.builder(new Point(3, 2)).head(direction).build());
+        this.nodes.add(Node.builder(new Point(3, 2)).head(Direction.RIGHT).build());
         this.nodes.add(Node.builder(new Point(2, 2)).body().build());
         this.nodes.add(Node.builder(new Point(1, 2)).body().build());
     }
 
     public void draw(Graphics g) {
+        this.move();
         for (Node node : nodes) {
             node.draw(g);
         }
     }
 
+    public void changeDirection(Direction direction) {
+        this.getHead().direction = direction;
+    }
+
+    private Node getHead() {
+        return this.nodes.getFirst();
+    }
+
+    public void move() {
+        // 获取原来的蛇头
+        Node oldHead = this.getHead();
+        // 根据方向创建新的蛇头
+        Node newHead = Node.builder(this.calculateNewHeadPoint(oldHead.point, oldHead.direction))
+                .head(oldHead.direction)
+                .build();
+        // 将新的蛇头添加到头部
+        this.nodes.addFirst(newHead);
+        // 将原来的蛇头变成蛇身
+        oldHead.isHead = false;
+        // 移除蛇尾实现移动
+        this.nodes.pollLast();
+    }
+
+    private Point calculateNewHeadPoint(Point point, Direction direction) {
+        int x = point.x;
+        int y = point.y;
+        switch (direction) {
+            case UP:
+                y--;
+                if (y < 0) {
+                    y = Constants.MAX_Y;
+                }
+                break;
+            case DOWN:
+                y++;
+                if (y >= Constants.MAX_Y) {
+                    y = 0;
+                }
+                break;
+            case LEFT:
+                x--;
+                if (x < 0) {
+                    x = Constants.MAX_X;
+                }
+                break;
+            case RIGHT:
+                x++;
+                if (x >= Constants.MAX_X) {
+                    x = 0;
+                }
+                break;
+            default:
+                break;
+        }
+        return new Point(x, y);
+    }
+
     private static class Node {
         private final Point point;
-        private final Direction direction;
-        private final boolean isHead;
+        private boolean isHead;
+        private Direction direction;
 
         public Node(Point point, Direction direction, boolean isHead) {
             this.point = point;
@@ -75,6 +129,10 @@ public class Snake {
             }
         }
 
+        public Point getPoint() {
+            return point;
+        }
+
         private static class NodeBuilder {
             private final Point point;
             private Direction direction;
@@ -92,6 +150,7 @@ public class Snake {
 
             public NodeBuilder body() {
                 this.isHead = false;
+                this.direction = null;
                 return this;
             }
 

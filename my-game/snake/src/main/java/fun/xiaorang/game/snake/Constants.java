@@ -27,4 +27,16 @@ public class Constants {
      * 蛇节点高度
      */
     public static final int SNAKE_NODE_HEIGHT = 25;
+    /**
+     * 最大的X坐标
+     */
+    public static final int MAX_X = (GAME_WIDOWS_WIDTH - 6) / SNAKE_NODE_WIDTH;
+    /**
+     * 最大的Y坐标
+     */
+    public static final int MAX_Y = (GAME_WIDOWS_HEIGHT - 29) / SNAKE_NODE_HEIGHT;
+    /**
+     * 默认的游戏速度
+     */
+    public static final int DEFAULT_GAME_SPEED = 200;
 }
