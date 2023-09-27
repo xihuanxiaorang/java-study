@@ -3,6 +3,9 @@ package fun.xiaorang.game.snake;
 import java.awt.*;
 import java.util.LinkedList;
 
+import static fun.xiaorang.game.snake.Constants.SNAKE_NODE_HEIGHT;
+import static fun.xiaorang.game.snake.Constants.SNAKE_NODE_WIDTH;
+
 /**
  * @author liulei
  * @description <p style = " font-weight:bold ; "><p/>
@@ -22,8 +25,8 @@ public class Snake {
         this.nodes.add(Node.builder(new Point(1, 2)).body().build());
     }
 
-    public void draw(Graphics g) {
-        this.move();
+    public void draw(Graphics g, Food food) {
+        this.move(food);
         for (Node node : nodes) {
             node.draw(g);
         }
@@ -37,7 +40,7 @@ public class Snake {
         return this.nodes.getFirst();
     }
 
-    public void move() {
+    public void move(Food food) {
         // 获取原来的蛇头
         Node oldHead = this.getHead();
         // 根据方向创建新的蛇头
@@ -48,8 +51,26 @@ public class Snake {
         this.nodes.addFirst(newHead);
         // 将原来的蛇头变成蛇身
         oldHead.isHead = false;
-        // 移除蛇尾实现移动
-        this.nodes.pollLast();
+        if (ateFood(food)) {
+            // 生成新的食物
+            food.random(this);
+        } else {
+            // 移除蛇尾实现移动
+            this.nodes.pollLast();
+        }
+    }
+
+    public boolean isSnakeBody(Point point) {
+        for (Node node : nodes) {
+            if (node.point.equals(point)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean ateFood(Food food) {
+        return this.getHead().point.equals(food.getPoint());
     }
 
     private Point calculateNewHeadPoint(Point point, Direction direction) {
@@ -125,7 +146,7 @@ public class Snake {
                 image = Img.BODY;
             }
             if (image != null) {
-                g.drawImage(image, point.x * Constants.SNAKE_NODE_WIDTH, point.y * Constants.SNAKE_NODE_HEIGHT, null);
+                g.drawImage(image, point.x * SNAKE_NODE_WIDTH, point.y * SNAKE_NODE_HEIGHT, null);
             }
         }
 

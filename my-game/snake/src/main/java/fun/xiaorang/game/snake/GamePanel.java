@@ -2,6 +2,8 @@ package fun.xiaorang.game.snake;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static fun.xiaorang.game.snake.Constants.DEFAULT_GAME_SPEED;
 
@@ -12,21 +14,21 @@ import static fun.xiaorang.game.snake.Constants.DEFAULT_GAME_SPEED;
  * @Copyright 博客：<a href="https://blog.xiaorang.fun">小让的糖果屋</a>  - show me the code
  * @date 2023/9/27 21:07
  */
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements ActionListener {
     private final Snake snake;
+    private final Food food;
     /**
      * 定时器，用于定时重绘，实现动画效果
      */
-    private final Timer timer = new Timer(DEFAULT_GAME_SPEED, e -> {
-        // 重绘
-        repaint();
-    });
+    private final Timer timer = new Timer(DEFAULT_GAME_SPEED, this);
 
     public GamePanel() {
         // 初始化
         init();
         // 初始化蛇
         snake = new Snake();
+        // 初始化食物
+        food = new Food(snake);
     }
 
     private void init() {
@@ -49,10 +51,19 @@ public class GamePanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        snake.draw(g);
+        // 绘制蛇
+        snake.draw(g, this.food);
+        // 绘制食物
+        food.draw(g);
     }
 
     public Snake getSnake() {
         return snake;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // 重绘
+        repaint();
     }
 }
