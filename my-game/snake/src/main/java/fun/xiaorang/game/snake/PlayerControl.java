@@ -19,6 +19,17 @@ public class PlayerControl extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        changeDirection(e);
+        changeState(e);
+    }
+
+    private void changeState(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            this.gamePanel.changeState();
+        }
+    }
+
+    private void changeDirection(KeyEvent e) {
         Direction direction = null;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
@@ -37,7 +48,7 @@ public class PlayerControl extends KeyAdapter {
                 break;
         }
         if (direction != null) {
-            this.gamePanel.getSnake().changeDirection(direction);
+            this.gamePanel.changeDirection(direction);
         }
     }
 }

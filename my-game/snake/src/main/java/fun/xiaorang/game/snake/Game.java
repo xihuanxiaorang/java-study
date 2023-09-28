@@ -21,9 +21,11 @@ public class Game extends JFrame {
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         // 游戏窗口居中显示
-        this.setBounds((screenWidth - GAME_WIDOWS_WIDTH) >> 1, (screenHeight - GAME_WIDOWS_HEIGHT) >> 1, GAME_WIDOWS_WIDTH, GAME_WIDOWS_HEIGHT);
-        // 将窗口自带的内容面板设置为GamePanel的自定义面板
-        this.setContentPane(new GamePanel());
+        this.setLocation((screenWidth - GAME_WIDOWS_WIDTH) >> 1, (screenHeight - GAME_WIDOWS_HEIGHT) >> 1);
+        // 将窗口内容面板设置为自定义的主面板
+        this.setContentPane(new MainPanel());
+        // 自适应窗口大小
+        this.pack();
         // 禁止窗口调整大小
         this.setResizable(false);
         // 窗口置顶

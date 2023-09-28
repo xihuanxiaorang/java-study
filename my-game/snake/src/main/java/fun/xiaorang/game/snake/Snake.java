@@ -3,8 +3,7 @@ package fun.xiaorang.game.snake;
 import java.awt.*;
 import java.util.LinkedList;
 
-import static fun.xiaorang.game.snake.Constants.SNAKE_NODE_HEIGHT;
-import static fun.xiaorang.game.snake.Constants.SNAKE_NODE_WIDTH;
+import static fun.xiaorang.game.snake.Constants.*;
 
 /**
  * @author liulei
@@ -25,8 +24,10 @@ public class Snake {
         this.nodes.add(Node.builder(new Point(1, 2)).body().build());
     }
 
-    public void draw(Graphics g, Food food) {
-        this.move(food);
+    public void draw(Graphics g, Food food, GamePanel gamePanel) {
+        if (gamePanel.getState() == State.RUNNING) {
+            this.move(food, gamePanel);
+        }
         for (Node node : nodes) {
             node.draw(g);
         }
@@ -40,13 +41,17 @@ public class Snake {
         return this.nodes.getFirst();
     }
 
-    public void move(Food food) {
+    public void move(Food food, GamePanel gamePanel) {
         // 获取原来的蛇头
         Node oldHead = this.getHead();
         // 根据方向创建新的蛇头
         Node newHead = Node.builder(this.calculateNewHeadPoint(oldHead.point, oldHead.direction))
                 .head(oldHead.direction)
                 .build();
+        if (this.isDead(newHead)) {
+            gamePanel.setState(State.OVER);
+            return;
+        }
         // 将新的蛇头添加到头部
         this.nodes.addFirst(newHead);
         // 将原来的蛇头变成蛇身
@@ -69,6 +74,20 @@ public class Snake {
         return false;
     }
 
+    private boolean isDead(Node newHead) {
+        // 检查蛇头是否超出边界
+        if (newHead.point.x < 0 || newHead.point.x >= MAX_X || newHead.point.y < 0 || newHead.point.y >= MAX_Y) {
+            return true;
+        }
+        // 检查蛇头是否与蛇身重叠
+        for (int i = 1; i < nodes.size(); i++) {
+            if (newHead.point.equals(nodes.get(i).point)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean ateFood(Food food) {
         return this.getHead().point.equals(food.getPoint());
     }
@@ -79,27 +98,15 @@ public class Snake {
         switch (direction) {
             case UP:
                 y--;
-                if (y < 0) {
-                    y = Constants.MAX_Y;
-                }
                 break;
             case DOWN:
                 y++;
-                if (y >= Constants.MAX_Y) {
-                    y = 0;
-                }
                 break;
             case LEFT:
                 x--;
-                if (x < 0) {
-                    x = Constants.MAX_X;
-                }
                 break;
             case RIGHT:
                 x++;
-                if (x >= Constants.MAX_X) {
-                    x = 0;
-                }
                 break;
             default:
                 break;

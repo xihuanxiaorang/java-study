@@ -18,6 +18,8 @@ public class Img {
     public static Image RIGHT;
     public static Image BODY;
     public static Image FOOD;
+    public static Image TITLE;
+
 
     static {
         ClassLoader classLoader = Img.class.getClassLoader();
@@ -27,5 +29,6 @@ public class Img {
         RIGHT = new ImageIcon(Objects.requireNonNull(classLoader.getResource("images/right.png"))).getImage();
         BODY = new ImageIcon(Objects.requireNonNull(classLoader.getResource("images/body.png"))).getImage();
         FOOD = new ImageIcon(Objects.requireNonNull(classLoader.getResource("images/food.png"))).getImage();
+        TITLE = new ImageIcon(Objects.requireNonNull(classLoader.getResource("images/title.png"))).getImage();
     }
 }
