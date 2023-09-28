@@ -70,4 +70,8 @@ public class Constants {
      * 默认字体
      */
     public static final Font DEFAULT_FONT = new Font("宋体", Font.BOLD, 25);
+    /**
+     * 按键的间隔
+     */
+    public static final int KEY_INTERVAL = 200;
 }

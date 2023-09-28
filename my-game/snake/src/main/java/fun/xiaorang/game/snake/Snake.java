@@ -37,8 +37,8 @@ public class Snake {
         this.getHead().direction = direction;
     }
 
-    private Node getHead() {
-        return this.nodes.getFirst();
+    public Direction getDirection() {
+        return this.getHead().direction;
     }
 
     public void move(Food food, GamePanel gamePanel) {
@@ -99,6 +99,10 @@ public class Snake {
         return this.getHead().point.equals(food.getPoint());
     }
 
+    private Node getHead() {
+        return this.nodes.getFirst();
+    }
+
     private Point calculateNewHeadPoint(Point point, Direction direction) {
         int x = point.x;
         int y = point.y;
@@ -123,8 +127,8 @@ public class Snake {
 
     private static class Node {
         private final Point point;
-        private boolean isHead;
         private Direction direction;
+        private boolean isHead;
 
         public Node(Point point, Direction direction, boolean isHead) {
             this.point = point;

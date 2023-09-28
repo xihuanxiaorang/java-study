@@ -118,8 +118,8 @@ public class GamePanel extends JPanel implements ActionListener {
         start();
     }
 
-    public void changeDirection(Direction direction) {
-        this.snake.changeDirection(direction);
+    public Snake getSnake() {
+        return snake;
     }
 
     public State getState() {
