@@ -49,7 +49,12 @@ public class Snake {
                 .head(oldHead.direction)
                 .build();
         if (this.isDead(newHead)) {
+            // 设置游戏状态为结束
             gamePanel.setState(State.OVER);
+            // 播放游戏结束音乐
+            SoundManager.playGameOverMusic();
+            // 停止播放背景音乐
+            SoundManager.stopBackgroundMusic();
             return;
         }
         // 将新的蛇头添加到头部
@@ -57,6 +62,8 @@ public class Snake {
         // 将原来的蛇头变成蛇身
         oldHead.isHead = false;
         if (ateFood(food)) {
+            // 播放吃食物的音效
+            SoundManager.playEatFoodMusic();
             // 生成新的食物
             food.random(this);
         } else {

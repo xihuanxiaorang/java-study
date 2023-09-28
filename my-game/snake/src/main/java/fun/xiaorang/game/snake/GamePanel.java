@@ -95,13 +95,21 @@ public class GamePanel extends JPanel implements ActionListener {
     public void changeState() {
         if (this.state == RUNNING) {
             this.state = PAUSE;
+            // 停止播放背景音乐
+            SoundManager.stopBackgroundMusic();
         } else if (this.state == PAUSE) {
             this.state = RUNNING;
+            // 播放背景音乐
+            SoundManager.playBackgroundMusic();
         } else if (this.state == OVER) {
             // 设置游戏状态为运行中
             this.state = RUNNING;
             // 重新开始游戏
             this.restart();
+            // 停止播放游戏结束音乐
+            SoundManager.stopGameOverMusic();
+            // 播放背景音乐
+            SoundManager.playBackgroundMusic();
         }
     }
 
