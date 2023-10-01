@@ -15,7 +15,7 @@ import static fun.xiaorang.game._2048.Constants.*;
 public class Box {
     private final Card[][] cards = new Card[ROWS][COLS];
 
-    public Box() {
+    public void init() {
         // 初始化卡片
         this.initCards();
         // 初始化随机数字
@@ -72,12 +72,51 @@ public class Box {
         }
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g, GameData gameData) {
+        // 判断游戏是否胜利，即是否出现数字2048
+        if (this.isWin()) {
+            gameData.setGameState(GameState.WIN);
+        } else if (this.isGameOver()) { // 判断游戏是否结束，即是否不能再移动任何卡片
+            gameData.setGameState(GameState.OVER);
+        }
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 cards[i][j].draw(g);
             }
         }
+    }
+
+    private boolean isGameOver() {
+        return !this.hasEmptyCard() && !canMerge();
+    }
+
+    private boolean canMerge() {
+        // 遍历所有的卡片格子，检查相邻的卡片
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                if (j < COLS - 1 && cards[i][j].num == cards[i][j + 1].num) {
+                    return true; // 右侧有相同数字可以合并
+                }
+                if (i < ROWS - 1 && cards[i][j].num == cards[i + 1][j].num) {
+                    return true; // 下方有相同数字可以合并
+                }
+            }
+        }
+        // 没有相邻的卡片可以合并
+        return false;
+    }
+
+
+    private boolean isWin() {
+        // 遍历所有卡片，如果有一个卡片的数字为2048，就返回true
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                if (cards[i][j].num == 2048) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**

@@ -122,4 +122,8 @@ public class Constants {
      * 开局默认生成随机数的卡片数量
      */
     public static final int DEFAULT_GENERATE_CARD_NUM = 2;
+    /**
+     * 默认用来绘制状态的字体
+     */
+    public static final Font DEFAULT_STATE_FONT = new Font("宋体", Font.BOLD, 25);
 }
