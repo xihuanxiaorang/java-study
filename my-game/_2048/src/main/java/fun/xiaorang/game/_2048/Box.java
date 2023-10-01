@@ -1,6 +1,7 @@
 package fun.xiaorang.game._2048;
 
 import java.awt.*;
+import java.util.Random;
 
 import static fun.xiaorang.game._2048.Constants.*;
 
@@ -17,12 +18,56 @@ public class Box {
     public Box() {
         // 初始化卡片
         this.initCards();
+        // 初始化随机数字
+        this.initRandomNum();
+    }
+
+    private void initRandomNum() {
+        // 随机生成两个数字
+        for (int i = 0; i < DEFAULT_GENERATE_CARD_NUM; i++) {
+            this.generateRandomNum();
+        }
+    }
+
+    private void generateRandomNum() {
+        // 判断是否还有空位
+        if (!this.hasEmptyCard()) {
+            return;
+        }
+        // 随机生成一个数字，2或者4，其中2的概率为90%，4的概率为10%，并将数字填入随机的空白卡片中
+        this.getRandomEmptyCard().num = new Random().nextInt(10) == 9 ? 4 : 2;
+    }
+
+    private Card getRandomEmptyCard() {
+        Random random = new Random();
+        // 随机生成一个坐标
+        int i = random.nextInt(ROWS);
+        int j = random.nextInt(COLS);
+        Card card = cards[i][j];
+        // 如果随机获取的卡片是空白卡片，则直接返回
+        if (card.num == 0) {
+            return card;
+        }
+        // 如果随机获取的卡片不是空白卡片，则重新递归获取
+        return this.getRandomEmptyCard();
+    }
+
+    private boolean hasEmptyCard() {
+        // 遍历所有卡片，如果有一个卡片的数字为0，就返回true
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; ++j) {
+                if (cards[i][j].num == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void initCards() {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; ++j) {
-                cards[i][j] = new Card(i, j, 512);
+                cards[i][j] = new Card(i, j);
             }
         }
     }
@@ -42,7 +87,7 @@ public class Box {
         private final int y;
         private final int width = DEFAULT_CARD_WIDTH;
         private final int height = DEFAULT_CARD_HEIGHT;
-        private final int num;
+        private int num;
 
         public Card(int i, int j) {
             this(i, j, 0);

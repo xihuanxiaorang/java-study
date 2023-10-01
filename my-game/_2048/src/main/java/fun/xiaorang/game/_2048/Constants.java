@@ -118,4 +118,8 @@ public class Constants {
      * 默认的卡片数字字体
      */
     public static final Font DEFAULT_CARD_NUMBER_FONT = new Font("思源宋体", Font.BOLD, 30);
+    /**
+     * 开局默认生成随机数的卡片数量
+     */
+    public static final int DEFAULT_GENERATE_CARD_NUM = 2;
 }
