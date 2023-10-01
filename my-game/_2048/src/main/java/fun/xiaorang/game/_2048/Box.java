@@ -80,6 +80,22 @@ public class Box {
         }
     }
 
+    public void moveUp() {
+        System.out.println("up");
+    }
+
+    public void moveDown() {
+        System.out.println("down");
+    }
+
+    public void moveLeft() {
+        System.out.println("left");
+    }
+
+    public void moveRight() {
+        System.out.println("right");
+    }
+
     private static class Card {
         private final int i;
         private final int j;

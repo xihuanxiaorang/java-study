@@ -35,6 +35,8 @@ public class GamePanel extends JPanel implements ActionListener {
         this.requestFocusInWindow();
         // 通过请求焦点来确保当前面板获得焦点（这行通常不会影响焦点的设置，但可以作为一种额外的措施）
         this.requestFocus();
+        // 为当前游戏面板添加键盘监听器
+        this.addKeyListener(new PlayerControl(box));
         // 创建定时器，用于定时重绘，实现动画效果
         Timer timer = new Timer(DEFAULT_GAME_SPEED, this);
         // 启动定时器
