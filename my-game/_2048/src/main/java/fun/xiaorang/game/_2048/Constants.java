@@ -58,4 +58,52 @@ public class Constants {
      * 游戏面板默认背景颜色
      */
     public static final Color DEFAULT_GAME_PANEL_BACKGROUND_COLOR = new Color(0xBBADA0);
+    /**
+     * 卡片默认的背景颜色
+     */
+    public static final Color DEFAULT_CARD_BACKGROUND_COLOR = new Color(0xD5CDC4);
+    /**
+     * 卡片数字2的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_2 = new Color(0xEEE4DA);
+    /**
+     * 卡片数字4的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_4 = new Color(0xEDE0C8);
+    /**
+     * 卡片数字8的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_8 = new Color(0xF2B179);
+    /**
+     * 卡片数字16的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_16 = new Color(0xF59563);
+    /**
+     * 卡片数字32的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_32 = new Color(0xF67C5F);
+    /**
+     * 卡片数字64的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_64 = new Color(0xF65E3B);
+    /**
+     * 卡片数字128的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_128 = new Color(0xEDCF72);
+    /**
+     * 卡片数字256的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_256 = new Color(0xEDCC61);
+    /**
+     * 卡片数字512的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_512 = new Color(0xEDC850);
+    /**
+     * 卡片数字1024的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_1024 = new Color(0xEDC53F);
+    /**
+     * 卡片数字2048的背景颜色
+     */
+    public static final Color CARD_BACKGROUND_COLOR_2048 = new Color(0xEDC22E);
 }

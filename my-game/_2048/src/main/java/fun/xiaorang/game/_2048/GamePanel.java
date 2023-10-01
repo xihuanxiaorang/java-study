@@ -15,6 +15,8 @@ import static fun.xiaorang.game._2048.Constants.*;
  * @date 2023/10/1 13:54
  */
 public class GamePanel extends JPanel implements ActionListener {
+    private final Box box = new Box();
+
     public GamePanel() {
         // 初始化
         init();
@@ -42,6 +44,7 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        box.draw(g);
     }
 
     @Override
