@@ -22,7 +22,7 @@ public class Box {
     private void initCards() {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; ++j) {
-                cards[i][j] = new Card(i, j);
+                cards[i][j] = new Card(i, j, 512);
             }
         }
     }
@@ -59,7 +59,32 @@ public class Box {
         public void draw(Graphics g) {
             Color oldColor = g.getColor();
             this.drawCardBackground(g);
+            this.drawNum(g);
             g.setColor(oldColor);
+        }
+
+        private void drawNum(Graphics g) {
+            if (num == 0) {
+                return;
+            }
+            String number = String.valueOf(this.num);
+            g.setColor(this.getNumColor());
+            g.setFont(DEFAULT_CARD_NUMBER_FONT);
+            // 居中显示
+            FontMetrics fontMetrics = g.getFontMetrics();
+            int x = this.x + ((this.width - fontMetrics.stringWidth(number)) >> 1);
+            // TODO 此处获得的字体高度比实际显示的高度要大，暂时不知道原因
+            int y = this.y + ((this.height + fontMetrics.getHeight()) >> 1);
+            // 绘制文字
+            g.drawString(number, x, y);
+        }
+
+        private Color getNumColor() {
+            if (num <= 4) {
+                return CARD_NUMBER_COLOR_2_4;
+            } else {
+                return CARD_NUMBER_COLOR_OTHER;
+            }
         }
 
         private void drawCardBackground(Graphics g) {

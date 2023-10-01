@@ -106,4 +106,16 @@ public class Constants {
      * 卡片数字2048的背景颜色
      */
     public static final Color CARD_BACKGROUND_COLOR_2048 = new Color(0xEDC22E);
+    /**
+     * 卡片数字2和4的字体颜色
+     */
+    public static final Color CARD_NUMBER_COLOR_2_4 = new Color(0x776e65);
+    /**
+     * 卡片其他数字的字体颜色
+     */
+    public static final Color CARD_NUMBER_COLOR_OTHER = new Color(0xf9f6f2);
+    /**
+     * 默认的卡片数字字体
+     */
+    public static final Font DEFAULT_CARD_NUMBER_FONT = new Font("思源宋体", Font.BOLD, 30);
 }
