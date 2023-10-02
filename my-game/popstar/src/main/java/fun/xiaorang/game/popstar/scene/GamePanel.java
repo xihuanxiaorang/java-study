@@ -1,11 +1,13 @@
 package fun.xiaorang.game.popstar.scene;
 
+import fun.xiaorang.game.popstar.core.Color;
 import fun.xiaorang.game.popstar.core.Star;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 import static fun.xiaorang.game.popstar.core.Constants.*;
 
@@ -41,6 +43,14 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBounds(0, 0, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
         // 设置面板透明
         this.setOpaque(false);
+        // 添加鼠标监听
+        this.addMouseListener(new PlayerControl());
+        // 将当前面板标记为可获得焦点的组件
+        this.setFocusable(true);
+        // 请求当前面板在窗口中获得焦点
+        this.requestFocusInWindow();
+        // 通过请求焦点来确保当前面板获得焦点（这行通常不会影响焦点的设置，但可以作为一种额外的措施）
+        this.requestFocus();
         // 创建定时器，用于刷新面板，实现动画效果，每秒刷新60次
         Timer timer = new Timer(1000 / DEFAULT_FRAME_RATE, this);
         // 启动定时器
@@ -58,7 +68,6 @@ public class GamePanel extends JPanel implements ActionListener {
         // 遍历所有星星
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                // 绘制星星
                 STARS[i][j].draw(g);
             }
         }
@@ -68,5 +77,90 @@ public class GamePanel extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // 重绘面板
         this.repaint();
+    }
+
+    private static class PlayerControl extends MouseAdapter {
+        @Override
+        public void mouseClicked(java.awt.event.MouseEvent e) {
+            // 获取鼠标点击的星星
+            Star star = getStarByMouse(e.getX(), e.getY());
+            // 判断鼠标点击的星星是否为空
+            if (star == null) {
+                return;
+            }
+            // 判断鼠标点击的星星是否被选中
+            if (star.isSelected()) {
+                // 消除选中的星星
+            } else {
+                // 清除所有选中的星星
+                clearSelectedStars();
+                // 选中当前星星周围颜色相同的星星
+                selectSameColorStars(star);
+            }
+        }
+
+        /**
+         * 选中当前星星周围颜色相同的星星
+         *
+         * @param star 当前星星
+         */
+        private void selectSameColorStars(Star star) {
+            // 判断当前星星是否为空或者已经被选中，如果是则直接返回
+            if (star == null || star.isSelected()) {
+                return;
+            }
+            // 选中当前星星
+            star.setSelected(true);
+            // 获取当前星星的颜色
+            Color color = star.getColor();
+            // 获取当前星星的行列索引
+            int row = star.getRow();
+            int col = star.getCol();
+            Star up, down, left, right;
+            // 选中当前星星上方的星星
+            if (row > 0 && (up = STARS[row - 1][col]).getColor() == color) {
+                selectSameColorStars(up);
+            }
+            // 选中当前星星下方的星星
+            if (row < ROWS - 1 && (down = STARS[row + 1][col]).getColor() == color) {
+                selectSameColorStars(down);
+            }
+            // 选中当前星星左方的星星
+            if (col > 0 && (left = STARS[row][col - 1]).getColor() == color) {
+                selectSameColorStars(left);
+            }
+            // 选中当前星星右方的星星
+            if (col < COLS - 1 && (right = STARS[row][col + 1]).getColor() == color) {
+                selectSameColorStars(right);
+            }
+        }
+
+        /**
+         * 清除所有选中的星星
+         */
+        private void clearSelectedStars() {
+            // 遍历所有星星
+            for (Star[] stars : STARS) {
+                for (Star star : stars) {
+                    // 清除选中状态
+                    star.setSelected(false);
+                }
+            }
+        }
+
+        /**
+         * 根据鼠标点击的坐标获取对应的星星
+         *
+         * @param x 鼠标点击的x坐标
+         * @param y 鼠标点击的y坐标
+         * @return 星星
+         */
+        private Star getStarByMouse(int x, int y) {
+            // 计算鼠标点击的星星的行列索引
+            int row = y / STAR_HEIGHT;
+            int col = x / STAR_WIDTH;
+            // 获取鼠标点击的星星
+            return STARS[row][col];
+        }
     }
 }

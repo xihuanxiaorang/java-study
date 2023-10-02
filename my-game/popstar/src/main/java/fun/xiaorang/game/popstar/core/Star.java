@@ -15,23 +15,23 @@ import static fun.xiaorang.game.popstar.core.Constants.STAR_WIDTH;
  * @date 2023/10/2 21:47
  */
 public class Star {
-    private final int i;
-    private final int j;
+    private final int row;
+    private final int col;
     private final int x;
     private final int y;
     private final Color color;
     private boolean selected = false;
 
-    public Star(int i, int j) {
-        this(i, j, Color.random());
+    public Star(int row, int col) {
+        this(row, col, Color.random());
     }
 
-    public Star(int i, int j, Color color) {
-        this.i = i;
-        this.j = j;
+    public Star(int row, int col, Color color) {
+        this.row = row;
+        this.col = col;
         this.color = color;
-        this.x = j * STAR_WIDTH;
-        this.y = i * STAR_HEIGHT;
+        this.x = col * STAR_WIDTH;
+        this.y = row * STAR_HEIGHT;
     }
 
     public void draw(Graphics g) {
@@ -39,6 +39,18 @@ public class Star {
         if (selected) {
             g.drawImage(ImageManager.STAR_SELECTED, x, y, null);
         }
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public Color getColor() {
+        return color;
     }
 
     public boolean isSelected() {
