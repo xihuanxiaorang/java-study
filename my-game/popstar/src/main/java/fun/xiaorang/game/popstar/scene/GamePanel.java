@@ -1,5 +1,7 @@
 package fun.xiaorang.game.popstar.scene;
 
+import fun.xiaorang.game.popstar.core.Star;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,9 +17,21 @@ import static fun.xiaorang.game.popstar.core.Constants.*;
  * @date 2023/10/2 21:14
  */
 public class GamePanel extends JPanel implements ActionListener {
+    private static final Star[][] STARS = new Star[ROWS][COLS];
+
     public GamePanel() {
         // 初始化
         this.init();
+        // 初始化星星
+        this.initStars();
+    }
+
+    private void initStars() {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                STARS[i][j] = new Star(i, j);
+            }
+        }
     }
 
     private void init() {
@@ -36,8 +50,19 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // 绘制星星
+        this.drawStars(g);
     }
 
+    private void drawStars(Graphics g) {
+        // 遍历所有星星
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                // 绘制星星
+                STARS[i][j].draw(g);
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
