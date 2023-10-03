@@ -68,7 +68,11 @@ public class GamePanel extends JPanel implements ActionListener {
         // 遍历所有星星
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                STARS[i][j].draw(g);
+                Star star = STARS[i][j];
+                if (star != null) {
+                    // 绘制星星
+                    star.draw(g);
+                }
             }
         }
     }
@@ -91,11 +95,25 @@ public class GamePanel extends JPanel implements ActionListener {
             // 判断鼠标点击的星星是否被选中
             if (star.isSelected()) {
                 // 消除选中的星星
+                popSelectedStars();
             } else {
                 // 清除所有选中的星星
                 clearSelectedStars();
                 // 选中当前星星周围颜色相同的星星
                 selectSameColorStars(star);
+            }
+        }
+
+        /**
+         * 消除选中的星星
+         */
+        private void popSelectedStars() {
+            for (int i = 0; i < ROWS; i++) {
+                for (int j = 0; j < COLS; j++) {
+                    if (STARS[i][j] != null && STARS[i][j].isSelected()) {
+                        STARS[i][j] = null;
+                    }
+                }
             }
         }
 
@@ -118,19 +136,19 @@ public class GamePanel extends JPanel implements ActionListener {
             int col = star.getCol();
             Star up, down, left, right;
             // 选中当前星星上方的星星
-            if (row > 0 && (up = STARS[row - 1][col]).getColor() == color) {
+            if (row > 0 && (up = STARS[row - 1][col]) != null && up.getColor() == color) {
                 selectSameColorStars(up);
             }
             // 选中当前星星下方的星星
-            if (row < ROWS - 1 && (down = STARS[row + 1][col]).getColor() == color) {
+            if (row < ROWS - 1 && (down = STARS[row + 1][col]) != null && down.getColor() == color) {
                 selectSameColorStars(down);
             }
             // 选中当前星星左方的星星
-            if (col > 0 && (left = STARS[row][col - 1]).getColor() == color) {
+            if (col > 0 && (left = STARS[row][col - 1]) != null && left.getColor() == color) {
                 selectSameColorStars(left);
             }
             // 选中当前星星右方的星星
-            if (col < COLS - 1 && (right = STARS[row][col + 1]).getColor() == color) {
+            if (col < COLS - 1 && (right = STARS[row][col + 1]) != null && right.getColor() == color) {
                 selectSameColorStars(right);
             }
         }
@@ -140,10 +158,13 @@ public class GamePanel extends JPanel implements ActionListener {
          */
         private void clearSelectedStars() {
             // 遍历所有星星
-            for (Star[] stars : STARS) {
-                for (Star star : stars) {
-                    // 清除选中状态
-                    star.setSelected(false);
+            for (int i = 0; i < ROWS; i++) {
+                for (int j = 0; j < COLS; j++) {
+                    Star star = STARS[i][j];
+                    if (star != null) {
+                        // 清除选中状态
+                        star.setSelected(false);
+                    }
                 }
             }
         }
