@@ -1,6 +1,5 @@
 package fun.xiaorang.game.popstar.scene;
 
-import fun.xiaorang.game.popstar.core.Color;
 import fun.xiaorang.game.popstar.core.Star;
 
 import javax.swing.*;
@@ -8,6 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static fun.xiaorang.game.popstar.core.Constants.*;
 
@@ -96,12 +99,68 @@ public class GamePanel extends JPanel implements ActionListener {
             if (star.isSelected()) {
                 // 消除选中的星星
                 popSelectedStars();
+                // 星星下落
+                starsFall();
             } else {
                 // 清除所有选中的星星
                 clearSelectedStars();
                 // 选中当前星星周围颜色相同的星星
                 selectSameColorStars(star);
             }
+        }
+
+        /**
+         * 星星下落
+         */
+        private void starsFall() {
+            // 首先获取所有不为空的星星，然后重新排列所有星星，实现星星下落效果
+            rearrangeStars(getStarsNotEqualsNull());
+        }
+
+        /**
+         * 重新排列所有星星，实现星星下落效果
+         *
+         * @param map 所有不为空的星星
+         */
+        private void rearrangeStars(Map<Integer, List<Star>> map) {
+            for (int j = 0; j < COLS; j++) {
+                List<Star> stars = map.get(j);
+                int row = 0;
+                for (int i = ROWS - 1; i >= 0; i--) {
+                    if (stars == null || stars.isEmpty() || row >= stars.size()) {
+                        STARS[i][j] = null;
+                        continue;
+                    }
+                    Star star = stars.get(row++);
+                    STARS[i][j] = new Star(i, j, star.getColor());
+                }
+            }
+        }
+
+        /**
+         * 按从左到右，从下到上收集所有不为空的星星，将其放到一个 Map<Integer, List<Star>> 集合中，其中 key 为列索引，value 为该列中所有不为空的星星
+         *
+         * @return Map<Integer, List < Star>> 集合
+         */
+        private Map<Integer, List<Star>> getStarsNotEqualsNull() {
+            Map<Integer, List<Star>> map = new HashMap<>();
+            int colKey = 0;
+            // 遍历所有星星
+            for (int j = 0; j < COLS; j++) {
+                List<Star> stars = new ArrayList<>();
+                for (int i = ROWS - 1; i >= 0; i--) {
+                    Star star = STARS[i][j];
+                    if (star == null) {
+                        continue;
+                    }
+                    stars.add(star);
+                }
+                if (stars.isEmpty()) {
+                    continue;
+                }
+                map.put(colKey++, stars);
+            }
+            return map;
         }
 
         /**
@@ -129,26 +188,24 @@ public class GamePanel extends JPanel implements ActionListener {
             }
             // 选中当前星星
             star.setSelected(true);
-            // 获取当前星星的颜色
-            Color color = star.getColor();
             // 获取当前星星的行列索引
             int row = star.getRow();
             int col = star.getCol();
             Star up, down, left, right;
             // 选中当前星星上方的星星
-            if (row > 0 && (up = STARS[row - 1][col]) != null && up.getColor() == color) {
+            if (row > 0 && (up = STARS[row - 1][col]) != null && up.getColor() == star.getColor()) {
                 selectSameColorStars(up);
             }
             // 选中当前星星下方的星星
-            if (row < ROWS - 1 && (down = STARS[row + 1][col]) != null && down.getColor() == color) {
+            if (row < ROWS - 1 && (down = STARS[row + 1][col]) != null && down.getColor() == star.getColor()) {
                 selectSameColorStars(down);
             }
             // 选中当前星星左方的星星
-            if (col > 0 && (left = STARS[row][col - 1]) != null && left.getColor() == color) {
+            if (col > 0 && (left = STARS[row][col - 1]) != null && left.getColor() == star.getColor()) {
                 selectSameColorStars(left);
             }
             // 选中当前星星右方的星星
-            if (col < COLS - 1 && (right = STARS[row][col + 1]) != null && right.getColor() == color) {
+            if (col < COLS - 1 && (right = STARS[row][col + 1]) != null && right.getColor() == star.getColor()) {
                 selectSameColorStars(right);
             }
         }
