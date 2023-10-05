@@ -13,6 +13,7 @@
         <module>snake</module>
         <module>_2048</module>
         <module>popstar</module>
+        <module>ball</module>
     </modules>
 
     <properties>
