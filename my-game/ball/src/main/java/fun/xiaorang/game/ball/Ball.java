@@ -3,6 +3,8 @@ package fun.xiaorang.game.ball;
 import java.awt.*;
 
 import static fun.xiaorang.game.ball.Constants.*;
+import static fun.xiaorang.game.ball.State.OVER;
+import static fun.xiaorang.game.ball.State.RUNNING;
 
 /**
  * @author liulei
@@ -30,19 +32,32 @@ public class Ball {
     private int speedX = DEFAULT_BALL_SPEED_X;
 
     public void draw(Graphics g, GamePanel gamePanel) {
-        this.move(gamePanel);
+        if (gamePanel.getState() == RUNNING) {
+            this.move(gamePanel);
+        }
         g.setColor(Color.ORANGE);
         g.fillOval(point.x - radius, point.y - radius, radius << 1, radius << 1);
     }
 
     private void move(GamePanel gamePanel) {
-        // 检查小球是否碰到上下边界，如果碰到上下边界，那么Y轴速度取反
-        if (point.y - radius <= 0 || point.y + radius >= GAME_PANEL_HEIGHT) {
+        Racket racket = gamePanel.getRacket();
+        // 检查小球是否碰到上边界，如果碰到上边界，那么Y轴速度取反
+        if (point.y - radius <= 0) {
             speedY = -speedY;
         }
         // 检查小球是否碰到左右边界，如果碰到左右边界，那么X轴速度取反
         if (point.x - radius <= 0 || point.x + radius >= GAME_PANEL_WIDTH) {
             speedX = -speedX;
+        }
+        // 检查小球是否碰到挡板，如果碰到挡板，那么Y轴速度取反
+        if (point.y + radius >= racket.getPoint().y) {
+            if (point.x + radius >= racket.getPoint().x
+                    && point.x - radius <= racket.getPoint().x + racket.getWidth()) {
+                speedY = -speedY;
+            } else {
+                gamePanel.setState(OVER);
+                return;
+            }
         }
         // 更新小球的坐标
         point.x += speedX;

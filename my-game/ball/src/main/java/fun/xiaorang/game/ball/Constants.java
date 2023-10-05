@@ -1,5 +1,7 @@
 package fun.xiaorang.game.ball;
 
+import java.awt.*;
+
 /**
  * @author liulei
  * @description <p style = " font-weight:bold ; "><p/>
@@ -56,4 +58,12 @@ public class Constants {
      * 挡板距离底部的默认边距
      */
     public static final int DEFAULT_RACKET_BOTTOM_PADDING = 20;
+    /**
+     * 默认字体
+     */
+    public static final Font DEFAULT_FONT = new Font("宋体", Font.BOLD, 25);
+    /**
+     * 默认字体颜色
+     */
+    public static final Color DEFAULT_FONT_COLOR = Color.WHITE;
 }

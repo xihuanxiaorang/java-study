@@ -13,7 +13,7 @@ import java.awt.*;
 public class Game extends JFrame {
     public Game() throws HeadlessException {
         // 设置标题
-        this.setTitle("弹球小游戏");
+        this.setTitle("打砖块");
         // 将窗口内容面板设置为自定义的主面板
         this.setContentPane(new MainPanel());
         // 自适应窗口大小
@@ -21,7 +21,7 @@ public class Game extends JFrame {
         // 禁止窗口调整大小
         this.setResizable(false);
         // 窗口置顶
-//        this.setAlwaysOnTop(true);
+        this.setAlwaysOnTop(true);
         // 设置窗口关闭时的默认操作为退出程序
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         // 居中显示

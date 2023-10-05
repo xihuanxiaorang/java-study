@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static fun.xiaorang.game.ball.Constants.*;
+import static fun.xiaorang.game.ball.State.*;
 
 /**
  * @author liulei
@@ -15,10 +16,13 @@ import static fun.xiaorang.game.ball.Constants.*;
  * @date 2023/9/29 8:55
  */
 public class GamePanel extends JPanel implements ActionListener {
-    private final Ball ball = new Ball();
-    private final Racket racket = new Racket();
+    private Ball ball = new Ball();
+    private Racket racket = new Racket();
+    private State state = PAUSE;
 
     public GamePanel() {
+        // 开始游戏
+        this.start();
         // 初始化
         this.init();
     }
@@ -51,6 +55,26 @@ public class GamePanel extends JPanel implements ActionListener {
         ball.draw(g, this);
         // 绘制球拍
         racket.draw(g);
+        // 绘制游戏状态
+        drawState(g);
+    }
+
+    private void drawState(Graphics g) {
+        if (this.state == PAUSE) {
+            drawText(g, "按下空格键开始游戏");
+        } else if (this.state == OVER) {
+            drawText(g, "游戏结束，按下空格键重新开始");
+        }
+    }
+
+    private void drawText(Graphics g, String text) {
+        g.setColor(DEFAULT_FONT_COLOR);
+        g.setFont(DEFAULT_FONT);
+        // 居中显示
+        int x = (this.getWidth() - g.getFontMetrics().stringWidth(text)) >> 1;
+        int y = (this.getHeight() - g.getFontMetrics().getHeight()) >> 1;
+        // 绘制文字
+        g.drawString(text, x, y);
     }
 
     @Override
@@ -61,5 +85,38 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public Racket getRacket() {
         return racket;
+    }
+
+    public void changeState() {
+        if (this.state == RUNNING) {
+            this.state = PAUSE;
+        } else if (this.state == PAUSE) {
+            this.state = RUNNING;
+        } else if (this.state == OVER) {
+            // 设置游戏状态为运行中
+            this.state = RUNNING;
+            // 重新开始游戏
+            this.restart();
+        }
+    }
+
+    private void restart() {
+        // 开始游戏
+        start();
+    }
+
+    private void start() {
+        // 初始化小球
+        this.ball = new Ball();
+        // 初始化挡板
+        this.racket = new Racket();
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

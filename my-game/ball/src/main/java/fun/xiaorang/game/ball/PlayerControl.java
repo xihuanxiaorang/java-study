@@ -21,9 +21,18 @@ public class PlayerControl extends KeyAdapter {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        changeState(e);
+        if (this.gamePanel.getState() != State.RUNNING) {
+            return;
+        }
         changeDirection(e);
     }
 
+    private void changeState(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            this.gamePanel.changeState();
+        }
+    }
 
     @Override
     public void keyReleased(KeyEvent e) {
