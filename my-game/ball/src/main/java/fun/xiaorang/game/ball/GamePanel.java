@@ -15,9 +15,9 @@ import static fun.xiaorang.game.ball.Constants.*;
  * @date 2023/9/29 8:55
  */
 public class GamePanel extends JPanel implements ActionListener {
+    private final Ball ball = new Ball();
+
     public GamePanel() {
-        // 开始游戏
-        this.start();
         // 初始化
         this.init();
     }
@@ -29,6 +29,12 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBounds(0, 0, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
         // 设置背景颜色为黑色
         this.setBackground(Color.BLACK);
+        // 将当前面板标记为可获得焦点的组件
+        this.setFocusable(true);
+        // 请求当前面板在窗口中获得焦点
+        this.requestFocusInWindow();
+        // 通过请求焦点来确保当前面板获得焦点（这行通常不会影响焦点的设置，但可以作为一种额外的措施）
+        this.requestFocus();
         // 创建定时器，用于定时重绘，实现动画效果
         Timer timer = new Timer(DEFAULT_GAME_SPEED, this);
         // 启动定时器
@@ -38,14 +44,13 @@ public class GamePanel extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        // 绘制小球
+        ball.draw(g, this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // 重绘
         repaint();
-    }
-
-    private void start() {
     }
 }

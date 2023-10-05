@@ -27,6 +27,18 @@ public class Constants {
      */
     public static final int GAME_WIDOWS_HEIGHT = GAME_PANEL_HEIGHT;
     /**
+     * 小球默认半径
+     */
+    public static final int DEFAULT_BALL_RADIUS = 10;
+    /**
+     * 小球默认X轴速度
+     */
+    public static final int DEFAULT_BALL_SPEED_X = 10;
+    /**
+     * 小球默认Y轴速度
+     */
+    public static final int DEFAULT_BALL_SPEED_Y = 10;
+    /**
      * 默认的游戏速度
      */
     public static final int DEFAULT_GAME_SPEED = 200;
