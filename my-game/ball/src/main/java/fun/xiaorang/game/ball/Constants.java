@@ -1,7 +1,5 @@
 package fun.xiaorang.game.ball;
 
-import java.awt.*;
-
 /**
  * @author liulei
  * @description <p style = " font-weight:bold ; "><p/>
@@ -43,11 +41,19 @@ public class Constants {
      */
     public static final int DEFAULT_GAME_SPEED = 200;
     /**
-     * 默认字体
+     * 挡板默认宽度
      */
-    public static final Font DEFAULT_FONT = new Font("宋体", Font.BOLD, 25);
+    public static final int DEFAULT_RACKET_WIDTH = 80;
     /**
-     * 默认字体颜色
+     * 挡板默认高度
      */
-    public static final Color DEFAULT_FONT_COLOR = Color.WHITE;
+    public static final int DEFAULT_RACKET_HEIGHT = 10;
+    /**
+     * 挡板默认速度
+     */
+    public static final int DEFAULT_RACKET_SPEED = 50;
+    /**
+     * 挡板距离底部的默认边距
+     */
+    public static final int DEFAULT_RACKET_BOTTOM_PADDING = 20;
 }

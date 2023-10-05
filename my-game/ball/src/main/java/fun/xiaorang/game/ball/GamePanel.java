@@ -16,6 +16,7 @@ import static fun.xiaorang.game.ball.Constants.*;
  */
 public class GamePanel extends JPanel implements ActionListener {
     private final Ball ball = new Ball();
+    private final Racket racket = new Racket();
 
     public GamePanel() {
         // 初始化
@@ -29,6 +30,8 @@ public class GamePanel extends JPanel implements ActionListener {
         this.setBounds(0, 0, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
         // 设置背景颜色为黑色
         this.setBackground(Color.BLACK);
+        // 添加键盘监听
+        this.addKeyListener(new PlayerControl(this));
         // 将当前面板标记为可获得焦点的组件
         this.setFocusable(true);
         // 请求当前面板在窗口中获得焦点
@@ -46,11 +49,17 @@ public class GamePanel extends JPanel implements ActionListener {
         super.paintComponent(g);
         // 绘制小球
         ball.draw(g, this);
+        // 绘制球拍
+        racket.draw(g);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // 重绘
         repaint();
+    }
+
+    public Racket getRacket() {
+        return racket;
     }
 }
