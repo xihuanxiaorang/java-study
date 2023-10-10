@@ -19,21 +19,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 连接池状态，用于记录连接池的状态信息
+ *
  * @author Clinton Begin
  */
 public class PoolState {
 
-  protected PooledDataSource dataSource;
-
+  /**
+   * 空闲连接集合
+   */
   protected final List<PooledConnection> idleConnections = new ArrayList<>();
+  /**
+   * 活跃连接集合
+   */
   protected final List<PooledConnection> activeConnections = new ArrayList<>();
+  /**
+   * 池化数据源
+   */
+  protected PooledDataSource dataSource;
+  /**
+   * 请求数据库连接的次数
+   */
   protected long requestCount;
+  /**
+   * 获取连接的累计耗时（单位：毫秒）
+   */
   protected long accumulatedRequestTime;
+  /**
+   * 所有连接被使用的累计耗时（单位：毫秒）
+   */
   protected long accumulatedCheckoutTime;
+  /**
+   * 执行时间超时的连接数
+   */
   protected long claimedOverdueConnectionCount;
+  /**
+   * 超时时间累加值（单位：毫秒）
+   */
   protected long accumulatedCheckoutTimeOfOverdueConnections;
+  /**
+   * 阻塞等待的累计时间（单位：毫秒）
+   */
   protected long accumulatedWaitTime;
+  /**
+   * 阻塞等待的总次数
+   */
   protected long hadToWaitCount;
+  /**
+   * 无效连接数
+   */
   protected long badConnectionCount;
 
   public PoolState(PooledDataSource dataSource) {
@@ -67,7 +101,7 @@ public class PoolState {
 
   public synchronized long getAverageOverdueCheckoutTime() {
     return claimedOverdueConnectionCount == 0 ? 0
-        : accumulatedCheckoutTimeOfOverdueConnections / claimedOverdueConnectionCount;
+      : accumulatedCheckoutTimeOfOverdueConnections / claimedOverdueConnectionCount;
   }
 
   public synchronized long getAverageCheckoutTime() {
@@ -84,33 +118,32 @@ public class PoolState {
 
   @Override
   public synchronized String toString() {
-    StringBuilder builder = new StringBuilder();
-    builder.append("\n===CONFIGURATION==============================================");
-    builder.append("\n jdbcDriver                     ").append(dataSource.getDriver());
-    builder.append("\n jdbcUrl                        ").append(dataSource.getUrl());
-    builder.append("\n jdbcUsername                   ").append(dataSource.getUsername());
-    builder.append("\n jdbcPassword                   ")
-        .append(dataSource.getPassword() == null ? "NULL" : "************");
-    builder.append("\n poolMaxActiveConnections       ").append(dataSource.poolMaximumActiveConnections);
-    builder.append("\n poolMaxIdleConnections         ").append(dataSource.poolMaximumIdleConnections);
-    builder.append("\n poolMaxCheckoutTime            ").append(dataSource.poolMaximumCheckoutTime);
-    builder.append("\n poolTimeToWait                 ").append(dataSource.poolTimeToWait);
-    builder.append("\n poolPingEnabled                ").append(dataSource.poolPingEnabled);
-    builder.append("\n poolPingQuery                  ").append(dataSource.poolPingQuery);
-    builder.append("\n poolPingConnectionsNotUsedFor  ").append(dataSource.poolPingConnectionsNotUsedFor);
-    builder.append("\n ---STATUS-----------------------------------------------------");
-    builder.append("\n activeConnections              ").append(getActiveConnectionCount());
-    builder.append("\n idleConnections                ").append(getIdleConnectionCount());
-    builder.append("\n requestCount                   ").append(getRequestCount());
-    builder.append("\n averageRequestTime             ").append(getAverageRequestTime());
-    builder.append("\n averageCheckoutTime            ").append(getAverageCheckoutTime());
-    builder.append("\n claimedOverdue                 ").append(getClaimedOverdueConnectionCount());
-    builder.append("\n averageOverdueCheckoutTime     ").append(getAverageOverdueCheckoutTime());
-    builder.append("\n hadToWait                      ").append(getHadToWaitCount());
-    builder.append("\n averageWaitTime                ").append(getAverageWaitTime());
-    builder.append("\n badConnectionCount             ").append(getBadConnectionCount());
-    builder.append("\n===============================================================");
-    return builder.toString();
+    String builder = "\n===CONFIGURATION==============================================" +
+      "\n jdbcDriver                     " + dataSource.getDriver() +
+      "\n jdbcUrl                        " + dataSource.getUrl() +
+      "\n jdbcUsername                   " + dataSource.getUsername() +
+      "\n jdbcPassword                   " +
+      (dataSource.getPassword() == null ? "NULL" : "************") +
+      "\n poolMaxActiveConnections       " + dataSource.poolMaximumActiveConnections +
+      "\n poolMaxIdleConnections         " + dataSource.poolMaximumIdleConnections +
+      "\n poolMaxCheckoutTime            " + dataSource.poolMaximumCheckoutTime +
+      "\n poolTimeToWait                 " + dataSource.poolTimeToWait +
+      "\n poolPingEnabled                " + dataSource.poolPingEnabled +
+      "\n poolPingQuery                  " + dataSource.poolPingQuery +
+      "\n poolPingConnectionsNotUsedFor  " + dataSource.poolPingConnectionsNotUsedFor +
+      "\n ---STATUS-----------------------------------------------------" +
+      "\n activeConnections              " + getActiveConnectionCount() +
+      "\n idleConnections                " + getIdleConnectionCount() +
+      "\n requestCount                   " + getRequestCount() +
+      "\n averageRequestTime             " + getAverageRequestTime() +
+      "\n averageCheckoutTime            " + getAverageCheckoutTime() +
+      "\n claimedOverdue                 " + getClaimedOverdueConnectionCount() +
+      "\n averageOverdueCheckoutTime     " + getAverageOverdueCheckoutTime() +
+      "\n hadToWait                      " + getHadToWaitCount() +
+      "\n averageWaitTime                " + getAverageWaitTime() +
+      "\n badConnectionCount             " + getBadConnectionCount() +
+      "\n===============================================================";
+    return builder;
   }
 
 }

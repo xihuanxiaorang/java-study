@@ -1,9 +1,9 @@
 package fun.xiaorang.mybatis.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import org.apache.ibatis.datasource.pooled.PooledDataSourceFactory;
 
-import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -14,19 +14,16 @@ import java.util.Properties;
  * @date 2023/9/20 16:07
  */
 public class MyDruidDataSourceFactory extends PooledDataSourceFactory {
-    private DataSource dataSource;
+    public MyDruidDataSourceFactory() {
+        this.dataSource = new DruidDataSource();
+    }
 
     @Override
     public void setProperties(Properties properties) {
         try {
-            this.dataSource = DruidDataSourceFactory.createDataSource(properties);
+            DruidDataSourceFactory.config((DruidDataSource) dataSource, properties);
         } catch (Exception e) {
             throw new RuntimeException("init datasource error", e);
         }
-    }
-
-    @Override
-    public DataSource getDataSource() {
-        return this.dataSource;
     }
 }

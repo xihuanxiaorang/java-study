@@ -23,6 +23,7 @@ import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;
 public class PooledDataSourceFactory extends UnpooledDataSourceFactory {
 
   public PooledDataSourceFactory() {
+    // 设置当前数据源为池化数据源 PooledDataSource
     this.dataSource = new PooledDataSource();
   }
 
