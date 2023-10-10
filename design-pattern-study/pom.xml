@@ -17,6 +17,7 @@
         <module>proxy</module>
         <module>simple-factory</module>
         <module>adapter</module>
+        <module>factory-method</module>
     </modules>
 
 </project>
