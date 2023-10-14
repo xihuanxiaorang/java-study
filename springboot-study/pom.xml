@@ -13,12 +13,14 @@
         <module>wx-mp-study</module>
         <module>springboot-annotation-study</module>
         <module>springboot-standard-response-result</module>
+        <module>springboot-validation-study</module>
     </modules>
 
     <properties>
         <wx.mp.version>4.5.0</wx.mp.version>
         <lombok.version>1.18.26</lombok.version>
         <javax.inject.version>1</javax.inject.version>
+        <springboot.version>2.7.11</springboot.version>
     </properties>
 
     <dependencyManagement>
@@ -26,9 +28,14 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-parent</artifactId>
-                <version>2.7.11-SNAPSHOT</version>
+                <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.binarywang</groupId>
