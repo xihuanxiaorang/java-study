@@ -42,3 +42,4 @@ build/
 *.log
 
 /out/
+.flattened-pom.xml
