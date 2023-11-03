@@ -1,10 +1,7 @@
-oss:
-  access-key: tackIrdbOzfpltFVHpCu
-  access-secret: DCErOHD4EVUMucnqCnQQSg5hqAUwVpsk7vlZtHc9
-  endpoint: http://120.78.177.161:9000
-
+server:
+  port: 3080
 spring:
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 100MB
+  application:
+    name: oss_upload
+  profiles:
+    active: dev

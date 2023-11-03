@@ -48,3 +48,5 @@ cglib/
 
 ### JDK8动态代理生成的代理类 ###
 com/sun/proxy/
+
+.flattened-pom.xml

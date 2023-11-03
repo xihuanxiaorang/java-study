@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/oss_upload?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 10
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      maxEvictableIdleTimeMillis: 900000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500;
+oss:
+  endpoint: http://127.0.0.1:9000
+  access-key: jaHMGSvBGaui6Zy4bYoO
+  access-secret: hroBZl87obWhU2cfFYKcAGiUdFwsKD34r0VrhFQR
+  bucket-name: test
+doc:
+  info:
+    title: 基于 AWS S3 的文件上传服务
+    description: 基于 AWS S3 的文件上传服务，主要用于测试自己封装的 oss 组件
+springdoc:
+  group-configs:
+    - group: 'oss'
+      paths-to-match: '/**'
+      packages-to-scan: fun.xiaorang.demo.oss.controller
