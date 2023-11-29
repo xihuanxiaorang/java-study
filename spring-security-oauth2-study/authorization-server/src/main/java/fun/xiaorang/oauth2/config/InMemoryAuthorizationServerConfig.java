@@ -1,12 +1,10 @@
 package fun.xiaorang.oauth2.config;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
@@ -17,14 +15,14 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
  * @Copyright 博客：<a href="https://blog.xiaorang.fun">小让的糖果屋</a>  - show me the code
  * @date 2023/11/24 15:23
  */
-@Configuration
-@EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+//@Configuration
+//@EnableAuthorizationServer
+public class InMemoryAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthorizationServerConfig(
+    public InMemoryAuthorizationServerConfig(
             final PasswordEncoder passwordEncoder,
             final UserDetailsService userDetailsService,
             final AuthenticationManager authenticationManager) {
