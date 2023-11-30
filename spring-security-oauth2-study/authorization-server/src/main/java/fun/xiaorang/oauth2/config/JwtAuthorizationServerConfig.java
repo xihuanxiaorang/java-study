@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -13,16 +14,15 @@ import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @author xiaorang
@@ -89,6 +89,18 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     }
 
     @Bean
+    public TokenEnhancer customAdditionalInformation() {
+        return (accessToken, authentication) -> {
+            Map<String, Object> additionalInformation = new LinkedHashMap<>();
+            additionalInformation.put("author", "xiaorang");
+            additionalInformation.put("blog", "https://blog.xiaorang.fun");
+            additionalInformation.put("github", "https://github.com/xihuanxiaorang");
+            ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInformation);
+            return accessToken;
+        };
+    }
+
+    @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
@@ -102,7 +114,8 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
         defaultTokenServices.setAccessTokenValiditySeconds(60 * 60 * 24 * 2);
         defaultTokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(jwtAccessTokenConverter()));
+        // TOKEN 增强链的顺序需要保证 JwtAccessTokenConverter 位于附加信息增强器之前
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(jwtAccessTokenConverter(), customAdditionalInformation()));
         defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
         return defaultTokenServices;
     }
