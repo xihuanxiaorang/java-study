@@ -2,6 +2,7 @@ package fun.xiaorang.oauth2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -18,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 import javax.sql.DataSource;
 import java.util.Collections;
@@ -47,7 +49,11 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
 
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("permitAll()")
+        security
+                // 开放检查 token 端点
+                .checkTokenAccess("permitAll()")
+                // 开放获取公钥端点
+                .tokenKeyAccess("permitAll()")
                 .allowFormAuthenticationForClients();
     }
 
@@ -77,8 +83,8 @@ public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerA
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         // 配置 JWT 令牌增强器，用于生成 JWT 令牌
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        // 密钥，用于对 JWT 进行签名，在资源服务器中需要配置相同的密钥，才能解密 JWT
-        converter.setSigningKey("xiaorang");
+        final KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("oauth2.jks"), "123456".toCharArray());
+        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("oauth2"));
         return converter;
     }
 

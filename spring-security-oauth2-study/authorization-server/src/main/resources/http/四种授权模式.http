@@ -11,7 +11,7 @@ POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&gr
 ### 刷新令牌
 
 POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&grant_type=refresh_token&
-    refresh_token=04ff19a4-0e25-4aef-81db-de47c7d66328
+    refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsicmVzMSIsInJlczIiXSwidXNlcl9uYW1lIjoiYWRtaW4iLCJzY29wZSI6WyJzY29wZTEiLCJzY29wZTIiXSwiYXRpIjoiNzU5N2Y5YzUtNDA2Ny00Y2YxLWJmZjgtNWIyOTE0ZmQyZDAxIiwiZXhwIjoxNzAxOTQwMDYxLCJhdXRob3JpdGllcyI6WyJST0xFX0FETUlOIl0sImp0aSI6IjA1YTVjMzFiLTUxYWUtNGM0My05OTIwLWJjMTZlYTM0M2YwYSIsImNsaWVudF9pZCI6ImNsaWVudDEifQ.CmXdtBZ9fFL-MIZ1W7H8YVmVE4hpNyeWA1H-yYAdTNU
 
 # 简化模式 浏览器访问 http://localhost:8080/oauth/authorize?client_id=client1&response_type=token&scope=scope1&redirect_uri=https://www.baidu.com&state=abc
 
@@ -21,3 +21,6 @@ POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&gr
 
 ### 客户端模式
 POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&grant_type=client_credentials&scope=scope1
+
+### 获取公钥
+GET http://localhost:8080/oauth/token_key

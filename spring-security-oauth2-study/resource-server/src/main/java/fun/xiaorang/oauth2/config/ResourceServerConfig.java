@@ -2,6 +2,8 @@ package fun.xiaorang.oauth2.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -10,6 +12,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 /**
  * @author xiaorang
@@ -51,9 +58,22 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        // 密钥，用于对 JWT 进行解密，必须与授权服务器的密钥一致
-        converter.setSigningKey("xiaorang");
+        // 通过读取本地文件获取非对称加密公钥，用于对 JWT 进行解密
+        converter.setVerifierKey(getPublicKey());
         return converter;
+    }
+
+    private String getPublicKey() {
+        final Resource resource = new ClassPathResource("public.txt");
+        String publicKey = null;
+        try {
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                publicKey = br.lines().collect(Collectors.joining("\n"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return publicKey;
     }
 
     @Bean
