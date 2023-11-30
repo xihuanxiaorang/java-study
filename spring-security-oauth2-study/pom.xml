@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>authorization-server</module>
+        <module>resource-server</module>
     </modules>
 
     <properties>

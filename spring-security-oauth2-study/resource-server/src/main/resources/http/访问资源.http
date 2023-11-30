@@ -1,0 +1,7 @@
+### hello
+GET http://localhost:8081/hello
+Authorization: bearer 8d000e5e-e705-4166-9f4b-27f00b19dcab
+
+### admin
+GET http://localhost:8081/admin
+Authorization: bearer 8d000e5e-e705-4166-9f4b-27f00b19dcab
