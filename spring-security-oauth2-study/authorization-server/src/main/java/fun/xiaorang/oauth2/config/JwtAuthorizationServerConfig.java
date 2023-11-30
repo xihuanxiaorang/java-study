@@ -1,9 +1,11 @@
 package fun.xiaorang.oauth2.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -12,26 +14,29 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.sql.DataSource;
+import java.util.Collections;
 
 /**
  * @author xiaorang
  * @description <p style = " font-weight:bold ; "><p/>
  * @github <a href="https://github.com/xihuanxiaorang/java-study">java-study</a>
  * @Copyright 博客：<a href="https://blog.xiaorang.fun">小让的糖果屋</a>  - show me the code
- * @date 2023/11/24 15:23
+ * @date 2023/11/30 00:32
  */
-//@Configuration
-//@EnableAuthorizationServer
-public class JdbcAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+@Configuration
+@EnableAuthorizationServer
+public class JwtAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
     private final DataSource dataSource;
     private final ClientDetailsService clientDetailsService;
 
-    public JdbcAuthorizationServerConfig(
+    public JwtAuthorizationServerConfig(
             final AuthenticationManager authenticationManager,
             final DataSource dataSource,
             final ClientDetailsService clientDetailsService) {
@@ -59,7 +64,8 @@ public class JdbcAuthorizationServerConfig extends AuthorizationServerConfigurer
                 // 授权码存储方式
                 .authorizationCodeServices(authorizationCodeServices())
                 // 令牌存储方式
-                .tokenServices(tokenServices());
+                .tokenServices(tokenServices())
+        ;
     }
 
     @Bean
@@ -68,8 +74,17 @@ public class JdbcAuthorizationServerConfig extends AuthorizationServerConfigurer
     }
 
     @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        // 配置 JWT 令牌增强器，用于生成 JWT 令牌
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        // 密钥，用于对 JWT 进行签名，在资源服务器中需要配置相同的密钥，才能解密 JWT
+        converter.setSigningKey("xiaorang");
+        return converter;
+    }
+
+    @Bean
     public TokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+        return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
     @Bean
@@ -80,6 +95,9 @@ public class JdbcAuthorizationServerConfig extends AuthorizationServerConfigurer
         defaultTokenServices.setSupportRefreshToken(true);
         defaultTokenServices.setAccessTokenValiditySeconds(60 * 60 * 24 * 2);
         defaultTokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
+        final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(jwtAccessTokenConverter()));
+        defaultTokenServices.setTokenEnhancer(tokenEnhancerChain);
         return defaultTokenServices;
     }
 }

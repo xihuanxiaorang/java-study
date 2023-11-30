@@ -8,9 +8,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
-
-import javax.sql.DataSource;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * @author xiaorang
@@ -23,12 +22,6 @@ import javax.sql.DataSource;
 @EnableResourceServer
 @EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-    private final DataSource dataSource;
-
-    public ResourceServerConfig(final DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
     @Override
     public void configure(final ResourceServerSecurityConfigurer resources) throws Exception {
         resources
@@ -56,7 +49,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
     @Bean
-    public JdbcTokenStore tokenStore() {
-        return new JdbcTokenStore(dataSource);
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        // 密钥，用于对 JWT 进行解密，必须与授权服务器的密钥一致
+        converter.setSigningKey("xiaorang");
+        return converter;
+    }
+
+    @Bean
+    public JwtTokenStore tokenStore() {
+        return new JwtTokenStore(jwtAccessTokenConverter());
     }
 }

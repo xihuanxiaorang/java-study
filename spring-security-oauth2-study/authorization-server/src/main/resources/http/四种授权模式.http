@@ -17,7 +17,7 @@ POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&gr
 
 ### 密码模式
 POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&grant_type=password&username=admin&
-    password=123456&scope=scope1
+    password=123456
 
 ### 客户端模式
 POST http://localhost:8080/oauth/token?client_id=client1&client_secret=123456&grant_type=client_credentials&scope=scope1
