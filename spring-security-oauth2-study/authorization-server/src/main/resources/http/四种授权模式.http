@@ -1,0 +1,27 @@
+# 申请授权码流程如下所示：
+# 1. 浏览器访问授权服务器的授权端点（/oauth/authorize），http://localhost:8080/oauth/authorize?client_id=client1&response_type=code&scope=scope1&redirect_uri=https://www.baidu.com&state=abc
+# 2. 出现登录页面，输入用户名密码，登录成功
+# 3. 出现授权页面，点击授权按钮，授权成功
+# 4. 浏览器跳转到百度页面，地址栏出现code，复制code
+
+### 授权码模式（使用授权码（code）获取访问令牌（token））
+POST http://localhost:8080/oauth/token?grant_type=authorization_code&code=SXsGIp&redirect_uri=https://www.baidu.com
+Authorization: Basic client1 123456
+
+### 刷新令牌
+POST http://localhost:8080/oauth/token?grant_type=refresh_token&
+    refresh_token=5d5dc7d3-4431-4663-bfa4-87725d35266f
+Authorization: Basic client1 123456
+
+# 简化模式 浏览器访问 http://localhost:8080/oauth/authorize?client_id=client1&response_type=token&scope=scope1&redirect_uri=https://www.baidu.com&state=abc
+
+### 密码模式
+POST http://localhost:8080/oauth/token?grant_type=password&username=admin&password=123456
+Authorization: Basic client1 123456
+
+### 客户端模式
+POST http://localhost:8080/oauth/token?grant_type=client_credentials&scope=scope1
+Authorization: Basic client1 123456
+
+### 获取公钥
+GET http://localhost:8080/oauth/token_key
