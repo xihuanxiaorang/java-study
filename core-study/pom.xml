@@ -12,6 +12,7 @@
     <modules>
         <module>nested-class-study</module>
         <module>lambda-study</module>
+        <module>spi-study</module>
     </modules>
 
     <properties>
@@ -21,6 +22,7 @@
         <junit.version>5.11.3</junit.version>
         <lombok.version>1.18.34</lombok.version>
         <logback.version>1.5.12</logback.version>
+        <mysql.version>8.0.33</mysql.version>
     </properties>
 
     <dependencyManagement>
@@ -43,6 +45,12 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+            <!-- MySQL 驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

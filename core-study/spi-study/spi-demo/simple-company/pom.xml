@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fun.xiaorang</groupId>
+        <artifactId>spi-demo</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>simple-company</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>fun.xiaorang</groupId>
+            <artifactId>simple-api</artifactId>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>fun.xiaorang</groupId>-->
+        <!--            <artifactId>simple-isp-mobile</artifactId>-->
+        <!--        </dependency>-->
+        <dependency>
+            <groupId>fun.xiaorang</groupId>
+            <artifactId>simple-isp-unicom</artifactId>
+        </dependency>
+    </dependencies>
+</project>
