@@ -2,6 +2,8 @@ package fun.xiaorang.study.algorithm.sorting;
 
 import java.util.Arrays;
 
+import static cn.hutool.core.util.PrimitiveArrayUtil.swap;
+
 /**
  * @author xiaorang
  * @description <p style = " font-weight:bold ; ">冒泡排序<p/>
@@ -35,9 +37,7 @@ public class BubbleSort {
       for (int j = 0; j < sortBorder; j++) {
         // 如果前一个元素大于后一个元素，则交换位置
         if (arr[j] > arr[j + 1]) {
-          int tmp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = tmp;
+          swap(arr, j, j + 1);
           // 标记发生了交换
           swapped = true;
           // 更新最后一次交换的位置
