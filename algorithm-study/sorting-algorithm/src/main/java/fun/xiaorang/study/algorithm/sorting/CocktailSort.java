@@ -1,8 +1,8 @@
 package fun.xiaorang.study.algorithm.sorting;
 
-import cn.hutool.core.util.ArrayUtil;
-
 import java.util.Arrays;
+
+import static cn.hutool.core.util.PrimitiveArrayUtil.swap;
 
 /**
  * @author xiaorang
@@ -40,7 +40,7 @@ public class CocktailSort {
       // 从左到右遍历，将最大的元素放到右边
       for (int j = left; j < right; j++) {
         if (arr[j] > arr[j + 1]) {
-          ArrayUtil.swap(arr, j, j + 1);
+          swap(arr, j, j + 1);
           // 标记发生了交换
           swapped = true;
           // 更新最后一次交换的位置
@@ -58,7 +58,7 @@ public class CocktailSort {
       // 从右到左遍历，将最小的元素放到左边
       for (int j = right; j > left; j--) {
         if (arr[j] < arr[j - 1]) {
-          ArrayUtil.swap(arr, j, j - 1);
+          swap(arr, j, j - 1);
           // 标记发生了交换
           swapped = true;
           // 更新最后一次交换的位置
