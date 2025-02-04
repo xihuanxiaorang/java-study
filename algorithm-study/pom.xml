@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>sorting-algorithm</module>
+        <module>divide-to-conquer</module>
     </modules>
 
     <properties>
