@@ -4,3 +4,6 @@
 [submodule "algorithm-study"]
 	path = algorithm-study
 	url = git@github.com:xihuanxiaorang/algorithm-study.git
+[submodule "mapstruct-study"]
+	path = mapstruct-study
+	url = git@github.com:xihuanxiaorang/mapstruct-study.git
