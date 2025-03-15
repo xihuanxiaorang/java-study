@@ -1,3 +1,6 @@
 [submodule "javase-study"]
 	path = javase-study
 	url = git@github.com:xihuanxiaorang/javase-study.git
+[submodule "algorithm-study"]
+	path = algorithm-study
+	url = git@github.com:xihuanxiaorang/algorithm-study.git
