@@ -7,3 +7,6 @@
 [submodule "mapstruct-study"]
 	path = mapstruct-study
 	url = git@github.com:xihuanxiaorang/mapstruct-study.git
+[submodule "mysql-study"]
+	path = mysql-study
+	url = git@github.com:xihuanxiaorang/mysql-study.git
