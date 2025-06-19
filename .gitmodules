@@ -10,3 +10,6 @@
 [submodule "mysql-study"]
 	path = mysql-study
 	url = git@github.com:xihuanxiaorang/mysql-study.git
+[submodule "datastructure-study"]
+	path = datastructure-study
+	url = git@github.com:xihuanxiaorang/datastructure-study.git
