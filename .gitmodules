@@ -13,3 +13,6 @@
 [submodule "datastructure-study"]
 	path = datastructure-study
 	url = git@github.com:xihuanxiaorang/datastructure-study.git
+[submodule "design-pattern-study"]
+	path = design-pattern-study
+	url = git@github.com:xihuanxiaorang/design-pattern-study.git
